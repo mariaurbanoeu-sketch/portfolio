@@ -1054,6 +1054,87 @@ footer .contact a{border-radius:.2rem;background:transparent}
 .index a:hover{
   transform:none!important;
 }
+
+
+/* ===== PROJECT INDEX — rebuilt without pseudo-elements ===== */
+.project-index{
+  margin:2.6rem 0 0;
+  border-top:1px solid var(--rule);
+  width:100%;
+}
+.project-row{
+  display:grid;
+  grid-template-columns:3rem minmax(0,1fr) auto;
+  gap:1.5rem;
+  align-items:start;
+  min-height:7.1rem;
+  padding:1.45rem .2rem;
+  border-bottom:1px solid var(--rule);
+  text-decoration:none;
+  color:inherit;
+  position:relative;
+  transition:background .35s var(--ease),padding-left .5s var(--ease);
+}
+.project-row:hover{
+  background:linear-gradient(90deg,rgba(255,183,210,.055),transparent);
+  padding-left:1rem;
+}
+.project-num{
+  display:block;
+  font-size:.68rem;
+  line-height:1.2;
+  color:var(--soft);
+  padding-top:.25rem;
+}
+.project-copy{
+  min-width:0;
+  display:block;
+}
+.project-copy b{
+  display:block;
+  font-size:clamp(1.25rem,2.5vw,2rem);
+  line-height:1;
+  letter-spacing:-.045em;
+  font-weight:600;
+  transition:color .3s var(--ease);
+}
+.project-row:hover .project-copy b{color:var(--cherry)}
+.project-copy small{
+  display:block;
+  margin-top:.45rem;
+  color:var(--soft);
+  font-size:.76rem;
+  line-height:1.35;
+  letter-spacing:.04em;
+}
+.project-meta{
+  display:block;
+  padding-top:.25rem;
+  color:var(--candy);
+  font-size:.58rem;
+  line-height:1.2;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+@media(max-width:700px){
+  .project-index{margin-top:2rem}
+  .project-row{
+    grid-template-columns:2rem minmax(0,1fr);
+    gap:.8rem;
+    min-height:0;
+    padding:1.15rem 0;
+  }
+  .project-row:hover{padding-left:.35rem}
+  .project-copy b{font-size:clamp(1.05rem,5.5vw,1.35rem);line-height:1.05}
+  .project-copy small{font-size:.68rem;line-height:1.35}
+  .project-meta{
+    grid-column:2;
+    padding-top:.15rem;
+    white-space:normal;
+    font-size:.54rem;
+  }
+}
 </style>
 </head>
 <body>
@@ -1105,15 +1186,16 @@ footer .contact a{border-radius:.2rem;background:transparent}
     </div>
   </div>
   <div class="wrap">
-    <p class="work-kicker">SELECTED WORK</p><ol class="index rise" aria-label="Proyectos">
-      <li><a href="#nails"><span class="ix-t"><b>Nails by MelyG</b><span data-en="Bilingual website with a manicure simulator">Web bilingüe · simulador interactivo</span></span><em data-en="Live · client">Online · cliente</em></a></li>
-      <li><a href="#rebolica"><span class="ix-t"><b>Rebolica</b><span data-en="Brand, die-cut label and the QR website">Identidad · packaging · experiencia QR</span></span><em data-en="Concept project">Proyecto conceptual</em></a></li>
-      <li><a href="#nacar"><span class="ix-t"><b>Nácar Estilismo</b><span data-en="Shopify store built from scratch">E-commerce · Shopify · UX</span></span><em data-en="Live · client">Online · cliente</em></a></li>
-      <li><a href="#kronox"><span class="ix-t"><b>Kronox</b><span data-en="A website that gets him paid, with its own admin panel">Web · reservas · panel propio</span></span><em data-en="Live · client">Online · cliente</em></a></li>
-      <li><a href="#emergency"><span class="ix-t"><b>Entre Amigos por Venezuela</b><span data-en="An app built in a week after an earthquake">Producto digital · proyecto social</span></span><em data-en="Personal">Personal</em></a></li>
-      <li><a href="#identidades"><span class="ix-t"><b data-en="Visual identities">Identidades visuales</b><span>Vora, Café del Sur, Nidoo</span></span><em data-en="3 brand books">3 manuales</em></a></li>
-      <li><a href="#redes"><span class="ix-t"><b data-en="Brands on social">Marcas en redes</b><span data-en="An iPad that shows each brand's Instagram">Herramienta propia · identidad digital</span></span><em data-en="Own tool">Herramienta propia</em></a></li>
-    </ol>
+    <p class="work-kicker">SELECTED WORK</p>
+    <div class="project-index rise" aria-label="Proyectos">
+      <a class="project-row" href="#nails"><span class="project-num">01</span><span class="project-copy"><b>Nails by MelyG</b><small data-en="Bilingual website with a manicure simulator">Web bilingüe · simulador interactivo</small></span><span class="project-meta" data-en="Live · client">Online · cliente</span></a>
+      <a class="project-row" href="#rebolica"><span class="project-num">02</span><span class="project-copy"><b>Rebolica</b><small data-en="Brand, die-cut label and the QR website">Identidad · packaging · experiencia QR</small></span><span class="project-meta" data-en="Concept project">Proyecto conceptual</span></a>
+      <a class="project-row" href="#nacar"><span class="project-num">03</span><span class="project-copy"><b>Nácar Estilismo</b><small data-en="Shopify store built from scratch">E-commerce · Shopify · UX</small></span><span class="project-meta" data-en="Live · client">Online · cliente</span></a>
+      <a class="project-row" href="#kronox"><span class="project-num">04</span><span class="project-copy"><b>Kronox</b><small data-en="A website that gets him paid, with its own admin panel">Web · reservas · panel propio</small></span><span class="project-meta" data-en="Live · client">Online · cliente</span></a>
+      <a class="project-row" href="#emergency"><span class="project-num">05</span><span class="project-copy"><b>Entre Amigos por Venezuela</b><small data-en="An app built in a week after an earthquake">Producto digital · proyecto social</small></span><span class="project-meta" data-en="Personal">Personal</span></a>
+      <a class="project-row" href="#identidades"><span class="project-num">06</span><span class="project-copy"><b data-en="Visual identities">Identidades visuales</b><small>Vora, Café del Sur, Nidoo</small></span><span class="project-meta" data-en="3 brand books">3 manuales</span></a>
+      <a class="project-row" href="#redes"><span class="project-num">07</span><span class="project-copy"><b data-en="Brands on social">Marcas en redes</b><small data-en="An iPad that shows each brand's Instagram">Herramienta propia · identidad digital</small></span><span class="project-meta" data-en="Own tool">Herramienta propia</span></a>
+    </div>
   </div>
 </section>
 
