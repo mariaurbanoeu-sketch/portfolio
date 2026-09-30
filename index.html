@@ -996,6 +996,23 @@ footer .contact a{border-radius:.2rem;background:transparent}
   .case-facts>div{min-height:auto;gap:.55rem;border-right:0;border-bottom:1px solid var(--rule)}
   .case-facts>div:last-child{border-bottom:0}
 }
+
+/* ===== HERO FIX — visible, clean, no stray marks ===== */
+.hero .stack::before{display:none!important}
+.hero .stack .mini,.hero .stack .pmini{
+  opacity:1!important;
+  animation:none!important;
+}
+.hero .stack .m1{transform:rotate(-5deg)}
+.hero .stack .m2{transform:rotate(3.5deg)}
+.hero .stack .m3{transform:rotate(-1.5deg)}
+.hero .stack .pmini{transform:rotate(7deg)}
+@media(max-width:860px){
+  .hero .stack .m1{transform:rotate(-3.5deg)}
+  .hero .stack .m2{transform:rotate(2.5deg)}
+  .hero .stack .m3{transform:rotate(-1deg)}
+  .hero .stack .pmini{transform:rotate(7deg)}
+}
 </style>
 </head>
 <body>
