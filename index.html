@@ -2139,3 +2139,23 @@ footer .contact a{border-radius:.2rem;background:transparent}
 </script>
 </body>
 </html>
+
+/* ===== INDEX ARROW FIX — keep decorative arrow out of CSS Grid ===== */
+.index a::after{
+  position:absolute!important;
+  right:.2rem;
+  top:50%;
+  z-index:3;
+  display:block;
+  width:auto;
+  margin:0;
+  pointer-events:none;
+  transform:translate(8px,-50%)!important;
+}
+.index a:hover::after{
+  opacity:1;
+  transform:translate(0,-50%)!important;
+}
+@media(max-width:700px){
+  .index a::after{display:none!important}
+}
