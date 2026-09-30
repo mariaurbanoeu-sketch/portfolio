@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Paula Urbano — Diseño gráfico y web</title>
-<meta name="description" content="Paula Urbano, diseñadora gráfica y web en Valencia. Identidad visual, contenido para redes y webs que funcionan. Disponible ya.">
+<title>Paula Urbano — Diseño que quieres mirar</title>
+<meta name="description" content="Paula Urbano — diseño gráfico, identidad y experiencias digitales en Valencia.">
 <meta name="theme-color" content="#140A0D">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23FFD7E7' d='M12 0c0 6.63-5.37 12-12 12 6.63 0 12 5.37 12 12 0-6.63 5.37-12 12-12-6.63 0-12-5.37-12-12z'/%3E%3C/svg%3E">
 <link rel="preload" href="fonts/Poppins-800-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -741,6 +741,79 @@ footer h2{font-weight:800;letter-spacing:-.05em}
 .swipe::after{content:"→";color:var(--candy);animation:nudge 1.4s ease-in-out infinite}
 @keyframes nudge{50%{transform:translateX(6px)}}
 @media (prefers-reduced-motion:reduce){.swipe::after{animation:none}.mcta{transition:none}}
+
+/* ===== PAULA URBANO — 2026 ART DIRECTION OVERRIDE ===== */
+:root{
+  --paper:#0D0B0C; --card:#151214; --card2:#1C181A; --ink:#F7F3F0; --soft:#9D9497;
+  --cherry:#FFB7D2; --candy:#FF5C93; --lemon:#F5F0D7; --rule:#302A2D;
+  --display:'Poppins','Century Gothic',system-ui,sans-serif;
+}
+body{background:var(--paper)}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.035;z-index:500;background-image:radial-gradient(#fff .55px,transparent .55px);background-size:5px 5px;mix-blend-mode:screen}
+.top{background:rgba(13,11,12,.82);border-bottom:1px solid rgba(255,255,255,.08)}
+.brand{font-size:.9rem;letter-spacing:-.02em}
+.top nav a{font-size:.72rem;letter-spacing:.02em}
+.hero{padding:7.5rem 0 4rem;min-height:calc(100svh - 3.6rem);display:flex;align-items:center}
+.hero-grid{grid-template-columns:1.15fr .85fr;gap:4rem}
+.hello{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--soft)}
+.hero h1{font-size:clamp(4rem,9vw,9rem);line-height:.83;letter-spacing:-.075em;max-width:8ch;margin:1.2rem 0 1.7rem}
+.hero h1 em{color:var(--cherry)}
+.hero .sub{font-size:clamp(1rem,1.6vw,1.25rem);line-height:1.35;max-width:34ch}
+.cta{margin-top:2rem}.btn{border-radius:999px;padding:.8rem 1.25rem}
+.chips{gap:.55rem;margin-top:1.7rem}.chip{border-color:rgba(255,255,255,.11);background:rgba(255,255,255,.025)}
+.stack{height:clamp(360px,43vw,600px);transform:rotate(1deg)}
+.mini{border-color:rgba(255,255,255,.12);box-shadow:0 35px 100px -40px #000}
+.mini:hover{box-shadow:0 50px 110px -35px rgba(255,92,147,.22)}
+.stack::before{opacity:.35}
+.work-kicker{margin-top:2rem;font-size:.68rem;letter-spacing:.32em;color:var(--cherry);font-weight:700}
+.index{border-top:1px solid rgba(255,255,255,.12)}
+.index li{border-bottom:1px solid rgba(255,255,255,.12)}
+.index a{padding:1.35rem .2rem}
+.index a:hover{background:rgba(255,183,210,.045)}
+.index b{font-size:clamp(1rem,1.7vw,1.35rem);letter-spacing:-.025em}
+.index .ix-t span{font-size:.8rem}
+.index em{font-size:.62rem}
+.sec{padding:9rem 0 8rem;border-top:1px solid rgba(255,255,255,.09)}
+.sec-head{grid-template-columns:5rem 1fr;gap:1.5rem;margin-bottom:3.5rem}
+.big-n{font-size:clamp(2.4rem,5vw,4rem);-webkit-text-stroke:1px #51484C;color:#51484C;line-height:1}
+.sec h2{font-size:clamp(3rem,7vw,7rem);max-width:11ch;letter-spacing:-.075em;line-height:.88;margin:.3rem 0 1.4rem}
+.sec .one{font-size:1.1rem;line-height:1.45;max-width:48ch}
+.tags{gap:.3rem}.tags span{border-radius:999px;padding:.25rem .65rem;background:rgba(255,255,255,.02);border-color:rgba(255,255,255,.1)}
+.board{gap:1rem}.board>*{border-radius:.5rem;border-color:rgba(255,255,255,.1)}
+.stats{gap:0;margin:3rem 0}.stat{border-radius:0;border-width:1px 0 1px 1px;background:transparent;padding:1.4rem 1rem}.stat:last-child{border-right-width:1px}
+.stat b{font-size:clamp(3rem,7vw,6rem);color:var(--ink);letter-spacing:-.08em}.stat span{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em}
+.win-wrap{margin-top:3rem}.win{border-radius:.65rem;border-color:rgba(255,255,255,.12);box-shadow:0 70px 130px -60px #000}
+.view{height:min(78vh,760px)}
+.sauces{gap:1rem}.sauce{border-radius:.5rem}
+.row2{border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12);margin-top:1rem}.row2>div{background:transparent}
+.mosaic{gap:1rem}.mosaic>div{border-radius:.5rem}
+.duo{gap:4rem}.duo-t b{font-size:1.3rem}.duo-d{color:var(--soft)}
+.idb{border-radius:.5rem;border-color:rgba(255,255,255,.1);background:#121011}.idb-top{grid-template-columns:1.35fr .85fr}.idb-info{padding:3rem}.idb-info h3{font-size:clamp(3rem,6vw,6rem);letter-spacing:-.08em}
+.idb-one{font-size:1.1rem}.apps{border-top-color:rgba(255,255,255,.1);padding:1rem}.apps figure{border-radius:.45rem}
+#redes .igstage{margin-top:4rem}#redes .dev{box-shadow:0 60px 120px -40px #000}
+.why{margin-top:5rem;border-top:1px solid rgba(255,255,255,.1);padding-top:1.5rem}
+.crea li{border-color:rgba(255,255,255,.12)}.cr{padding:1.5rem .2rem}
+.about-grid{gap:5rem}.about .lead{font-size:clamp(2rem,4vw,4rem);line-height:.95;letter-spacing:-.06em}
+.facts{border-top:1px solid rgba(255,255,255,.12);margin-top:2rem}.facts>div{border-bottom-color:rgba(255,255,255,.12)}
+.tools-h{border-bottom-color:rgba(255,255,255,.18)}.tools-h h2{font-size:clamp(4rem,10vw,9rem);letter-spacing:-.08em}
+.tg{border-color:rgba(255,255,255,.1);border-radius:.5rem}.tl{border-color:rgba(255,255,255,.08)}
+footer{padding:9rem 0 4rem;border-top:1px solid rgba(255,255,255,.1)}
+footer h2{font-size:clamp(5rem,14vw,13rem);letter-spacing:-.1em;line-height:.78}
+footer .contact{border-top:1px solid rgba(255,255,255,.15)}
+footer .contact a{padding:1.25rem .2rem;border-bottom-color:rgba(255,255,255,.1)}
+footer .contact strong{font-size:clamp(1rem,2vw,1.5rem)}
+.mcta{background:var(--cherry);color:#180E12}
+@media(max-width:860px){
+  .hero{padding-top:5rem;display:block}.hero-grid{grid-template-columns:1fr;gap:2rem}.hero h1{font-size:clamp(3.6rem,14vw,6.5rem);max-width:9ch}
+  .stack{margin-top:3rem;transform:none}.sec{padding:6rem 0}.sec-head{grid-template-columns:3rem 1fr;gap:.7rem}.sec h2{font-size:clamp(2.7rem,11vw,5rem)}
+  .idb-top{grid-template-columns:1fr}.idb-info{padding:1.5rem}
+}
+@media(max-width:600px){
+  .hero{min-height:auto;padding:4.5rem 0 3rem}.hero h1{font-size:clamp(3.25rem,16vw,5.5rem)}
+  .index a{padding:1.1rem 0}.index em{font-size:.58rem}.stats{grid-template-columns:1fr 1fr}.stat{border-width:1px 0 0 1px}.stat:nth-child(odd){border-left:0}.stat:nth-child(-n+2){border-top:1px solid rgba(255,255,255,.12)}
+  footer{padding-top:6rem}footer h2{font-size:clamp(4.5rem,20vw,8rem)}
+}
+
 </style>
 </head>
 <body>
@@ -770,18 +843,18 @@ footer h2{font-weight:800;letter-spacing:-.05em}
 <section class="hero" id="top">
   <div class="wrap hero-grid">
     <div>
-      <p class="hello" data-en="Hi, I'm <b>Paula</b> and I design.">Hola, soy <b>Paula</b> y diseño.</p>
-      <h1 data-en="Websites that feel <em>like brands.</em>">Webs que se sienten <em>como marcas.</em></h1>
-      <p class="sub" data-en="Websites are what I love most. I also design the brand and every piece around them, so it all fits. Scroll down: every window is real and you can use it.">Lo que más me gusta es hacer webs. También diseño la marca y todas las piezas que la rodean, para que todo encaje. Baja: cada ventana es real y se puede usar.</p>
+      <p class="hello" data-en="Hi, I'm <b>Paula</b> and I design.">PAULA URBANO.</p>
+      <h1 data-en="Websites that feel <em>like brands.</em>">Diseño cosas que <em>quieres mirar.</em></h1>
+      <p class="sub" data-en="Websites are what I love most. I also design the brand and every piece around them, so it all fits. Scroll down: every window is real and you can use it.">Diseño gráfico, identidad y experiencias digitales. Me interesa el punto donde una idea deja de ser una imagen y empieza a funcionar.</p>
       <div class="cta">
-        <a class="btn fill" href="#nails" data-en="Open the websites ↓">Abrir las webs ↓</a>
+        <a class="btn fill" href="#nails" data-en="Open the websites ↓">Ver proyectos ↓</a>
         <a class="btn" href="Paula-Urbano-Portfolio.pdf" download data-en="Portfolio PDF ↓">Portfolio en PDF ↓</a>
         <a class="btn" href="Paula-Urbano-CV.pdf" download data-en="CV ↓">CV ↓</a>
       </div>
       <div class="chips">
         <span class="chip"><i class="dot"></i><b data-en="Available now">Disponible ya</b></span>
-        <span class="chip" data-en="4 websites live · 3 brand books">4 webs online · 3 manuales de marca</span>
-        <span class="chip">Illustrator · Photoshop · InDesign · Figma</span>
+        <span class="chip" data-en="4 websites live · 3 brand books">Identidad · Web · Dirección visual</span>
+        <span class="chip">Diseño → Digital → Desarrollo</span>
       </div>
     </div>
     <div class="stack rise" aria-hidden="true">
@@ -792,14 +865,14 @@ footer h2{font-weight:800;letter-spacing:-.05em}
     </div>
   </div>
   <div class="wrap">
-    <ol class="index rise" aria-label="Proyectos">
-      <li><a href="#nails"><span class="ix-t"><b>Nails by MelyG</b><span data-en="Bilingual website with a manicure simulator">Web bilingüe con simulador de manicura</span></span><em data-en="Live · client">Online · cliente</em></a></li>
-      <li><a href="#rebolica"><span class="ix-t"><b>Rebolica</b><span data-en="Brand, die-cut label and the QR website">Marca, etiqueta troquelada y web del QR</span></span><em data-en="University">Universidad</em></a></li>
-      <li><a href="#nacar"><span class="ix-t"><b>Nácar Estilismo</b><span data-en="Shopify store built from scratch">Tienda en Shopify hecha desde cero</span></span><em data-en="Live · client">Online · cliente</em></a></li>
-      <li><a href="#kronox"><span class="ix-t"><b>Kronox</b><span data-en="A website that gets him paid, with its own admin panel">Una web que le hace cobrar, con su propio panel</span></span><em data-en="Live · client">Online · cliente</em></a></li>
-      <li><a href="#emergency"><span class="ix-t"><b>Entre Amigos por Venezuela</b><span data-en="An app built in a week after an earthquake">App hecha en una semana tras un terremoto</span></span><em data-en="Personal">Personal</em></a></li>
+    <p class="work-kicker">SELECTED WORK</p><ol class="index rise" aria-label="Proyectos">
+      <li><a href="#nails"><span class="ix-t"><b>Nails by MelyG</b><span data-en="Bilingual website with a manicure simulator">Web bilingüe · simulador interactivo</span></span><em data-en="Live · client">Online · cliente</em></a></li>
+      <li><a href="#rebolica"><span class="ix-t"><b>Rebolica</b><span data-en="Brand, die-cut label and the QR website">Identidad · packaging · experiencia QR</span></span><em data-en="University">Universidad</em></a></li>
+      <li><a href="#nacar"><span class="ix-t"><b>Nácar Estilismo</b><span data-en="Shopify store built from scratch">E-commerce · Shopify · UX</span></span><em data-en="Live · client">Online · cliente</em></a></li>
+      <li><a href="#kronox"><span class="ix-t"><b>Kronox</b><span data-en="A website that gets him paid, with its own admin panel">Web · reservas · panel propio</span></span><em data-en="Live · client">Online · cliente</em></a></li>
+      <li><a href="#emergency"><span class="ix-t"><b>Entre Amigos por Venezuela</b><span data-en="An app built in a week after an earthquake">Producto digital · proyecto social</span></span><em data-en="Personal">Personal</em></a></li>
       <li><a href="#identidades"><span class="ix-t"><b data-en="Visual identities">Identidades visuales</b><span>Vora, Café del Sur, Nidoo</span></span><em data-en="3 brand books">3 manuales</em></a></li>
-      <li><a href="#redes"><span class="ix-t"><b data-en="Brands on social">Marcas en redes</b><span data-en="An iPad that shows each brand's Instagram">Un iPad que enseña el Instagram de cada marca</span></span><em data-en="Own tool">Herramienta propia</em></a></li>
+      <li><a href="#redes"><span class="ix-t"><b data-en="Brands on social">Marcas en redes</b><span data-en="An iPad that shows each brand's Instagram">Herramienta propia · identidad digital</span></span><em data-en="Own tool">Herramienta propia</em></a></li>
     </ol>
   </div>
 </section>
@@ -811,8 +884,8 @@ footer h2{font-weight:800;letter-spacing:-.05em}
     <div class="sec-head rise">
       <span class="big-n" aria-hidden="true">01</span>
       <div>
-        <p class="et" data-en="Nails by MelyG · nail studio, Katy (Texas)">Nails by MelyG · estudio de uñas, Katy (Texas)</p>
-        <h2 data-en="A salon <em>you can try on.</em>">Un salón que <em>te pruebas antes.</em></h2>
+        <p class="et" data-en="Nails by MelyG · nail studio, Katy (Texas)">CLIENTE · DIGITAL EXPERIENCE · KATY, TEXAS</p>
+        <h2 data-en="A salon <em>you can try on.</em>">Pruébate la web <em>antes de reservar.</em></h2>
         <div class="tags"><span class="live" data-en="● Live">● Online</span><span data-en="Client">Cliente</span><span data-en="Art direction">Dirección visual</span><span data-en="SVG illustration">Ilustración SVG</span><span>Gift cards</span><span>Motion</span><span>ES / EN</span></div>
       </div>
     </div>
@@ -866,8 +939,8 @@ footer h2{font-weight:800;letter-spacing:-.05em}
     <div class="sec-head rise">
       <span class="big-n" aria-hidden="true">02</span>
       <div>
-        <p class="et" data-en="Rebolica · hot sauce brand · university">Rebolica · marca de salsas picantes · universidad</p>
-        <h2 data-en="From the shelf <em>to the phone.</em>">Del estante <em>al celular.</em></h2>
+        <p class="et" data-en="Rebolica · hot sauce brand · concept project">CONCEPT PROJECT · BRANDING · PACKAGING · DIGITAL</p>
+        <h2 data-en="From the shelf <em>to the phone.</em>">Una salsa que empieza en el estante <em>y continúa en tu móvil.</em></h2>
         <div class="tags"><span data-en="Brand identity">Identidad de marca</span><span data-en="Die-cut label">Etiqueta troquelada</span><span data-en="Gift pack">Pack regalo</span><span data-en="QR website">Web del QR</span><span>ES / VAL</span></div>
       </div>
     </div>
@@ -902,8 +975,8 @@ footer h2{font-weight:800;letter-spacing:-.05em}
     <div class="sec-head rise">
       <span class="big-n" aria-hidden="true">03</span>
       <div>
-        <p class="et" data-en="Nácar Estilismo · clothing store, Seville">Nácar Estilismo · tienda de ropa, Sevilla</p>
-        <h2 data-en="Calm, earthy, <em>in six languages.</em>">Calma, tonos tierra <em>y seis idiomas.</em></h2>
+        <p class="et" data-en="Nácar Estilismo · clothing store, Seville">CLIENTE · E-COMMERCE · SEVILLA</p>
+        <h2 data-en="Calm, earthy, <em>in six languages.</em>">Una tienda que <em>no parece una tienda.</em></h2>
         <div class="tags"><span class="live" data-en="● Live">● Online</span><span data-en="Client">Cliente</span><span data-en="E-commerce design">Diseño e-commerce</span><span>Shopify</span><span data-en="I keep it updated">La mantengo yo</span></div>
       </div>
     </div>
@@ -933,7 +1006,7 @@ footer h2{font-weight:800;letter-spacing:-.05em}
     <div class="sec-head rise">
       <span class="big-n" aria-hidden="true">04</span>
       <div>
-        <p class="et" data-en="Kronox · music-video director, Seville">Kronox · director de videoclips, Sevilla</p>
+        <p class="et" data-en="Kronox · music-video director, Seville">CLIENTE · DIGITAL PRODUCT · SEVILLA</p>
         <h2 data-en="He asked for a website. <em>He needed to get paid.</em>">Pidió una web. <em>Necesitaba cobrar.</em></h2>
         <div class="tags"><span class="live" data-en="● Live">● Online</span><span data-en="Client">Cliente</span><span data-en="Photo-led design">Diseño fotográfico</span><span data-en="Booking & admin panel">Reservas y panel</span></div>
       </div>
@@ -1093,9 +1166,9 @@ footer h2{font-weight:800;letter-spacing:-.05em}
     <div class="sec-head rise">
       <span class="big-n" aria-hidden="true">✦</span>
       <div>
-        <p class="et" data-en="Brands on social">Marcas en redes</p>
-        <h2 data-en="Your client sees their Instagram <em>before it exists.</em>">Tu cliente ve su Instagram <em>antes de que exista.</em></h2>
-        <p class="one" data-en="A working iPad I coded myself: every brand, its feed and its stories, straight from my brand books. Touch it.">Un iPad que funciona, programado por mí: cada marca con su feed y sus historias, sacados de mis manuales. Tócalo.</p>
+        <p class="et" data-en="Brands on social">EXPERIMENT · DIGITAL TOOL</p>
+        <h2 data-en="Your client sees their Instagram <em>before it exists.</em>">Tu cliente ve la marca <em>antes de aprobarla.</em></h2>
+        <p class="one" data-en="A working iPad I coded myself: every brand, its feed and its stories, straight from my brand books. Touch it.">Construí una herramienta interactiva que convierte un manual de identidad en un Instagram navegable. <b>No es un mockup. Es código.</b></p>
       </div>
     </div>
     <!-- C: historias por marca -->
@@ -1143,7 +1216,7 @@ footer h2{font-weight:800;letter-spacing:-.05em}
       <span class="big-n" aria-hidden="true">+</span>
       <div>
         <p class="et" data-en="Portfolios for other creatives">Portfolios para otros creativos</p>
-        <h2 data-en="Designed around <em>their craft, not mine.</em>">Diseñados alrededor de <em>su oficio, no del mío.</em></h2>
+        <h2 data-en="Designed around <em>their craft, not mine.</em>">Cada portfolio empieza por <em>la persona que lo va a usar.</em></h2>
         <p class="one" data-en="Every portfolio starts by finding out what their industry looks for. Then I build it. Tap any of them to open the site.">Cada portfolio empieza por averiguar qué busca su sector. Después lo construyo. Toca cualquiera para abrir su web.</p>
       </div>
     </div>
@@ -1178,8 +1251,8 @@ footer h2{font-weight:800;letter-spacing:-.05em}
   <div class="wrap about-grid">
     <div class="rise">
       <h2 data-en="About">Sobre mí</h2>
-      <p class="lead" data-en="I come from graphic design. I learned to code so <em>my designs would come out exactly as I drew them.</em>">Vengo del diseño gráfico. Aprendí a programar para que <em>mis diseños salieran tal cual los dibujé.</em></p>
-      <p data-en="22, Venezuelan, living in Valencia. Final year of Multimedia & Digital Arts (UCV). Working with real clients since 2025.">22 años, venezolana, en Valencia. Último curso de Multimedia y Artes Digitales (UCV). Con clientes reales desde 2025.</p>
+      <p class="lead" data-en="I come from graphic design. I learned to code so <em>my designs would come out exactly as I drew them.</em>">Vengo del diseño gráfico. Aprendí a programar para que <em>mis diseños salieran de Figma y funcionaran de verdad.</em></p>
+      <p data-en="22, Venezuelan, living in Valencia. Final year of Multimedia & Digital Arts (UCV). Working with real clients since 2025.">Diseño marcas, interfaces y experiencias digitales. Me interesa el punto donde el diseño deja de ser una imagen y empieza a funcionar.</p>
       <div class="facts">
         <div><small data-en="Graduating">Graduación</small><b data-en="June 2027">Junio 2027</b></div>
         <div><small data-en="Available">Disponible</small><b data-en="Now">Ya</b></div>
@@ -1189,7 +1262,7 @@ footer h2{font-weight:800;letter-spacing:-.05em}
     </div>
     <div class="rise">
       <div class="prac">
-        <p class="et" data-en="Learning right now">Ahora estoy aprendiendo</p>
+        <p class="et" data-en="Learning right now">Actualmente explorando</p>
         <ul class="plearn">
           <li data-en="React and modern component frameworks">React y frameworks modernos de componentes</li>
           <li data-en="Writing tests">Escribir tests</li>
@@ -1206,9 +1279,9 @@ footer h2{font-weight:800;letter-spacing:-.05em}
   <div class="wrap">
     <div class="tools-h rise">
       <h2 data-en="Tools">Herramientas</h2>
-      <span class="tools-c" data-en="15 on one desk">15 en un escritorio</span>
+      <span class="tools-c" data-en="15 on one desk">Diseño → Digital → Código</span>
     </div>
-    <p class="tools-lead rise" data-en="Brand, pieces and website on the same desk. <b>From the logo to the published site, without handing the work over.</b>">Marca, piezas y web en la misma mesa. <b>Del logo a la web publicada, sin pasarle el trabajo a nadie.</b></p>
+    <p class="tools-lead rise" data-en="Brand, pieces and website on the same desk. <b>From the logo to the published site, without handing the work over.</b>">De la identidad a la web publicada. <b>Diseño y construyo el sistema completo.</b></p>
     
     <div class="tg rise">
       <div class="tg-h"><span data-en="Design">Diseño</span><span class="tg-n">06</span></div>
@@ -1243,7 +1316,7 @@ footer h2{font-weight:800;letter-spacing:-.05em}
       </ul>
     </div>
     <div class="tools-ask rise">
-      <p data-en="Do you work with<br>other tools?">¿Trabajan con<br>otras herramientas?</p>
+      <p data-en="Do you work with<br>other tools?">¿Tienes una idea<br>que quieras construir?</p>
       <a class="btn" href="mailto:mariaurbanoeu@gmail.com?subject=Herramientas" data-en="Ask">Preguntar</a>
     </div>
   </div>
@@ -1261,7 +1334,7 @@ footer h2{font-weight:800;letter-spacing:-.05em}
       <a href="Paula-Urbano-CV.pdf" download><strong data-en="Download CV ↓">Descargar CV ↓</strong><span>PDF</span></a>
       <a href="Paula-Urbano-Portfolio.pdf" download><strong data-en="Download portfolio ↓">Descargar portfolio ↓</strong><span>PDF</span></a>
     </div>
-    <p class="note" data-en="Designed and built by me, line by line. Available now.">Diseñado y construido por mí, línea a línea. Disponible ya.</p>
+    <p class="note" data-en="Designed and built by me, line by line. Available now.">Diseñado y construido por mí, línea a línea.</p>
   </div>
 </footer>
 
@@ -1756,5 +1829,28 @@ footer h2{font-weight:800;letter-spacing:-.05em}
   addEventListener('scroll', upd, { passive: true }); upd();
 })();
 </script>
+
+<script>
+(function(){
+  /* Dirección editorial: convierte el índice en una navegación más limpia y
+     deja los proyectos respirando como casos de estudio. */
+  var nav=document.querySelector('.top nav');
+  if(nav){
+    var links=[['#nails','Nails'],['#rebolica','Rebolica'],['#nacar','Nácar'],['#kronox','Kronox'],['#identidades','Identidades'],['#redes','Tool'],['#about','About']];
+    nav.innerHTML=links.map(function(x){return '<a href="'+x[0]+'">'+x[1]+'</a>';}).join('');
+  }
+  var hello=document.querySelector('.hello');
+  if(hello) hello.innerHTML='<span class="et">GRAPHIC DESIGN · DIGITAL · ART DIRECTION</span>';
+  document.querySelectorAll('.sec-head .et').forEach(function(e){
+    e.style.letterSpacing='.24em';
+  });
+  /* Vora funciona como la primera entrada de identidad visual: la sección
+     completa conserva sus tres casos y se presenta después de los trabajos
+     digitales principales. */
+  var ids=document.getElementById('identidades');
+  if(ids) ids.dataset.editorial='brand-world';
+})();
+</script>
+
 </body>
 </html>
