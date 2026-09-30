@@ -29,10 +29,16 @@ jobs:
         with:
           enablement: true
 
+      - name: Build clean site
+        run: |
+          mkdir -p _site
+          cp -R . _site
+          printf '\n<link rel="stylesheet" href="redesign.css?v=1">\n' >> _site/index.html
+
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: ./_site
 
       - name: Deploy to GitHub Pages
         id: deployment
