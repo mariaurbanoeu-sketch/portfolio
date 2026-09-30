@@ -899,6 +899,35 @@ footer .contact a{border-radius:.2rem;background:transparent}
 @media(max-width:600px){
   .hero{padding-top:.55rem!important;padding-bottom:1.2rem!important}
 }
+
+/* ===== SIGNATURE MOTION — hero ===== */
+.hero-grid{perspective:1200px}
+.stack{--mx:0px;--my:0px;transform:translate3d(var(--mx),var(--my),0);transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.stack .mini,.stack .pmini{opacity:0}
+.stack.motion-ready .m1{animation:heroIn .9s .05s cubic-bezier(.16,1,.3,1) forwards}
+.stack.motion-ready .m2{animation:heroIn .9s .16s cubic-bezier(.16,1,.3,1) forwards}
+.stack.motion-ready .m3{animation:heroIn .9s .27s cubic-bezier(.16,1,.3,1) forwards}
+.stack.motion-ready .pmini{animation:heroPhoneIn .9s .38s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes heroIn{
+  from{opacity:0;transform:translate3d(0,32px,0) rotate(var(--r,-3deg)) scale(.97)}
+  to{opacity:1;transform:translate3d(0,0,0) rotate(var(--r,-3deg)) scale(1)}
+}
+@keyframes heroPhoneIn{
+  from{opacity:0;transform:translate3d(22px,38px,0) rotate(12deg) scale(.94)}
+  to{opacity:1;transform:translate3d(0,0,0) rotate(7deg) scale(1)}
+}
+.m1{--r:-5deg}.m2{--r:3.5deg}.m3{--r:-1.5deg}
+@media (hover:hover) and (pointer:fine){
+  .stack.motion-ready .mini:hover{animation:none}
+  .stack.motion-ready .m1:hover{transform:rotate(0) translateY(-8px) scale(1.04)}
+  .stack.motion-ready .m2:hover{transform:rotate(0) translateY(-8px) scale(1.04)}
+  .stack.motion-ready .m3:hover{transform:rotate(0) translateY(-8px) scale(1.04)}
+}
+@media(max-width:860px){
+  .stack{transform:none!important}
+  .stack .mini,.stack .pmini{opacity:1}
+  .stack.motion-ready .m1,.stack.motion-ready .m2,.stack.motion-ready .m3,.stack.motion-ready .pmini{animation:none}
+}
 </style>
 </head>
 <body>
@@ -1937,5 +1966,27 @@ footer .contact a{border-radius:.2rem;background:transparent}
 })();
 </script>
 
+
+<script>
+(function(){
+  const stack=document.querySelector('.stack');
+  if(!stack) return;
+  requestAnimationFrame(()=>stack.classList.add('motion-ready'));
+  if(!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+  const grid=stack.closest('.hero-grid');
+  if(!grid) return;
+  grid.addEventListener('pointermove',e=>{
+    const r=grid.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5;
+    const y=(e.clientY-r.top)/r.height-.5;
+    stack.style.setProperty('--mx',(x*10).toFixed(1)+'px');
+    stack.style.setProperty('--my',(y*8).toFixed(1)+'px');
+  });
+  grid.addEventListener('pointerleave',()=>{
+    stack.style.setProperty('--mx','0px');
+    stack.style.setProperty('--my','0px');
+  });
+})();
+</script>
 </body>
 </html>
