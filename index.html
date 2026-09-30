@@ -2167,3 +2167,15 @@ footer .contact a{border-radius:.2rem;background:transparent}
   content:none!important;
   display:none!important;
 }
+
+
+/* ===== INDEX CLEANUP — remove all decorative pseudo-elements ===== */
+.index li::after,
+.index a::after{
+  content:none!important;
+  display:none!important;
+}
+.index a,
+.index a:hover{
+  transform:none!important;
+}
