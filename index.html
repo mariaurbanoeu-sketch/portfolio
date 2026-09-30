@@ -2159,3 +2159,11 @@ footer .contact a{border-radius:.2rem;background:transparent}
 @media(max-width:700px){
   .index a::after{display:none!important}
 }
+
+
+/* ===== REMOVE DECORATIVE INDEX ARROWS ===== */
+.index a::after,
+.index a:hover::after{
+  content:none!important;
+  display:none!important;
+}
