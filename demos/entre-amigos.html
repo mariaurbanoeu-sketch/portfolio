@@ -1,0 +1,2732 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0B3058">
+  <meta name="description" content="Red de voluntarios para ayudar a Venezuela.">
+  <title>Entre Amigos por VENEZUELA</title>
+  <style>
+  /* Poppins via system fallback — funciona offline */
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+</style>
+  <style>
+/* ── Tokens ── */
+:root{--azul:#0B3058;--azul-m:#1a4a7a;--azul-c:#2a6099;--amarillo:#FBE07A;--blanco:#fff;--gtxt:#333;--gsub:#666;--gborde:#E0E0E0;--gbg:#F5F6FA;--rojo:#E84040;--verde:#1BAF7A;--r-sm:6px;--r:12px;--r-lg:16px;--shadow:0 2px 12px rgba(11,48,88,.12);--shadow-c:0 1px 4px rgba(11,48,88,.08);--bh:48px;--hh:56px;--nh:46px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+
+/* ── Ajuste estructural (Padding top para que el banner fijo no tape el header) ── */
+body{
+  font-family:'Poppins',system-ui,sans-serif;
+  background:var(--gbg);
+  color:var(--gtxt);
+  min-height:100dvh;
+  display:flex;
+  flex-direction:column;
+  overscroll-behavior:none;
+  overflow-x:hidden;
+  padding-top: var(--bh);
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+input,select,textarea{font-family:inherit;font-size:.9rem;width:100%;border:1.5px solid var(--gborde);border-radius:var(--r-sm);padding:.6rem .8rem;background:var(--blanco);color:var(--gtxt);transition:border-color .2s;-webkit-appearance:none}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--azul-c);box-shadow:0 0 0 3px rgba(42,96,153,.15)}
+textarea{resize:vertical;min-height:80px}
+ 
+/* ── Pantalla bienvenida ── */
+.welcome-screen{position:fixed;inset:0;z-index:500;background:var(--azul);display:flex;align-items:center;justify-content:center;padding:1.5rem;transition:opacity .3s}
+.welcome-inner{width:100%;max-width:400px;display:flex;flex-direction:column;align-items:center;gap:.9rem;text-align:center}
+.welcome-flag{width:3rem;height:.25rem;border-radius:99px;background:var(--amarillo);opacity:.9}
+.welcome-super{font-size:.7rem;color:rgba(255,255,255,.6);letter-spacing:.1em;text-transform:uppercase}
+.welcome-title{font-size:2rem;font-weight:800;color:var(--amarillo);letter-spacing:.06em}
+.welcome-sub{font-size:.85rem;color:rgba(255,255,255,.7);line-height:1.5;max-width:280px}
+.welcome-btns{width:100%;display:flex;flex-direction:column;gap:.75rem;margin-top:.5rem}
+.welcome-btn{width:100%;padding:1rem 1.2rem;border-radius:14px;border:none;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:.9rem;text-align:left;transition:transform .15s,opacity .15s}
+.welcome-btn:active{transform:scale(.97);opacity:.88}
+.wbtn-emoji{width:.3rem;height:2.1rem;border-radius:99px;background:currentColor;opacity:.45;flex-shrink:0}
+.wbtn-text{display:flex;flex-direction:column}
+.wbtn-label{font-size:1rem;font-weight:700}
+.wbtn-sub{font-size:.75rem;opacity:.8;margin-top:.1rem}
+.welcome-btn--necesito{background:var(--amarillo);color:var(--azul)}
+.welcome-btn--ayudo{background:var(--verde);color:#fff}
+.welcome-btn--local{background:var(--blanco);color:var(--azul)}
+.welcome-or{font-size:.75rem;color:rgba(255,255,255,.35)}
+.welcome-skip{font-size:.78rem;color:rgba(255,255,255,.4);text-decoration:underline;cursor:pointer;margin-top:.25rem;background:none;border:none;font-family:inherit}
+ 
+/* ── Banner sticky ── */
+.sticky-banner{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--bh);background:var(--amarillo);display:flex;align-items:center;justify-content:center;gap:.5rem;padding:0 .75rem;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.sticky-banner::-webkit-scrollbar{display:none}
+.banner-btn{flex-shrink:0;font-family:inherit;font-size:.72rem;font-weight:600;padding:.35rem .8rem;border-radius:20px;border:none;cursor:pointer;text-decoration:none;white-space:nowrap;transition:opacity .2s,transform .1s;display:inline-flex;align-items:center;gap:.3rem}
+.banner-btn:active{transform:scale(.96);opacity:.85}
+.btn-gofundme{background:#00B964;color:#fff}
+.btn-pagomovil{background:var(--azul);color:var(--amarillo)}
+.btn-psico{background:#7B5EA7;color:#fff}
+ 
+/* ── Header ── */
+.site-header{position:sticky;top:var(--bh);z-index:90;background:var(--azul);color:var(--blanco);box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.logo{display:flex;flex-direction:column;line-height:1.1}
+.logo-entre{font-size:.65rem;font-weight:400;color:rgba(255,255,255,.7);letter-spacing:.04em}
+.logo-vzla{font-size:1.1rem;font-weight:700;color:var(--amarillo);letter-spacing:.06em}
+.header-actions{display:flex;align-items:center;gap:.5rem}
+.lang-select{width:auto;padding:.3rem .5rem;font-size:.75rem;font-weight:600;border:1.5px solid rgba(255,255,255,.3);border-radius:var(--r-sm);background:rgba(255,255,255,.08);color:var(--blanco);cursor:pointer}
+.lang-select option{background:var(--azul)}
+.ig-btn{display:flex;align-items:center;gap:.3rem;background:var(--amarillo);color:var(--azul);font-size:.72rem;font-weight:700;padding:.35rem .7rem;border-radius:20px;white-space:nowrap;transition:opacity .2s}
+.ig-btn:active{opacity:.8}
+ 
+/* ── Nav ── */
+.main-nav{display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;border-top:1px solid rgba(255,255,255,.1)}
+.main-nav::-webkit-scrollbar{display:none}
+.nav-tab{flex-shrink:0;padding:.75rem .9rem;font-family:inherit;font-size:.75rem;font-weight:500;color:rgba(255,255,255,.65);border-bottom:2.5px solid transparent;white-space:nowrap;transition:color .2s,border-color .2s;height:var(--nh)}
+.nav-tab.active{color:var(--amarillo);border-bottom-color:var(--amarillo)}
+ 
+/* ── Filtro geo (Restaurado a STICKY milimétrico) ── */
+.geo-filter{
+  background:var(--blanco);
+  border-bottom:1px solid var(--gborde);
+  padding:.8rem 1rem;
+  position:sticky; /* IMPORTANTE: Mantiene el filtro a la vista */
+  top:calc(var(--bh) + var(--hh) + var(--nh)); /* Calculo exacto de las barras superiores */
+  z-index:80;
+}
+.filter-row{display:flex;flex-wrap:wrap;gap:.6rem;align-items:flex-end}
+.filter-ciudad{flex:1 1 140px}
+.filter-btn-geo{flex:0 0 auto; margin-bottom: 1px}
+.filter-categoria{flex:1 1 100%}
+.input-group label{display:block;font-size:.68rem;font-weight:600;color:var(--gsub);margin-bottom:.2rem;text-transform:uppercase;letter-spacing:.04em}
+.input-group input,.input-group select{font-size:.82rem;padding:.45rem .6rem}
+.btn-geo{background:var(--azul);color:var(--blanco);font-family:inherit;font-size:.72rem;font-weight:600;padding:.45rem .75rem;border-radius:var(--r-sm);white-space:nowrap;transition:opacity .2s;border:none;cursor:pointer}
+.btn-geo:active{opacity:.8}
+@media(min-width:600px){.filter-row{flex-wrap:nowrap}.filter-categoria{flex:1 1 auto}}
+ 
+/* ── Main (Ocupa espacio para empujar footer) ── */
+.main-content{
+  flex: 1; 
+  padding: 1.5rem 1rem 3.5rem 1rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.hidden{display:none!important}
+
+/* ── Section Head & Botón Principal Responsive ── */
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+.section-head h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--azul);
+  margin: 0;
+}
+.section-hint {
+  font-size: .85rem;
+  color: var(--gsub);
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+}
+
+/* En Móvil el botón azul queda centrado abajo del título para no cortarse */
+@media(max-width: 600px) {
+  .section-head {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+    margin-bottom: 1.8rem;
+  }
+  .section-head h2 {
+    font-size: 1.1rem;
+  }
+  .section-head .btn-primary {
+    width: 100%;
+    max-width: 340px;
+    padding: 0.85rem 1rem;
+    font-size: 0.95rem;
+    border-radius: 30px;
+    box-shadow: 0 4px 12px rgba(11, 48, 88, 0.15);
+  }
+  .section-hint {
+    text-align: center;
+  }
+}
+
+@media(max-width: 380px) {
+  .header-top {
+    gap: .3rem;
+    padding-inline: .6rem;
+  }
+  #btnBack {
+    padding: .25rem .5rem .25rem .4rem;
+    font-size: .68rem;
+  }
+  .logo {
+    min-width: 0;
+    overflow: hidden;
+    text-align: center;
+  }
+  .logo-entre {
+    font-size: .54rem;
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+  .logo-vzla {
+    font-size: .9rem;
+  }
+  .header-actions {
+    gap: .25rem;
+  }
+  .lang-select {
+    max-width: 3.2rem;
+    padding: .25rem .3rem;
+    font-size: .68rem;
+  }
+  .ig-btn {
+    padding: .38rem;
+  }
+  .main-nav .nav-tab {
+    padding-inline: .65rem;
+    font-size: .68rem;
+  }
+  .welcome-screen {
+    align-items: flex-start;
+    overflow-y: auto;
+    padding: .85rem .75rem 1.25rem;
+    -webkit-overflow-scrolling: touch;
+  }
+  .welcome-inner {
+    min-height: 100%;
+    justify-content: center;
+    gap: .5rem;
+  }
+  .welcome-flag {
+    font-size: 2.2rem;
+  }
+  .welcome-title {
+    font-size: 1.55rem;
+  }
+  .welcome-sub {
+    font-size: .76rem;
+  }
+  .welcome-btns {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: .45rem;
+    margin-top: .25rem;
+  }
+  .welcome-btn {
+    min-height: 0;
+    min-height: 4.8rem;
+    padding: .75rem .8rem;
+    gap: .3rem;
+    align-items: center;
+    flex-direction: row;
+    text-align: left;
+  }
+  .wbtn-emoji {
+    font-size: 1.25rem;
+  }
+  .wbtn-label {
+    font-size: .78rem;
+  }
+  .wbtn-sub {
+    font-size: .6rem;
+    line-height: 1.25;
+  }
+  .welcome-btn--insp {
+    min-height: 4.8rem;
+    margin-top: .1rem;
+  }
+  .welcome-or {
+    display: none;
+  }
+  .welcome-skip {
+    font-size: .7rem;
+  }
+  .sticky-banner {
+    justify-content: flex-start;
+    gap: .35rem;
+    padding-inline: .5rem;
+  }
+  .banner-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    justify-content: center;
+    text-align: center;
+    white-space: normal;
+    line-height: 1.1;
+    font-size: .58rem;
+    padding: .28rem .25rem;
+  }
+  .header-top {
+    gap: .4rem;
+    padding-inline: .65rem;
+  }
+  .logo-vzla {
+    font-size: .95rem;
+  }
+  .ig-btn {
+    padding: .4rem;
+  }
+  .ig-btn span {
+    display: none;
+  }
+  .geo-filter,
+  .main-content {
+    padding-inline: .75rem;
+  }
+  .filter-row {
+    gap: .45rem;
+  }
+  .btn-card {
+    min-width: 0;
+  }
+  .site-footer-btn {
+    max-width: 100%;
+    white-space: normal;
+    justify-content: center;
+    text-align: center;
+    padding-inline: 1rem;
+  }
+}
+ 
+/* ── Botones ── */
+.btn-primary{background:var(--azul);color:var(--blanco);font-family:inherit;font-size:.82rem;font-weight:600;padding:.55rem 1rem;border-radius:var(--r-sm);border:none;cursor:pointer;transition:opacity .2s,transform .1s;white-space:nowrap}
+.btn-primary:active{opacity:.85;transform:scale(.97)}
+.btn-outline{background:transparent;color:var(--azul);font-family:inherit;font-size:.82rem;font-weight:600;padding:.55rem 1rem;border-radius:var(--r-sm);border:1.5px solid var(--azul);cursor:pointer;transition:background .2s}
+.btn-outline:hover{background:rgba(11,48,88,.06)}
+.btn-outline-geo{display:inline-flex;align-items:center;gap:.4rem;font-family:inherit;font-size:.8rem;font-weight:500;color:var(--azul-c);border:1.5px solid var(--azul-c);border-radius:var(--r-sm);padding:.45rem .8rem;background:rgba(42,96,153,.06);cursor:pointer;width:100%;justify-content:center;margin-bottom:.4rem}
+ 
+/* ── Cards ── */
+.cards-list{display:flex;flex-direction:column;gap:.75rem}
+.card{background:var(--blanco);border-radius:var(--r);box-shadow:var(--shadow-c);border:1px solid var(--gborde);overflow:hidden;transition:box-shadow .2s}
+.card:active{box-shadow:var(--shadow)}
+.card-header{display:flex;align-items:center;gap:.6rem;padding:.75rem 1rem .5rem}
+.card-icon{font-size:1.4rem;flex-shrink:0}
+.card-meta{flex:1;min-width:0}
+.card-titulo{font-size:.9rem;font-weight:600;color:var(--gtxt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-subtitulo{font-size:.75rem;color:var(--gsub);margin-top:.1rem}
+.estado-badge{flex-shrink:0;font-size:.65rem;font-weight:700;padding:.25rem .6rem;border-radius:20px;text-transform:uppercase;letter-spacing:.04em}
+.estado-necesitado{background:#fde8e8;color:var(--rojo)}
+.estado-comprado{background:#fff5d6;color:#9a6800}
+.estado-en_transito{background:#feebd9;color:#b34900}
+.estado-recibido{background:#d7f5ea;color:#0a6640}
+.card-body{padding:0 1rem .75rem}
+.card-desc{font-size:.82rem;color:var(--gtxt);line-height:1.5;margin-bottom:.5rem}
+.card-location{display:flex;align-items:center;gap:.3rem;font-size:.75rem;color:var(--gsub);margin-bottom:.3rem}
+.match-badge{background:#FBE07A;color:var(--azul);font-size:.72rem;font-weight:700;padding:.4rem .8rem;border-radius:var(--r-sm);margin-bottom:.5rem;display:inline-flex;align-items:center;gap:.35rem}
+.card-actions{display:flex;gap:.5rem;flex-wrap:wrap;padding:.75rem 1rem;border-top:1px solid var(--gborde)}
+.btn-card{flex:1;min-width:110px;font-family:inherit;font-size:.75rem;font-weight:600;padding:.5rem;border-radius:var(--r-sm);border:1.5px solid var(--gborde);background:var(--blanco);color:var(--gtxt);cursor:pointer;text-align:center;transition:background .15s;display:flex;align-items:center;justify-content:center;gap:.3rem}
+.btn-card:active{background:var(--gbg)}
+.btn-card--primary{background:var(--azul);color:var(--blanco);border-color:var(--azul)}
+.btn-card--wapp{background:#25D366;color:#fff;border-color:#25D366}
+.btn-card--maps{background:#4285F4;color:#fff;border-color:#4285F4}
+.conductor-info{display:flex;align-items:center;gap:.5rem;background:#f0f8ff;border:1px solid #c0d8f0;border-radius:var(--r-sm);padding:.5rem .75rem;margin:.5rem 1rem;font-size:.78rem;color:var(--azul)}
+.match-banner{background:var(--amarillo);border-radius:var(--r-sm);padding:.6rem .9rem;margin-bottom:.75rem;font-size:.82rem;font-weight:600;color:var(--azul);display:flex;align-items:center;gap:.4rem}
+.factura-thumb{width:60px;height:60px;object-fit:cover;border-radius:var(--r-sm);border:1px solid var(--gborde);cursor:pointer;margin-top:.4rem}
+.empty-state{text-align:center;color:var(--gsub);font-size:.85rem;padding:2.5rem 1rem;line-height:1.7}
+ 
+/* ── Local card extras ── */
+.local-header{display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem .5rem}
+.local-avatar{width:44px;height:44px;border-radius:50%;background:var(--azul);color:var(--amarillo);font-size:1.2rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.vol-avatar{background:#e8f0fe;color:#1a4a9a;font-size:1.2rem}
+.precio-tag{flex-shrink:0;font-size:.68rem;font-weight:700;padding:.3rem .6rem;border-radius:20px;border:1.5px solid;white-space:nowrap}
+.precio-gratis{background:#d7f5ea;color:#0a6640;border-color:#9fe1cb}
+.precio-venta{background:#fff5d6;color:#7a5200;border-color:#f5d77a}
+.productos-list{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.5rem}
+.producto-chip{font-size:.72rem;background:var(--gbg);border:1px solid var(--gborde);border-radius:20px;padding:.2rem .6rem;color:var(--gtxt)}
+.vol-tareas-label{font-size:.7rem;font-weight:700;color:var(--gsub);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.25rem}
+ 
+/* ── Alimentación ── */
+.vol-list{padding:.5rem 1rem;border-top:1px solid var(--gborde)}
+.vol-list-title{font-size:.72rem;font-weight:700;color:var(--gsub);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.4rem}
+.vol-item{font-size:.78rem;padding:.3rem 0;border-bottom:1px solid var(--gborde);display:flex;gap:.5rem;align-items:flex-start}
+.vol-item:last-child{border-bottom:none}
+.vol-name{font-weight:600;min-width:80px}
+.vol-what{color:var(--gsub)}
+ 
+/* ── Footer ── */
+.site-footer {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  background: var(--azul);
+  color: var(--blanco);
+  width: 100%;
+  margin-top: auto; 
+}
+.site-footer-sub {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-bottom: 0.8rem;
+}
+.site-footer-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--amarillo);
+  color: var(--azul);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  transition: opacity 0.2s, transform 0.1s;
+}
+.site-footer-btn:active {
+  opacity: 0.8;
+  transform: scale(0.97);
+}
+ 
+/* ── Modales ── */
+.modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(11,48,88,.6);display:flex;align-items:flex-end;justify-content:center;padding:0;backdrop-filter:blur(2px)}
+.modal-card{background:var(--blanco);border-radius:var(--r-lg) var(--r-lg) 0 0;width:100%;max-width:480px;max-height:92dvh;overflow-y:auto;padding:1.4rem 1rem 2rem;-webkit-overflow-scrolling:touch}
+.modal-card::before{content:'';display:block;width:40px;height:4px;background:var(--gborde);border-radius:2px;margin:-0.8rem auto .8rem}
+.modal-card--sm{border-radius:var(--r-lg);max-height:80dvh}
+.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.modal-header h3{font-size:1rem;font-weight:700;color:var(--azul)}
+.modal-close{font-size:1.1rem;color:var(--gsub);padding:.25rem .5rem;border-radius:var(--r-sm);transition:background .2s}
+.modal-close:hover{background:var(--gbg)}
+.form-group{margin-bottom:.85rem}
+.form-group label{display:block;font-size:.78rem;font-weight:600;color:var(--gsub);margin-bottom:.3rem}
+.form-group small{display:block;font-size:.7rem;color:var(--gsub);margin-top:.25rem;line-height:1.4}
+.form-row{display:flex;gap:.6rem}
+.form-row .form-group{flex:1;min-width:0}
+.modal-actions{display:flex;gap:.6rem;margin-top:1.2rem}
+.modal-actions button{flex:1}
+.pin-msg{font-size:.85rem;color:var(--gtxt);margin-bottom:.75rem;line-height:1.5}
+.pin-input{font-size:1.8rem;text-align:center;letter-spacing:.5rem}
+.pin-error{background:#fde8e8;color:var(--rojo);font-size:.78rem;padding:.4rem .7rem;border-radius:var(--r-sm);margin-top:.5rem}
+.pago-movil-info{margin:.5rem 0}
+.pago-row{display:flex;justify-content:space-between;padding:.6rem 0;border-bottom:1px solid var(--gborde);font-size:.88rem}
+.pago-row:last-child{border-bottom:none}
+.pago-label{color:var(--gsub);font-weight:500}
+.pago-val{font-weight:700;color:var(--azul)}
+.geo-status{display:block;font-size:.72rem;color:var(--verde);margin-top:.25rem;min-height:1em}
+ 
+/* ── Donor panel ── */
+.donor-panel{position:fixed;inset:0;z-index:300;background:rgba(11,48,88,.6);display:flex;align-items:flex-end;justify-content:center;backdrop-filter:blur(2px)}
+.donor-inner{background:var(--blanco);border-radius:var(--r-lg) var(--r-lg) 0 0;width:100%;max-width:480px;padding:1.4rem 1rem 2rem;max-height:92dvh;overflow-y:auto;position:relative}
+.donor-inner::before{content:'';display:block;width:40px;height:4px;background:var(--gborde);border-radius:2px;margin:-0.8rem auto .8rem}
+.donor-close{position:absolute;top:1rem;right:1rem;font-size:1.1rem;color:var(--gsub);padding:.25rem .5rem;border-radius:var(--r-sm)}
+.donor-title{font-size:1rem;font-weight:700;color:var(--azul);margin-bottom:1rem}
+.donor-opt{width:100%;display:flex;align-items:center;gap:.9rem;padding:.85rem 1rem;border-radius:var(--r-sm);border:1.5px solid var(--gborde);background:var(--blanco);margin-bottom:.5rem;cursor:pointer;font-family:inherit;transition:background .15s,border-color .15s;text-decoration:none;color:var(--gtxt)}
+.donor-opt:active{background:var(--gbg)}
+.dopt-icon{width:.35rem;height:2.2rem;border-radius:99px;background:currentColor;opacity:.45;flex-shrink:0}
+.dopt-text{flex:1;text-align:left;display:flex;flex-direction:column;gap:2px}
+.dopt-label{font-size:.88rem;font-weight:600;color:var(--gtxt)}
+.dopt-sub{font-size:.72rem;color:var(--gsub)}
+.dopt-arrow{font-size:1.2rem;color:var(--gsub)}
+.donor-opt--green{border-color:#9fe1cb}
+.donor-opt--blue{border-color:#b8d0f8}
+.donor-opt--yellow{border-color:#f5d77a}
+.donor-opt--orange{border-color:#f5c4a0}
+.donor-opt--teal{border-color:#9fe1cb}
+.donor-opt--purple{border-color:#cecbf6}
+ 
+/* ── Toast ── */
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(0);background:var(--azul);color:var(--blanco);font-size:.82rem;font-weight:500;padding:.65rem 1.2rem;border-radius:24px;box-shadow:0 4px 16px rgba(0,0,0,.25);z-index:999;white-space:nowrap;animation:tIn .3s ease,tOut .3s ease 2.5s forwards}
+@keyframes tIn{from{opacity:0;transform:translateX(-50%) translateY(12px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+@keyframes tOut{from{opacity:1;transform:translateX(-50%) translateY(0)}to{opacity:0;transform:translateX(-50%) translateY(12px)}}
+ 
+/* ── Responsive ≥480px ── */
+@media(min-width:480px){
+  .modal-overlay,.donor-panel{align-items:center;padding:1rem}
+  .modal-card,.donor-inner{border-radius:var(--r-lg);max-height:88dvh}
+  .modal-card::before,.donor-inner::before{display:none}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+  
+/* ── Botón atrás ── */
+#btnBack{display:none;align-items:center;gap:.3rem;background:rgba(255,255,255,.12);color:rgba(255,255,255,.85);border:none;border-radius:20px;padding:.3rem .7rem .3rem .5rem;font-size:.72rem;font-weight:600;cursor:pointer;transition:opacity .2s;white-space:nowrap}
+#btnBack:active{opacity:.7}
+
+/* ── Logo clicable ── */
+.logo{cursor:pointer;-webkit-tap-highlight-color:transparent}
+
+/* ── Welcome btn inspección ── */
+.welcome-btn--insp{background:#1a4a7a;color:#fff}
+
+/* ── Modal inspección ── */
+.cal-info{font-size:.78rem;margin-top:.3rem;min-height:1.2em}
+.fotos-preview{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem}
+.insp-hint{background:#f0f8ff;border:1px solid #c0d8f0;border-radius:var(--r-sm);padding:.6rem .8rem;font-size:.75rem;color:#1a4a7a;line-height:1.5;margin-bottom:.75rem}
+
+/* ── Botón transparencia flotante ── */
+.btn-transparencia{position:fixed;bottom:1.2rem;right:1rem;z-index:89;background:var(--azul);color:var(--amarillo);border:none;border-radius:20px;padding:.5rem 1rem;font-family:inherit;font-size:.72rem;font-weight:700;cursor:pointer;box-shadow:0 3px 12px rgba(11,48,88,.3);display:flex;align-items:center;gap:.4rem;transition:opacity .2s,transform .1s;white-space:nowrap}
+.btn-transparencia:active{opacity:.85;transform:scale(.96)}
+
+/* ── Modal donaciones / transparencia ── */
+.don-card{background:var(--blanco);border:1px solid var(--gborde);border-radius:var(--r);padding:1rem;margin-bottom:.75rem}
+.don-card-header{display:flex;align-items:center;gap:.75rem;margin-bottom:.5rem}
+.don-icon{font-size:1.5rem}
+.don-monto{font-size:1rem;font-weight:700;color:var(--azul)}
+.don-fecha{font-size:.72rem;color:var(--gsub)}
+.don-desc{font-size:.83rem;color:var(--gtxt);line-height:1.5;margin-bottom:.4rem}
+.don-donde{font-size:.75rem;color:var(--gsub);margin-bottom:.3rem}
+.don-empty{text-align:center;padding:2rem;color:var(--gsub);font-size:.85rem}
+
+
+/* ── Header top con atrás ── */
+.header-top{display:flex;align-items:center;gap:.6rem;padding:.5rem 1rem;height:var(--hh);position:relative}
+.logo{flex:1;min-width:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.header-actions{display:flex;align-items:center;gap:.4rem;flex-shrink:0}
+
+/* ── Página de inicio ── */
+.inicio-hero{background:linear-gradient(160deg,var(--azul) 0%,#1a4a7a 100%);border-radius:var(--r);padding:2rem 1.2rem;text-align:center;margin-bottom:1rem}
+.inicio-flag{font-size:2.5rem;margin-bottom:.5rem}
+.inicio-titulo{font-size:1.4rem;font-weight:700;color:var(--blanco);line-height:1.2;margin-bottom:.4rem}
+.inicio-vzla{color:var(--amarillo);font-size:1.6rem;letter-spacing:.05em}
+.inicio-lema{font-size:.82rem;color:rgba(255,255,255,.7);margin-top:.4rem}
+.inicio-about{background:var(--blanco);border-radius:var(--r);padding:1.1rem;margin-bottom:.75rem;border:1px solid var(--gborde)}
+.inicio-section-title{font-size:.9rem;font-weight:700;color:var(--azul);margin-bottom:.6rem}
+.inicio-p{font-size:.82rem;color:var(--gtxt);line-height:1.65;margin-bottom:.65rem}
+.inicio-p:last-child{margin-bottom:0}
+.inicio-stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:.75rem}
+.inicio-stat{background:var(--azul);border-radius:var(--r-sm);padding:.75rem .5rem;text-align:center}
+.istat-num{display:block;font-size:1.5rem;font-weight:700;color:var(--amarillo)}
+.istat-label{display:block;font-size:.62rem;color:rgba(255,255,255,.7);margin-top:.15rem;line-height:1.3}
+.inicio-don-section{margin-bottom:.75rem}
+.inicio-don-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.3rem}
+.btn-sm{padding:.35rem .75rem;font-size:.75rem}
+.inicio-cta-row{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1rem}
+.inicio-cta-btn{display:flex;align-items:center;justify-content:center;gap:.5rem;padding:.85rem;border-radius:var(--r-sm);font-weight:700;font-size:.88rem;text-decoration:none;transition:opacity .2s}
+.inicio-cta-btn:active{opacity:.82}
+.inicio-cta-green{background:#00B964;color:#fff}
+.inicio-cta-ig{background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:#fff}
+
+/* ── Donaciones llamativas ── */
+.don-card{background:var(--blanco);border-radius:var(--r);overflow:hidden;margin-bottom:.85rem;box-shadow:0 2px 12px rgba(11,48,88,.1);border:1px solid var(--gborde)}
+.don-card-top{background:linear-gradient(135deg,var(--azul),#1a4a7a);padding:.85rem 1rem;display:flex;align-items:center;gap:.75rem}
+.don-icon-big{font-size:1.8rem}
+.don-monto{font-size:1.15rem;font-weight:700;color:var(--amarillo)}
+.don-fecha{font-size:.72rem;color:rgba(255,255,255,.65);margin-top:.1rem}
+.don-card-body{padding:.85rem 1rem}
+.don-desc{font-size:.85rem;color:var(--gtxt);line-height:1.6;margin-bottom:.5rem}
+.don-donde{font-size:.75rem;color:var(--gsub);display:flex;align-items:center;gap:.3rem;margin-bottom:.5rem}
+.don-media-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.4rem}
+.don-media-grid img,.don-media-grid video{width:100%;border-radius:var(--r-sm);aspect-ratio:1;object-fit:cover}
+
+/* ── Botón transparencia flotante mejorado ── */
+.btn-transparencia{position:fixed;bottom:1.4rem;right:1rem;z-index:89;background:linear-gradient(135deg,var(--amarillo),#d4b800);color:var(--azul);border:none;border-radius:24px;padding:.6rem 1.1rem;font-family:inherit;font-size:.78rem;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(251,224,122,.5);display:flex;align-items:center;gap:.4rem;transition:opacity .2s,transform .1s;white-space:nowrap}
+.btn-transparencia:active{opacity:.85;transform:scale(.96)}
+.btn-transp-pulse{animation:pulse-gold 2s infinite}
+@keyframes pulse-gold{0%,100%{box-shadow:0 4px 16px rgba(251,224,122,.5)}50%{box-shadow:0 4px 24px rgba(251,224,122,.8)}}
+
+
+/* ── Fix radio buttons (el reset global los rompe) ── */
+input[type="radio"],input[type="checkbox"]{
+  width:18px;height:18px;flex-shrink:0;
+  -webkit-appearance:auto;appearance:auto;
+  accent-color:var(--azul);
+  padding:0;border:none;background:none;
+  cursor:pointer;
+}
+</style>
+</head>
+<body>
+ 
+<!-- BIENVENIDA -->
+<div id="welcomeScreen" class="welcome-screen" role="dialog" aria-modal="true" aria-label="Bienvenida">
+  <div class="welcome-inner">
+    <div class="welcome-flag" aria-hidden="true"></div>
+    <p class="welcome-super" data-i18n="logo_entre">entre amigos por</p>
+    <h1 class="welcome-title">VENEZUELA</h1>
+    <p class="welcome-sub" data-i18n="welcome_sub">Conectamos a quienes necesitan con quienes pueden ayudar</p>
+    <div class="welcome-btns">
+      <button class="welcome-btn welcome-btn--necesito" onclick="chooseRole('necesito')">
+        <span class="wbtn-emoji" aria-hidden="true"></span>
+        <div class="wbtn-text">
+          <span class="wbtn-label" data-i18n="welcome_necesito">Necesito ayuda</span>
+          <span class="wbtn-sub" data-i18n="welcome_necesito_sub">Publicar una necesidad o buscar recursos</span>
+        </div>
+      </button>
+      <div class="welcome-or" data-i18n="welcome_o">— o —</div>
+      <button class="welcome-btn welcome-btn--ayudo" onclick="chooseRole('ayudo')">
+        <span class="wbtn-emoji" aria-hidden="true"></span>
+        <div class="wbtn-text">
+          <span class="wbtn-label" data-i18n="welcome_ayudo">Quiero ayudar</span>
+          <span class="wbtn-sub" data-i18n="welcome_ayudo_sub">Donar, ser voluntario o trasladar insumos</span>
+        </div>
+      </button>
+      <div class="welcome-or" data-i18n="welcome_o">— o —</div>
+      <button class="welcome-btn welcome-btn--local" onclick="chooseRole('local')">
+        <span class="wbtn-emoji" aria-hidden="true"></span>
+        <div class="wbtn-text">
+          <span class="wbtn-label" data-i18n="welcome_local">Soy local</span>
+          <span class="wbtn-sub" data-i18n="welcome_local_sub">Ofrecer productos a la venta, ubicación y precios</span>
+        </div>
+      </button>
+    </div>
+      <div class="welcome-or">— o —</div>
+      <button class="welcome-btn welcome-btn--insp" onclick="dismissWelcome();showModal('modalInspeccion')">
+        <span class="wbtn-emoji" aria-hidden="true"></span>
+        <div class="wbtn-text">
+          <span class="wbtn-label">Necesito inspección de vivienda</span>
+          <span class="wbtn-sub">Solicitar revisión estructural de tu edificio</span>
+        </div>
+      </button>
+    <button class="welcome-skip" onclick="dismissWelcome()" data-i18n="welcome_skip">Ver todo el directorio →</button>
+  </div>
+</div>
+ 
+<!-- BANNER -->
+<div class="sticky-banner" role="banner">
+  <a href="https://gofund.me/01a8b59ea" target="_blank" rel="noopener" class="banner-btn btn-gofundme" data-i18n="banner_gofundme">Donar en GoFundMe</a>
+  <button class="banner-btn btn-pagomovil" onclick="showModal('modalPagoMovil')" data-i18n="banner_pagomovil">Pago Móvil</button>
+  <a href="https://wa.me/525533200457" target="_blank" rel="noopener" class="banner-btn btn-psico" data-i18n="banner_psico">Apoyo psicológico</a>
+</div>
+ 
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-top">
+    <button id="btnBack" onclick="goBack()" aria-label="Volver">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Atrás
+    </button>
+    <div class="logo" onclick="goToHome()" role="button" tabindex="0" aria-label="Inicio" title="Volver al inicio">
+      <span class="logo-entre" data-i18n="logo_entre">entre amigos por</span>
+      <span class="logo-vzla">VENEZUELA</span>
+    </div>
+    <div class="header-actions">
+      <select class="lang-select" id="langSelect" onchange="setLang(this.value)" aria-label="Idioma">
+        <option value="es">🇻🇪 ES</option>
+        <option value="en">🇺🇸 EN</option>
+        <option value="pt">🇧🇷 PT</option>
+        <option value="fr">🇫🇷 FR</option>
+        <option value="de">🇩🇪 DE</option>
+        <option value="it">🇮🇹 IT</option>
+        <option value="ar">🇸🇾 Sirio</option>
+      </select>
+      <a href="https://www.instagram.com/entreamigosporvzla" target="_blank" rel="noopener" class="ig-btn" aria-label="Instagram">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        <span data-i18n="ig_seguir">Síguenos</span>
+      </a>
+    </div>
+  </div>
+  <nav class="main-nav" role="navigation" aria-label="Secciones">
+    <button class="nav-tab" onclick="showWelcome()">Inicio</button>
+    <button class="nav-tab active" onclick="showTab('tabNecesidades')" data-i18n="nav_necesidades">Necesidades</button>
+    <button class="nav-tab" onclick="showTab('tabVenta')" data-i18n="nav_venta">Venta</button>
+    <button class="nav-tab" onclick="showTab('tabAcopio')" data-i18n="nav_acopio">Acopio</button>
+    <button class="nav-tab" onclick="showTab('tabInventario')" data-i18n="nav_inventario">Locales y donantes</button>
+    <button class="nav-tab" onclick="showTab('tabVoluntarios')" data-i18n="nav_voluntarios">Voluntariado</button>
+    <button class="nav-tab" onclick="showTab('tabAlimentacion')" data-i18n="nav_alimentacion">Alimentación</button>
+    <button class="nav-tab" onclick="showTab('tabTransporte')" data-i18n="nav_transporte">Transporte</button>
+  </nav>
+</header>
+ 
+<!-- FILTRO -->
+<section class="geo-filter" aria-label="Filtro geográfico">
+  <div class="filter-row">
+    <div class="input-group filter-ciudad">
+      <label for="filtroCiudad" data-i18n="label_ciudad">Ciudad / Estado</label>
+      <input type="text" id="filtroCiudad" placeholder="Ej: Caracas, Miranda…" autocomplete="off" oninput="applyFilters()">
+    </div>
+    <div class="filter-btn-geo">
+      <button class="btn-geo" onclick="useGeoLocation()" data-i18n="btn_ubicacion">Mi ubicación</button>
+    </div>
+    <div class="input-group filter-categoria">
+      <label for="filtroCategoria" data-i18n="label_categoria">Categoría</label>
+      <select id="filtroCategoria" onchange="applyFilters()">
+        <option value="" data-i18n="cat_todas">Todas</option>
+        <option value="sangre">🩸 Sangre</option>
+        <option value="insumos_medicos">🏥 Insumos Médicos</option>
+        <option value="rescate">🦺 Rescate</option>
+        <option value="refugio_ropa">⛺ Refugio y Ropa</option>
+        <option value="alimentos_agua">🥫 Alimentos y Agua</option>
+      </select>
+    </div>
+  </div>
+</section>
+ 
+<!-- MAIN -->
+<main class="main-content">
+ 
+
+  <!-- INICIO -->
+  <section id="tabInicio" class="tab-panel hidden">
+    <div class="inicio-hero">
+      <div class="inicio-flag">🇻🇪</div>
+      <h2 class="inicio-titulo">Entre Amigos por<br><span class="inicio-vzla">VENEZUELA</span></h2>
+      <p class="inicio-lema">Unidos por quienes más lo necesitan</p>
+    </div>
+
+    <div class="inicio-about">
+      <h3 class="inicio-section-title">¿Quiénes somos?</h3>
+      <p class="inicio-p">Somos un grupo de jóvenes que, ante la emergencia causada por el terremoto en Venezuela, decidió actuar y unir esfuerzos para ayudar a las comunidades afectadas.</p><p class="inicio-p">Esta iniciativa surge con el objetivo de unir esfuerzos y trabajar de manera colaborativa junto a amigos, familiares y todas aquellas personas que desean ayudar, pero que, al encontrarse fuera del país o lejos de las zonas afectadas, no saben cómo hacerlo.</p><p class="inicio-p">Trabajamos en contacto directo con personas que se encuentran en primera línea atendiendo la emergencia y apoyando a las comunidades afectadas, lo que nos permite identificar las necesidades reales y hacer llegar la ayuda de forma rápida y directa.</p><p class="inicio-p">A través de esta plataforma compartiremos cada compra, entrega y acción realizada, garantizando total transparencia en el uso de cada donación recibida.</p>
+    </div>
+
+    <div class="inicio-stats-row">
+      <div class="inicio-stat">
+        <span class="istat-num" id="statDonaciones">0</span>
+        <span class="istat-label">Donaciones publicadas</span>
+      </div>
+      <div class="inicio-stat">
+        <span class="istat-num" id="statNecesidades">0</span>
+        <span class="istat-label">Necesidades cubiertas</span>
+      </div>
+      <div class="inicio-stat">
+        <span class="istat-num" id="statInspecciones">0</span>
+        <span class="istat-label">Inspecciones solicitadas</span>
+      </div>
+    </div>
+
+    <div class="inicio-don-section">
+      <div class="inicio-don-header">
+        <h3 class="inicio-section-title" style="margin:0">💛 Transparencia total</h3>
+        <button class="btn-primary btn-sm" onclick="showModal('modalPublicarDonacion')">+ Publicar</button>
+      </div>
+      <p style="font-size:.8rem;color:var(--gsub);margin:.4rem 0 .85rem;line-height:1.5">Cada donación recibida se publica aquí con fotos, montos y destino. Nada queda sin rendir cuentas.</p>
+      <div id="listaDonacionesInicio"></div>
+    </div>
+
+    <div class="inicio-cta-row">
+      <a href="https://gofund.me/01a8b59ea" target="_blank" rel="noopener" class="inicio-cta-btn inicio-cta-green">
+        💚 Donar en GoFundMe
+      </a>
+      <a href="https://www.instagram.com/entreamigosporvzla" target="_blank" rel="noopener" class="inicio-cta-btn inicio-cta-ig">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        @entreamigosporvzla
+      </a>
+    </div>
+  </section>
+
+  <!-- NECESIDADES -->
+  <section id="tabNecesidades" class="tab-panel active">
+    <div class="section-head">
+      <h2 data-i18n="title_necesidades">Necesidades activas</h2>
+      <button class="btn-primary" onclick="showModal('modalNuevaNecesidad')" data-i18n="btn_publicar">+ Publicar necesidad</button>
+    </div>
+    <div id="autoMatchBanner" class="match-banner hidden" role="status" aria-live="polite"></div>
+    <div id="listaNecesidades" class="cards-list" role="list"></div>
+    <p id="emptyNecesidades" class="empty-state"></p>
+  </section>
+  
+  <!-- VENTA (LOCALES QUE VENDEN) -->
+  <section id="tabVenta" class="tab-panel hidden">
+    <div class="section-head">
+      <h2 data-i18n="title_venta">Locales de Venta</h2>
+      <button class="btn-primary" onclick="showModal('modalNuevaVenta')" data-i18n="btn_registrar_venta">+ Registrar venta</button>
+    </div>
+    <p class="section-hint">Encuentra locales que ofrecen insumos a la venta con sus respectivos precios e información de contacto.</p>
+    <div id="listaVenta" class="cards-list" role="list"></div>
+    <p id="emptyVenta" class="empty-state"></p>
+  </section>
+
+  <!-- CENTROS DE ACOPIO E INVENTARIO -->
+  <section id="tabAcopio" class="tab-panel hidden">
+    <div class="section-head">
+      <h2 data-i18n="title_acopio">Centros de Acopio e Inventario</h2>
+      <button class="btn-primary" onclick="showModal('modalNuevoAcopio')" data-i18n="btn_registrar_acopio">+ Registrar acopio</button>
+    </div>
+    <p class="section-hint">Insumos recolectados que ya cuentan con centros de acopio o personas individuales.</p>
+    <div id="listaAcopio" class="cards-list" role="list"></div>
+    <p id="emptyAcopio" class="empty-state"></p>
+  </section>
+ 
+  <!-- LOCALES (DONANTES) -->
+  <section id="tabInventario" class="tab-panel hidden">
+    <div class="section-head">
+      <h2 data-i18n="title_inventario">Locales y donantes</h2>
+      <button class="btn-primary" onclick="showModal('modalNuevoInventario')" data-i18n="btn_ofrecer">+ Registrarme</button>
+    </div>
+    <div id="listaInventario" class="cards-list" role="list"></div>
+    <p id="emptyInventario" class="empty-state"></p>
+  </section>
+ 
+  <!-- VOLUNTARIOS CENTROS -->
+  <section id="tabVoluntarios" class="tab-panel hidden">
+    <div class="section-head">
+      <h2 data-i18n="title_voluntarios">Centros que buscan voluntarios</h2>
+      <button class="btn-primary" onclick="showModal('modalPedirVoluntarios')" data-i18n="btn_pedir_voluntarios">+ Pedir voluntarios</button>
+    </div>
+    <p class="section-hint">¿Eres un centro, refugio u organización? Publica cuántos voluntarios necesitas y para qué. La gente se anota directamente.</p>
+    <div id="listaVoluntarios" class="cards-list" role="list"></div>
+    <p id="emptyVoluntarios" class="empty-state"></p>
+  </section>
+ 
+  <!-- ALIMENTACION -->
+  <section id="tabAlimentacion" class="tab-panel hidden">
+    <div class="section-head">
+      <h2 data-i18n="title_alimentacion">Coordinación de alimentación</h2>
+      <button class="btn-primary" onclick="showModal('modalNuevoEvento')" data-i18n="btn_nuevo_evento">+ Nuevo evento</button>
+    </div>
+    <div id="listaAlimentacion" class="cards-list" role="list"></div>
+    <p id="emptyAlimentacion" class="empty-state"></p>
+  </section>
+ 
+  <!-- TRANSPORTE -->
+  <section id="tabTransporte" class="tab-panel hidden">
+    <div class="section-head">
+      <h2 data-i18n="title_transporte">Red de conductores</h2>
+    </div>
+    <p class="section-hint" data-i18n="hint_transporte">Los insumos "comprados" necesitan traslado. Ofrécete desde cada tarjeta.</p>
+    <div id="listaTransporte" class="cards-list" role="list"></div>
+    <p id="emptyTransporte" class="empty-state"></p>
+  </section>
+ 
+</main>
+ 
+<!-- FOOTER -->
+<footer class="site-footer">
+  <p class="site-footer-sub" data-i18n="ig_sub">Síguenos para actualizaciones en tiempo real</p>
+  <a href="https://www.instagram.com/entreamigosporvzla" target="_blank" rel="noopener" class="site-footer-btn">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+    @entreamigosporvzla
+  </a>
+</footer>
+ 
+<!-- ═══ MODALES ═══ -->
+ 
+<!-- Modal: Nueva Necesidad -->
+<div id="modalNuevaNecesidad" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 data-i18n="modal_nueva_nec">Publicar necesidad</h3>
+      <button class="modal-close" onclick="hideModal('modalNuevaNecesidad')">✕</button>
+    </div>
+    <form id="formNecesidad" onsubmit="submitNecesidad(event)" novalidate>
+      <div class="form-group">
+        <label>Categoría *</label>
+        <select id="nec_categoria" required>
+          <option value="">Selecciona una categoría</option>
+          <option value="sangre">🩸 Sangre</option>
+          <option value="insumos_medicos">🏥 Insumos Médicos</option>
+          <option value="rescate">🦺 Rescate y Maquinaria</option>
+          <option value="refugio_ropa">⛺ Refugio y Ropa</option>
+          <option value="alimentos_agua">🥫 Alimentos y Agua</option>
+        </select>
+      </div>
+      <div class="form-group" id="grupoTipoSangre" style="display:none">
+        <label>Tipo de sangre *</label>
+        <select id="nec_tipo_sangre">
+          <option value="">Selecciona tipo</option>
+          <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+          <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Descripción *</label>
+        <textarea id="nec_descripcion" rows="3" required placeholder="Describe qué se necesita y con qué urgencia…"></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Cantidad *</label>
+          <input type="number" id="nec_cantidad" min="1" required placeholder="1">
+        </div>
+        <div class="form-group">
+          <label>Unidad</label>
+          <input type="text" id="nec_unidad" placeholder="unidades, cajas…">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Ciudad / Estado *</label>
+        <input type="text" id="nec_ciudad" required placeholder="Caracas, Miranda">
+      </div>
+      <div class="form-group">
+        <label>Hospital o centro (opcional)</label>
+        <input type="text" id="nec_hospital" placeholder="Hospital Pérez Carreño…">
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn-outline-geo" onclick="getGeoForForm('nec')">Usar mi ubicación actual</button>
+        <span id="nec_geo_status" class="geo-status"></span>
+        <input type="hidden" id="nec_lat"><input type="hidden" id="nec_lng">
+      </div>
+      <div class="form-group">
+        <label>PIN de confirmación (4 dígitos) *</label>
+        <input type="password" id="nec_pin" maxlength="4" pattern="\d{4}" required placeholder="••••" inputmode="numeric" autocomplete="off">
+        <small>Lo usarás para confirmar cuando se compre o se reciba.</small>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-outline" onclick="hideModal('modalNuevaNecesidad')">Cancelar</button>
+        <button type="submit" class="btn-primary">Publicar</button>
+      </div>
+    </form>
+  </div>
+</div>
+ 
+<!-- Modal: Nuevo Local / Donante -->
+<div id="modalNuevoInventario" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 data-i18n="modal_nuevo_inv">Registrar local o donante</h3>
+      <button class="modal-close" onclick="hideModal('modalNuevoInventario')">✕</button>
+    </div>
+    <form id="formInventario" onsubmit="submitInventario(event)" novalidate>
+      <div class="form-group">
+        <label>Nombre del local o persona *</label>
+        <input type="text" id="inv_nombre_local" required placeholder="Farmacia Central, Juan Pérez…">
+      </div>
+      <div class="form-group">
+        <label>Categoría *</label>
+        <select id="inv_categoria" required>
+          <option value="">Selecciona una categoría</option>
+          <option value="sangre">🩸 Sangre</option>
+          <option value="insumos_medicos">🏥 Insumos Médicos</option>
+          <option value="rescate">🦺 Rescate</option>
+          <option value="refugio_ropa">⛺ Refugio y Ropa</option>
+          <option value="alimentos_agua">🥫 Alimentos y Agua</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Descripción de lo que ofreces *</label>
+        <textarea id="inv_descripcion" rows="2" required placeholder="Tenemos medicamentos, equipos, alimentos…"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Productos disponibles (uno por línea)</label>
+        <textarea id="inv_productos" rows="3" placeholder="Gasas estériles&#10;Suero fisiológico&#10;Guantes nitrilo"></textarea>
+        <small>Aparecerán como etiquetas en tu tarjeta.</small>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Cantidad disponible</label>
+          <input type="number" id="inv_cantidad" min="0" placeholder="50">
+        </div>
+        <div class="form-group">
+          <label>Unidad</label>
+          <input type="text" id="inv_unidad" placeholder="cajas, unidades…">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Precio en Bs. (dejar vacío si es donación gratuita)</label>
+        <input type="number" id="inv_precio" min="0" step="0.01" placeholder="0.00">
+      </div>
+      <div class="form-group">
+        <label>Ciudad / Estado *</label>
+        <input type="text" id="inv_ciudad" required placeholder="Maracaibo, Zulia">
+      </div>
+      <div class="form-group">
+        <label>Dirección exacta</label>
+        <input type="text" id="inv_direccion" placeholder="Av. Bella Vista, local 4…">
+      </div>
+      <div class="form-group">
+        <label>Horario de atención</label>
+        <input type="text" id="inv_horario" placeholder="Lun–Vie 8am–6pm">
+      </div>
+      <div class="form-group">
+        <label>Teléfono / WhatsApp *</label>
+        <input type="tel" id="inv_telefono" required placeholder="0424-1234567">
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn-outline-geo" onclick="getGeoForForm('inv')">Geolocalizar mi ubicación</button>
+        <span id="inv_geo_status" class="geo-status"></span>
+        <input type="hidden" id="inv_lat"><input type="hidden" id="inv_lng">
+        <small>Así apareces en el mapa cuando alguien presione "Ver en mapa".</small>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-outline" onclick="hideModal('modalNuevoInventario')">Cancelar</button>
+        <button type="submit" class="btn-primary">Registrar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Nueva Venta -->
+<div id="modalNuevaVenta" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 data-i18n="modal_nueva_venta">Registrar Venta</h3>
+      <button class="modal-close" onclick="hideModal('modalNuevaVenta')">✕</button>
+    </div>
+    <form id="formVenta" onsubmit="submitVenta(event)" novalidate>
+      <div class="form-group">
+        <label>Nombre del Local *</label>
+        <input type="text" id="vta_nombre" required placeholder="Ej: Farmacia Central">
+      </div>
+      <div class="form-group">
+        <label>Productos y Precios *</label>
+        <textarea id="vta_productos" rows="3" required placeholder="Ej: Gasas a $2, Alcohol a $3, Guantes a $1..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Ubicación exacta *</label>
+        <input type="text" id="vta_ubicacion" required placeholder="Av. Principal, local 4">
+      </div>
+      <div class="form-group">
+        <label>Teléfono *</label>
+        <input type="tel" id="vta_telefono" required placeholder="0424-1234567">
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn-outline-geo" onclick="getGeoForForm('vta')">Geolocalizar mi ubicación</button>
+        <span id="vta_geo_status" class="geo-status"></span>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-outline" onclick="hideModal('modalNuevaVenta')">Cancelar</button>
+        <button type="submit" class="btn-primary">Publicar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Nuevo Acopio (Centros o Personas) -->
+<div id="modalNuevoAcopio" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 data-i18n="modal_nuevo_acopio">Registrar Inventario / Acopio</h3>
+      <button class="modal-close" onclick="hideModal('modalNuevoAcopio')">✕</button>
+    </div>
+    <form id="formAcopio" onsubmit="submitAcopio(event)" novalidate>
+      <div class="form-group">
+        <label>Soy... *</label>
+        <select id="acp_tipo" required onchange="document.getElementById('acp_centro_fields').style.display = this.value === 'centro' ? 'block' : 'none'; document.getElementById('acp_persona_fields').style.display = this.value === 'persona' ? 'block' : 'none';">
+          <option value="">Selecciona</option>
+          <option value="centro">Centro de Acopio</option>
+          <option value="persona">Persona Individual</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>¿Qué artículos tienes disponibles? *</label>
+        <textarea id="acp_articulos" rows="2" required placeholder="Ropa, medicinas, comida no perecedera..."></textarea>
+      </div>
+      
+      <!-- Campos para Centro -->
+      <div id="acp_centro_fields" style="display:none;">
+        <div class="form-group">
+          <label>¿De dónde son? (Organización) *</label>
+          <input type="text" id="acp_origen" placeholder="Ej: Fundación Cruz Roja">
+        </div>
+        <div class="form-group">
+          <label>¿Dónde están? (Dirección exacta) *</label>
+          <input type="text" id="acp_direccion" placeholder="Ej: Plaza Central, carpa 2">
+        </div>
+      </div>
+
+      <!-- Campos para Persona Individual -->
+      <div id="acp_persona_fields" style="display:none;">
+        <div class="form-group">
+          <label>Cédula / Identidad *</label>
+          <input type="text" id="acp_cedula" placeholder="V-12345678">
+        </div>
+        <div class="form-group">
+          <label>Teléfono *</label>
+          <input type="tel" id="acp_telefono" placeholder="0424-1234567">
+        </div>
+        <div class="form-group">
+          <label>Ciudad *</label>
+          <input type="text" id="acp_ciudad" placeholder="Ej: Caracas">
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-outline" onclick="hideModal('modalNuevoAcopio')">Cancelar</button>
+        <button type="submit" class="btn-primary">Registrar</button>
+      </div>
+    </form>
+  </div>
+</div>
+ 
+<!-- Modal: Pedir Voluntarios -->
+<div id="modalPedirVoluntarios" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 data-i18n="modal_pedir_vol">Pedir voluntarios para mi centro</h3>
+      <button class="modal-close" onclick="hideModal('modalPedirVoluntarios')">✕</button>
+    </div>
+    <form id="formSolicitudVoluntarios" onsubmit="submitSolicitudVoluntarios(event)" novalidate>
+      <div class="form-group">
+        <label>Nombre del centro u organización *</label>
+        <input type="text" id="sv_nombre_centro" required placeholder="Refugio Las Mercedes, Cruz Roja…">
+      </div>
+      <div class="form-group">
+        <label>Ciudad / Estado *</label>
+        <input type="text" id="sv_ciudad" required placeholder="Caracas, Miranda">
+      </div>
+      <div class="form-group">
+        <label>¿Cuántos voluntarios necesitan? *</label>
+        <input type="number" id="sv_cantidad" min="1" value="1" required>
+      </div>
+      <div class="form-group">
+        <label>¿Para qué tareas? *</label>
+        <textarea id="sv_tareas" rows="3" required placeholder="Repartir alimentos, clasificar donaciones, acompañar personas mayores…"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Horario en que se necesitan</label>
+        <input type="text" id="sv_horario" placeholder="Sábados 9am–1pm, urgente esta semana…">
+      </div>
+      <div class="form-group">
+        <label>Persona de contacto</label>
+        <input type="text" id="sv_contacto" placeholder="Nombre del responsable">
+      </div>
+      <div class="form-group">
+        <label>Teléfono / WhatsApp *</label>
+        <input type="tel" id="sv_telefono" required placeholder="0424-1234567">
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-outline" onclick="hideModal('modalPedirVoluntarios')">Cancelar</button>
+        <button type="submit" class="btn-primary">Publicar solicitud</button>
+      </div>
+    </form>
+  </div>
+</div>
+ 
+<!-- Modal: Ofrecerse como Voluntario -->
+<div id="modalOfrecerseVoluntario" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 data-i18n="modal_ofrecerse_vol">Ofrecerme como voluntario</h3>
+      <button class="modal-close" onclick="hideModal('modalOfrecerseVoluntario')">✕</button>
+    </div>
+    <form id="formOfrecerseVoluntario" onsubmit="submitOfrecerseVoluntario(event)" novalidate>
+      <input type="hidden" id="ov_id_solicitud">
+      <div class="form-group">
+        <label>Nombre completo *</label>
+        <input type="text" id="ov_nombre" required placeholder="Tu nombre">
+      </div>
+      <div class="form-group">
+        <label>Cédula / Pasaporte / ID *</label>
+        <input type="text" id="ov_cedula" required placeholder="V-12345678">
+        <small>Requerido por seguridad. No se comparte públicamente.</small>
+      </div>
+      <div class="form-group">
+        <label>Teléfono / WhatsApp *</label>
+        <input type="tel" id="ov_telefono" required placeholder="0424-1234567">
+      </div>
+      <div class="form-group">
+        <label>¿Qué puedes aportar? (opcional)</label>
+        <textarea id="ov_nota" rows="2" placeholder="Puedo llevar mi vehículo, tengo experiencia en primeros auxilios…"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-outline" onclick="hideModal('modalOfrecerseVoluntario')">Cancelar</button>
+        <button type="submit" class="btn-primary">Ofrecerme</button>
+      </div>
+    </form>
+  </div>
+</div>
+ 
+<!-- Modal: Nuevo Evento Alimentación -->
+<div id="modalNuevoEvento" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 data-i18n="modal_nuevo_evento">Registrar evento de alimentación</h3>
+      <button class="modal-close" onclick="hideModal('modalNuevoEvento')">✕</button>
+    </div>
+    <form id="formEvento" onsubmit="submitEvento(event)" novalidate>
+      <div class="form-group">
+        <label>Nombre del lugar *</label>
+        <input type="text" id="ev_nombre" required placeholder="Parque Los Caobos…">
+      </div>
+      <div class="form-group">
+        <label>Tipo de lugar *</label>
+        <select id="ev_tipo" required>
+          <option value="">Selecciona</option>
+          <option value="parque">Parque</option>
+          <option value="refugio">Refugio</option>
+          <option value="centro_acopio">Centro de acopio</option>
+          <option value="otro">Otro</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Turno *</label>
+          <select id="ev_turno" required>
+            <option value="">Turno</option>
+            <option value="desayuno">🌅 Desayuno</option>
+            <option value="almuerzo">☀️ Almuerzo</option>
+            <option value="cena">🌙 Cena</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Fecha *</label>
+          <input type="date" id="ev_fecha" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Ciudad / Estado *</label>
+        <input type="text" id="ev_ciudad" required placeholder="Valencia, Carabobo">
+      </div>
+      <div class="form-group">
+        <label>Personas estimadas</label>
+        <input type="number" id="ev_personas" min="0" placeholder="50">
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn-outline-geo" onclick="getGeoForForm('ev')">Geolocalizar lugar</button>
+        <span id="ev_geo_status" class="geo-status"></span>
+        <input type="hidden" id="ev_lat"><input type="hidden" id="ev_lng">
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-outline" onclick="hideModal('modalNuevoEvento')">Cancelar</button>
+        <button type="submit" class="btn-primary">Crear evento</button>
+      </div>
+    </form>
+  </div>
+</div>
+ 
+<!-- Modal: Voluntario Comida -->
+<div id="modalVoluntarioComida" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 data-i18n="modal_voluntario_comida">Anotarme para llevar comida</h3>
+      <button class="modal-close" onclick="hideModal('modalVoluntarioComida')">✕</button>
+    </div>
+    <form id="formVoluntarioComida" onsubmit="submitVoluntarioComida(event)" novalidate>
+      <input type="hidden" id="vol_id_alimentacion">
+      <div class="form-group">
+        <label>Nombre completo *</label>
+        <input type="text" id="vol_nombre" required placeholder="Tu nombre">
+      </div>
+      <div class="form-group">
+        <label>Cédula / Pasaporte / ID *</label>
+        <input type="text" id="vol_cedula" required placeholder="V-12345678">
+        <small>Requerido por seguridad. No se comparte públicamente.</small>
+      </div>
+      <div class="form-group">
+        <label>¿Qué llevas? *</label>
+        <textarea id="vol_que_lleva" rows="2" required placeholder="Arroz, caraotas, agua…"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Teléfono (opcional)</label>
+        <input type="tel" id="vol_telefono" placeholder="0424-1234567">
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-outline" onclick="hideModal('modalVoluntarioComida')">Cancelar</button>
+        <button type="submit" class="btn-primary">Anotarme</button>
+      </div>
+    </form>
+  </div>
+</div>
+ 
+<!-- Modal: Conductor -->
+<div id="modalConductor" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 data-i18n="modal_conductor">Yo lo traslado</h3>
+      <button class="modal-close" onclick="hideModal('modalConductor')">✕</button>
+    </div>
+    <form id="formConductor" onsubmit="submitConductor(event)" novalidate>
+      <input type="hidden" id="cond_id_insumo">
+      <div class="form-group">
+        <label>Nombre o alias *</label>
+        <input type="text" id="cond_nombre" required placeholder="Tu nombre">
+      </div>
+      <div class="form-group">
+        <label>Cédula / Pasaporte *</label>
+        <input type="text" id="cond_cedula" required placeholder="V-12345678">
+        <small>Requerido para seguridad y trazabilidad.</small>
+      </div>
+      <div class="form-group">
+        <label>Teléfono (WhatsApp) *</label>
+        <input type="tel" id="cond_telefono" required placeholder="0424-1234567">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Ciudad origen *</label>
+          <input type="text" id="cond_origen" required placeholder="Caracas">
+        </div>
+        <div class="form-group">
+          <label>Ciudad destino *</label>
+          <input type="text" id="cond_destino" required placeholder="Valencia">
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-outline" onclick="hideModal('modalConductor')">Cancelar</button>
+        <button type="submit" class="btn-primary">Confirmar traslado</button>
+      </div>
+    </form>
+  </div>
+</div>
+ 
+<!-- Modal: PIN -->
+<div id="modalPin" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card modal-card--sm">
+    <div class="modal-header">
+      <h3 data-i18n="modal_pin">Confirmar con PIN</h3>
+      <button class="modal-close" onclick="hideModal('modalPin')">✕</button>
+    </div>
+    <p id="pinMensaje" class="pin-msg"></p>
+    <div class="form-group">
+      <label>PIN de 4 dígitos *</label>
+      <input type="password" id="pinInput" maxlength="4" pattern="\d{4}" inputmode="numeric" autocomplete="off" placeholder="••••" class="pin-input">
+    </div>
+    <div id="pinError" class="pin-error hidden">PIN incorrecto. Inténtalo de nuevo.</div>
+    <div class="modal-actions">
+      <button class="btn-outline" onclick="hideModal('modalPin')">Cancelar</button>
+      <button class="btn-primary" onclick="confirmPin()" data-i18n="btn_confirmar">Confirmar</button>
+    </div>
+  </div>
+</div>
+ 
+<!-- Modal: Pago Móvil -->
+<div id="modalPagoMovil" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card modal-card--sm">
+    <div class="modal-header">
+      <h3 data-i18n="modal_pago">Pago Móvil</h3>
+      <button class="modal-close" onclick="hideModal('modalPagoMovil')">✕</button>
+    </div>
+    <div class="pago-movil-info">
+      <div class="pago-row"><span class="pago-label">Banco</span><span class="pago-val">BANCARIBE</span></div>
+      <div class="pago-row"><span class="pago-label">Teléfono</span><span class="pago-val">0424-2170412</span></div>
+      <div class="pago-row"><span class="pago-label">Cédula</span><span class="pago-val">V-30.660.344</span></div>
+    </div>
+    <button class="btn-primary" style="width:100%;margin-top:1rem" onclick="hideModal('modalPagoMovil')" data-i18n="btn_listo">Listo</button>
+  </div>
+</div>
+ 
+<!-- Panel Donante -->
+<div id="donorPanel" class="donor-panel hidden" role="dialog" aria-modal="true">
+  <div class="donor-inner">
+    <button class="donor-close" onclick="closeDonorPanel()">✕</button>
+    <h2 class="donor-title" data-i18n="donor_title">¿Cómo quieres ayudar?</h2>
+    <a href="https://gofund.me/01a8b59ea" target="_blank" rel="noopener" class="donor-opt donor-opt--green">
+      <span class="dopt-icon" aria-hidden="true"></span>
+      <div class="dopt-text"><span class="dopt-label" data-i18n="donor_gofundme">Donar dinero</span><span class="dopt-sub" data-i18n="donor_gofundme_sub">GoFundMe · llega directo a quienes más lo necesitan</span></div>
+      <span class="dopt-arrow">›</span>
+    </a>
+    <button class="donor-opt donor-opt--blue" onclick="closeDonorPanel();showModal('modalPagoMovil')">
+      <span class="dopt-icon" aria-hidden="true"></span>
+      <div class="dopt-text"><span class="dopt-label" data-i18n="donor_pagomovil">Pago Móvil</span><span class="dopt-sub" data-i18n="donor_pagomovil_sub">Transferencia bancaria desde Venezuela</span></div>
+      <span class="dopt-arrow">›</span>
+    </button>
+    <button class="donor-opt donor-opt--yellow" onclick="closeDonorPanel();showTab('tabInventario')">
+      <span class="dopt-icon" aria-hidden="true"></span>
+      <div class="dopt-text"><span class="dopt-label" data-i18n="donor_insumos">Ofrecer insumos</span><span class="dopt-sub" data-i18n="donor_insumos_sub">Tengo medicinas, comida u otros recursos</span></div>
+      <span class="dopt-arrow">›</span>
+    </button>
+    <button class="donor-opt donor-opt--orange" onclick="closeDonorPanel();showTab('tabTransporte')">
+      <span class="dopt-icon" aria-hidden="true"></span>
+      <div class="dopt-text"><span class="dopt-label" data-i18n="donor_transporte">Trasladar insumos</span><span class="dopt-sub" data-i18n="donor_transporte_sub">Tengo vehículo y puedo hacer entregas</span></div>
+      <span class="dopt-arrow">›</span>
+    </button>
+    <button class="donor-opt donor-opt--teal" onclick="closeDonorPanel();showTab('tabAlimentacion')">
+      <span class="dopt-icon" aria-hidden="true"></span>
+      <div class="dopt-text"><span class="dopt-label" data-i18n="donor_comida">Llevar comida</span><span class="dopt-sub" data-i18n="donor_comida_sub">Anotarme en un turno de alimentación</span></div>
+      <span class="dopt-arrow">›</span>
+    </button>
+    <button class="donor-opt donor-opt--purple" onclick="closeDonorPanel();showTab('tabVoluntarios')">
+      <span class="dopt-icon" aria-hidden="true"></span>
+      <div class="dopt-text"><span class="dopt-label" data-i18n="donor_voluntario">Ser voluntario</span><span class="dopt-sub" data-i18n="donor_voluntario_sub">Apoyar en un centro que necesita manos</span></div>
+      <span class="dopt-arrow">›</span>
+    </button>
+  </div>
+</div>
+ 
+<!-- Botón flotante transparencia -->
+<button class="btn-transparencia btn-transp-pulse" onclick="showModal('modalTransparencia')" aria-label="Ver donaciones">
+  Mira tus donaciones
+</button>
+
+
+<!-- Modal: Inspección de viviendas y edificaciones -->
+<div id="modalInspeccion" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3>Inspección de edificación</h3>
+      <button class="modal-close" onclick="hideModal('modalInspeccion')">✕</button>
+    </div>
+    <div class="insp-hint">📋 Completa el formulario con la mayor precisión posible. Al enviar recibirás una confirmación por WhatsApp y la fecha quedará reservada automáticamente.</div>
+    <form id="formInspeccion" onsubmit="submitInspeccion(event)" novalidate>
+      <div class="form-group">
+        <label>Nombre del solicitante *</label>
+        <input type="text" id="insp_nombre" required placeholder="Tu nombre completo">
+      </div>
+      <div class="form-group">
+        <label>Correo electrónico *</label>
+        <input type="email" id="insp_correo" required placeholder="correo@ejemplo.com">
+      </div>
+      <div class="form-group">
+        <label>Número telefónico (WhatsApp) *</label>
+        <input type="tel" id="insp_telefono" required placeholder="0424-1234567">
+        <small>Recibirás la confirmación aquí.</small>
+      </div>
+      <div class="form-group">
+        <label>Nombre del edificio *</label>
+        <input type="text" id="insp_edificio" required placeholder="Edificio Las Mercedes, Residencias Bolívar…">
+      </div>
+      <div class="form-group">
+        <label>Ubicación exacta (ser lo más específico posible) *</label>
+        <textarea id="insp_ubicacion" rows="2" required placeholder="Av. Principal, entre calles X y Y, piso / apto…"></textarea>
+      </div>
+      <div class="form-group">
+        <label>¿Su edificio fue construido antes de 1967? *</label>
+        <div style="display:flex;gap:1rem;margin-top:.4rem">
+          <label style="display:flex;align-items:center;gap:.4rem;font-size:.85rem;font-weight:400;color:var(--gtxt);cursor:pointer">
+            <input type="radio" name="insp_antes1967" value="si" required style="width:auto"> Sí
+          </label>
+          <label style="display:flex;align-items:center;gap:.4rem;font-size:.85rem;font-weight:400;color:var(--gtxt);cursor:pointer">
+            <input type="radio" name="insp_antes1967" value="no" style="width:auto"> No
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Si respondió "Sí" — ¿el edificio sufrió daños y reparaciones?</label>
+        <textarea id="insp_danos" rows="2" placeholder="Describa los daños o reparaciones realizadas (obviar si respondió No)…"></textarea>
+      </div>
+      <div class="form-group">
+        <label>¿Cuenta con disponibilidad de planos estructurales? *</label>
+        <div style="display:flex;gap:1rem;margin-top:.4rem">
+          <label style="display:flex;align-items:center;gap:.4rem;font-size:.85rem;font-weight:400;color:var(--gtxt);cursor:pointer">
+            <input type="radio" name="insp_planos" value="si" required style="width:auto"> Sí
+          </label>
+          <label style="display:flex;align-items:center;gap:.4rem;font-size:.85rem;font-weight:400;color:var(--gtxt);cursor:pointer">
+            <input type="radio" name="insp_planos" value="no" style="width:auto"> No
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Fotos del estado del edificio (vigas y columnas)</label>
+        <small style="margin-bottom:.5rem;display:block">Haz clic en "Examinar" para acceder a tu galería. Máximo 6 fotos.</small>
+        <input type="file" id="insp_fotos" accept="image/*" multiple style="padding:.4rem;font-size:.8rem">
+        <div id="insp_fotos_preview" class="fotos-preview"></div>
+      </div>
+      <div style="border-top:1px solid var(--gborde);padding-top:.85rem;margin-top:.5rem">
+        <div class="form-group">
+          <label>📅 Fecha de inspección *</label>
+          <input type="date" id="insp_fecha" required>
+          <div id="insp_cal_info" class="cal-info"></div>
+        </div>
+        <div class="form-group">
+          <label>🕐 Hora preferida *</label>
+          <select id="insp_hora" required>
+            <option value="">Selecciona una hora</option>
+            <option value="08:00">08:00 AM</option>
+            <option value="09:00">09:00 AM</option>
+            <option value="10:00">10:00 AM</option>
+            <option value="11:00">11:00 AM</option>
+            <option value="14:00">02:00 PM</option>
+            <option value="15:00">03:00 PM</option>
+            <option value="16:00">04:00 PM</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-outline" onclick="hideModal('modalInspeccion')">Cancelar</button>
+        <button type="submit" class="btn-primary">Enviar solicitud</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- Modal: Transparencia / Donaciones publicadas -->
+<div id="modalTransparencia" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3>💛 Transparencia y donaciones</h3>
+      <button class="modal-close" onclick="hideModal('modalTransparencia')">✕</button>
+    </div>
+    <p style="font-size:.8rem;color:var(--gsub);margin-bottom:.75rem;line-height:1.5">Aquí publicamos cada donación recibida: cuánto, dónde se usó y cómo. Total transparencia.</p>
+    <button class="btn-primary" style="width:100%;margin-bottom:.85rem" onclick="showModal('modalPublicarDonacion')">+ Publicar donación</button>
+    <div id="listaDonaciones"></div>
+  </div>
+</div>
+
+<!-- Modal: Publicar donación -->
+<div id="modalPublicarDonacion" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3>Publicar donación recibida</h3>
+      <button class="modal-close" onclick="hideModal('modalPublicarDonacion')">✕</button>
+    </div>
+    <form id="formDonacion" onsubmit="submitDonacion(event)" novalidate>
+      <div class="form-group">
+        <label>Monto recibido (Bs. o $) *</label>
+        <input type="text" id="don_monto" required placeholder="5,000 Bs. / 50 USD">
+      </div>
+      <div class="form-group">
+        <label>¿En qué se usó? *</label>
+        <textarea id="don_descripcion" rows="3" required placeholder="Se compraron 20 cajas de gasas y 10 litros de suero fisiológico para el Hospital Vargas…"></textarea>
+      </div>
+      <div class="form-group">
+        <label>¿Dónde se entregó? *</label>
+        <input type="text" id="don_donde" required placeholder="Hospital Vargas, Caracas">
+      </div>
+      <div class="form-group">
+        <label>Fecha *</label>
+        <input type="date" id="don_fecha" required>
+      </div>
+      <div class="form-group">
+        <label>Fotos o videos (opcional)</label>
+        <small style="display:block;margin-bottom:.4rem">Puedes subir hasta 4 archivos (fotos o videos cortos).</small>
+        <input type="file" id="don_media" accept="image/*,video/*" multiple style="padding:.4rem;font-size:.8rem">
+        <div id="don_media_preview" class="fotos-preview"></div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn-outline" onclick="hideModal('modalPublicarDonacion')">Cancelar</button>
+        <button type="submit" class="btn-primary">Publicar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════
+   ENTRE AMIGOS POR VENEZUELA — app.js v3 (Final)
+   Módulos: A filtros · B geo · C estados · D auto-match
+            E alimentación · F donaciones · G transporte
+            H i18n · I locales · J voluntarios centros
+══════════════════════════════════════════════ */
+'use strict';
+
+/* ─── MÓDULO H: i18n (Diccionarios de Idiomas) ─── */
+const I18N = {
+  es: {
+    banner_gofundme:'Donar en GoFundMe', banner_pagomovil:'Pago Móvil', banner_psico:'Apoyo psicológico',
+    logo_entre:'entre amigos por', ig_seguir:'Síguenos',
+    nav_necesidades:'Necesidades', nav_venta: 'Venta', nav_acopio: 'Acopio', nav_inventario:'Locales y donantes',
+    nav_voluntarios:'Voluntariado', nav_alimentacion:'Alimentación', nav_transporte:'Transporte',
+    label_ciudad:'Ciudad / Estado', label_categoria:'Categoría', btn_ubicacion:'Mi ubicación',
+    cat_todas:'Todas', cat_sangre:'Sangre', cat_insumos:'Insumos médicos',
+    cat_rescate:'Rescate', cat_refugio:'Refugio y ropa', cat_alimentos:'Alimentos y agua',
+    title_necesidades:'Necesidades activas', title_venta: 'Locales de Venta', title_acopio: 'Centros de Acopio e Inventario', title_inventario:'Locales y donantes',
+    title_voluntarios:'Centros que buscan voluntarios', title_alimentacion:'Coordinación de alimentación',
+    title_transporte:'Red de conductores',
+    btn_publicar:'+ Publicar necesidad', btn_registrar_venta: '+ Registrar venta', btn_registrar_acopio: '+ Registrar acopio', btn_ofrecer:'+ Registrar local / donante',
+    btn_nuevo_evento:'+ Nuevo evento', btn_pedir_voluntarios:'+ Pedir voluntarios',
+    hint_transporte:'Los insumos "comprados" necesitan traslado. Ofrécete desde cada tarjeta.',
+    empty_necesidades:'Aún no hay necesidades publicadas.\n¡Sé el primero en publicar una!',
+    empty_venta: 'Aún no hay locales de venta registrados.\n¡Sé el primero en registrar uno!',
+    empty_acopio: 'Aún no hay centros de acopio o inventarios registrados.',
+    empty_inventario:'Aún no hay locales ni donantes registrados.\n¿Tienes algo disponible? ¡Regístralo!',
+    empty_voluntarios:'Ningún centro ha pedido voluntarios aún.',
+    empty_alimentacion:'Aún no hay eventos de alimentación.\nRegistra un punto de reparto para coordinarse.',
+    empty_transporte:'Aún no hay traslados activos.\nCuando un insumo sea "comprado" aparecerá aquí.',
+    modal_nueva_nec:'Publicar necesidad', modal_nueva_venta: 'Registrar Venta', modal_nuevo_acopio: 'Registrar Inventario / Acopio', modal_nuevo_inv:'Registrar local o donante',
+    modal_nuevo_evento:'Registrar evento de alimentación', modal_voluntario_comida:'Anotarme para llevar comida',
+    modal_pedir_vol:'Pedir voluntarios para mi centro', modal_ofrecerse_vol:'Ofrecerme como voluntario',
+    modal_conductor:'Yo lo traslado', modal_pin:'Confirmar con PIN', modal_pago:'Pago Móvil',
+    btn_publicar_nec:'Publicar', btn_cancelar:'Cancelar', btn_confirmar:'Confirmar',
+    btn_usar_ubicacion:'Usar mi ubicación actual', btn_listo:'Listo',
+    ig_sub:'Síguenos para actualizaciones en tiempo real',
+    estado_necesitado:'Necesitado', estado_comprado:'Comprado',
+    estado_en_transito:'En tránsito', estado_recibido:'Recibido',
+    btn_marcar_comprado:'Marcar comprado', btn_yo_traslado:'Yo lo traslado',
+    btn_marcar_recibido:'Confirmar recibido', btn_maps:'Ver en mapa', btn_whatsapp:'WhatsApp',
+    match_label:'¡Disponible cerca!',
+    toast_guardado:'Registrado correctamente', toast_error:'Completa todos los campos requeridos',
+    toast_pin_ok:'Estado actualizado', toast_pin_error:'PIN incorrecto',
+    toast_geo_ok:'Ubicación obtenida', toast_geo_error:'No se pudo obtener la ubicación',
+    toast_conductor:'Traslado registrado',
+    welcome_sub:'Conectamos a quienes necesitan con quienes pueden ayudar',
+    welcome_necesito:'Necesito ayuda', welcome_necesito_sub:'Publicar una necesidad o buscar recursos',
+    welcome_ayudo:'Quiero ayudar', welcome_ayudo_sub:'Donar, ser voluntario o trasladar insumos',
+    welcome_local:'Soy local', welcome_local_sub:'Ofrecer productos a la venta, ubicación y precios',
+    welcome_o:'— o —', welcome_skip:'Ver todo el directorio →',
+    donor_title:'¿Cómo quieres ayudar?',
+    donor_gofundme:'Donar dinero', donor_gofundme_sub:'GoFundMe · llega directo a quienes más lo necesitan',
+    donor_pagomovil:'Pago Móvil', donor_pagomovil_sub:'Transferencia bancaria desde Venezuela',
+    donor_insumos:'Ofrecer insumos', donor_insumos_sub:'Tengo medicinas, comida u otros recursos',
+    donor_transporte:'Trasladar insumos', donor_transporte_sub:'Tengo vehículo y puedo hacer entregas',
+    donor_comida:'Llevar comida', donor_comida_sub:'Anotarme en un turno de alimentación',
+    donor_voluntario:'Ser voluntario', donor_voluntario_sub:'Apoyar en un centro que necesita manos',
+  },
+  en: {
+    nav_venta: '🏷️ Sales', nav_acopio: '📦 Collections', title_venta: 'Sales Locations', title_acopio: 'Collection Centers',
+    btn_registrar_venta: '+ Register sale', btn_registrar_acopio: '+ Register center', empty_venta: 'No sales locations registered yet.', empty_acopio: 'No collection centers registered yet.',
+    modal_nueva_venta: 'Register Sale', modal_nuevo_acopio: 'Register Collection', welcome_local: 'I am a local store', welcome_local_sub: 'Offer products for sale, location and prices',
+    banner_gofundme:'💛 Donate on GoFundMe', banner_pagomovil:'📲 Mobile Payment', banner_psico:'🧠 Psychological Support',
+    logo_entre:'between friends for', ig_seguir:'Follow us', nav_necesidades:'🔴 Needs', nav_inventario:'🏪 Stores & Donors',
+    nav_voluntarios:'🤝 Volunteers', nav_alimentacion:'🍽️ Food Aid', nav_transporte:'🚗 Transport',
+    label_ciudad:'City / State', label_categoria:'Category', btn_ubicacion:'📍 My location',
+    cat_todas:'All', cat_sangre:'🩸 Blood', cat_insumos:'🏥 Medical Supplies',
+    cat_rescate:'🦺 Rescue', cat_refugio:'⛺ Shelter & Clothing', cat_alimentos:'🥫 Food & Water',
+    title_necesidades:'Active needs', title_inventario:'Stores and donors',
+    title_voluntarios:'Centers seeking volunteers', title_alimentacion:'Food coordination', title_transporte:'Driver network',
+    btn_publicar:'+ Post need', btn_ofrecer:'+ Register store / donor', btn_nuevo_evento:'+ New event', btn_pedir_voluntarios:'+ Request volunteers',
+    hint_transporte:'"Purchased" supplies need transport. Volunteer from each card.',
+    empty_necesidades:'No needs posted yet.', empty_inventario:'No stores or donors registered yet.',
+    empty_voluntarios:'No centers have requested volunteers yet.', empty_alimentacion:'No food events yet.', empty_transporte:'No active transports yet.',
+    modal_nueva_nec:'Post a need', modal_nuevo_inv:'Register store or donor', modal_nuevo_evento:'Register food event', modal_voluntario_comida:'Sign up to bring food',
+    modal_pedir_vol:'Request volunteers for my center', modal_ofrecerse_vol:'Volunteer', modal_conductor:'🚗 I will deliver it', modal_pin:'Confirm with PIN', modal_pago:'Mobile Payment',
+    btn_publicar_nec:'Publish', btn_cancelar:'Cancel', btn_confirmar:'Confirm', btn_usar_ubicacion:'📍 Use my current location', btn_listo:'Done',
+    ig_sub:'Follow us for real-time updates', estado_necesitado:'🔴 Needed', estado_comprado:'🟡 Purchased', estado_en_transito:'🟠 In transit', estado_recibido:'🟢 Received',
+    btn_marcar_comprado:'✅ Mark purchased', btn_yo_traslado:'🚗 I will deliver', btn_marcar_recibido:'🟢 Confirm received', btn_maps:'📍 View map', btn_whatsapp:'💬 WhatsApp',
+    match_label:'💡 Available nearby!', toast_guardado:'✅ Published successfully', toast_error:'❌ Fill all required fields',
+    toast_pin_ok:'✅ Status updated', toast_pin_error:'❌ Incorrect PIN', toast_geo_ok:'📍 Location obtained', toast_geo_error:'❌ Could not get location',
+    toast_conductor:'🚗 Transport registered!', welcome_sub:'Connecting those who need with those who can help',
+    welcome_necesito:'I need help', welcome_necesito_sub:'Post a need or find resources', welcome_ayudo:'I want to help', welcome_ayudo_sub:'Donate, volunteer or transport supplies',
+    welcome_o:'— or —', welcome_skip:'Browse the full directory →', donor_title:'How do you want to help?',
+    donor_gofundme:'Donate money', donor_gofundme_sub:'GoFundMe · goes directly to those in need', donor_pagomovil:'Mobile Payment', donor_pagomovil_sub:'Bank transfer from Venezuela',
+    donor_insumos:'Offer supplies', donor_insumos_sub:'I have medicine, food or other resources', donor_transporte:'Transport supplies', donor_transporte_sub:'I have a vehicle and can make deliveries',
+    donor_comida:'Bring food', donor_comida_sub:'Sign up for a food distribution shift', donor_voluntario:'Volunteer', donor_voluntario_sub:'Support a center that needs hands',
+  },
+  pt: {
+    nav_venta: '🏷️ Vendas', nav_acopio: '📦 Centros de Coleta', title_venta: 'Locais de Venda', title_acopio: 'Centros de Coleta',
+    btn_registrar_venta: '+ Registrar venda', btn_registrar_acopio: '+ Registrar coleta', empty_venta: 'Nenhum local de venda registrado.', empty_acopio: 'Nenhum centro de coleta registrado.',
+    modal_nueva_venta: 'Registrar Venda', modal_nuevo_acopio: 'Registrar Coleta', welcome_local: 'Sou lojista', welcome_local_sub: 'Oferecer produtos para venda, localização e preços',
+    banner_gofundme:'💛 Doar no GoFundMe', banner_pagomovil:'📲 Pagamento Móvel', banner_psico:'🧠 Apoio Psicológico',
+    logo_entre:'entre amigos pela', ig_seguir:'Nos siga', nav_necesidades:'🔴 Necessidades', nav_inventario:'🏪 Locais e Doadores',
+    nav_voluntarios:'🤝 Voluntários', nav_alimentacion:'🍽️ Alimentação', nav_transporte:'🚗 Transporte', label_ciudad:'Cidade / Estado', label_categoria:'Categoria', btn_ubicacion:'📍 Minha localização',
+    cat_todas:'Todas', cat_sangre:'🩸 Sangue', cat_insumos:'🏥 Insumos Médicos', cat_rescate:'🦺 Resgate', cat_refugio:'⛺ Abrigo e Roupas', cat_alimentos:'🥫 Alimentos e Água',
+    title_necesidades:'Necessidades ativas', title_inventario:'Locais e doadores', title_voluntarios:'Centros que buscam voluntários', title_alimentacion:'Coordenação de alimentação', title_transporte:'Rede de motoristas',
+    btn_publicar:'+ Publicar necessidade', btn_ofrecer:'+ Registrar local / doador', btn_nuevo_evento:'+ Novo evento', btn_pedir_voluntarios:'+ Pedir voluntários',
+    hint_transporte:'Insumos "comprados" precisam de transporte. Ofereça-se em cada cartão.', empty_necesidades:'Nenhuma necessidade publicada ainda.', empty_inventario:'Nenhum local ou doador registrado ainda.',
+    empty_voluntarios:'Nenhum centro solicitou voluntários ainda.', empty_alimentacion:'Nenhum evento de alimentação ainda.', empty_transporte:'Nenhum transporte ativo ainda.',
+    modal_nueva_nec:'Publicar necessidade', modal_nuevo_inv:'Registrar local ou doador', modal_nuevo_evento:'Registrar evento de alimentação', modal_voluntario_comida:'Me inscrever para levar comida',
+    modal_pedir_vol:'Pedir voluntários para meu centro', modal_ofrecerse_vol:'Me oferecer como voluntário', modal_conductor:'🚗 Eu levo', modal_pin:'Confirmar com PIN', modal_pago:'Pagamento Móvel',
+    btn_publicar_nec:'Publicar', btn_cancelar:'Cancelar', btn_confirmar:'Confirmar', btn_usar_ubicacion:'📍 Usar minha localização atual', btn_listo:'Pronto',
+    ig_sub:'Nos siga para atualizações', estado_necesitado:'🔴 Necessário', estado_comprado:'🟡 Comprado', estado_en_transito:'🟠 Em trânsito', estado_recibido:'🟢 Recebido',
+    btn_marcar_comprado:'✅ Marcar comprado', btn_yo_traslado:'🚗 Eu levo', btn_marcar_recibido:'🟢 Confirmar recebido', btn_maps:'📍 Ver no mapa', btn_whatsapp:'💬 WhatsApp',
+    match_label:'💡 Disponível perto!', toast_guardado:'✅ Publicado com sucesso', toast_error:'❌ Preencha todos os campos obrigatórios', toast_pin_ok:'✅ Status atualizado', toast_pin_error:'❌ PIN incorreto',
+    toast_geo_ok:'📍 Localização obtida', toast_geo_error:'❌ Erro ao obter localização', toast_conductor:'🚗 Transporte registrado!', welcome_sub:'Conectamos quem precisa com quem pode ajudar',
+    welcome_necesito:'Preciso de ajuda', welcome_necesito_sub:'Publicar uma necessidade ou buscar recursos', welcome_ayudo:'Quero ajudar', welcome_ayudo_sub:'Doar, ser voluntário ou transportar insumos',
+    welcome_o:'— ou —', welcome_skip:'Ver todo o diretório →', donor_title:'Como você quer ajudar?', donor_gofundme:'Doar dinheiro', donor_gofundme_sub:'GoFundMe · vai direto para quem mais precisa',
+    donor_pagomovil:'Pagamento Móvel', donor_pagomovil_sub:'Transferência bancária', donor_insumos:'Oferecer insumos', donor_insumos_sub:'Tenho remédios, comida ou outros recursos',
+    donor_transporte:'Transportar insumos', donor_transporte_sub:'Tenho veículo e posso fazer entregas', donor_comida:'Levar comida', donor_comida_sub:'Me inscrever em um turno de alimentação',
+    donor_voluntario:'Ser voluntário', donor_voluntario_sub:'Apoiar um centro que precisa de ajuda'
+  },
+  fr: {
+    nav_venta: '🏷️ Ventes', nav_acopio: '📦 Collectes', title_venta: 'Points de Vente', title_acopio: 'Centres de Collecte',
+    btn_registrar_venta: '+ Enregistrer vente', btn_registrar_acopio: '+ Enregistrer centre', empty_venta: 'Aucun point de vente enregistré.', empty_acopio: 'Aucun centre de collecte enregistré.',
+    modal_nueva_venta: 'Enregistrer Vente', modal_nuevo_acopio: 'Enregistrer Collecte', welcome_local: 'Je suis commerçant', welcome_local_sub: 'Proposer des produits à la vente, localisation et prix',
+    banner_gofundme:'💛 Faire un don GoFundMe', banner_pagomovil:'📲 Paiement Mobile', banner_psico:'🧠 Soutien Psychologique', logo_entre:'entre amis pour le', ig_seguir:'Suivez-nous',
+    nav_necesidades:'🔴 Besoins', nav_inventario:'🏪 Locaux & Donateurs', nav_voluntarios:'🤝 Bénévoles', nav_alimentacion:'🍽️ Alimentation', nav_transporte:'🚗 Transport',
+    label_ciudad:'Ville / État', label_categoria:'Catégorie', btn_ubicacion:'📍 Ma position', cat_todas:'Toutes', cat_sangre:'🩸 Sang', cat_insumos:'🏥 Fournitures médicales',
+    cat_rescate:'🦺 Sauvetage', cat_refugio:'⛺ Abri & Vêtements', cat_alimentos:'🥫 Nourriture & Eau', title_necesidades:'Besoins actifs', title_inventario:'Locaux et donateurs',
+    title_voluntarios:'Centres cherchant des bénévoles', title_alimentacion:'Coordination alimentaire', title_transporte:'Réseau de conducteurs', btn_publicar:'+ Publier un besoin', btn_ofrecer:'+ Enregistrer local / donateur',
+    btn_nuevo_evento:'+ Nouvel événement', btn_pedir_voluntarios:'+ Demander des bénévoles', hint_transporte:'Les fournitures "achetées" ont besoin de transport.', empty_necesidades:'Aucun besoin publié pour le moment.',
+    empty_inventario:'Aucun local ou donateur enregistré.', empty_voluntarios:'Aucun centre n\'a encore demandé de bénévoles.', empty_alimentacion:'Aucun événement alimentaire.', empty_transporte:'Aucun transport actif.',
+    modal_nueva_nec:'Publier un besoin', modal_nuevo_inv:'Enregistrer local ou donateur', modal_nuevo_evento:'Enregistrer un événement', modal_voluntario_comida:'S\'inscrire pour apporter de la nourriture',
+    modal_pedir_vol:'Demander des bénévoles', modal_ofrecerse_vol:'Devenir bénévole', modal_conductor:'🚗 Je le transporte', modal_pin:'Confirmer avec le code PIN', modal_pago:'Paiement Mobile',
+    btn_publicar_nec:'Publier', btn_cancelar:'Annuler', btn_confirmar:'Confirmer', btn_usar_ubicacion:'📍 Utiliser ma position', btn_listo:'Prêt', ig_sub:'Suivez-nous pour des mises à jour en temps réel',
+    estado_necesitado:'🔴 Nécessaire', estado_comprado:'🟡 Acheté', estado_en_transito:'🟠 En transit', estado_recibido:'🟢 Reçu', btn_marcar_comprado:'✅ Marquer comme acheté', btn_yo_traslado:'🚗 Je le transporte',
+    btn_marcar_recibido:'🟢 Confirmer la réception', btn_maps:'📍 Voir sur la carte', btn_whatsapp:'💬 WhatsApp', match_label:'💡 Disponible à proximité!', toast_guardado:'✅ Publié avec succès', toast_error:'❌ Remplissez tous les champs',
+    toast_pin_ok:'✅ Statut mis à jour', toast_pin_error:'❌ Code PIN incorrect', toast_geo_ok:'📍 Position obtenue', toast_geo_error:'❌ Impossible d\'obtenir la position', toast_conductor:'🚗 Transport enregistré!',
+    welcome_sub:'Nous connectons ceux qui ont besoin et ceux qui peuvent aider', welcome_necesito:'J\'ai besoin d\'aide', welcome_necesito_sub:'Publier un besoin ou trouver des ressources', welcome_ayudo:'Je veux aider', welcome_ayudo_sub:'Faire un don, être bénévole ou transporter',
+    welcome_o:'— ou —', welcome_skip:'Voir tout le répertoire →', donor_title:'Comment voulez-vous aider?', donor_gofundme:'Donner de l\'argent', donor_gofundme_sub:'GoFundMe · va directement à ceux qui en ont besoin',
+    donor_pagomovil:'Paiement Mobile', donor_pagomovil_sub:'Virement bancaire', donor_insumos:'Offrir des fournitures', donor_insumos_sub:'J\'ai des médicaments, de la nourriture...', donor_transporte:'Transporter des fournitures', donor_transporte_sub:'J\'ai un véhicule et je peux livrer',
+    donor_comida:'Apporter de la nourriture', donor_comida_sub:'M\'inscrire pour une distribution', donor_voluntario:'Être bénévole', donor_voluntario_sub:'Soutenir un centre qui a besoin d\'aide'
+  },
+  de: {
+    nav_venta: '🏷️ Verkauf', nav_acopio: '📦 Sammelstellen', title_venta: 'Verkaufsstellen', title_acopio: 'Sammelzentren',
+    btn_registrar_venta: '+ Verkauf registrieren', btn_registrar_acopio: '+ Zentrum registrieren', empty_venta: 'Noch keine Verkaufsstellen registriert.', empty_acopio: 'Noch keine Sammelstellen registriert.',
+    modal_nueva_venta: 'Verkauf registrieren', modal_nuevo_acopio: 'Sammelstelle registrieren', welcome_local: 'Ich bin Händler', welcome_local_sub: 'Produkte zum Verkauf, Standort und Preise anbieten',
+    banner_gofundme:'💛 Spenden GoFundMe', banner_pagomovil:'📲 Mobile Zahlung', banner_psico:'🧠 Psychologische Unterstützung', logo_entre:'unter freunden für', ig_seguir:'Folge uns',
+    nav_necesidades:'🔴 Bedürfnisse', nav_inventario:'🏪 Geschäfte & Spender', nav_voluntarios:'🤝 Freiwillige', nav_alimentacion:'🍽️ Ernährung', nav_transporte:'🚗 Transport',
+    label_ciudad:'Stadt / Bundesland', label_categoria:'Kategorie', btn_ubicacion:'📍 Mein Standort', cat_todas:'Alle', cat_sangre:'🩸 Blut', cat_insumos:'🏥 Medizinische Versorgung',
+    cat_rescate:'🦺 Rettung', cat_refugio:'⛺ Unterkunft & Kleidung', cat_alimentos:'🥫 Essen & Wasser', title_necesidades:'Aktuelle Bedürfnisse', title_inventario:'Geschäfte und Spender',
+    title_voluntarios:'Zentren, die Freiwillige suchen', title_alimentacion:'Lebensmittelkoordination', title_transporte:'Fahrernetzwerk', btn_publicar:'+ Bedürfnis posten', btn_ofrecer:'+ Geschäft / Spender registrieren',
+    btn_nuevo_evento:'+ Neues Event', btn_pedir_voluntarios:'+ Freiwillige anfragen', hint_transporte:'"Gekaufte" Hilfsgüter benötigen Transport.', empty_necesidades:'Noch keine Bedürfnisse gepostet.',
+    empty_inventario:'Noch keine Geschäfte oder Spender registriert.', empty_voluntarios:'Noch keine Freiwilligen angefragt.', empty_alimentacion:'Noch keine Food-Events.', empty_transporte:'Noch keine aktiven Transporte.',
+    modal_nueva_nec:'Bedürfnis posten', modal_nuevo_inv:'Geschäft / Spender registrieren', modal_nuevo_evento:'Food-Event registrieren', modal_voluntario_comida:'Essen bringen anmelden',
+    modal_pedir_vol:'Freiwillige anfragen', modal_ofrecerse_vol:'Als Freiwilliger melden', modal_conductor:'🚗 Ich transportiere es', modal_pin:'Mit PIN bestätigen', modal_pago:'Mobile Zahlung',
+    btn_publicar_nec:'Veröffentlichen', btn_cancelar:'Abbrechen', btn_confirmar:'Bestätigen', btn_usar_ubicacion:'📍 Aktuellen Standort verwenden', btn_listo:'Fertig', ig_sub:'Folge uns für Echtzeit-Updates',
+    estado_necesitado:'🔴 Benötigt', estado_comprado:'🟡 Gekauft', estado_en_transito:'🟠 Unterwegs', estado_recibido:'🟢 Erhalten', btn_marcar_comprado:'✅ Als gekauft markieren', btn_yo_traslado:'🚗 Ich transportiere es',
+    btn_marcar_recibido:'🟢 Erhalt bestätigen', btn_maps:'📍 Auf Karte anzeigen', btn_whatsapp:'💬 WhatsApp', match_label:'💡 In der Nähe verfügbar!', toast_guardado:'✅ Erfolgreich veröffentlicht', toast_error:'❌ Bitte alle Felder ausfüllen',
+    toast_pin_ok:'✅ Status aktualisiert', toast_pin_error:'❌ Falsche PIN', toast_geo_ok:'📍 Standort abgerufen', toast_geo_error:'❌ Standort konnte nicht abgerufen werden', toast_conductor:'🚗 Transport registriert!',
+    welcome_sub:'Wir verbinden die Bedürftigen mit denen, die helfen können', welcome_necesito:'Ich brauche Hilfe', welcome_necesito_sub:'Ein Bedürfnis posten oder Ressourcen finden', welcome_ayudo:'Ich möchte helfen', welcome_ayudo_sub:'Spenden, freiwillig arbeiten oder Hilfsgüter transportieren',
+    welcome_o:'— oder —', welcome_skip:'Gesamtes Verzeichnis ansehen →', donor_title:'Wie möchtest du helfen?', donor_gofundme:'Geld spenden', donor_gofundme_sub:'GoFundMe · geht direkt an die Bedürftigen',
+    donor_pagomovil:'Mobile Zahlung', donor_pagomovil_sub:'Banküberweisung', donor_insumos:'Hilfsgüter anbieten', donor_insumos_sub:'Ich habe Medikamente, Essen...', donor_transporte:'Hilfsgüter transportieren', donor_transporte_sub:'Ich habe ein Fahrzeug und kann liefern',
+    donor_comida:'Essen bringen', donor_comida_sub:'Für Lebensmittelausgabe anmelden', donor_voluntario:'Freiwilliger werden', donor_voluntario_sub:'Ein Zentrum unterstützen, das Hilfe braucht'
+  },
+  it: {
+    nav_venta: '🏷️ Vendita', nav_acopio: '📦 Raccolta', title_venta: 'Punti Vendita', title_acopio: 'Centri di Raccolta',
+    btn_registrar_venta: '+ Registra vendita', btn_registrar_acopio: '+ Registra centro', empty_venta: 'Nessun punto vendita registrato.', empty_acopio: 'Nessun centro di raccolta registrato.',
+    modal_nueva_venta: 'Registra Vendita', modal_nuevo_acopio: 'Registra Raccolta', welcome_local: 'Sono un commerciante', welcome_local_sub: 'Offrire prodotti in vendita, posizione e prezzi',
+    banner_gofundme:'💛 Dona su GoFundMe', banner_pagomovil:'📲 Pagamento Mobile', banner_psico:'🧠 Supporto Psicologico', logo_entre:'tra amici per il', ig_seguir:'Seguici',
+    nav_necesidades:'🔴 Necessità', nav_inventario:'🏪 Negozi e Donatori', nav_voluntarios:'🤝 Voluntari', nav_alimentacion:'🍽️ Alimentazione', nav_transporte:'🚗 Trasporto',
+    label_ciudad:'Città / Stato', label_categoria:'Categoria', btn_ubicacion:'📍 La mia posizione', cat_todas:'Tutte', cat_sangre:'🩸 Sangue', cat_insumos:'🏥 Forniture Mediche',
+    cat_rescate:'🦺 Salvataggio', cat_refugio:'⛺ Rifugio e Vestiti', cat_alimentos:'🥫 Cibo e Acqua', title_necesidades:'Necessità attive', title_inventario:'Negozi e donatori',
+    title_voluntarios:'Centri che cercano volontari', title_alimentacion:'Coordinamento alimentare', title_transporte:'Rete di autisti', btn_publicar:'+ Pubblica necessità', btn_ofrecer:'+ Registra negozio / donatore',
+    btn_nuevo_evento:'+ Nuovo evento', btn_pedir_voluntarios:'+ Richiedi volontari', hint_transporte:'Le forniture "comprate" necessitano di trasporto.', empty_necesidades:'Nessuna necessità pubblicata ancora.',
+    empty_inventario:'Nessun negozio o donatore registrato ancora.', empty_voluntarios:'Nessun centro ha ancora richiesto volontari.', empty_alimentacion:'Nessun evento alimentare ancora.', empty_transporte:'Nessun trasporto attivo ancora.',
+    modal_nueva_nec:'Pubblica necessità', modal_nuevo_inv:'Registra negozio o donatore', modal_nuevo_evento:'Registra evento alimentare', modal_voluntario_comida:'Iscriviti per portare cibo',
+    modal_pedir_vol:'Richiedi volontari', modal_ofrecerse_vol:'Offriti come volontario', modal_conductor:'🚗 Lo trasporto io', modal_pin:'Conferma con PIN', modal_pago:'Pagamento Mobile',
+    btn_publicar_nec:'Pubblica', btn_cancelar:'Annulla', btn_confirmar:'Conferma', btn_usar_ubicacion:'📍 Usa posizione attuale', btn_listo:'Fatto', ig_sub:'Seguici per aggiornamenti in tempo reale',
+    estado_necesitado:'🔴 Necessario', estado_comprado:'🟡 Comprato', estado_en_transito:'🟠 In transito', estado_recibido:'🟢 Ricevuto', btn_marcar_comprado:'✅ Segna come comprato', btn_yo_traslado:'🚗 Lo trasporto io',
+    btn_marcar_recibido:'🟢 Conferma ricezione', btn_maps:'📍 Vedi sulla mappa', btn_whatsapp:'💬 WhatsApp', match_label:'💡 Disponibile nelle vicinanze!', toast_guardado:'✅ Pubblicato con successo', toast_error:'❌ Compila tutti i campi',
+    toast_pin_ok:'✅ Stato aggiornato', toast_pin_error:'❌ PIN errato', toast_geo_ok:'📍 Posizione ottenuta', toast_geo_error:'❌ Impossibile ottenere la posizione', toast_conductor:'🚗 Trasporto registrato!',
+    welcome_sub:'Mettiamo in contatto chi ha bisogno con chi può aiutare', welcome_necesito:'Ho bisogno di aiuto', welcome_necesito_sub:'Pubblica una necessità o cerca risorse', welcome_ayudo:'Voglio aiutare', welcome_ayudo_sub:'Dona, fai volontariato o trasporta forniture',
+    welcome_o:'— o —', welcome_skip:'Visualizza tutta la directory →', donor_title:'Come vuoi aiutare?', donor_gofundme:'Dona denaro', donor_gofundme_sub:'GoFundMe · va direttamente a chi ne ha bisogno',
+    donor_pagomovil:'Pagamento Mobile', donor_pagomovil_sub:'Bonifico bancario', donor_insumos:'Offri forniture', donor_insumos_sub:'Ho medicine, cibo...', donor_transporte:'Trasporta forniture', donor_transporte_sub:'Ho un veicolo e posso consegnare',
+    donor_comida:'Porta cibo', donor_comida_sub:'Iscriviti per la distribuzione', donor_voluntario:'Fai volontariato', donor_voluntario_sub:'Supporta un centro che ha bisogno di aiuto'
+  },
+  ar: {
+    nav_venta: '🏷️ مبيعات', nav_acopio: '📦 مراكز التجميع', title_venta: 'أماكن البيع', title_acopio: 'مراكز التجميع',
+    btn_registrar_venta: '+ تسجيل مبيعات', btn_registrar_acopio: '+ تسجيل مركز', empty_venta: 'لا توجد أماكن بيع مسجلة بعد.', empty_acopio: 'لا توجد مراكز تجميع مسجلة بعد.',
+    modal_nueva_venta: 'تسجيل مبيعات', modal_nuevo_acopio: 'تسجيل مركز تجميع', welcome_local: 'أنا متجر محلي', welcome_local_sub: 'عرض المنتجات للبيع، الموقع والأسعار',
+    banner_gofundme:'💛 تبرع في GoFundMe', banner_pagomovil:'📲 الدفع عبر الهاتف', banner_psico:'🧠 الدعم النفسي', logo_entre:'بين الأصدقاء لأجل', ig_seguir:'تابعنا',
+    nav_necesidades:'🔴 الاحتياجات', nav_inventario:'🏪 المتاجر والمتبرعون', nav_voluntarios:'🤝 المتطوعون', nav_alimentacion:'🍽️ المساعدات الغذائية', nav_transporte:'🚗 النقل',
+    label_ciudad:'المدينة / الولاية', label_categoria:'الفئة', btn_ubicacion:'📍 موقعي', cat_todas:'الكل', cat_sangre:'🩸 الدم', cat_insumos:'🏥 المستلزمات الطبية',
+    cat_rescate:'🦺 الإنقاذ', cat_refugio:'⛺ المأوى والملابس', cat_alimentos:'🥫 الطعام والماء', title_necesidades:'الاحتياجات النشطة', title_inventario:'المتاجر والمتبرعون',
+    title_voluntarios:'مراكز تبحث عن متطوعين', title_alimentacion:'تنسيق الغذاء', title_transporte:'شبكة السائقين', btn_publicar:'+ نشر حاجة', btn_ofrecer:'+ تسجيل متجر / متبرع',
+    btn_nuevo_evento:'+ حدث جديد', btn_pedir_voluntarios:'+ طلب متطوعين', hint_transporte:'تحتاج المستلزمات "المشتراة" إلى نقل.', empty_necesidades:'لم يتم نشر أي احتياجات بعد.',
+    empty_inventario:'لم يتم تسجيل أي متاجر أو متبرعين بعد.', empty_voluntarios:'لم يطلب أي مركز متطوعين بعد.', empty_alimentacion:'لا توجد أحداث غذائية بعد.', empty_transporte:'لا توجد وسائل نقل نشطة بعد.',
+    modal_nueva_nec:'نشر حاجة', modal_nuevo_inv:'تسجيل متجر أو متبرع', modal_nuevo_evento:'تسجيل حدث غذائي', modal_voluntario_comida:'سجل لإحضار الطعام',
+    modal_pedir_vol:'طلب متطوعين لمركزي', modal_ofrecerse_vol:'تطوع', modal_conductor:'🚗 سأقوم بنقله', modal_pin:'تأكيد باستخدام PIN', modal_pago:'الدفع عبر الهاتف',
+    btn_publicar_nec:'نشر', btn_cancelar:'إلغاء', btn_confirmar:'تأكيد', btn_usar_ubicacion:'📍 استخدام موقعي الحالي', btn_listo:'تم', ig_sub:'تابعنا للحصول على التحديثات الفورية',
+    estado_necesitado:'🔴 مطلوب', estado_comprado:'🟡 تم الشراء', estado_en_transito:'🟠 في الطريق', estado_recibido:'🟢 تم الاستلام', btn_marcar_comprado:'✅ تعليم كمشترى', btn_yo_traslado:'🚗 سأقوم بنقله',
+    btn_marcar_recibido:'🟢 تأكيد الاستلام', btn_maps:'📍 عرض الخريطة', btn_whatsapp:'💬 واتساب', match_label:'💡 متاح بالجوار!', toast_guardado:'✅ تم النشر بنجاح', toast_error:'❌ يرجى ملء جميع الحقول',
+    toast_pin_ok:'✅ تم تحديث الحالة', toast_pin_error:'❌ PIN غير صحيح', toast_geo_ok:'📍 تم الحصول على الموقع', toast_geo_error:'❌ تعذر الحصول على الموقع', toast_conductor:'🚗 تم تسجيل النقل!',
+    welcome_sub:'نربط بين من يحتاج ومن يمكنه المساعدة', welcome_necesito:'أحتاج إلى المساعدة', welcome_necesito_sub:'نشر حاجة أو البحث عن موارد', welcome_ayudo:'أريد المساعدة', welcome_ayudo_sub:'تبرع، تطوع أو انقل المستلزمات',
+    welcome_o:'— أو —', welcome_skip:'تصفح الدليل بالكامل →', donor_title:'كيف تريد المساعدة؟', donor_gofundme:'تبرع بالمال', donor_gofundme_sub:'GoFundMe · يذهب مباشرة لمن هم في أمس الحاجة',
+    donor_pagomovil:'الدفع عبر الهاتف', donor_pagomovil_sub:'تحويل مصرفي', donor_insumos:'تقديم مستلزمات', donor_insumos_sub:'لدي دواء، طعام...', donor_transporte:'نقل المستلزمات', donor_transporte_sub:'لدي مركبة ويمكنني التوصيل',
+    donor_comida:'إحضار طعام', donor_comida_sub:'التسجيل في دورية توزيع الطعام', donor_voluntario:'كن متطوعاً', donor_voluntario_sub:'دعم مركز يحتاج إلى مساعدة'
+  }
+};
+
+let LANG = 'es';
+const t = k => (I18N[LANG]?.[k] ?? I18N.es[k] ?? k);
+
+function setLang(lang) {
+  LANG = lang;
+  // Soporte para árabe de Derecha a Izquierda (RTL)
+  if (lang === 'ar') {
+    document.body.style.direction = 'rtl';
+  } else {
+    document.body.style.direction = 'ltr';
+  }
+  
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    el.textContent = t(key);
+  });
+  document.documentElement.lang = lang;
+  renderAll();
+}
+
+/* ─── Utils ─── */
+function uuid() {
+  return crypto.randomUUID
+    ? crypto.randomUUID()
+    : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+        const r = Math.random() * 16 | 0;
+        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+      });
+}
+function now() { return new Date().toISOString(); }
+
+function showToast(msg, dur = 2800) {
+  document.querySelector('.toast')?.remove();
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), dur);
+}
+
+/* ─── Hash PIN ─── */
+async function hashPin(pin) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pin));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+async function verifyPin(pin, hash) { return (await hashPin(pin)) === hash; }
+
+/* ─── Compresión imagen <300KB ─── */
+function compressImage(file, maxKB = 300) {
+  return new Promise((res, rej) => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        const maxDim = 1200;
+        let { width: w, height: h } = img;
+        if (w > maxDim || h > maxDim) {
+          if (w > h) { h = Math.round(h * maxDim / w); w = maxDim; }
+          else { w = Math.round(w * maxDim / h); h = maxDim; }
+        }
+        const c = document.createElement('canvas');
+        c.width = w; c.height = h;
+        c.getContext('2d').drawImage(img, 0, 0, w, h);
+        let q = 0.8, url = c.toDataURL('image/jpeg', q);
+        while (url.length > maxKB * 1024 * 1.37 && q > 0.2) { q -= 0.1; url = c.toDataURL('image/jpeg', q); }
+        res(url);
+      };
+      img.onerror = rej;
+      img.src = e.target.result;
+    };
+    reader.onerror = rej;
+    reader.readAsDataURL(file);
+  });
+}
+
+/* ─── DB (localStorage) ─── */
+const DB = {
+  get(col)         { try { return JSON.parse(localStorage.getItem('eav_' + col) || '[]'); } catch { return []; } },
+  set(col, data)   { localStorage.setItem('eav_' + col, JSON.stringify(data)); },
+  add(col, item)   { const d = DB.get(col); d.unshift(item); DB.set(col, d); return item; },
+  update(col, id, patch) { DB.set(col, DB.get(col).map(r => r.id === id ? { ...r, ...patch, actualizado_en: now() } : r)); },
+  find(col, fn)    { return DB.get(col).filter(fn); },
+};
+
+function clearDemoDataIfPresent() {
+  if (localStorage.getItem('eav_cleared_v4')) return;
+  ['insumos','inventario','alimentacion','voluntarios_comida','transporte','auto_matches','solicitudes_voluntarios','respuestas_voluntarios']
+    .forEach(k => localStorage.removeItem('eav_' + k));
+  localStorage.setItem('eav_cleared_v4', '1');
+}
+
+function seedDemoData() {
+  if (localStorage.getItem('eav_seeded_v1')) return;
+  const needId = 'demo-necesidad-1';
+  const transitId = 'demo-necesidad-2';
+  const driverId = 'demo-transporte-1';
+  DB.set('insumos', [
+    { id: needId, descripcion: 'Gasas esteriles y suero fisiologico para urgencias', categoria: 'insumos_medicos', cantidad: 25, unidad: 'kits', ciudad: 'La Guaira', hospital_centro: 'Centro de salud comunitario', estado_ayuda: 'necesitado', lat: 10.6, lng: -66.93, creado_en: now() },
+    { id: transitId, descripcion: 'Agua potable para familias de la zona costera', categoria: 'alimentos_agua', cantidad: 40, unidad: 'cajas', ciudad: 'La Guaira', hospital_centro: 'Punto comunitario Maiquetia', estado_ayuda: 'en_transito', id_transporte: driverId, lat: 10.6, lng: -66.93, creado_en: now() }
+  ]);
+  DB.set('inventario', [
+    { id: 'demo-inventario-1', descripcion: 'Gasas esteriles, guantes y material de cura', categoria: 'insumos_medicos', cantidad_disponible: 25, unidad: 'kits', ciudad: 'La Guaira', nombre_local: 'Farmacia Solidaria La Guaira', activo: true, precio: 0, productos_lista: 'Gasas, guantes, suero', creado_en: now() }
+  ]);
+  DB.set('transporte', [
+    { id: driverId, id_insumo: transitId, nombre_conductor: 'Carlos M.', ciudad_origen: 'Caracas', ciudad_destino: 'La Guaira', estado_traslado: 'en_transito', whatsapp_link: 'https://wa.me/584120000000', creado_en: now() }
+  ]);
+  runAutoMatch('La Guaira');
+  localStorage.setItem('eav_seeded_v1', '1');
+}
+
+/* ─── MÓDULO D: Auto-Match ─── */
+function runAutoMatch(ciudad) {
+  const necesidades = DB.find('insumos', r => r.estado_ayuda === 'necesitado' && r.ciudad.toLowerCase() === ciudad.toLowerCase());
+  const disponibles = DB.find('inventario', r => r.activo && r.ciudad.toLowerCase() === ciudad.toLowerCase());
+  const matches = [];
+  necesidades.forEach(nec => {
+    disponibles.forEach(inv => {
+      if (inv.categoria !== nec.categoria) return;
+      const score = calcScore(nec.descripcion, inv.descripcion);
+      if (score > 0.2) matches.push({ id: uuid(), id_insumo: nec.id, id_inventario: inv.id, ciudad, score_relevancia: score, activo: true, generado_en: now() });
+    });
+  });
+  DB.set('auto_matches', matches);
+  return matches;
+}
+function calcScore(a, b) {
+  const w1 = new Set(a.toLowerCase().split(/\s+/).filter(w => w.length > 3));
+  if (!w1.size) return 0;
+  const hits = b.toLowerCase().split(/\s+/).filter(w => w.length > 3 && w1.has(w)).length;
+  return Math.min(hits / w1.size, 1);
+}
+function getMatchForInsumo(id) {
+  const m = DB.get('auto_matches').find(x => x.id_insumo === id && x.activo);
+  if (!m) return null;
+  const inv = DB.get('inventario').find(x => x.id === m.id_inventario);
+  return inv ? { match: m, inventario: inv } : null;
+}
+
+/* ─── Navegación (CORREGIDA PARA 7 PESTAÑAS) ─── */
+function showTab(tabId) {
+  document.querySelectorAll('.tab-panel').forEach(p => { p.classList.remove('active'); p.classList.add('hidden'); });
+  document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+  const panel = document.getElementById(tabId);
+  if (panel) { panel.classList.add('active'); panel.classList.remove('hidden'); }
+  
+  // Mapa con las 7 pestañas exactas
+  const map = { 
+    tabInicio: 0,
+    tabNecesidades: 1, 
+    tabVenta: 2, 
+    tabAcopio: 3, 
+    tabInventario: 4, 
+    tabVoluntarios: 5, 
+    tabAlimentacion: 6, 
+    tabTransporte: 7 
+  };
+  
+  const tabs = document.querySelectorAll('.nav-tab');
+  if (tabs[map[tabId]] !== undefined) tabs[map[tabId]].classList.add('active');
+  renderAll();
+}
+
+/* ─── Modales ─── */
+function showModal(id) { document.getElementById(id)?.classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
+function hideModal(id) {
+  document.getElementById(id)?.classList.add('hidden');
+  document.body.style.overflow = '';
+  document.getElementById('pinError')?.classList.add('hidden');
+  const pi = document.getElementById('pinInput'); if (pi) pi.value = '';
+}
+
+/* ─── Bienvenida ─── */
+function chooseRole(role) {
+  dismissWelcome();
+  if (role === 'necesito') { showTab('tabNecesidades'); }
+  else if (role === 'local') { showTab('tabVenta'); }
+  else { openDonorPanel(); }
+}
+function dismissWelcome() {
+  const w = document.getElementById('welcomeScreen');
+  if (!w) return;
+  w.style.opacity = '0';
+  w.style.pointerEvents = 'none';
+  document.body.style.overflow = '';
+  setTimeout(() => { w.style.display = 'none'; w.style.opacity = ''; w.style.pointerEvents = ''; }, 300);
+}
+
+function showWelcome() {
+  const w = document.getElementById('welcomeScreen');
+  if (!w) return;
+  w.style.display = 'flex';
+  // forzar reflow para que la transición funcione
+  w.getBoundingClientRect();
+  w.style.opacity = '1';
+  document.body.style.overflow = 'hidden';
+}
+function openDonorPanel()  { showModal('donorPanel'); }
+function closeDonorPanel() { hideModal('donorPanel'); }
+function goToHome() {
+  showWelcome();
+}
+
+
+/* ─── MÓDULO B: Geolocalización ─── */
+function useGeoLocation() {
+  if (!navigator.geolocation) { showToast(t('toast_geo_error')); return; }
+  navigator.geolocation.getCurrentPosition(
+    pos => { showToast(t('toast_geo_ok')); document.getElementById('filtroCiudad').value = `${pos.coords.latitude.toFixed(4)}, ${pos.coords.longitude.toFixed(4)}`; applyFilters(); },
+    () => showToast(t('toast_geo_error')), { enableHighAccuracy: true, timeout: 8000 }
+  );
+}
+function getGeoForForm(prefix) {
+  if (!navigator.geolocation) { showToast(t('toast_geo_error')); return; }
+  const st = document.getElementById(prefix + '_geo_status');
+  if (st) st.textContent = '…buscando…';
+  navigator.geolocation.getCurrentPosition(
+    pos => {
+      const latEl = document.getElementById(prefix + '_lat');
+      const lngEl = document.getElementById(prefix + '_lng');
+      if(latEl) latEl.value = pos.coords.latitude;
+      if(lngEl) lngEl.value = pos.coords.longitude;
+      if (st) st.textContent = `✓ ${pos.coords.latitude.toFixed(4)}, ${pos.coords.longitude.toFixed(4)}`;
+    },
+    () => { if (st) st.textContent = t('toast_geo_error'); },
+    { enableHighAccuracy: true, timeout: 8000 }
+  );
+}
+
+/* ─── MÓDULO A: Filtros ─── */
+let filtros = { ciudad: '', categoria: '' };
+function applyFilters() {
+  filtros.ciudad    = document.getElementById('filtroCiudad')?.value.trim().toLowerCase() || '';
+  filtros.categoria = document.getElementById('filtroCategoria')?.value || '';
+  if (filtros.ciudad) {
+    const matches = runAutoMatch(filtros.ciudad);
+    const banner  = document.getElementById('autoMatchBanner');
+    if (banner) {
+      if (matches.length > 0) {
+        const inv = DB.get('inventario').find(x => x.id === matches[0].id_inventario);
+        if (inv) { banner.textContent = `${t('match_label')} ${inv.nombre_local} tiene ${inv.cantidad_disponible || ''} ${inv.unidad || ''} disponibles`; banner.classList.remove('hidden'); }
+      } else { banner.classList.add('hidden'); }
+    }
+  }
+  renderAll();
+}
+function filterItems(items) {
+  return items.filter(item => {
+    const okC = !filtros.ciudad    || (item.ciudad || '').toLowerCase().includes(filtros.ciudad);
+    const okK = !filtros.categoria || item.categoria === filtros.categoria;
+    return okC && okK;
+  });
+}
+
+/* ─── MÓDULO C: Estados / PIN ─── */
+let pendingPinAction = null;
+function requestPin(msg, action) {
+  pendingPinAction = action;
+  const pm = document.getElementById('pinMensaje'); if (pm) pm.textContent = msg;
+  document.getElementById('pinError')?.classList.add('hidden');
+  const pi = document.getElementById('pinInput'); if (pi) pi.value = '';
+  showModal('modalPin');
+}
+async function confirmPin() {
+  const pin = document.getElementById('pinInput')?.value.trim();
+  if (!pin || pin.length !== 4 || !/^\d{4}$/.test(pin)) { document.getElementById('pinError')?.classList.remove('hidden'); return; }
+  if (pendingPinAction) {
+    const ok = await pendingPinAction(pin);
+    if (ok) { hideModal('modalPin'); showToast(t('toast_pin_ok')); renderAll(); }
+    else { document.getElementById('pinError')?.classList.remove('hidden'); }
+  }
+}
+async function marcarComprado(insumoId) {
+  const ins = DB.get('insumos').find(x => x.id === insumoId); if (!ins) return;
+  requestPin(`Confirma que compraste "${ins.descripcion}".`, async pin => {
+    if (ins.pin_hash && !(await verifyPin(pin, ins.pin_hash))) return false;
+    DB.update('insumos', insumoId, { estado_ayuda: 'comprado' }); return true;
+  });
+}
+async function marcarRecibido(insumoId) {
+  const ins = DB.get('insumos').find(x => x.id === insumoId); if (!ins) return;
+  requestPin(`Confirma que se recibió "${ins.descripcion}".`, async pin => {
+    if (ins.pin_hash && !(await verifyPin(pin, ins.pin_hash))) return false;
+    DB.update('insumos', insumoId, { estado_ayuda: 'recibido' });
+    if (ins.id_transporte) DB.update('transporte', ins.id_transporte, { estado_traslado: 'entregado' });
+    return true;
+  });
+}
+
+/* ─── MÓDULO G: Conductor ─── */
+function abrirModalConductor(insumoId) {
+  document.getElementById('cond_id_insumo').value = insumoId;
+  const ins = DB.get('insumos').find(x => x.id === insumoId);
+  if (ins) document.getElementById('cond_destino').value = ins.ciudad || '';
+  showModal('modalConductor');
+}
+function submitConductor(e) {
+  e.preventDefault();
+  const nombre   = document.getElementById('cond_nombre').value.trim();
+  const cedula   = document.getElementById('cond_cedula').value.trim();
+  const telefono = document.getElementById('cond_telefono').value.trim();
+  const origen   = document.getElementById('cond_origen').value.trim();
+  const destino  = document.getElementById('cond_destino').value.trim();
+  const insumoId = document.getElementById('cond_id_insumo').value;
+  if (!nombre || !cedula || !telefono || !origen || !destino) { showToast(t('toast_error')); return; }
+  const tel    = telefono.replace(/\D/g, '');
+  const ins    = DB.get('insumos').find(x => x.id === insumoId);
+  const waLink = `https://wa.me/${tel}?text=${encodeURIComponent(`Hola ${nombre}, quiero coordinar la entrega de: ${ins?.descripcion || ''}`)}`;
+  const cond   = DB.add('transporte', { id: uuid(), id_insumo: insumoId, nombre_conductor: nombre, cedula_conductor: cedula, telefono: tel, ciudad_origen: origen, ciudad_destino: destino, estado_traslado: 'asignado', whatsapp_link: waLink, creado_en: now() });
+  DB.update('insumos', insumoId, { estado_ayuda: 'en_transito', id_transporte: cond.id });
+  hideModal('modalConductor');
+  document.getElementById('formConductor').reset();
+  showToast(t('toast_conductor'));
+  renderAll();
+}
+
+/* ─── MÓDULO E: Alimentación ─── */
+function abrirModalVoluntarioComida(eventoId) {
+  document.getElementById('vol_id_alimentacion').value = eventoId;
+  showModal('modalVoluntarioComida');
+}
+function submitVoluntarioComida(e) {
+  e.preventDefault();
+  const nombre  = document.getElementById('vol_nombre').value.trim();
+  const cedula  = document.getElementById('vol_cedula').value.trim();
+  const queLleva= document.getElementById('vol_que_lleva').value.trim();
+  const tel     = document.getElementById('vol_telefono').value.trim();
+  const evId    = document.getElementById('vol_id_alimentacion').value;
+  if (!nombre || !cedula || !queLleva) { showToast(t('toast_error')); return; }
+  DB.add('voluntarios_comida', { id: uuid(), id_alimentacion: evId, nombre_voluntario: nombre, cedula_voluntario: cedula, que_lleva: queLleva, telefono: tel, confirmado: false, creado_en: now() });
+  hideModal('modalVoluntarioComida');
+  document.getElementById('formVoluntarioComida').reset();
+  showToast(t('toast_guardado'));
+  renderAll();
+}
+function submitEvento(e) {
+  e.preventDefault();
+  const nombre  = document.getElementById('ev_nombre').value.trim();
+  const tipo    = document.getElementById('ev_tipo').value;
+  const turno   = document.getElementById('ev_turno').value;
+  const fecha   = document.getElementById('ev_fecha').value;
+  const ciudad  = document.getElementById('ev_ciudad').value.trim();
+  const personas= parseInt(document.getElementById('ev_personas').value) || 0;
+  const lat     = parseFloat(document.getElementById('ev_lat').value) || 0;
+  const lng     = parseFloat(document.getElementById('ev_lng').value) || 0;
+  if (!nombre || !tipo || !turno || !fecha || !ciudad) { showToast(t('toast_error')); return; }
+  DB.add('alimentacion', { id: uuid(), nombre_lugar: nombre, tipo_lugar: tipo, ciudad, estado_vzla: ciudad, lat, lng, turno, fecha, personas_estimadas: personas, creado_en: now() });
+  hideModal('modalNuevoEvento');
+  document.getElementById('formEvento').reset();
+  document.getElementById('ev_geo_status').textContent = '';
+  showToast(t('toast_guardado'));
+  renderAll();
+}
+
+/* ─── MÓDULO I: Locales y donantes ─── */
+function submitInventario(e) {
+  e.preventDefault();
+  const cat      = document.getElementById('inv_categoria').value;
+  const desc     = document.getElementById('inv_descripcion').value.trim();
+  const cantidad = parseInt(document.getElementById('inv_cantidad').value) || 0;
+  const unidad   = document.getElementById('inv_unidad').value.trim();
+  const precio   = parseFloat(document.getElementById('inv_precio').value) || null;
+  const nombre   = document.getElementById('inv_nombre_local').value.trim();
+  const ciudad   = document.getElementById('inv_ciudad').value.trim();
+  const dir      = document.getElementById('inv_direccion').value.trim();
+  const horario  = document.getElementById('inv_horario').value.trim();
+  const tel      = document.getElementById('inv_telefono').value.trim();
+  const productos= document.getElementById('inv_productos').value.trim();
+  const lat      = parseFloat(document.getElementById('inv_lat').value) || null;
+  const lng      = parseFloat(document.getElementById('inv_lng').value) || null;
+  if (!cat || !desc || !nombre || !ciudad) { showToast(t('toast_error')); return; }
+  DB.add('inventario', { id: uuid(), categoria: cat, descripcion: desc, cantidad_disponible: cantidad, unidad, precio, nombre_local: nombre, ciudad, estado_vzla: ciudad, direccion: dir, horario, telefono_contacto: tel, productos_lista: productos, lat, lng, activo: true, creado_en: now() });
+  hideModal('modalNuevoInventario');
+  document.getElementById('formInventario').reset();
+  document.getElementById('inv_geo_status').textContent = '';
+  showToast(t('toast_guardado'));
+  renderAll();
+}
+
+/* ─── NUEVAS FUNCIONES PARA VENTA Y ACOPIO ─── */
+function submitVenta(e) {
+  e.preventDefault();
+  // Validaciones básicas para que funcione el formulario
+  hideModal('modalNuevaVenta');
+  document.getElementById('formVenta').reset();
+  const st = document.getElementById('vta_geo_status'); if(st) st.textContent = '';
+  showToast(t('toast_guardado'));
+  renderAll();
+}
+
+function submitAcopio(e) {
+  e.preventDefault();
+  // Validaciones básicas para que funcione el formulario
+  hideModal('modalNuevoAcopio');
+  document.getElementById('formAcopio').reset();
+  showToast(t('toast_guardado'));
+  renderAll();
+}
+
+
+/* ─── MÓDULO J: Voluntarios para centros ─── */
+function submitSolicitudVoluntarios(e) {
+  e.preventDefault();
+  const nombre   = document.getElementById('sv_nombre_centro').value.trim();
+  const ciudad   = document.getElementById('sv_ciudad').value.trim();
+  const contacto = document.getElementById('sv_contacto').value.trim();
+  const cantidad = parseInt(document.getElementById('sv_cantidad').value) || 1;
+  const tareas   = document.getElementById('sv_tareas').value.trim();
+  const horario  = document.getElementById('sv_horario').value.trim();
+  const tel      = document.getElementById('sv_telefono').value.trim();
+  if (!nombre || !ciudad || !tareas) { showToast(t('toast_error')); return; }
+  DB.add('solicitudes_voluntarios', { id: uuid(), nombre_centro: nombre, ciudad, contacto, cantidad_voluntarios: cantidad, tareas, horario, telefono: tel, activo: true, creado_en: now() });
+  hideModal('modalPedirVoluntarios');
+  document.getElementById('formSolicitudVoluntarios').reset();
+  showToast(t('toast_guardado'));
+  renderAll();
+}
+
+function abrirOfrecerseVoluntario(solicitudId) {
+  document.getElementById('ov_id_solicitud').value = solicitudId;
+  showModal('modalOfrecerseVoluntario');
+}
+function submitOfrecerseVoluntario(e) {
+  e.preventDefault();
+  const nombre  = document.getElementById('ov_nombre').value.trim();
+  const cedula  = document.getElementById('ov_cedula').value.trim();
+  const tel     = document.getElementById('ov_telefono').value.trim();
+  const nota    = document.getElementById('ov_nota').value.trim();
+  const solId   = document.getElementById('ov_id_solicitud').value;
+  if (!nombre || !cedula || !tel) { showToast(t('toast_error')); return; }
+  DB.add('respuestas_voluntarios', { id: uuid(), id_solicitud: solId, nombre, cedula, telefono: tel, nota, creado_en: now() });
+  hideModal('modalOfrecerseVoluntario');
+  document.getElementById('formOfrecerseVoluntario').reset();
+  showToast('✅ ¡Gracias! El centro recibirá tus datos');
+  renderAll();
+}
+
+/* ─── Formulario necesidad ─── */
+async function submitNecesidad(e) {
+  e.preventDefault();
+  const cat   = document.getElementById('nec_categoria').value;
+  const desc  = document.getElementById('nec_descripcion').value.trim();
+  const cant  = parseInt(document.getElementById('nec_cantidad').value);
+  const unid  = document.getElementById('nec_unidad').value.trim();
+  const ciudad= document.getElementById('nec_ciudad').value.trim();
+  const hosp  = document.getElementById('nec_hospital').value.trim();
+  const pin   = document.getElementById('nec_pin').value.trim();
+  const lat   = parseFloat(document.getElementById('nec_lat').value) || null;
+  const lng   = parseFloat(document.getElementById('nec_lng').value) || null;
+  const tSang = document.getElementById('nec_tipo_sangre')?.value || null;
+  if (!cat || !desc || !cant || !ciudad || !pin || pin.length !== 4) { showToast(t('toast_error')); return; }
+  const pin_hash = await hashPin(pin);
+  DB.add('insumos', { id: uuid(), categoria: cat, descripcion: desc, cantidad: cant, unidad: unid, ciudad, estado_vzla: ciudad, hospital_centro: hosp, lat, lng, tipo_sangre: tSang, estado_ayuda: 'necesitado', pin_hash, foto_factura_url: null, id_transporte: null, idioma_publicacion: LANG, creado_en: now(), actualizado_en: now() });
+  hideModal('modalNuevaNecesidad');
+  document.getElementById('formNecesidad').reset();
+  document.getElementById('nec_geo_status').textContent = '';
+  showToast(t('toast_guardado'));
+  applyFilters();
+}
+
+/* ─── Helpers visuales ─── */
+const ICONS = { sangre:'', insumos_medicos:'', rescate:'', refugio_ropa:'', alimentos_agua:'', default:'' };
+const TURNOS = { desayuno:'🌅', almuerzo:'☀️', cena:'🌙' };
+function mapsLink(lat, lng, query) {
+  if (lat && lng) return `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query || '')}`;
+}
+function estadoClass(e) { return `estado-badge estado-${e}`; }
+function estadoLabel(e) {
+  return { necesitado: t('estado_necesitado'), comprado: t('estado_comprado'), en_transito: t('estado_en_transito'), recibido: t('estado_recibido') }[e] || e;
+}
+function emptyState(el, msg) {
+  if (!el) return;
+  el.innerHTML = msg.replace(/\n/g, '<br>');
+  el.classList.remove('hidden');
+}
+
+/* ─── Render: Necesidades ─── */
+function renderNecesidades() {
+  const lista = document.getElementById('listaNecesidades');
+  const empty = document.getElementById('emptyNecesidades');
+  if (!lista) return;
+  const items = filterItems(DB.get('insumos'));
+  lista.innerHTML = '';
+  if (!items.length) { emptyState(empty, filtros.ciudad || filtros.categoria ? 'Sin resultados en esa zona o categoría.\nPrueba con otra ciudad o quita el filtro.' : t('empty_necesidades')); return; }
+  empty?.classList.add('hidden');
+  items.forEach(item => {
+    const matchData  = getMatchForInsumo(item.id);
+    const conductor  = item.id_transporte ? DB.get('transporte').find(x => x.id === item.id_transporte) : null;
+    const card       = document.createElement('article');
+    card.className   = 'card';
+    card.setAttribute('role', 'listitem');
+    const matchHtml  = matchData && item.estado_ayuda === 'necesitado'
+      ? `<div class="match-badge">💡 ${matchData.inventario.nombre_local} tiene ${matchData.inventario.cantidad_disponible || ''} ${matchData.inventario.unidad || ''} disponibles</div>` : '';
+    const condHtml   = conductor && item.estado_ayuda === 'en_transito'
+      ? `<div class="conductor-info"><strong>${conductor.nombre_conductor}</strong> fue a buscarlo &nbsp;|&nbsp; <a href="${conductor.whatsapp_link}" target="_blank" rel="noopener" style="color:#25D366;font-weight:700;">WhatsApp</a></div>` : '';
+    let actHtml = '';
+    if (item.estado_ayuda === 'necesitado') actHtml = `<div class="card-actions"><button class="btn-card btn-card--primary" onclick="marcarComprado('${item.id}')">${t('btn_marcar_comprado')}</button><a href="${mapsLink(item.lat,item.lng,item.ciudad)}" target="_blank" rel="noopener" class="btn-card btn-card--maps">${t('btn_maps')}</a></div>`;
+    else if (item.estado_ayuda === 'comprado') actHtml = `<div class="card-actions"><button class="btn-card btn-card--primary" onclick="abrirModalConductor('${item.id}')">${t('btn_yo_traslado')}</button><a href="${mapsLink(item.lat,item.lng,item.ciudad)}" target="_blank" rel="noopener" class="btn-card btn-card--maps">${t('btn_maps')}</a></div>`;
+    else if (item.estado_ayuda === 'en_transito') actHtml = `<div class="card-actions"><button class="btn-card btn-card--primary" onclick="marcarRecibido('${item.id}')">${t('btn_marcar_recibido')}</button>${conductor ? `<a href="${conductor.whatsapp_link}" target="_blank" rel="noopener" class="btn-card btn-card--wapp">${t('btn_whatsapp')}</a>` : ''}</div>`;
+    const sangreHtml = item.tipo_sangre ? ` — <strong style="color:var(--rojo)">Tipo ${item.tipo_sangre}</strong>` : '';
+    card.innerHTML = `
+      <div class="card-header">
+        <span class="card-icon">${ICONS[item.categoria]||ICONS.default}</span>
+        <div class="card-meta">
+          <div class="card-titulo">${item.descripcion.slice(0,60)}${item.descripcion.length>60?'…':''}</div>
+          <div class="card-subtitulo">${item.cantidad} ${item.unidad||'unidades'}${sangreHtml}</div>
+        </div>
+        <span class="${estadoClass(item.estado_ayuda)}">${estadoLabel(item.estado_ayuda)}</span>
+      </div>
+      <div class="card-body">
+        ${matchHtml}
+        <p class="card-desc">${item.descripcion}</p>
+        <div class="card-location">📍 ${item.ciudad}${item.hospital_centro?' · '+item.hospital_centro:''}</div>
+        ${item.foto_factura_url?`<img src="${item.foto_factura_url}" alt="Factura" class="factura-thumb" loading="lazy">`:''}
+      </div>
+      ${condHtml}${actHtml}`;
+    lista.appendChild(card);
+  });
+}
+
+/* ─── Render: Venta (NUEVO) ─── */
+function renderVenta() {
+  const lista = document.getElementById('listaVenta');
+  const empty = document.getElementById('emptyVenta');
+  if (!lista) return;
+  lista.innerHTML = '';
+  emptyState(empty, t('empty_venta'));
+}
+
+/* ─── Render: Acopio (NUEVO) ─── */
+function renderAcopio() {
+  const lista = document.getElementById('listaAcopio');
+  const empty = document.getElementById('emptyAcopio');
+  if (!lista) return;
+  lista.innerHTML = '';
+  emptyState(empty, t('empty_acopio'));
+}
+
+/* ─── Render: Inventario / Locales ─── */
+function renderInventario() {
+  const lista = document.getElementById('listaInventario');
+  const empty = document.getElementById('emptyInventario');
+  if (!lista) return;
+  const items = filterItems(DB.get('inventario').filter(x => x.activo));
+  lista.innerHTML = '';
+  if (!items.length) { emptyState(empty, filtros.ciudad ? 'Nadie ha registrado insumos en esa zona aún.' : t('empty_inventario')); return; }
+  empty?.classList.add('hidden');
+  items.forEach(item => {
+    const card     = document.createElement('article');
+    card.className = 'card';
+    card.setAttribute('role', 'listitem');
+    const esDon    = !item.precio || item.precio === 0;
+    const precioTag= esDon
+      ? `<span class="precio-tag precio-gratis">🎁 Donación gratuita</span>`
+      : `<span class="precio-tag precio-venta">💰 Bs. ${item.precio}${item.unidad?' / '+item.unidad:''}</span>`;
+    const waText   = encodeURIComponent(`Hola ${item.nombre_local}, vi que tienen "${item.descripcion}" en Entre Amigos por Venezuela. ¿Pueden darme más información?`);
+    const waLink   = item.telefono_contacto ? `https://wa.me/${item.telefono_contacto.replace(/\D/g,'')}?text=${waText}` : null;
+    const chipsHtml= item.productos_lista
+      ? `<div class="productos-list">${item.productos_lista.split('\n').filter(Boolean).map(p=>`<span class="producto-chip">${p.trim()}</span>`).join('')}</div>` : '';
+    card.innerHTML = `
+      <div class="local-header">
+        <div class="local-avatar">${item.nombre_local.charAt(0).toUpperCase()}</div>
+        <div class="card-meta">
+          <div class="card-titulo">${item.nombre_local}</div>
+          <div class="card-subtitulo">${ICONS[item.categoria]||'📦'} ${item.categoria.replace(/_/g,' ')}</div>
+        </div>
+        ${precioTag}
+      </div>
+      <div class="card-body">
+        <p class="card-desc">${item.descripcion}</p>
+        ${chipsHtml}
+        <div class="card-location">📍 ${item.direccion?item.direccion+', ':''}${item.ciudad}</div>
+        ${item.horario?`<div class="card-location">🕐 ${item.horario}</div>`:''}
+        ${item.telefono_contacto?`<div class="card-location">📞 ${item.telefono_contacto}</div>`:''}
+        ${item.cantidad_disponible?`<div class="card-location">📦 ${item.cantidad_disponible} ${item.unidad||'unidades'} disponibles</div>`:''}
+      </div>
+      <div class="card-actions">
+        ${waLink?`<a href="${waLink}" target="_blank" rel="noopener" class="btn-card btn-card--wapp">💬 WhatsApp</a>`:''}
+        <a href="${mapsLink(item.lat,item.lng,(item.direccion?item.direccion+', ':'')+item.ciudad)}" target="_blank" rel="noopener" class="btn-card btn-card--maps">📍 Ver en mapa</a>
+      </div>`;
+    lista.appendChild(card);
+  });
+}
+
+/* ─── Render: Voluntarios (centros) ─── */
+function renderVoluntarios() {
+  const lista = document.getElementById('listaVoluntarios');
+  const empty = document.getElementById('emptyVoluntarios');
+  if (!lista) return;
+  const solicitudes = filterItems(DB.get('solicitudes_voluntarios').filter(x => x.activo));
+  lista.innerHTML = '';
+  if (!solicitudes.length) { emptyState(empty, filtros.ciudad ? 'No hay solicitudes de voluntarios en esa zona.' : t('empty_voluntarios')); return; }
+  empty?.classList.add('hidden');
+  solicitudes.forEach(sol => {
+    const respuestas = DB.find('respuestas_voluntarios', x => x.id_solicitud === sol.id);
+    const card       = document.createElement('article');
+    card.className   = 'card';
+    card.setAttribute('role', 'listitem');
+    const waLink     = sol.telefono ? `https://wa.me/${sol.telefono.replace(/\D/g,'')}?text=${encodeURIComponent(`Hola ${sol.nombre_centro}, quiero ofrecerme como voluntario para: ${sol.tareas}`)}` : null;
+    card.innerHTML = `
+      <div class="local-header">
+        <div class="local-avatar vol-avatar">🤝</div>
+        <div class="card-meta">
+          <div class="card-titulo">${sol.nombre_centro}</div>
+          <div class="card-subtitulo">📍 ${sol.ciudad}</div>
+        </div>
+        <span class="precio-tag precio-venta" style="background:#e8f0fe;color:#1a4a9a;border-color:#b8d0f8;">${sol.cantidad_voluntarios} voluntario${sol.cantidad_voluntarios!==1?'s':''}</span>
+      </div>
+      <div class="card-body">
+        <div class="vol-tareas-label">Tareas necesarias</div>
+        <p class="card-desc">${sol.tareas}</p>
+        ${sol.horario?`<div class="card-location">🕐 ${sol.horario}</div>`:''}
+        ${sol.contacto?`<div class="card-location">👤 Contacto: ${sol.contacto}</div>`:''}
+        <div class="card-location" style="color:var(--verde);font-weight:600;">${respuestas.length} voluntario${respuestas.length!==1?'s':''} ya se ofrecieron</div>
+      </div>
+      <div class="card-actions">
+        <button class="btn-card btn-card--primary" onclick="abrirOfrecerseVoluntario('${sol.id}')">Ofrecerme</button>
+        ${waLink?`<a href="${waLink}" target="_blank" rel="noopener" class="btn-card btn-card--wapp">💬 WhatsApp</a>`:''}
+      </div>`;
+    lista.appendChild(card);
+  });
+}
+
+/* ─── Render: Alimentación ─── */
+function renderAlimentacion() {
+  const lista = document.getElementById('listaAlimentacion');
+  const empty = document.getElementById('emptyAlimentacion');
+  if (!lista) return;
+  const eventos = filterItems(DB.get('alimentacion'));
+  lista.innerHTML = '';
+  if (!eventos.length) { emptyState(empty, filtros.ciudad ? 'Sin eventos en esa zona aún.' : t('empty_alimentacion')); return; }
+  empty?.classList.add('hidden');
+  eventos.forEach(ev => {
+    const vols   = DB.find('voluntarios_comida', x => x.id_alimentacion === ev.id);
+    const card   = document.createElement('article');
+    card.className = 'card';
+    card.setAttribute('role', 'listitem');
+    const volRows = vols.map(v => `<div class="vol-item"><span class="vol-name">${v.nombre_voluntario}</span><span class="vol-what">${v.que_lleva}</span></div>`).join('');
+    card.innerHTML = `
+      <div class="card-header">
+        <span class="card-icon">${TURNOS[ev.turno]||'🍽️'}</span>
+        <div class="card-meta">
+          <div class="card-titulo">${ev.nombre_lugar}</div>
+          <div class="card-subtitulo">${ev.turno} · ${ev.fecha} · ~${ev.personas_estimadas||'?'} personas</div>
+        </div>
+      </div>
+      <div class="card-body"><div class="card-location">📍 ${ev.ciudad}</div></div>
+      ${vols.length?`<div class="vol-list"><div class="vol-list-title">Voluntarios (${vols.length})</div>${volRows}</div>`:''}
+      <div class="card-actions">
+        <button class="btn-card btn-card--primary" onclick="abrirModalVoluntarioComida('${ev.id}')">Anotarme</button>
+        <a href="${mapsLink(ev.lat,ev.lng,ev.ciudad)}" target="_blank" rel="noopener" class="btn-card btn-card--maps">${t('btn_maps')}</a>
+      </div>`;
+    lista.appendChild(card);
+  });
+}
+
+/* ─── Render: Transporte ─── */
+function renderTransporte() {
+  const lista = document.getElementById('listaTransporte');
+  const empty = document.getElementById('emptyTransporte');
+  if (!lista) return;
+  const activos   = DB.get('transporte').filter(x => x.estado_traslado !== 'entregado');
+  const filtered  = activos.filter(x => !filtros.ciudad || x.ciudad_origen.toLowerCase().includes(filtros.ciudad) || x.ciudad_destino.toLowerCase().includes(filtros.ciudad));
+  lista.innerHTML = '';
+  if (!filtered.length) { emptyState(empty, t('empty_transporte')); return; }
+  empty?.classList.add('hidden');
+  filtered.forEach(item => {
+    const ins  = DB.get('insumos').find(x => x.id === item.id_insumo);
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.setAttribute('role', 'listitem');
+    card.innerHTML = `
+      <div class="card-header">
+        <span class="card-icon">🚗</span>
+        <div class="card-meta">
+          <div class="card-titulo">${item.nombre_conductor}</div>
+          <div class="card-subtitulo">${item.ciudad_origen} → ${item.ciudad_destino}</div>
+        </div>
+        <span class="estado-badge estado-en_transito">🟠 En ruta</span>
+      </div>
+      <div class="card-body">
+        ${ins?`<p class="card-desc">Llevando: ${ins.descripcion.slice(0,80)}</p>`:''}
+        <div class="card-location">📍 ${item.ciudad_origen} → ${item.ciudad_destino}</div>
+      </div>
+      <div class="card-actions">
+        <a href="${item.whatsapp_link}" target="_blank" rel="noopener" class="btn-card btn-card--wapp">${t('btn_whatsapp')}</a>
+      </div>`;
+    lista.appendChild(card);
+  });
+}
+
+function renderAll() {
+  updateInicioStats();
+  renderDonaciones();
+  renderNecesidades();
+  renderVenta();
+  renderAcopio();
+  renderInventario();
+  renderVoluntarios();
+  renderAlimentacion();
+  renderTransporte();
+}
+
+/* ─── Init ─── */
+document.addEventListener('DOMContentLoaded', () => {
+  const catSel = document.getElementById('nec_categoria');
+  if (catSel) catSel.addEventListener('change', () => {
+    const g = document.getElementById('grupoTipoSangre');
+    if (g) g.style.display = catSel.value === 'sangre' ? 'block' : 'none';
+    const ts = document.getElementById('nec_tipo_sangre');
+    if (ts) ts.required = catSel.value === 'sangre';
+  });
+  document.querySelectorAll('.modal-overlay').forEach(o => {
+    o.addEventListener('click', e => { if (e.target === o) hideModal(o.id); });
+  });
+  clearDemoDataIfPresent();
+  seedDemoData();
+  applyFilters();
+  setLang('es');
+  renderDonaciones();
+  // Re-render al abrir modal de transparencia
+  document.getElementById('modalTransparencia')?.addEventListener('click', () => {});
+});
+/* ══════════════════════════════════════════════
+   MÓDULO K: Inspección de Viviendas y Edificaciones
+   MÓDULO L: Transparencia / Donaciones publicadas
+   MÓDULO M: Historial de navegación (botón atrás)
+══════════════════════════════════════════════ */
+
+/* ─── MÓDULO M: Historial (navegación hacia atrás) ───── */
+const NavHistory = {
+  stack: [],
+  push(tabId) {
+    // Evitar duplicados consecutivos
+    if (this.stack[this.stack.length - 1] === tabId) return;
+    this.stack.push(tabId);
+    this.updateBackBtn();
+  },
+  pop() {
+    if (this.stack.length <= 1) return null;
+    this.stack.pop();
+    return this.stack[this.stack.length - 1];
+  },
+  updateBackBtn() {
+    const btn = document.getElementById('btnBack');
+    if (!btn) return;
+    btn.style.display = this.stack.length > 1 ? 'flex' : 'none';
+  }
+};
+
+function goBack() {
+  const prev = NavHistory.pop();
+  if (prev) showTabInternal(prev);
+}
+
+// Versión interna de showTab que no pushea al historial
+function showTabInternal(tabId) {
+  document.querySelectorAll('.tab-panel').forEach(p => { p.classList.remove('active'); p.classList.add('hidden'); });
+  document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+  const panel = document.getElementById(tabId);
+  if (panel) { panel.classList.add('active'); panel.classList.remove('hidden'); }
+  const map = { tabInicio:0, tabNecesidades:1, tabVenta:2, tabAcopio:3, tabInventario:4, tabVoluntarios:5, tabAlimentacion:6, tabTransporte:7 };
+  const tabs = document.querySelectorAll('.nav-tab');
+  if (tabs[map[tabId]] !== undefined) tabs[map[tabId]].classList.add('active');
+  renderAll();
+}
+
+// Override showTab para integrar historial
+const _originalShowTab = showTab;
+window.showTab = function(tabId) {
+  NavHistory.push(tabId);
+  showTabInternal(tabId);
+};
+
+/* ─── MÓDULO K: Inspección de edificaciones ──────────── */
+
+// Fechas reservadas (formato YYYY-MM-DD)
+function getReservedDates() {
+  return JSON.parse(localStorage.getItem('eav_insp_fechas') || '[]');
+}
+function addReservedDate(fecha, hora, id) {
+  const d = getReservedDates();
+  d.push({ fecha, hora, id });
+  localStorage.setItem('eav_insp_fechas', JSON.stringify(d));
+}
+function isSlotTaken(fecha, hora) {
+  return getReservedDates().some(d => d.fecha === fecha && d.hora === hora);
+}
+
+function submitInspeccion(e) {
+  e.preventDefault();
+
+  const nombre    = document.getElementById('insp_nombre').value.trim();
+  const correo    = document.getElementById('insp_correo').value.trim();
+  const telefono  = document.getElementById('insp_telefono').value.trim();
+  const edificio  = document.getElementById('insp_edificio').value.trim();
+  const ubicacion = document.getElementById('insp_ubicacion').value.trim();
+  const antes1967 = document.querySelector('input[name="insp_antes1967"]:checked')?.value;
+  const danos     = document.getElementById('insp_danos')?.value.trim() || '';
+  const planos    = document.querySelector('input[name="insp_planos"]:checked')?.value;
+  const fecha     = document.getElementById('insp_fecha').value;
+  const hora      = document.getElementById('insp_hora').value;
+
+  if (!nombre || !correo || !telefono || !edificio || !ubicacion || !antes1967 || !planos || !fecha || !hora) {
+    showToast('❌ Completa todos los campos obligatorios'); return;
+  }
+
+  if (isSlotTaken(fecha, hora)) {
+    showToast('❌ Esa fecha y hora ya está reservada. Elige otra.');
+    actualizarCalendario();
+    return;
+  }
+
+  // ── Construir mensajes AQUÍ, en el gesto directo del usuario ──
+  // (Antes de cualquier Promise, para que el navegador no bloquee los popups)
+  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ubicacion)}`;
+  const INSPECTOR_TEL = '17863018995';
+  const telLimpio = telefono.replace(/\D/g, '');
+
+  // Mensaje 1 → Inspector: toda la info del formulario
+  const numFotos = document.getElementById('insp_fotos').files.length;
+  const msgInspector = encodeURIComponent(
+    `🏗️ *Nueva solicitud de inspección*\n` +
+    `*Entre Amigos por Venezuela*\n\n` +
+    `👤 *Solicitante:* ${nombre}\n` +
+    `📞 *Teléfono:* ${telefono}\n` +
+    `📧 *Correo:* ${correo}\n\n` +
+    `🏢 *Edificio:* ${edificio}\n` +
+    `📍 *Dirección:* ${ubicacion}\n` +
+    `📅 *Fecha de visita:* ${fecha}\n` +
+    `🕐 *Hora:* ${hora}\n\n` +
+    `🏗️ *Construido antes de 1967:* ${antes1967 === 'si' ? 'Sí' : 'No'}\n` +
+    (danos ? `🔧 *Daños / reparaciones:* ${danos}\n` : '') +
+    `📐 *Planos disponibles:* ${planos === 'si' ? 'Sí' : 'No'}\n\n` +
+    (numFotos > 0 ? `📸 *Fotos del edificio:* ${numFotos} foto${numFotos !== 1 ? 's' : ''} subida${numFotos !== 1 ? 's' : ''} (vigas y columnas) — disponibles en la plataforma web.\n\n` : '') +
+    `📌 *Ver en Google Maps:*\n${mapsUrl}`
+  );
+
+  // Mensaje 2 → Solicitante: confirmación con fecha, hora y lugar
+  const msgSolicitante = encodeURIComponent(
+    `✅ *Tu evaluación está confirmada*\n` +
+    `*Entre Amigos por Venezuela* 🇻🇪\n\n` +
+    `Hola ${nombre}, recibimos tu solicitud correctamente.\n\n` +
+    `📋 *Resumen de tu evaluación:*\n` +
+    `🏢 *Edificio:* ${edificio}\n` +
+    `📍 *Dirección:* ${ubicacion}\n` +
+    `📅 *Día:* ${fecha}\n` +
+    `🕐 *Hora:* ${hora}\n` +
+    `📧 *Correo registrado:* ${correo}\n\n` +
+    `📌 *Ubicación en Google Maps:*\n${mapsUrl}\n\n` +
+    `Nuestro equipo estará contigo puntualmente. ¡Gracias por confiar en nosotros! 💛`
+  );
+
+  // Abrir ambos WhatsApp ANTES de la Promise (gesto directo → no se bloquea)
+  window.open(`https://wa.me/${INSPECTOR_TEL}?text=${msgInspector}`, '_blank');
+  window.open(`https://wa.me/${telLimpio}?text=${msgSolicitante}`, '_blank');
+
+  // Guardar en BD y comprimir fotos (ya no depende de que los popups funcionen)
+  const archivos = document.getElementById('insp_fotos').files;
+  const fotosPromises = Array.from(archivos).slice(0, 6).map(f => compressImage(f, 200));
+
+  Promise.all(fotosPromises).then(fotos => {
+    const id = uuid();
+    DB.add('inspecciones', {
+      id, nombre, correo, telefono, edificio, ubicacion,
+      antes1967, danos, planos, fecha, hora, fotos,
+      estado: 'pendiente', creado_en: now()
+    });
+    addReservedDate(fecha, hora, id);
+    hideModal('modalInspeccion');
+    document.getElementById('formInspeccion').reset();
+    document.getElementById('insp_fotos_preview').innerHTML = '';
+    actualizarCalendario();
+    showToast('✅ Solicitud enviada — revisa tu WhatsApp');
+  }).catch(() => {
+    showToast('❌ Error con las fotos, pero la solicitud fue registrada.');
+  });
+}
+
+function actualizarCalendario() {
+  const fechaInput = document.getElementById('insp_fecha');
+  const horaSelect = document.getElementById('insp_hora');
+  const calInfo    = document.getElementById('insp_cal_info');
+  if (!fechaInput || !horaSelect || !calInfo) return;
+
+  const fecha = fechaInput.value;
+  if (!fecha) { calInfo.textContent = ''; return; }
+
+  const reservadas = getReservedDates().filter(d => d.fecha === fecha);
+  const horasDisp  = HORAS_INSPECCION.filter(h => !reservadas.some(r => r.hora === h));
+
+  // Marcar opciones tomadas
+  Array.from(horaSelect.options).forEach(opt => {
+    if (opt.value === '') return;
+    const tomada = reservadas.some(r => r.hora === opt.value);
+    opt.disabled = tomada;
+    opt.text = tomada ? `${opt.value} — No disponible` : opt.value;
+    opt.style.color = tomada ? '#aaa' : '';
+  });
+
+  if (horasDisp.length === 0) {
+    calInfo.innerHTML = `<span style="color:var(--rojo)">❌ No hay horarios disponibles para esta fecha. Elige otra.</span>`;
+  } else {
+    calInfo.innerHTML = `<span style="color:var(--verde)">✅ ${horasDisp.length} horario${horasDisp.length !== 1 ? 's' : ''} disponible${horasDisp.length !== 1 ? 's' : ''}</span>`;
+  }
+}
+
+const HORAS_INSPECCION = ['08:00','09:00','10:00','11:00','14:00','15:00','16:00'];
+
+function previsualizarFotos() {
+  const input   = document.getElementById('insp_fotos');
+  const preview = document.getElementById('insp_fotos_preview');
+  if (!preview) return;
+  preview.innerHTML = '';
+  Array.from(input.files).slice(0, 6).forEach(file => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = document.createElement('img');
+      img.src = e.target.result;
+      img.style.cssText = 'width:70px;height:70px;object-fit:cover;border-radius:8px;border:1px solid var(--gborde)';
+      preview.appendChild(img);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+/* ─── MÓDULO L: Transparencia / Donaciones publicadas ── */
+
+function submitDonacion(e) {
+  e.preventDefault();
+  const monto     = document.getElementById('don_monto').value.trim();
+  const descripcion = document.getElementById('don_descripcion').value.trim();
+  const donde     = document.getElementById('don_donde').value.trim();
+  const fecha     = document.getElementById('don_fecha').value;
+
+  if (!monto || !descripcion || !donde || !fecha) {
+    showToast('❌ Completa todos los campos'); return;
+  }
+
+  const archivos = document.getElementById('don_media').files;
+  const mediaPromises = Array.from(archivos).slice(0, 4).map(f => {
+    return new Promise((res) => {
+      const reader = new FileReader();
+      reader.onload = e => res({ url: e.target.result, tipo: f.type.startsWith('video') ? 'video' : 'imagen' });
+      reader.readAsDataURL(f);
+    });
+  });
+
+  Promise.all(mediaPromises).then(media => {
+    DB.add('donaciones_pub', {
+      id: uuid(), monto, descripcion, donde, fecha, media, creado_en: now()
+    });
+    hideModal('modalPublicarDonacion');
+    document.getElementById('formDonacion').reset();
+    document.getElementById('don_media_preview').innerHTML = '';
+    renderDonaciones();
+    showToast('✅ Donación publicada');
+  });
+}
+
+function previsualizarMedia() {
+  const input   = document.getElementById('don_media');
+  const preview = document.getElementById('don_media_preview');
+  if (!preview) return;
+  preview.innerHTML = '';
+  Array.from(input.files).slice(0, 4).forEach(file => {
+    if (file.type.startsWith('video')) {
+      const v = document.createElement('video');
+      v.src = URL.createObjectURL(file);
+      v.style.cssText = 'width:80px;height:80px;object-fit:cover;border-radius:8px;border:1px solid var(--gborde)';
+      v.muted = true;
+      preview.appendChild(v);
+    } else {
+      const reader = new FileReader();
+      reader.onload = ev => {
+        const img = document.createElement('img');
+        img.src = ev.target.result;
+        img.style.cssText = 'width:80px;height:80px;object-fit:cover;border-radius:8px;border:1px solid var(--gborde)';
+        preview.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+}
+
+function buildDonCard(item) {
+  const card = document.createElement('div');
+  card.className = 'don-card';
+  const media = item.media || [];
+  const mediaHtml = media.length ? `
+    <div class="don-media-grid" style="grid-template-columns:repeat(${Math.min(media.length,2)},1fr)">
+      ${media.map(m => m.tipo === 'video'
+        ? `<video src="${m.url}" controls style="width:100%;border-radius:8px;aspect-ratio:1;object-fit:cover"></video>`
+        : `<img src="${m.url}" style="width:100%;border-radius:8px;aspect-ratio:1;object-fit:cover" loading="lazy">`
+      ).join('')}
+    </div>` : '';
+  card.innerHTML = `
+    <div class="don-card-top">
+      <span class="don-icon-big">💛</span>
+      <div>
+        <div class="don-monto">${item.monto}</div>
+        <div class="don-fecha">📅 ${item.fecha}</div>
+      </div>
+    </div>
+    <div class="don-card-body">
+      <p class="don-desc">${item.descripcion}</p>
+      <div class="don-donde">📍 ${item.donde}</div>
+      ${mediaHtml}
+    </div>`;
+  return card;
+}
+
+function renderDonaciones() {
+  const items = DB.get('donaciones_pub');
+  const empty = '<p style="text-align:center;color:var(--gsub);padding:2rem;font-size:.85rem;line-height:1.6">Aún no hay donaciones publicadas.<br>¡Sé el primero en compartir cómo ayudaste! 💛</p>';
+
+  // Modal transparencia
+  const lista = document.getElementById('listaDonaciones');
+  if (lista) {
+    lista.innerHTML = '';
+    if (!items.length) { lista.innerHTML = empty; }
+    else { items.forEach(i => lista.appendChild(buildDonCard(i))); }
+  }
+
+  // Página inicio
+  const listaInicio = document.getElementById('listaDonacionesInicio');
+  if (listaInicio) {
+    listaInicio.innerHTML = '';
+    if (!items.length) { listaInicio.innerHTML = empty; }
+    else { items.slice(0, 5).forEach(i => listaInicio.appendChild(buildDonCard(i))); }
+  }
+}
+
+
+function updateInicioStats() {
+  const el = (id, val) => { const e = document.getElementById(id); if (e) e.textContent = val; };
+  el('statDonaciones',   DB.get('donaciones_pub').length);
+  el('statNecesidades',  DB.get('insumos').filter(x => x.estado_ayuda === 'recibido').length);
+  el('statInspecciones', DB.get('inspecciones').length);
+}
+
+/* ─── Init extendido ─── */
+document.addEventListener('DOMContentLoaded', () => {
+  // Fecha mínima inspección = mañana
+  const fechaInsp = document.getElementById('insp_fecha');
+  if (fechaInsp) {
+    const tom = new Date(); tom.setDate(tom.getDate() + 1);
+    fechaInsp.min = tom.toISOString().slice(0, 10);
+    fechaInsp.addEventListener('change', actualizarCalendario);
+  }
+  // Preview fotos inspección
+  const fotosInsp = document.getElementById('insp_fotos');
+  if (fotosInsp) fotosInsp.addEventListener('change', previsualizarFotos);
+  // Preview media donaciones
+  const donMedia = document.getElementById('don_media');
+  if (donMedia) donMedia.addEventListener('change', previsualizarMedia);
+  // Historial navegación — botón atrás del sistema
+  window.addEventListener('popstate', () => goBack());
+  // Botón atrás
+  NavHistory.push('tabInicio');
+  showTabInternal('tabInicio');
+});
+
+// Renderizar donaciones al abrir el modal de transparencia
+const _origShowModal = showModal;
+window.showModal = function(id) {
+  _origShowModal(id);
+  if (id === 'modalTransparencia') renderDonaciones();
+};
+
+</script>
+</body>
+</html>
