@@ -678,7 +678,11 @@ footer h2{font-weight:800;letter-spacing:-.05em}
 /* portfolios para otros creativos: filas grandes con vista previa flotante */
 .crea{list-style:none;border-top:1px solid var(--rule)}
 .crea li{border-bottom:1px solid var(--rule)}
-.cr{position:relative;display:grid;grid-template-columns:2.6rem minmax(0,1fr) minmax(0,21rem) 2.6rem;gap:1.2rem;align-items:center;padding:1.7rem .2rem;text-decoration:none;color:inherit}
+.cr{position:relative;display:grid;grid-template-columns:2.6rem minmax(0,1fr) minmax(0,24rem) 2.6rem;grid-template-rows:auto auto;column-gap:1.6rem;row-gap:.9rem;align-items:end;padding:2rem .2rem;text-decoration:none;color:inherit}
+.cr-n{grid-column:1;grid-row:1}
+.cr-name{grid-column:2;grid-row:1}
+.cr-meta{grid-column:2;grid-row:2;align-self:start;max-width:40ch}
+.cr-go{grid-column:4;grid-row:1}
 .cr-n{font-size:.75rem;font-weight:600;color:var(--soft);letter-spacing:.1em}
 .cr-name{font-weight:800;font-size:clamp(2rem,6vw,4.8rem);line-height:.95;letter-spacing:-.05em;transition:transform .6s var(--ease),color .3s}
 .cr:hover .cr-name,.cr:focus-visible .cr-name{transform:translateX(.8rem);color:var(--cherry)}
@@ -687,22 +691,56 @@ footer h2{font-weight:800;letter-spacing:-.05em}
 .cr-meta span{font-size:.88rem;color:var(--soft);line-height:1.45}
 .cr-go{width:2.6rem;height:2.6rem;border:1px solid var(--rule);border-radius:.25rem;display:grid;place-items:center;font-size:1.1rem;transition:transform .5s var(--ease),background .3s,color .3s,border-color .3s}
 .cr:hover .cr-go{transform:rotate(45deg);background:var(--cherry);color:#2A0E14;border-color:var(--cherry)}
-.cr-pv{position:fixed;left:0;top:0;z-index:50;width:min(380px,40vw);border-radius:.8rem;overflow:hidden;border:1px solid #4a2d36;background:var(--card);box-shadow:0 40px 80px -20px rgba(0,0,0,.9);pointer-events:none;opacity:0;transform:translate(var(--px,0),var(--py,0)) scale(.85) rotate(-3deg);transition:opacity .3s,transform .5s var(--ease)}
-.cr.on .cr-pv{opacity:1;transform:translate(var(--px,0),var(--py,0)) scale(1) rotate(-2deg)}
+.cr-pv{grid-column:3;grid-row:1 / span 2;align-self:center;width:100%;border-radius:.8rem;overflow:hidden;border:1px solid #4a2d36;background:var(--card);box-shadow:0 30px 60px -25px rgba(0,0,0,.9);transform:rotate(-1.5deg);transition:transform .6s var(--ease),box-shadow .6s var(--ease)}
+.cr:hover .cr-pv{transform:rotate(0) scale(1.04);box-shadow:0 40px 80px -25px rgba(255,111,156,.35)}
 .cr-pv .mbar{display:flex;gap:.3rem;align-items:center;padding:.42rem .6rem;border-bottom:1px solid var(--rule);font-size:.66rem;color:var(--soft)}
 .cr-pv .mbar i{width:.42rem;height:.42rem;border-radius:50%;display:block;background:#FFFDE9}
 .cr-pv .mbar i:first-child{background:#FF6F9C}.cr-pv .mbar i:nth-child(2){background:#FFD7E7}
 .cr-pv .mbar span{margin-left:.4rem}
 .cr-pv .pv{display:block;position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--g)}
 .cr-pv .fb{position:absolute;inset:0;display:grid;place-items:center;font-weight:800;font-size:1.5rem;letter-spacing:-.03em;color:#fff}
+.cr-pv .shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:0 0}
 .cr-pv iframe{position:absolute;top:0;left:0;width:400%;height:400%;transform:scale(.25);transform-origin:0 0;border:0;background:#fff;opacity:0;transition:opacity .4s}
 .cr-pv iframe.ok{opacity:1}
-@media (hover:none),(max-width:760px){
-  .cr{grid-template-columns:2rem minmax(0,1fr) 2.4rem;row-gap:.8rem;padding:1.4rem .1rem}
-  .cr-meta{grid-column:2 / -1;grid-row:2}
+@media(max-width:760px){
+  .cr{grid-template-columns:2rem minmax(0,1fr) 2.4rem;grid-template-rows:auto;row-gap:.8rem;padding:1.5rem .1rem;align-items:center}
+  .cr-name{grid-column:2;grid-row:1}
   .cr-go{grid-column:3;grid-row:1}
-  .cr-pv{position:relative;grid-column:1 / -1;grid-row:3;width:100%;opacity:1;transform:none!important;pointer-events:none}
+  .cr-pv{grid-column:1 / -1;grid-row:2;transform:none}
+  .cr-meta{grid-column:1 / -1;grid-row:3}
 }
+
+/* ================= móvil: más corto, más visual, siempre con salida al contacto ================= */
+.mcta{display:none}
+@media(max-width:760px){
+  .index a{padding:.8rem .2rem}
+  .index .ix-t span{display:none}
+  .board{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:.7rem;padding-bottom:.4rem;scrollbar-width:none}
+  .board::-webkit-scrollbar,.mosaic::-webkit-scrollbar{display:none}
+  .board > *{flex:0 0 84%;scroll-snap-align:start;grid-column:auto!important;aspect-ratio:auto}
+  .board .b-studio,.board .b-gal{aspect-ratio:4/5}
+  .board .b-gift{aspect-ratio:4/5}
+  .board .b-looks{grid-template-columns:1fr 1fr}
+  .mosaic{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:.6rem;aspect-ratio:auto;scrollbar-width:none}
+  .mosaic > *{flex:0 0 80%;aspect-ratio:4/5!important;scroll-snap-align:start;grid-column:auto!important;grid-row:auto!important}
+  .swipe{display:flex!important}
+  .tgrid{grid-template-columns:1fr}
+  .tl{display:grid;grid-template-columns:2.5rem minmax(0,1fr);column-gap:.9rem;row-gap:.15rem;padding:.9rem 1rem;align-items:start}
+  .tl-ic{grid-row:1 / span 2;width:2.5rem;height:2.5rem;margin:0;font-size:.85rem}
+  .tl b{font-size:.92rem}
+  .tl > span:last-child{font-size:.82rem}
+  .tl + .tl{border-top:1px solid var(--rule)}
+  .duo .view.duo-v{height:58vh}
+  .mcta{display:flex;position:fixed;left:.8rem;right:.8rem;bottom:calc(.8rem + env(safe-area-inset-bottom,0px));z-index:40;align-items:center;justify-content:space-between;gap:.8rem;padding:.85rem 1rem;border-radius:.4rem;background:var(--cherry);color:#2A0E14;text-decoration:none;font-size:.9rem;font-weight:600;box-shadow:0 18px 40px -12px rgba(0,0,0,.8);transform:translateY(160%);transition:transform .5s var(--ease)}
+  .mcta.show{transform:none}
+  .mcta span{display:flex;align-items:center;gap:.5rem}
+  .mcta i{width:.5rem;height:.5rem;border-radius:50%;background:#1f8a4c;display:block}
+  footer{padding-bottom:6rem}
+}
+.swipe{display:none;align-items:center;gap:.5rem;margin-top:.6rem;font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--soft)}
+.swipe::after{content:"→";color:var(--candy);animation:nudge 1.4s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateX(6px)}}
+@media (prefers-reduced-motion:reduce){.swipe::after{animation:none}.mcta{transition:none}}
 </style>
 </head>
 <body>
@@ -801,6 +839,7 @@ footer h2{font-weight:800;letter-spacing:-.05em}
       </div>
     </div>
 
+    <p class="swipe" aria-hidden="true" data-en="Swipe">Desliza</p>
     <div class="stats rise">
       <div class="stat"><b>10</b><span data-en="polish shades to try on">tonos para probar</span></div>
       <div class="stat"><b>4×4</b><span data-en="shapes × finishes">formas × acabados</span></div>
@@ -907,6 +946,7 @@ footer h2{font-weight:800;letter-spacing:-.05em}
       <div style="grid-column:span 2"><img src="img/kronox-4.jpg" alt="Equipo revisando el monitor" loading="lazy"></div>
     </div>
 
+    <p class="swipe" aria-hidden="true" data-en="Swipe">Desliza</p>
     <div class="stats rise">
       <div class="stat"><b>3<small>h</small></b><span data-en="of shooting, agreed up front">de rodaje, pactadas antes</span></div>
       <div class="stat"><b>14<small data-en="days">días</small></b><span data-en="delivery">de entrega</span></div>
@@ -1104,7 +1144,7 @@ footer h2{font-weight:800;letter-spacing:-.05em}
       <div>
         <p class="et" data-en="Portfolios for other creatives">Portfolios para otros creativos</p>
         <h2 data-en="Designed around <em>their craft, not mine.</em>">Diseñados alrededor de <em>su oficio, no del mío.</em></h2>
-        <p class="one" data-en="Every portfolio starts by finding out what their industry looks for. Then I build it. Hover a name to see the site live.">Cada portfolio empieza por averiguar qué busca su sector. Después lo construyo. Pasa por un nombre para ver su web en directo.</p>
+        <p class="one" data-en="Every portfolio starts by finding out what their industry looks for. Then I build it. Tap any of them to open the site.">Cada portfolio empieza por averiguar qué busca su sector. Después lo construyo. Toca cualquiera para abrir su web.</p>
       </div>
     </div>
     <ol class="crea rise">
@@ -1113,14 +1153,14 @@ footer h2{font-weight:800;letter-spacing:-.05em}
         <span class="cr-name">Jairo Azogue</span>
         <span class="cr-meta"><em data-en="Film · director & editor">Cine · director y editor</em><span data-en="Built around his craft: a shoot timer, work sorted by type and his tools laid out like a desk. It now lives on his own domain.">Pensado desde su oficio: cronómetro de rodaje, piezas por tipo y sus herramientas como un escritorio. Ya tiene su propio dominio.</span></span>
         <span class="cr-go" aria-hidden="true">↗</span>
-        <span class="cr-pv" aria-hidden="true"><span class="mbar"><i></i><i></i><i></i><span>jairoazogue.com</span></span><span class="pv" style="--g:linear-gradient(135deg,#3b2a1c,#120c08)"><span class="fb">Jairo Azogue</span><iframe data-crsrc="https://jairoazogue.com/" title="Vista previa de Jairo Azogue" tabindex="-1"></iframe></span></span>
+        <span class="cr-pv" aria-hidden="true"><span class="mbar"><i></i><i></i><i></i><span>jairoazogue.com</span></span><span class="pv" style="--g:linear-gradient(135deg,#3b2a1c,#120c08)"><img class="shot" src="img/jairo-herramientas.jpg" alt="Web de Jairo Azogue, sección de herramientas" loading="lazy"></span></span>
       </a></li>
       <li><a class="cr" href="https://zoguekidd.netlify.app/" target="_blank" rel="noopener">
         <span class="cr-n">02</span>
         <span class="cr-name">ZogueKidd</span>
         <span class="cr-meta"><em data-en="Film · music videos">Cine · videoclips</em><span data-en="Inside, the same system as Kronox. Outside, the opposite identity. It took half the time.">Por dentro, el mismo sistema que Kronox. Por fuera, la identidad opuesta. Salió en la mitad de tiempo.</span></span>
         <span class="cr-go" aria-hidden="true">↗</span>
-        <span class="cr-pv" aria-hidden="true"><span class="mbar"><i></i><i></i><i></i><span>zoguekidd.netlify.app</span></span><span class="pv" style="--g:linear-gradient(135deg,#2b2b2b,#0d0d0d)"><span class="fb">ZogueKidd</span><iframe data-crsrc="https://zoguekidd.netlify.app/" title="Vista previa de ZogueKidd" tabindex="-1"></iframe></span></span>
+        <span class="cr-pv" aria-hidden="true"><span class="mbar"><i></i><i></i><i></i><span>zoguekidd.netlify.app</span></span><span class="pv" style="--g:linear-gradient(135deg,#2b2b2b,#0d0d0d)"><img class="pan" src="img/tall-zoguekidd.jpg" alt="Web de ZogueKidd" loading="lazy"></span></span>
       </a></li>
       <li><a class="cr" href="https://catalinasilva.netlify.app/" target="_blank" rel="noopener">
         <span class="cr-n">03</span>
@@ -1210,6 +1250,7 @@ footer h2{font-weight:800;letter-spacing:-.05em}
 </section>
 
 </main>
+<a class="mcta" href="mailto:mariaurbanoeu@gmail.com" aria-label="Escribir a Paula"><span><i></i><span data-en="Available now">Disponible ya</span></span><b data-en="Email me →">Escríbeme →</b></a>
 
 <footer>
   <div class="wrap">
@@ -1269,8 +1310,8 @@ footer h2{font-weight:800;letter-spacing:-.05em}
   /* ---- en móvil, las ventanas enseñan la versión móvil de cada web ---- */
   if (matchMedia('(max-width: 700px)').matches) {
     var MOB = { 'img/tall-nails.jpg': 'img/m-nails.jpg', 'img/tall-nails-gal.jpg': 'img/m-nails-gal.jpg', 'img/tall-nails-gift.jpg': 'img/m-nails-gift.jpg',
-                'img/tall-rebolica.jpg': 'img/m-rebolica.jpg', 'img/tall-nacar.jpg': 'img/m-nacar.jpg', 'img/tall-kronox.jpg': 'img/m-kronox.jpg' };
-    document.querySelectorAll('.view > img.pan').forEach(function(img){ var k = img.getAttribute('src'); if (MOB[k]) img.src = MOB[k]; });
+                'img/tall-rebolica.jpg': 'img/m-rebolica.jpg', 'img/tall-nacar.jpg': 'img/m-nacar.jpg', 'img/tall-kronox.jpg': 'img/m-kronox.jpg', 'img/tall-zoguekidd.jpg': 'img/m-zoguekidd.jpg' };
+    document.querySelectorAll('.view > img.pan, .cr-pv img.pan').forEach(function(img){ var k = img.getAttribute('src'); if (MOB[k]) img.src = MOB[k]; });
     document.querySelectorAll('.tabs button[data-shot]').forEach(function(b){ if (MOB[b.dataset.shot]) b.dataset.shot = MOB[b.dataset.shot]; });
   }
 
@@ -1359,7 +1400,7 @@ footer h2{font-weight:800;letter-spacing:-.05em}
     });
     vids.forEach(function(v){ vo.observe(v); });
     var pv = new IntersectionObserver(function(es){ es.forEach(function(e){ e.target.classList.toggle('on', e.isIntersecting); }); });
-    document.querySelectorAll('.view, .mini .pv, .pmini .pv').forEach(function(v){ pv.observe(v); });
+    document.querySelectorAll('.view, .mini .pv, .pmini .pv, .cr-pv .pv').forEach(function(v){ pv.observe(v); });
   }
 
   /* ---- antes / después ---- */
@@ -1691,31 +1732,28 @@ footer h2{font-weight:800;letter-spacing:-.05em}
 </script>
 <script>
 (function(){
-  /* vistas previas de los portfolios: flotan junto al cursor; en móvil van bajo cada nombre */
+  /* vistas previas de los portfolios: la de Catalina carga su web en directo en la web publicada */
   var preview = !/claude\.ai|claudeusercontent|^$/.test(location.hostname);
-  function load(a){
-    if (!preview) return;
-    var f = a.querySelector('iframe[data-crsrc]'); if (!f || f.src) return;
-    f.addEventListener('load', function(){ f.classList.add('ok'); });
-    f.src = f.dataset.crsrc;
+  if (preview && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){
+      if (!e.isIntersecting) return; var f = e.target;
+      f.addEventListener('load', function(){ f.classList.add('ok'); }); f.src = f.dataset.crsrc; io.unobserve(f);
+    }); }, { rootMargin: '300px' });
+    document.querySelectorAll('iframe[data-crsrc]').forEach(function(f){ io.observe(f); });
   }
-  var rows = document.querySelectorAll('.cr');
-  var floating = matchMedia('(hover: hover) and (min-width: 761px)');
-  rows.forEach(function(a){
-    var pv = a.querySelector('.cr-pv');
-    a.addEventListener('pointerenter', function(){ if (!floating.matches) return; load(a); a.classList.add('on'); });
-    a.addEventListener('pointerleave', function(){ a.classList.remove('on'); });
-    a.addEventListener('pointermove', function(e){
-      if (!floating.matches) return;
-      var w = pv.offsetWidth, h = pv.offsetHeight;
-      var x = Math.min(innerWidth - w - 16, e.clientX + 24), y = Math.min(innerHeight - h - 16, Math.max(16, e.clientY - h / 2));
-      pv.style.setProperty('--px', x + 'px'); pv.style.setProperty('--py', y + 'px');
-    });
-  });
-  if (!floating.matches && 'IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { load(e.target); io.unobserve(e.target); } }); }, { rootMargin: '200px' });
-    rows.forEach(function(a){ io.observe(a); });
+})();
+</script>
+<script>
+(function(){
+  /* barra de contacto en móvil: aparece tras la portada y se esconde al llegar al contacto */
+  var bar = document.querySelector('.mcta'); if (!bar) return;
+  var hero = document.querySelector('.hero'), foot = document.querySelector('footer');
+  function upd(){
+    var pastHero = hero.getBoundingClientRect().bottom < 0;
+    var atFoot = foot.getBoundingClientRect().top < innerHeight;
+    bar.classList.toggle('show', pastHero && !atFoot);
   }
+  addEventListener('scroll', upd, { passive: true }); upd();
 })();
 </script>
 </body>
