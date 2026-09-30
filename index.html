@@ -394,10 +394,8 @@ body.locked{overflow:hidden}
 @media(max-width:600px){.row2{grid-template-columns:1fr}}
 
 .sauces{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem}
-.sauce{border-radius:var(--r);overflow:hidden;position:relative;background:#111;aspect-ratio:4/5}
-.sauce video{width:100%;height:100%;object-fit:cover}
-.sauce img{position:absolute;left:50%;bottom:1rem;transform:translateX(-50%);width:62%;z-index:2}
-.sauce::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.75))}
+.sauce{border-radius:var(--r);overflow:hidden;position:relative;background:#140A0D;aspect-ratio:1/1}
+.sauce video{width:100%;height:100%;object-fit:contain}
 
 .mosaic{display:grid;grid-template-columns:1.2fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:.8rem;aspect-ratio:16/8}
 .mosaic > *{border-radius:var(--r);overflow:hidden;background:#000}
@@ -634,6 +632,11 @@ footer h2{font-weight:800;letter-spacing:-.05em}
 @media(max-width:620px){.index a{grid-template-columns:1.8rem minmax(0,1fr)}.index em{grid-column:2}}
 .learn{list-style:none;border-top:1px solid var(--rule)}
 .learn li{border-bottom:1px solid var(--rule);padding:.6rem 0;color:var(--soft);font-size:.9rem}
+/* programas: idéntico al portfolio de prácticas */
+.prac .ptags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.7rem}
+.prac .ptags span{border:1px solid var(--rule);border-radius:999px;padding:.25rem .7rem;font-size:.76rem;color:var(--soft)}
+.prac .plearn{margin-top:.7rem}
+.prac .plearn li{margin-left:1.1rem;color:var(--soft);margin-bottom:.4rem}
 </style>
 </head>
 <body>
@@ -764,9 +767,9 @@ footer h2{font-weight:800;letter-spacing:-.05em}
     </div>
 
     <div class="sauces rise">
-      <div class="sauce"><video src="video/fosca.webm" muted loop playsinline autoplay preload="metadata"></video><img src="img/fosca.png" alt="Fosca"></div>
-      <div class="sauce"><video src="video/llamp.webm" muted loop playsinline autoplay preload="metadata"></video><img src="img/llamp.png" alt="Llamp"></div>
-      <div class="sauce"><video src="video/traca.webm" muted loop playsinline autoplay preload="metadata"></video><img src="img/traca.png" alt="Traca"></div>
+      <div class="sauce"><video src="video/fosca.webm" muted loop playsinline autoplay preload="metadata"></video></div>
+      <div class="sauce"><video src="video/llamp.webm" muted loop playsinline autoplay preload="metadata"></video></div>
+      <div class="sauce"><video src="video/traca.webm" muted loop playsinline autoplay preload="metadata"></video></div>
     </div>
 
     <div class="row2 rise">
@@ -1042,19 +1045,21 @@ footer h2{font-weight:800;letter-spacing:-.05em}
       <div class="facts">
         <div><small data-en="Graduating">Graduación</small><b data-en="June 2027">Junio 2027</b></div>
         <div><small data-en="Available">Disponible</small><b data-en="Now">Ya</b></div>
-        <div><small data-en="Based in">Ubicación</small><b data-en="Valencia · will relocate">Valencia · me mudo</b></div>
+        <div><small data-en="Based in">Ubicación</small><b>Valencia</b></div>
         <div><small data-en="Languages">Idiomas</small><b data-en="ES native · EN B2">ES nativo · EN B2</b></div>
       </div>
     </div>
     <div class="rise">
-      <div class="skill-g"><span class="et" data-en="What I do">Qué hago</span><div class="pills hi"><span data-en="Social media content">Contenido para RRSS</span><span data-en="Brand identity">Identidad de marca</span><span>Packaging</span><span data-en="Editorial">Editorial</span><span data-en="Web design">Diseño web</span></div></div>
-      <div class="skill-g"><span class="et" data-en="Design">Diseño</span><div class="pills"><span>Figma</span><span data-en="Prototyping">Prototipado</span><span>Illustrator</span><span>InDesign</span><span>Photoshop</span></div></div>
-      <div class="skill-g"><span class="et" data-en="Build">Desarrollo</span><div class="pills"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Liquid</span><span>PHP</span><span>Shopify</span><span>WordPress</span><span>Firebase</span><span>Git</span></div></div>
-      <div class="skill-g"><span class="et" data-en="Learning right now">Aprendiendo ahora</span>
-        <ul class="learn">
-          <li data-en="React and modern component frameworks">React y frameworks de componentes modernos</li>
+      <div class="prac">
+        <p class="et" data-en="Design">Diseño</p>
+        <div class="ptags"><span>Figma</span><span>Prototyping</span><span>Illustrator</span><span>InDesign</span><span>Photoshop</span></div>
+        <p class="et" style="margin-top:1.4rem" data-en="Build">Desarrollo</p>
+        <div class="ptags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Liquid</span><span>PHP</span><span>Shopify</span><span>WordPress</span><span>Firebase</span><span>Git</span></div>
+        <p class="et" style="margin-top:1.4rem" data-en="Learning right now">Ahora estoy aprendiendo</p>
+        <ul class="plearn">
+          <li data-en="React and modern component frameworks">React y frameworks modernos de componentes</li>
           <li data-en="Writing tests">Escribir tests</li>
-          <li data-en="Working inside a large team, with code review and other people's branches">Trabajar en un equipo grande, con code review y ramas de otras personas</li>
+          <li data-en="Working inside large teams, with code review and shared branches">Trabajar en equipos grandes, con revisión de código y ramas compartidas</li>
           <li data-en="Accessibility beyond alt text and contrast">Accesibilidad más allá del texto alternativo y el contraste</li>
         </ul>
       </div>
