@@ -8,6 +8,6 @@ Diseño gráfico, identidad visual y web. HTML, CSS y JavaScript sin frameworks.
 - `fonts/`: tipografías alojadas aquí (Unbounded, Poppins, Playfair Display, Jost).
 - `Paula-Urbano-Portfolio.pdf` y `Paula-Urbano-CV.pdf`: descargables.
 
-Para publicarlo con GitHub Pages: Settings → Pages → Deploy from a branch → `main` / root.
+Publicado con GitHub Pages en https://paulaurbanog.com (archivo `CNAME`).
 
 Contacto: mariaurbanoeu@gmail.com
