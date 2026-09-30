@@ -637,6 +637,72 @@ footer h2{font-weight:800;letter-spacing:-.05em}
 .prac .ptags span{border:1px solid var(--rule);border-radius:999px;padding:.25rem .7rem;font-size:.76rem;color:var(--soft)}
 .prac .plearn{margin-top:.7rem}
 .prac .plearn li{margin-left:1.1rem;color:var(--soft);margin-bottom:.4rem}
+
+/* herramientas (formato de la web de Jairo, con los colores del portfolio) */
+.tools-h{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;border-bottom:1px solid var(--ink);padding-bottom:.6rem;flex-wrap:wrap}
+.tools-h h2{margin:0;font-size:clamp(2.6rem,10vw,7.4rem);line-height:.86;letter-spacing:-.05em;text-transform:uppercase;max-width:none}
+.tools-c{font-size:.72rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--soft);padding-bottom:.4rem}
+.tools-lead{font-size:clamp(1.05rem,1.8vw,1.3rem);color:var(--soft);max-width:44ch;margin:1.6rem 0 2.6rem;line-height:1.5}
+.tools-lead b{color:var(--ink);font-weight:600}
+.tg{margin-bottom:2.4rem}
+.tg-h{display:flex;justify-content:space-between;font-size:.72rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--soft);margin-bottom:.8rem}
+.tg-n{color:var(--candy)}
+.tgrid{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--rule);gap:0}
+.tl{padding:1.4rem 1.3rem 1.6rem;display:flex;flex-direction:column;gap:.5rem;min-width:0;transition:background .25s}
+.tl:hover{background:rgba(255,215,231,.04)}
+.tl-ic{width:2.9rem;height:2.9rem;border-radius:.45rem;display:grid;place-items:center;font:800 .95rem/1 var(--sans);letter-spacing:-.02em;color:var(--tc);border:1px solid color-mix(in srgb,var(--tc) 55%,transparent);background:color-mix(in srgb,var(--tc) 12%,transparent);margin-bottom:.4rem;transition:transform .4s var(--ease)}
+.tl:hover .tl-ic{transform:translateY(-3px) rotate(-4deg)}
+.tl b{font-weight:800;font-size:1.05rem;letter-spacing:.01em;text-transform:uppercase}
+.tl > span:last-child{font-size:.88rem;color:var(--soft);line-height:1.5}
+.tools-ask{display:flex;align-items:center;justify-content:space-between;gap:1.2rem;border:1px dashed var(--rule);padding:1.4rem 1.6rem;margin-top:-1.4rem;flex-wrap:wrap}
+.tools-ask p{font-size:.95rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;line-height:1.5}
+.tgrid.one{grid-template-columns:1fr}
+.tgrid.one .tl{display:grid;grid-template-columns:auto minmax(9rem,14rem) minmax(0,1fr);align-items:center;column-gap:1.4rem}
+.tgrid.one .tl-ic{margin:0}
+@media(max-width:900px){.tgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.tgrid.one .tl{grid-template-columns:auto minmax(0,1fr);row-gap:.3rem}.tgrid.one .tl > span:last-child{grid-column:1 / -1}}
+@media(max-width:480px){.tgrid{grid-template-columns:1fr}.tl{padding:1.1rem 1rem 1.2rem}}
+
+/* Kronox: web y panel lado a lado */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;margin-top:2rem;align-items:start}
+.duo-i{min-width:0}
+.duo-t{display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap;border-top:1px solid var(--rule);padding-top:.9rem}
+.duo-t b{font-weight:800;font-size:1.2rem;letter-spacing:-.02em}
+.duo-t span{font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--candy)}
+.duo-d{color:var(--soft);font-size:.95rem;margin:.5rem 0 0;max-width:46ch;min-height:6em}
+.duo .win-wrap{margin-top:1rem}
+.duo .view.duo-v{height:min(62vh,520px)}
+.view .poster-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%;filter:brightness(.7)}
+@media(max-width:900px){.duo{grid-template-columns:1fr}.duo-d{min-height:0}}
+
+/* portfolios para otros creativos: filas grandes con vista previa flotante */
+.crea{list-style:none;border-top:1px solid var(--rule)}
+.crea li{border-bottom:1px solid var(--rule)}
+.cr{position:relative;display:grid;grid-template-columns:2.6rem minmax(0,1fr) minmax(0,21rem) 2.6rem;gap:1.2rem;align-items:center;padding:1.7rem .2rem;text-decoration:none;color:inherit}
+.cr-n{font-size:.75rem;font-weight:600;color:var(--soft);letter-spacing:.1em}
+.cr-name{font-weight:800;font-size:clamp(2rem,6vw,4.8rem);line-height:.95;letter-spacing:-.05em;transition:transform .6s var(--ease),color .3s}
+.cr:hover .cr-name,.cr:focus-visible .cr-name{transform:translateX(.8rem);color:var(--cherry)}
+.cr-meta{display:flex;flex-direction:column;gap:.35rem;min-width:0}
+.cr-meta em{font-style:normal;font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--candy)}
+.cr-meta span{font-size:.88rem;color:var(--soft);line-height:1.45}
+.cr-go{width:2.6rem;height:2.6rem;border:1px solid var(--rule);border-radius:.25rem;display:grid;place-items:center;font-size:1.1rem;transition:transform .5s var(--ease),background .3s,color .3s,border-color .3s}
+.cr:hover .cr-go{transform:rotate(45deg);background:var(--cherry);color:#2A0E14;border-color:var(--cherry)}
+.cr-pv{position:fixed;left:0;top:0;z-index:50;width:min(380px,40vw);border-radius:.8rem;overflow:hidden;border:1px solid #4a2d36;background:var(--card);box-shadow:0 40px 80px -20px rgba(0,0,0,.9);pointer-events:none;opacity:0;transform:translate(var(--px,0),var(--py,0)) scale(.85) rotate(-3deg);transition:opacity .3s,transform .5s var(--ease)}
+.cr.on .cr-pv{opacity:1;transform:translate(var(--px,0),var(--py,0)) scale(1) rotate(-2deg)}
+.cr-pv .mbar{display:flex;gap:.3rem;align-items:center;padding:.42rem .6rem;border-bottom:1px solid var(--rule);font-size:.66rem;color:var(--soft)}
+.cr-pv .mbar i{width:.42rem;height:.42rem;border-radius:50%;display:block;background:#FFFDE9}
+.cr-pv .mbar i:first-child{background:#FF6F9C}.cr-pv .mbar i:nth-child(2){background:#FFD7E7}
+.cr-pv .mbar span{margin-left:.4rem}
+.cr-pv .pv{display:block;position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--g)}
+.cr-pv .fb{position:absolute;inset:0;display:grid;place-items:center;font-weight:800;font-size:1.5rem;letter-spacing:-.03em;color:#fff}
+.cr-pv iframe{position:absolute;top:0;left:0;width:400%;height:400%;transform:scale(.25);transform-origin:0 0;border:0;background:#fff;opacity:0;transition:opacity .4s}
+.cr-pv iframe.ok{opacity:1}
+@media (hover:none),(max-width:760px){
+  .cr{grid-template-columns:2rem minmax(0,1fr) 2.4rem;row-gap:.8rem;padding:1.4rem .1rem}
+  .cr-meta{grid-column:2 / -1;grid-row:2}
+  .cr-go{grid-column:3;grid-row:1}
+  .cr-pv{position:relative;grid-column:1 / -1;grid-row:3;width:100%;opacity:1;transform:none!important;pointer-events:none}
+}
 </style>
 </head>
 <body>
@@ -651,6 +717,7 @@ footer h2{font-weight:800;letter-spacing:-.05em}
       <a href="#kronox">Kronox</a>
       <a href="#identidades" data-en="Brands">Identidades</a>
       <a href="#about" data-en="About">Sobre mí</a>
+      <a href="#herramientas" data-en="Tools">Herramientas</a>
     </nav>
     <div class="lang" role="group" aria-label="Idioma / Language">
       <button type="button" data-lang="es" aria-pressed="true">ES</button>
@@ -848,13 +915,31 @@ footer h2{font-weight:800;letter-spacing:-.05em}
     </div>
     <p class="cap rise" data-en="The terms are accepted before reaching his WhatsApp. No more unpaid hours.">Las condiciones se aceptan antes de llegar a su WhatsApp. Se acabaron las horas sin cobrar.</p>
 
-    <div class="win-wrap rise" style="--glow:#5b3cff">
-      <div class="win" data-win>
-        <div class="bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="url"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9V7A5 5 0 0 0 7 7v2H5v13h14V9h-2zM9 7a3 3 0 0 1 6 0v2H9V7z"/></svg><span data-u>Kronox · panel del cliente</span></span><div class="tabs" role="group" aria-label="Vistas"><button type="button" data-src="demos/kronox-panel.html" data-shot="img/tall-kronox.jpg" data-url="Kronox · panel del cliente" aria-pressed="true" data-en="Client panel">Panel del cliente</button><button type="button" data-src="https://kronoxprod.netlify.app/" data-shot="img/kronox-1.jpg" data-url="kronoxprod.netlify.app" aria-pressed="false" data-en="Public site">Web pública</button></div><span class="act"><button type="button" data-max aria-label="Pantalla completa" title="Pantalla completa">⤢</button></span></div>
-        <div class="view" data-src="demos/kronox-panel.html" data-title="Kronox · panel del cliente">
-          <img class="pan" src="img/tall-kronox.jpg" alt="Kronox · panel del cliente" loading="lazy">
-          <span class="live"><i></i><span data-en="His panel, demo copy">Su panel, en demo</span></span>
-          <button type="button" class="enter" data-enter><svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z"/></svg><span data-en="Try the panel">Probar el panel</span></button>
+    <div class="duo">
+      <div class="duo-i rise">
+        <p class="duo-t"><b data-en="1 · The website">1 · La web</b><span data-en="what his clients see">lo que ven sus clientes</span></p>
+        <p class="duo-d" data-en="People come to watch his music videos and check prices. Before they can message him on WhatsApp, they accept the shoot terms. That way nobody argues later.">La gente entra a ver sus videoclips y sus precios. Antes de poder escribirle por WhatsApp, acepta las condiciones del rodaje. Así nadie discute después.</p>
+        <div class="win-wrap" style="--glow:#5b3cff">
+          <div class="win" data-win>
+            <div class="bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="url"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9V7A5 5 0 0 0 7 7v2H5v13h14V9h-2zM9 7a3 3 0 0 1 6 0v2H9V7z"/></svg><span data-u>kronoxprod.netlify.app</span></span><span class="act"><a href="https://kronoxprod.netlify.app/" target="_blank" rel="noopener" aria-label="Abrir la web en otra pestaña" title="Abrir la web en otra pestaña">↗</a><button type="button" data-max aria-label="Pantalla completa" title="Pantalla completa">⤢</button></span></div>
+            <div class="view duo-v" data-src="https://kronoxprod.netlify.app/" data-title="Web de Kronox" data-autolive>
+              <img class="poster-img" src="img/kronox-1.jpg" alt="" loading="lazy">
+              <button type="button" class="enter" data-enter><svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z"/></svg><span data-en="Open the website">Ver la web</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="duo-i rise">
+        <p class="duo-t"><b data-en="2 · The panel">2 · El panel</b><span data-en="what Kronox uses">lo que usa Kronox</span></p>
+        <p class="duo-d" data-en="His control room. He uploads videos and photos, changes prices and manages reviews on his own, without calling me. This is a demo copy: play with it, nothing gets saved.">Su cuarto de control. Sube vídeos y fotos, cambia precios y gestiona reseñas él solo, sin llamarme. Es una copia de prueba: toca lo que quieras, no se guarda nada.</p>
+        <div class="win-wrap" style="--glow:#5b3cff">
+          <div class="win" data-win>
+            <div class="bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="url"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9V7A5 5 0 0 0 7 7v2H5v13h14V9h-2zM9 7a3 3 0 0 1 6 0v2H9V7z"/></svg><span data-u data-en="Kronox · admin panel">Kronox · panel</span></span><span class="act"><button type="button" data-max aria-label="Pantalla completa" title="Pantalla completa">⤢</button></span></div>
+            <div class="view duo-v" data-src="demos/kronox-panel.html" data-title="Panel de Kronox">
+              <img class="poster-img" src="img/kronox-fotos.jpg" alt="Panel de Kronox" loading="lazy" style="filter:none;object-position:50% 0">
+              <button type="button" class="enter" data-enter><svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z"/></svg><span data-en="Try the panel">Probar el panel</span></button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1011,27 +1096,40 @@ footer h2{font-weight:800;letter-spacing:-.05em}
   </div>
 </section>
 
-<!-- ================= ALSO SHIPPED ================= -->
-<section class="sec">
+<!-- ================= PORTFOLIOS PARA OTROS CREATIVOS ================= -->
+<section class="sec" id="creativos">
   <div class="wrap">
-    <h2 class="rise" data-en="Portfolios for other creatives">Portfolios para otros creativos</h2>
-    <div class="shipped">
-      <a class="site rise" href="https://zoguekidd.netlify.app/" target="_blank" rel="noopener">
-        <span class="mbar"><i></i><i></i><i></i><span>zoguekidd.netlify.app</span></span>
-        <span class="pv" style="--g:linear-gradient(135deg,#2b2b2b,#0d0d0d)"><span class="fb">ZogueKidd</span><iframe data-live="https://zoguekidd.netlify.app/" title="Vista previa de ZogueKidd" tabindex="-1" aria-hidden="true"></iframe></span>
-        <span class="meta"><b>ZogueKidd <em>↗</em></b><span data-en="Film · same system as Kronox, opposite identity">Cine · el sistema de Kronox con la identidad opuesta</span></span>
-      </a>
-      <a class="site rise" href="https://jairoazogue.com/" target="_blank" rel="noopener">
-        <span class="mbar"><i></i><i></i><i></i><span>jairoazogue.com</span></span>
-        <span class="pv" style="--g:linear-gradient(135deg,#3b2a1c,#120c08)"><span class="fb">Jairo Azogue</span><iframe data-live="https://jairoazogue.com/" title="Vista previa de Jairo Azogue" tabindex="-1" aria-hidden="true"></iframe></span>
-        <span class="meta"><b>Jairo Azogue <em>↗</em></b><span data-en="Film · director & video editor">Cine · director y editor de vídeo</span></span>
-      </a>
-      <a class="site rise" href="https://catalinasilva.netlify.app/" target="_blank" rel="noopener">
-        <span class="mbar"><i></i><i></i><i></i><span>catalinasilva.netlify.app</span></span>
-        <span class="pv" style="--g:linear-gradient(135deg,#243a52,#0b1522)"><span class="fb">Catalina Silva</span><iframe data-live="https://catalinasilva.netlify.app/" title="Vista previa de Catalina Silva" tabindex="-1" aria-hidden="true"></iframe></span>
-        <span class="meta"><b>Catalina Silva <em>↗</em></b><span data-en="3D & animation">3D y animación</span></span>
-      </a>
+    <div class="sec-head rise">
+      <span class="big-n" aria-hidden="true">+</span>
+      <div>
+        <p class="et" data-en="Portfolios for other creatives">Portfolios para otros creativos</p>
+        <h2 data-en="Designed around <em>their craft, not mine.</em>">Diseñados alrededor de <em>su oficio, no del mío.</em></h2>
+        <p class="one" data-en="Every portfolio starts by finding out what their industry looks for. Then I build it. Hover a name to see the site live.">Cada portfolio empieza por averiguar qué busca su sector. Después lo construyo. Pasa por un nombre para ver su web en directo.</p>
+      </div>
     </div>
+    <ol class="crea rise">
+      <li><a class="cr" href="https://jairoazogue.com/" target="_blank" rel="noopener">
+        <span class="cr-n">01</span>
+        <span class="cr-name">Jairo Azogue</span>
+        <span class="cr-meta"><em data-en="Film · director & editor">Cine · director y editor</em><span data-en="Built around his craft: a shoot timer, work sorted by type and his tools laid out like a desk. It now lives on his own domain.">Pensado desde su oficio: cronómetro de rodaje, piezas por tipo y sus herramientas como un escritorio. Ya tiene su propio dominio.</span></span>
+        <span class="cr-go" aria-hidden="true">↗</span>
+        <span class="cr-pv" aria-hidden="true"><span class="mbar"><i></i><i></i><i></i><span>jairoazogue.com</span></span><span class="pv" style="--g:linear-gradient(135deg,#3b2a1c,#120c08)"><span class="fb">Jairo Azogue</span><iframe data-crsrc="https://jairoazogue.com/" title="Vista previa de Jairo Azogue" tabindex="-1"></iframe></span></span>
+      </a></li>
+      <li><a class="cr" href="https://zoguekidd.netlify.app/" target="_blank" rel="noopener">
+        <span class="cr-n">02</span>
+        <span class="cr-name">ZogueKidd</span>
+        <span class="cr-meta"><em data-en="Film · music videos">Cine · videoclips</em><span data-en="Inside, the same system as Kronox. Outside, the opposite identity. It took half the time.">Por dentro, el mismo sistema que Kronox. Por fuera, la identidad opuesta. Salió en la mitad de tiempo.</span></span>
+        <span class="cr-go" aria-hidden="true">↗</span>
+        <span class="cr-pv" aria-hidden="true"><span class="mbar"><i></i><i></i><i></i><span>zoguekidd.netlify.app</span></span><span class="pv" style="--g:linear-gradient(135deg,#2b2b2b,#0d0d0d)"><span class="fb">ZogueKidd</span><iframe data-crsrc="https://zoguekidd.netlify.app/" title="Vista previa de ZogueKidd" tabindex="-1"></iframe></span></span>
+      </a></li>
+      <li><a class="cr" href="https://catalinasilva.netlify.app/" target="_blank" rel="noopener">
+        <span class="cr-n">03</span>
+        <span class="cr-name">Catalina Silva</span>
+        <span class="cr-meta"><em data-en="3D & animation">3D y animación</em><span data-en="Made to apply for studio placements. First I found out what a 3D studio looks for, then I designed it.">Para pedir prácticas en estudios. Primero averigüé qué mira un estudio de 3D y después lo diseñé.</span></span>
+        <span class="cr-go" aria-hidden="true">↗</span>
+        <span class="cr-pv" aria-hidden="true"><span class="mbar"><i></i><i></i><i></i><span>catalinasilva.netlify.app</span></span><span class="pv" style="--g:linear-gradient(135deg,#243a52,#0b1522)"><span class="fb">Catalina Silva</span><iframe data-crsrc="https://catalinasilva.netlify.app/" title="Vista previa de Catalina Silva" tabindex="-1"></iframe></span></span>
+      </a></li>
+    </ol>
   </div>
 </section>
 
@@ -1051,11 +1149,7 @@ footer h2{font-weight:800;letter-spacing:-.05em}
     </div>
     <div class="rise">
       <div class="prac">
-        <p class="et" data-en="Design">Diseño</p>
-        <div class="ptags"><span>Figma</span><span>Prototyping</span><span>Illustrator</span><span>InDesign</span><span>Photoshop</span><span>Canva</span><span>Affinity</span></div>
-        <p class="et" style="margin-top:1.4rem" data-en="Build">Desarrollo</p>
-        <div class="ptags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Liquid</span><span>PHP</span><span>Shopify</span><span>WordPress</span><span>Firebase</span><span>Git</span><span>Square</span><span>Copilot</span></div>
-        <p class="et" style="margin-top:1.4rem" data-en="Learning right now">Ahora estoy aprendiendo</p>
+        <p class="et" data-en="Learning right now">Ahora estoy aprendiendo</p>
         <ul class="plearn">
           <li data-en="React and modern component frameworks">React y frameworks modernos de componentes</li>
           <li data-en="Writing tests">Escribir tests</li>
@@ -1063,6 +1157,54 @@ footer h2{font-weight:800;letter-spacing:-.05em}
           <li data-en="Accessibility beyond alt text and contrast">Accesibilidad más allá del texto alternativo y el contraste</li>
         </ul>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HERRAMIENTAS ================= -->
+<section class="sec tools" id="herramientas">
+  <div class="wrap">
+    <div class="tools-h rise">
+      <h2 data-en="Tools">Herramientas</h2>
+      <span class="tools-c" data-en="15 on one desk">15 en un escritorio</span>
+    </div>
+    <p class="tools-lead rise" data-en="Brand, pieces and website on the same desk. <b>From the logo to the published site, without handing the work over.</b>">Marca, piezas y web en la misma mesa. <b>Del logo a la web publicada, sin pasarle el trabajo a nadie.</b></p>
+    
+    <div class="tg rise">
+      <div class="tg-h"><span data-en="Design">Diseño</span><span class="tg-n">06</span></div>
+      <ul class="tgrid">
+        <li class="tl" style="--tc:#A259FF"><span class="tl-ic" aria-hidden="true">Fg</span><b>Figma</b><span data-en="Interfaces, clickable prototypes and every website designed before I code it.">Interfaces, prototipos navegables y el diseño de cada web antes de programarla.</span></li>
+        <li class="tl" style="--tc:#FF9A00"><span class="tl-ic" aria-hidden="true">Ai</span><b>Illustrator</b><span data-en="Logos, symbols, construction grids and brand graphics.">Logotipos, isotipos, geometría y recursos gráficos de marca.</span></li>
+        <li class="tl" style="--tc:#31A8FF"><span class="tl-ic" aria-hidden="true">Ps</span><b>Photoshop</b><span data-en="Retouching, packaging mockups and social pieces.">Retoque, mockups de packaging y piezas para redes.</span></li>
+        <li class="tl" style="--tc:#FF3366"><span class="tl-ic" aria-hidden="true">Id</span><b>InDesign</b><span data-en="Brand books, restaurant menus and editorial layout.">Manuales de marca, cartas de restaurante y maquetación editorial.</span></li>
+        <li class="tl" style="--tc:#1BC6B4"><span class="tl-ic" aria-hidden="true">Af</span><b>Affinity</b><span data-en="Vector design and image editing for brand pieces.">Diseño vectorial y edición de imagen para piezas de marca.</span></li>
+        <li class="tl" style="--tc:#00C4CC"><span class="tl-ic" aria-hidden="true">Ca</span><b>Canva</b><span data-en="Social templates the client can edit without me.">Plantillas de redes que el cliente puede editar sin mí.</span></li>
+      </ul>
+    </div>
+    
+    <div class="tg rise">
+      <div class="tg-h"><span data-en="Web & development">Web y desarrollo</span><span class="tg-n">08</span></div>
+      <ul class="tgrid">
+        <li class="tl" style="--tc:#E34F26"><span class="tl-ic" aria-hidden="true">Hc</span><b>HTML y CSS</b><span data-en="Custom, responsive websites with no templates. This portfolio included.">Webs a medida y responsive, sin plantillas. Este portfolio incluido.</span></li>
+        <li class="tl" style="--tc:#F7DF1E"><span class="tl-ic" aria-hidden="true">Js</span><b>JavaScript</b><span data-en="Interaction and motion: the manicure simulator, the stories, the panels.">Interacción y animación: el simulador de manicura, las historias, los paneles.</span></li>
+        <li class="tl" style="--tc:#95BF47"><span class="tl-ic" aria-hidden="true">Sh</span><b>Shopify · Liquid</b><span data-en="Themes written from scratch, like Nácar Estilismo.">Temas escritos desde cero, como el de Nácar Estilismo.</span></li>
+        <li class="tl" style="--tc:#3E9CD6"><span class="tl-ic" aria-hidden="true">Wp</span><b>WordPress</b><span data-en="Websites the client updates on their own.">Webs que el cliente actualiza por su cuenta.</span></li>
+        <li class="tl" style="--tc:#8892BF"><span class="tl-ic" aria-hidden="true">Ph</span><b>PHP</b><span data-en="Forms and server logic when a site needs it.">Formularios y lógica de servidor cuando la web lo necesita.</span></li>
+        <li class="tl" style="--tc:#FFCA28"><span class="tl-ic" aria-hidden="true">Fb</span><b>Firebase</b><span data-en="Databases and admin panels, like Kronox.">Bases de datos y paneles de administración, como el de Kronox.</span></li>
+        <li class="tl" style="--tc:#F05032"><span class="tl-ic" aria-hidden="true">Gt</span><b>Git</b><span data-en="Version control and publishing on GitHub and Netlify.">Control de versiones y publicación en GitHub y Netlify.</span></li>
+        <li class="tl" style="--tc:#F4F4F4"><span class="tl-ic" aria-hidden="true">Sq</span><b>Square</b><span data-en="Bookings, payments and gift cards wired into Nails by MelyG.">Reservas, pagos y gift cards conectados a la web de Nails by MelyG.</span></li>
+      </ul>
+    </div>
+    
+    <div class="tg rise">
+      <div class="tg-h"><span data-en="AI in the workflow">IA dentro del flujo</span><span class="tg-n">01</span></div>
+      <ul class="tgrid one">
+        <li class="tl" style="--tc:#9A6BFF"><span class="tl-ic" aria-hidden="true">Cp</span><b>Copilot</b><span data-en="Helps me write and review code faster, while I stay in control.">Me ayuda a escribir y revisar código más rápido, sin perder el control.</span></li>
+      </ul>
+    </div>
+    <div class="tools-ask rise">
+      <p data-en="Do you work with<br>other tools?">¿Trabajáis con<br>otras herramientas?</p>
+      <a class="btn" href="mailto:mariaurbanoeu@gmail.com?subject=Herramientas" data-en="Ask">Preguntar</a>
     </div>
   </div>
 </section>
@@ -1169,6 +1311,10 @@ footer h2{font-weight:800;letter-spacing:-.05em}
   }
   scrim.addEventListener('click', closeMax);
   addEventListener('keydown', function(e){ if (e.key === 'Escape') closeMax(); });
+  if ('IntersectionObserver' in window && !/claude\.ai|claudeusercontent|^$/.test(location.hostname)) {
+    var ao = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { goLive(e.target); ao.unobserve(e.target); } }); }, { rootMargin: '200px' });
+    document.querySelectorAll('.view[data-autolive]').forEach(function(v){ ao.observe(v); });
+  }
   document.querySelectorAll('[data-win]').forEach(function(w){
     var view = w.querySelector('.view'), u = w.querySelector('[data-u]');
     w.querySelector('[data-max]').addEventListener('click', function(){ maxed === w ? closeMax() : openMax(w); });
@@ -1541,6 +1687,35 @@ footer h2{font-weight:800;letter-spacing:-.05em}
     });
     b.addEventListener('pointerleave', function(){ b.style.translate = ''; });
   });
+})();
+</script>
+<script>
+(function(){
+  /* vistas previas de los portfolios: flotan junto al cursor; en móvil van bajo cada nombre */
+  var preview = !/claude\.ai|claudeusercontent|^$/.test(location.hostname);
+  function load(a){
+    if (!preview) return;
+    var f = a.querySelector('iframe[data-crsrc]'); if (!f || f.src) return;
+    f.addEventListener('load', function(){ f.classList.add('ok'); });
+    f.src = f.dataset.crsrc;
+  }
+  var rows = document.querySelectorAll('.cr');
+  var floating = matchMedia('(hover: hover) and (min-width: 761px)');
+  rows.forEach(function(a){
+    var pv = a.querySelector('.cr-pv');
+    a.addEventListener('pointerenter', function(){ if (!floating.matches) return; load(a); a.classList.add('on'); });
+    a.addEventListener('pointerleave', function(){ a.classList.remove('on'); });
+    a.addEventListener('pointermove', function(e){
+      if (!floating.matches) return;
+      var w = pv.offsetWidth, h = pv.offsetHeight;
+      var x = Math.min(innerWidth - w - 16, e.clientX + 24), y = Math.min(innerHeight - h - 16, Math.max(16, e.clientY - h / 2));
+      pv.style.setProperty('--px', x + 'px'); pv.style.setProperty('--py', y + 'px');
+    });
+  });
+  if (!floating.matches && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { load(e.target); io.unobserve(e.target); } }); }, { rootMargin: '200px' });
+    rows.forEach(function(a){ io.observe(a); });
+  }
 })();
 </script>
 </body>
