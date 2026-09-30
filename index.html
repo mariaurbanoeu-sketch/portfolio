@@ -1013,6 +1013,35 @@ footer .contact a{border-radius:.2rem;background:transparent}
   .hero .stack .m3{transform:rotate(-1deg)}
   .hero .stack .pmini{transform:rotate(7deg)}
 }
+
+/* ===== MOBILE INDEX FIX — no stray arrow glyphs / no horizontal crop ===== */
+@media(max-width:700px){
+  .work-kicker{margin-top:2rem}
+  .index{width:100%;max-width:100%;overflow:visible}
+  .index li{width:100%;max-width:100%}
+  .index a,
+  .index a:hover{
+    width:100%;
+    max-width:100%;
+    grid-template-columns:2rem minmax(0,1fr);
+    gap:.8rem;
+    padding:1.15rem 0!important;
+    transform:none!important;
+  }
+  .index a::after{content:none!important;display:none!important}
+  .index a::before{transform:none!important}
+  .index .ix-t{min-width:0;overflow:hidden}
+  .index .ix-t b{font-size:clamp(1.05rem,5.5vw,1.35rem);white-space:normal}
+  .index .ix-t span{font-size:.68rem;line-height:1.35}
+  .index em{
+    grid-column:2;
+    grid-row:auto;
+    white-space:normal;
+    font-size:.54rem;
+    padding-top:.25rem;
+  }
+  .index li::after{left:0}
+}
 </style>
 </head>
 <body>
