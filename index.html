@@ -971,6 +971,19 @@ footer .contact a{border-radius:.2rem;background:transparent}
   .index li::after,.index a::after{transition:none}
   .sec-head.rise.in h2,.rise.in.board,.rise.in.mosaic,.rise.in.sauces,.rise.in.idb,.rise.in.phone-row,.rise.in.shipped{animation:none}
 }
+
+/* ===== HERO CLEANUP + RECRUITER-FIRST POLISH ===== */
+.hero-grid .stack::after{display:none!important}
+.hero-grid .stack{background:transparent}
+.work-kicker{margin-top:0}
+@media(min-width:861px){
+  .hero-grid{grid-template-columns:minmax(420px,.92fr) minmax(560px,1.08fr);gap:3rem}
+  .hero-grid>div:first-child{max-width:600px}
+  .index a{min-height:7.1rem}
+}
+@media(max-width:860px){
+  .hero-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
