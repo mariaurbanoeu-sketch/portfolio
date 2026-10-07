@@ -2,10 +2,10 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Paula Urbano — Diseñadora web</title>
 <meta name="description" content="Paula Urbano, diseñadora web en Valencia. Diseño y desarrollo webs a medida: UX/UI, Shopify y la marca que las acompaña.">
-<meta name="theme-color" content="#140A0D">
+<meta name="theme-color" content="#221616">
 <link rel="canonical" href="https://paulaurbanog.com/">
 <meta property="og:url" content="https://paulaurbanog.com/">
 <meta property="og:title" content="Paula Urbano — Diseñadora web">
@@ -1745,8 +1745,8 @@ footer .contact a{border-radius:.2rem;background:transparent}
   /* ---- en móvil, las ventanas enseñan la versión móvil de cada web ---- */
   if (matchMedia('(max-width: 700px)').matches) {
     var MOB = { 'img/tall-nails.jpg': 'img/m-nails.jpg', 'img/tall-nails-gal.jpg': 'img/m-nails-gal.jpg', 'img/tall-nails-gift.jpg': 'img/m-nails-gift.jpg',
-                'img/tall-rebolica.jpg': 'img/m-rebolica.jpg', 'img/tall-nacar.jpg': 'img/m-nacar.jpg', 'img/tall-kronox.jpg': 'img/m-kronox.jpg', 'img/tall-zoguekidd.jpg': 'img/m-zoguekidd.jpg' };
-    document.querySelectorAll('.view > img.pan, .cr-pv img.pan, .pc-img img').forEach(function(img){ var k = img.getAttribute('src'); if (MOB[k]) img.src = MOB[k]; });
+                'img/tall-rebolica.jpg': 'img/m-rebolica.jpg', 'img/tall-nacar.jpg': 'img/m-nacar.jpg', 'img/tall-kronox.jpg': 'img/m-kronox.jpg', 'img/kronox-tarifas.jpg': 'img/m-kronox-tarifas.jpg', 'img/tall-zoguekidd.jpg': 'img/m-zoguekidd.jpg' };
+    document.querySelectorAll('.view > img.pan, .view > img.poster-img, .cr-pv img.pan, .pc-img img').forEach(function(img){ var k = img.getAttribute('src'); if (MOB[k]) img.src = MOB[k]; });
     document.querySelectorAll('.tabs button[data-shot]').forEach(function(b){ if (MOB[b.dataset.shot]) b.dataset.shot = MOB[b.dataset.shot]; });
   }
 
