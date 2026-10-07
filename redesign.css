@@ -193,3 +193,17 @@
   .rs-car .rs-it{scroll-snap-align:start}
   .rs-row{grid-template-columns:1fr 1fr;gap:1.4rem .8rem}
 }
+
+/* ---------- Hero: ventana que pasa por las webs ---------- */
+.hero-web{position:relative;display:block;justify-self:end;width:min(100%,460px);border-radius:1rem;overflow:hidden;border:1px solid var(--rule);background:var(--card);box-shadow:0 40px 90px rgba(255,111,156,.12),0 24px 60px rgba(0,0,0,.55);text-decoration:none;transform:rotate(1.5deg);transition:transform .6s var(--ease)}
+.hero-web:hover{transform:rotate(0) translateY(-6px)}
+.hero-web .mbar{display:flex;gap:.3rem;align-items:center;padding:.55rem .75rem;border-bottom:1px solid var(--rule);font-size:.68rem;color:var(--soft)}
+.hero-web .mbar i{width:.5rem;height:.5rem;border-radius:50%;display:block;background:#FFFDE9}
+.hero-web .mbar i:nth-child(1){background:#FF6F9C}.hero-web .mbar i:nth-child(2){background:#FFD7E7}
+.hero-web .mbar span{margin-left:.5rem}
+.hw-view{display:block;position:relative;aspect-ratio:4/5;background:#fff}
+.hw-view img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0;opacity:0;transition:opacity .8s var(--ease)}
+.hw-view img.on{opacity:1;animation:hwPan 5.2s ease-in-out both}
+@keyframes hwPan{0%,12%{object-position:50% 0}100%{object-position:50% 45%}}
+@media (prefers-reduced-motion:reduce){.hw-view img.on{animation:none}}
+@media(max-width:900px){.hero-web{justify-self:center;width:min(86vw,380px);transform:rotate(0)}}
