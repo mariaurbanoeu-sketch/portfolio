@@ -1177,7 +1177,7 @@ footer .contact a{border-radius:.2rem;background:transparent}
         <a class="btn" href="Paula-Urbano-CV.pdf?v=3" download data-en="CV <i class=ic-d></i>">CV <i class=ic-d></i></a>
       </div>
     </div>
-    <div class="hero-web-wrap rise"><p class="hand hw-hand" data-en="my favourite <i class=ic-d></i>">mi favorita <i class=ic-d></i></p><a class="hero-web" href="#nails" aria-label="Ver Nails by MelyG"><span class="mbar"><i></i><i></i><i></i><span>nailsbymelyg.com</span></span><span class="hw-view"><img class="on" src="img/tall-nails.jpg" alt="Web de Nails by MelyG" loading="eager"></span></a></div>
+    <div class="hero-web-wrap rise"><p class="hand hw-hand" data-en="my favourite <i class=ic-d></i>">mi favorita <i class=ic-d></i></p><a class="hero-web" href="#nails" aria-label="Ver Nails by MelyG"><span class="mbar"><i></i><i></i><i></i><span>nailsbymelyg.com</span></span><span class="hw-view"><picture><source media="(max-width:700px)" srcset="img/m-nails.jpg"><img class="on" src="img/tall-nails.jpg" alt="Web de Nails by MelyG" loading="eager"></picture></span></a></div>
     <div class="stack rise" aria-hidden="true">
       <a class="mini m1" href="#nacar" tabindex="-1"><span class="mbar"><i></i><i></i><i></i><span>Nácar Estilismo</span></span><span class="pv"><img class="pan" src="img/tall-nacar.jpg" alt="" loading="eager"></span></a>
       <a class="mini m2" href="#rebolica" tabindex="-1"><span class="mbar"><i></i><i></i><i></i><span>Rebolica</span></span><span class="pv"><img class="pan" src="img/tall-rebolica.jpg" alt="" loading="eager"></span></a>
@@ -1333,7 +1333,7 @@ footer .contact a{border-radius:.2rem;background:transparent}
           <div class="win" data-win>
             <div class="bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="url"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9V7A5 5 0 0 0 7 7v2H5v13h14V9h-2zM9 7a3 3 0 0 1 6 0v2H9V7z"/></svg><span data-u data-en="Kronox · admin panel">Kronox · panel</span></span><span class="act"><button type="button" data-max aria-label="Pantalla completa" title="Pantalla completa"><i class=ic-max></i></button></span></div>
             <div class="view duo-v" data-src="demos/kronox-panel.html" data-title="Panel de Kronox">
-              <img class="poster-img" src="img/kronox-fotos.jpg" alt="Panel de Kronox" loading="lazy" style="filter:none;object-position:50% 0">
+              <img class="poster-img" src="img/kronox-tarifas.jpg" alt="Panel de Kronox" loading="lazy" style="filter:none;object-position:0 0">
               <button type="button" class="enter" data-enter><svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z"/></svg><span data-en="Try the panel">Probar el panel</span></button>
             </div>
           </div>
@@ -1746,7 +1746,7 @@ footer .contact a{border-radius:.2rem;background:transparent}
   if (matchMedia('(max-width: 700px)').matches) {
     var MOB = { 'img/tall-nails.jpg': 'img/m-nails.jpg', 'img/tall-nails-gal.jpg': 'img/m-nails-gal.jpg', 'img/tall-nails-gift.jpg': 'img/m-nails-gift.jpg',
                 'img/tall-rebolica.jpg': 'img/m-rebolica.jpg', 'img/tall-nacar.jpg': 'img/m-nacar.jpg', 'img/tall-kronox.jpg': 'img/m-kronox.jpg', 'img/tall-zoguekidd.jpg': 'img/m-zoguekidd.jpg' };
-    document.querySelectorAll('.view > img.pan, .cr-pv img.pan').forEach(function(img){ var k = img.getAttribute('src'); if (MOB[k]) img.src = MOB[k]; });
+    document.querySelectorAll('.view > img.pan, .cr-pv img.pan, .pc-img img').forEach(function(img){ var k = img.getAttribute('src'); if (MOB[k]) img.src = MOB[k]; });
     document.querySelectorAll('.tabs button[data-shot]').forEach(function(b){ if (MOB[b.dataset.shot]) b.dataset.shot = MOB[b.dataset.shot]; });
   }
 

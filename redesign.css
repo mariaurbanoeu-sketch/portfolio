@@ -404,3 +404,39 @@ footer h2{font-size:clamp(3.4rem,11vw,9rem)!important}
 :root{--ic-d:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 4v15M6 13l6 6 6-6'/%3E%3C/svg%3E");--ic-ne:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17L17 7M9 7h8v8'/%3E%3C/svg%3E");--ic-r:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h15M13 6l6 6-6 6'/%3E%3C/svg%3E");--ic-max:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7'/%3E%3C/svg%3E");--ic-x:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 6l12 12M18 6L6 18'/%3E%3C/svg%3E");--ic-l:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 5l-7 7 7 7'/%3E%3C/svg%3E");--ic-rr:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 5l7 7-7 7'/%3E%3C/svg%3E");--ic-lr:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 7l-5 5 5 5M16 7l5 5-5 5M3 12h18'/%3E%3C/svg%3E");--ic-heart:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z'/%3E%3C/svg%3E");--ic-comment:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12a8 8 0 1 1 3.5 6.6L4 20l1.4-3.6A8 8 0 0 1 4 12z'/%3E%3C/svg%3E");--ic-send:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 3L10 14M21 3l-7 18-4-7-7-4z'/%3E%3C/svg%3E");--ic-bat:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8h15v8H3zM21 11v2'/%3E%3C/svg%3E");--ic-play:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black' stroke='none' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 4l13 8-13 8z'/%3E%3C/svg%3E");--ic-sig:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black' stroke='none' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 16h3v4H3zM9 12h3v8H9zM15 8h3v12h-3z'/%3E%3C/svg%3E");}
 [class^="ic-"],[class*=" ic-"]{display:inline-block;width:1em;height:1em;vertical-align:-.14em;background:currentColor;font-style:normal;-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat}
 .ic-d{--m:var(--ic-d)}.ic-ne{--m:var(--ic-ne)}.ic-r{--m:var(--ic-r)}.ic-max{--m:var(--ic-max)}.ic-x{--m:var(--ic-x)}.ic-l{--m:var(--ic-l)}.ic-rr{--m:var(--ic-rr)}.ic-lr{--m:var(--ic-lr)}.ic-heart{--m:var(--ic-heart)}.ic-comment{--m:var(--ic-comment)}.ic-send{--m:var(--ic-send)}.ic-bat{--m:var(--ic-bat)}.ic-play{--m:var(--ic-play)}.ic-sig{--m:var(--ic-sig)}
+
+/* =========================== celular =========================== */
+@media(max-width:700px){
+  /* 1 · portada: la web de Nails dentro de un celular que se recorre sola */
+  .hero-web-wrap{width:auto!important;display:flex;justify-content:center;margin:2.4rem 0 0!important}
+  .hero-web{width:min(64vw,270px)!important;border-radius:2.6rem!important;border:9px solid #120c0c!important;box-shadow:0 40px 70px -30px rgba(0,0,0,.9)!important;position:relative}
+  .hero-web::before{content:"";position:absolute;top:.5rem;left:50%;width:34%;height:1.1rem;margin-left:-17%;background:#120c0c;border-radius:1rem;z-index:3}
+  .hero-web .mbar{display:none!important}
+  .hw-view{aspect-ratio:9/19!important}
+  .hw-view picture{position:absolute;inset:0;display:block}
+  .hw-view img.on{animation:hwPan 16s ease-in-out infinite alternate!important}
+  .hw-hand{left:auto!important;right:8%;top:-1.9rem!important}
+  .hero-web-wrap::after{display:none}
+
+  /* 2 · cada web dentro de un marco de celular */
+  .win-wrap{display:flex!important;justify-content:center}
+  .win:not(.is-max){width:min(80vw,330px)!important;border-radius:2.4rem!important;border:9px solid #120c0c!important;box-shadow:0 40px 70px -30px rgba(0,0,0,.9)!important;overflow:hidden}
+  .win:not(.is-max) .bar{background:#120c0c!important;border:0!important;padding:.55rem .7rem .45rem!important;gap:.4rem!important;flex-wrap:wrap}
+  .win:not(.is-max) .bar .lights,.win:not(.is-max) .bar .url svg{display:none!important}
+  .win:not(.is-max) .bar .url{font-size:.62rem!important;opacity:.7}
+  .win:not(.is-max) .view{height:auto!important;aspect-ratio:9/18}
+  .win:not(.is-max) .view > img.pan{width:100%;height:100%;object-fit:cover;object-position:50% 0}
+  .duo .win-wrap{margin-top:1rem}
+  .note-r{text-align:center!important;width:100%;padding:0!important;margin-bottom:-.4rem!important}
+
+  /* 3 · proyectos como tarjetas que se deslizan */
+  .pgrid{display:grid!important;grid-auto-flow:column;grid-template-columns:none!important;grid-auto-columns:80%;gap:1rem!important;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin-right:-1rem;padding-right:1rem}
+  .pgrid::-webkit-scrollbar{display:none}
+  .pcard{scroll-snap-align:start}
+  .pc-img{aspect-ratio:4/5!important}
+  .pc-cap{flex-direction:column;align-items:flex-start;gap:.1rem}
+  .pc-cap b{font-size:1.5rem!important}
+  .pc-phone img{width:62%!important}
+}
+@media(max-width:700px){.win:not(.is-max) .view > img.poster-img{width:100%;height:100%;object-fit:cover}}
+@media(max-width:700px){.hero > .hero-grid{padding-top:5.2rem!important}}
