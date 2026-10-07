@@ -207,3 +207,134 @@
 @keyframes hwPan{0%,12%{object-position:50% 0}100%{object-position:50% 45%}}
 @media (prefers-reduced-motion:reduce){.hw-view img.on{animation:none}}
 @media(max-width:900px){.hero-web{justify-self:center;width:min(86vw,380px);transform:rotate(0)}}
+
+/* =====================================================================
+   Estilo propio (sin adornos genéricos): Archivo condensada para titulares,
+   Bodoni en cursiva para las entradillas y Caveat para notas a mano.
+   ===================================================================== */
+:root{
+  --sans:'Archivo','Helvetica Neue',Arial,sans-serif;
+  --display:'Archivo','Helvetica Neue',Arial,sans-serif;
+  --serif:'Bodoni Moda',Didot,'Times New Roman',serif;
+  --hand:'Caveat','Bradley Hand',cursive;
+}
+body{font-family:var(--sans)!important;font-stretch:100%}
+/* fuera adornos */
+.big-n,.brand .star,.hero .chips,.tg-n,.tools-c,.win-wrap::before{display:none!important}
+.sec-head{display:block!important;margin-bottom:2.6rem!important}
+.hero-web,.hero-web:hover,.hero-ig{transform:none!important}
+/* titulares */
+.hero h1,.sec h2,footer h2,.about h2,.tools h2{
+  font-family:var(--display)!important;font-stretch:62%!important;font-weight:900!important;
+  text-transform:uppercase!important;letter-spacing:-.005em!important;line-height:.88!important}
+.sec h2{font-size:clamp(3.2rem,9vw,7.5rem)!important;max-width:none!important;margin:.15rem 0 1.1rem!important}
+.hero h1{font-size:clamp(3.6rem,9.5vw,8.6rem)!important;max-width:9.5ch!important;margin:0 0 1.6rem!important}
+.hero h1 em,.sec h2 em,footer h2 em{color:inherit!important}
+footer h2{font-size:clamp(4rem,14vw,11rem)!important}
+.kick{margin:0;font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(1.35rem,2.6vw,2.1rem);line-height:1;color:var(--candy);text-transform:none;letter-spacing:0}
+.sec .one{font-size:clamp(1rem,1.4vw,1.15rem)!important;line-height:1.55!important;max-width:58ch!important;color:var(--ink)!important;opacity:.82}
+.hero .sub{color:var(--ink)!important;opacity:.85;max-width:40ch!important}
+.et,.work-kicker,.project-meta,.rs-lab,.rs-row figcaption{text-transform:none!important;letter-spacing:0!important}
+.work-kicker{font-family:var(--serif)!important;font-style:italic!important;font-size:1.4rem!important;color:var(--candy)!important;font-weight:400!important}
+.work-kicker::after{display:none!important}
+.project-meta{font-size:.78rem!important;color:var(--soft)!important}
+.project-copy b{font-stretch:75%;font-weight:800!important;text-transform:uppercase;letter-spacing:0!important}
+/* botones */
+.btn{border-radius:0!important;text-transform:uppercase;letter-spacing:.08em;font-size:.78rem!important;font-weight:700!important;min-height:3.2rem;padding:0 1.4rem!important}
+/* notas a mano */
+.hand{font-family:var(--hand);font-weight:700;font-size:1.6rem;line-height:1;color:var(--candy);margin:0}
+.note-r{display:inline-block;margin:1.8rem 0 -1rem auto!important;transform:rotate(-4deg);width:100%;text-align:right;padding-right:6%}
+.hero-web-wrap{position:relative;justify-self:end;width:min(100%,460px)}
+.hero-web-wrap .hero-web{width:100%}
+.hw-hand{position:absolute;top:-2.3rem;left:1rem;transform:rotate(-5deg);z-index:2}
+.hw-view img.on{animation:hwPan 14s ease-in-out infinite alternate!important}
+@keyframes hwPan{0%,10%{object-position:50% 0}100%{object-position:50% 100%}}
+.hero-web{box-shadow:0 30px 60px -25px rgba(0,0,0,.7)!important}
+/* cinta adhesiva */
+.hero-web-wrap::after,.fg-tall::after,.idb-cover::after{content:"";position:absolute;top:-.6rem;left:50%;width:84px;height:22px;margin-left:-42px;background:rgba(255,215,231,.75);transform:rotate(-4deg);z-index:3;pointer-events:none}
+.idb-cover{position:relative}
+/* secciones en papel */
+.sec--paper{
+  --ink:#2A0E14;--soft:#6E5560;--rule:#DCCFC8;--card:#FBF6F2;--card2:#F1E7E1;--candy:#B8325A;--cherry:#8E1B3C;
+  background:#F4ECE6 url(img/grain.png)!important;background-size:160px!important;color:var(--ink)!important;
+  border-top:0!important}
+.sec--paper .btn.fill{background:#2A0E14!important;color:#FFF6F1!important;border-color:#2A0E14!important}
+.sec--paper .btn{color:#2A0E14;border-color:#2A0E14}
+.sec--paper .win,.sec--paper .duo-v{box-shadow:0 30px 50px -30px rgba(42,14,20,.55)}
+/* Entre Amigos sin columna de pasos */
+#emergency .phone-row{display:flex!important;justify-content:center}
+/* Figma */
+.fg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.1fr);gap:2.4rem;padding:2.6rem 0;border-top:1px solid var(--rule)}
+.fg h3{font-family:var(--display);font-stretch:62%;font-weight:900;text-transform:uppercase;font-size:clamp(2.2rem,4vw,3.4rem);line-height:.9;margin:0 0 .8rem}
+.fg-txt p{margin:0 0 1.2rem;line-height:1.55;opacity:.85;max-width:40ch}
+.fg-link{color:var(--candy);font-weight:700;text-decoration:none;border-bottom:1px solid currentColor}
+.fg-imgs figure{margin:0}
+.fg-imgs img{display:block;width:100%;height:auto;border:1px solid var(--rule)}
+.fg-imgs figcaption{margin-top:.5rem;font-size:.8rem;color:var(--soft)}
+.fg-dtr{display:grid;grid-template-columns:1.1fr 1fr;grid-template-rows:repeat(3,auto);gap:1rem}
+.fg-tall{position:relative;grid-row:span 3;border:1px solid var(--rule);background:#fff;display:flex;flex-direction:column}
+.fg-tall .mbar{display:flex;gap:.3rem;align-items:center;padding:.45rem .6rem;border-bottom:1px solid #ddd;font-size:.65rem;color:#777;background:#f6f6f6}
+.fg-tall .mbar i{width:.45rem;height:.45rem;border-radius:50%;background:#ccc;display:block}
+.fg-tall .mbar span{margin-left:.4rem}
+.fg-scroll{height:34rem;overflow-y:auto;overscroll-behavior:contain}
+.fg-scroll img{border:0}
+.fg-hand{position:absolute;right:-.6rem;bottom:-1.6rem;transform:rotate(-6deg)}
+.fg-two{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.fg-phones{display:flex;gap:1.2rem;justify-content:flex-start}
+.fg-phones figure{width:min(42%,220px)}
+.fg-phones img{border-radius:1.2rem;border:6px solid #0b0507}
+@media(max-width:800px){
+  .fg{grid-template-columns:1fr;gap:1.4rem}
+  .fg-dtr{grid-template-columns:1fr 1fr}
+  .fg-tall{grid-row:auto;grid-column:span 2}
+  .fg-scroll{height:26rem}
+  .fg-hand{right:.4rem}
+  .hero-web-wrap{justify-self:center;width:min(86vw,380px);margin-top:1.5rem}
+  .note-r{padding-right:0}
+}
+.sec-head::after,.sec-head::before{display:none!important}
+.idb-info h3,.cr-name{font-family:var(--display)!important;font-stretch:62%!important;font-weight:900!important;text-transform:uppercase!important;letter-spacing:0!important;line-height:.9!important}
+.cr-n{display:none!important}
+.cr-meta em,.duo-t span,.idb-info .et,.rs-tabs button{text-transform:none!important;letter-spacing:0!important}
+.cr-meta em{font-family:var(--serif);font-style:italic!important;font-size:1.15rem!important;font-weight:400!important}
+/* rosa solo en textos: fondos en crema/neutros */
+.btn.fill,.enter,.lang button[aria-pressed="true"],.mcta,.cr:hover .cr-go,.prog,.cur i{background:#FFF6F1!important;color:#140A0D!important;border-color:#FFF6F1!important}
+.lights i,.hero-web .mbar i,.mini .mbar i,.cr-pv .mbar i,.site .mbar i{background:#5A4A50!important}
+::selection{background:#FFF6F1;color:#140A0D}
+.hero-web-wrap::after,.fg-tall::after,.idb-cover::after{background:rgba(255,246,241,.55)!important}
+.enter{border-radius:0!important;box-shadow:0 14px 40px rgba(0,0,0,.45)!important;text-transform:uppercase;letter-spacing:.08em;font-size:.78rem!important}
+
+/* =====================================================================
+   Paleta: burdeos, verde oliva y crema con textura. Rosa solo en textos.
+   ===================================================================== */
+:root{
+  --paper:#4A1219;--card:#3D0E14;--card2:#58171F;--ink:#EFE4D2;--soft:#CDBDA8;
+  --rule:rgba(239,228,210,.16);--candy:#F4AFC3;--cherry:#F4AFC3;--red:#F4AFC3;--lemon:#EFE4D2;
+}
+html,body{background:#4A1219 url(img/grain.png)!important;background-size:180px!important;color:var(--ink)!important}
+.top{background:rgba(74,18,25,.88)!important;border-color:var(--rule)!important}
+.sec{border-top:0!important;background:transparent}
+.sec--olive{--card:#3F3F24;--card2:#55552F;--rule:rgba(239,228,210,.18);background:#4B4B2C url(img/grain.png)!important;background-size:180px!important}
+.sec--cream{--ink:#3B1016;--soft:#6E6450;--candy:#B04A6C;--cherry:#B04A6C;--rule:rgba(59,16,22,.16);--card:#E4DACA;--card2:#CFC3AF;
+  background:#D8CDBB url(img/grain.png)!important;background-size:180px!important;color:var(--ink)!important}
+.sec--cream .btn.fill,.sec--cream .enter{background:#4A1219!important;color:#EFE4D2!important;border-color:#4A1219!important}
+.sec--cream .btn{color:#3B1016;border-color:#3B1016}
+footer{background:#4B4B2C url(img/grain.png)!important;background-size:180px!important}
+/* titulares: serif de capitales espaciadas */
+.hero h1,.sec h2,footer h2,.about h2,.tools h2,.idb-info h3,.cr-name,.fg h3{
+  font-family:var(--serif)!important;font-stretch:100%!important;font-weight:500!important;font-style:normal!important;
+  text-transform:uppercase!important;letter-spacing:.12em!important;line-height:1.08!important}
+.sec h2{font-size:clamp(2.2rem,5.4vw,4.6rem)!important}
+.hero h1{font-size:clamp(2.6rem,6vw,5.4rem)!important;max-width:12ch!important;letter-spacing:.08em!important}
+footer h2{font-size:clamp(3rem,10vw,8rem)!important}
+.idb-info h3,.fg h3{font-size:clamp(1.8rem,3.4vw,2.8rem)!important}
+.cr-name{font-size:clamp(1.8rem,4vw,3.2rem)!important}
+.project-copy b{font-family:var(--serif)!important;font-weight:500!important;letter-spacing:.1em!important;font-stretch:100%!important}
+.kick,.work-kicker,.cr-meta em{color:var(--candy)!important}
+.hand{color:var(--candy)!important}
+.btn.fill,.enter,.lang button[aria-pressed="true"],.mcta,.cr:hover .cr-go,.prog,.cur i{background:#EFE4D2!important;color:#4A1219!important;border-color:#EFE4D2!important}
+.lights i,.hero-web .mbar i,.mini .mbar i,.cr-pv .mbar i,.site .mbar i{background:rgba(239,228,210,.35)!important}
+.win .bar,.hero-web .mbar{background:#3D0E14!important}
+.about .lead{font-family:var(--serif)!important;font-style:italic!important;font-weight:400!important;letter-spacing:0!important;font-size:clamp(1.6rem,3vw,2.4rem)!important;line-height:1.2!important}
+.about .lead em{color:inherit!important}
+.mcta i{display:none!important}
