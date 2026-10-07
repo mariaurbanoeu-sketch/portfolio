@@ -33,7 +33,7 @@ jobs:
         run: |
           mkdir -p _site
           rsync -a --exclude '.git' --exclude '_site' ./ _site/
-          printf '\n<link rel="stylesheet" href="redesign.css?v=6">\n' >> _site/index.html
+          printf '\n<link rel="stylesheet" href="redesign.css?v=8">\n' >> _site/index.html
 
       - name: Upload site
         uses: actions/upload-pages-artifact@v3

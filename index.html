@@ -264,7 +264,7 @@ body.locked{overflow:hidden}
 #redes .grid img,#redes .grid video{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
 #redes .grid button:hover img,#redes .grid button:hover video{transform:scale(1.06)}
 #redes .grid .fit img{object-fit:contain;padding:12%}
-#redes .grid .vid::after{content:"▶";position:absolute;top:.35rem;right:.45rem;color:#fff;font-size:.7rem;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+#redes .grid .vid::after{content:"";width:1.2em;height:1.2em;background:#fff;-webkit-mask:var(--ic-play) center/contain no-repeat;mask:var(--ic-play) center/contain no-repeat;position:absolute;top:.35rem;right:.45rem;color:#fff;font-size:.7rem;text-shadow:0 1px 3px rgba(0,0,0,.6)}
 #redes .nav{position:absolute;left:0;right:0;bottom:0;height:3rem;border-top:1px solid #efefef;display:grid;grid-template-columns:repeat(5,1fr);place-items:center;background:#fff}
 #redes .nav i{width:1.25rem;height:1.25rem;border:2px solid #111;border-radius:.35rem;display:block}
 #redes .nav i.r{border-radius:50%}
@@ -525,8 +525,8 @@ em{font-style:normal}
 .why-grid p{font-size:.98rem;line-height:1.45;color:rgba(255,255,255,.9)}
 .why-grid b{display:block;color:#fff;font:700 1.15rem/1.2 var(--display);letter-spacing:-.02em;margin-bottom:.4rem}
 @media(max-width:760px){.why-grid{grid-template-columns:1fr}}
-.igstage .glow::after{content:"● funciona · tócalo";position:absolute;z-index:3;top:-.9rem;left:50%;transform:translateX(-50%);background:#F4EEE3;color:#0D0C0B;font:700 .72rem var(--sans);letter-spacing:.06em;text-transform:uppercase;padding:.45rem .8rem;border-radius:999px;box-shadow:0 10px 24px -10px rgba(0,0,0,.6);white-space:nowrap}
-html[lang="en"] .igstage .glow::after{content:"● it works · touch it"}
+.igstage .glow::after{content:"funciona · tócalo";position:absolute;z-index:3;top:-.9rem;left:50%;transform:translateX(-50%);background:#F4EEE3;color:#0D0C0B;font:700 .72rem var(--sans);letter-spacing:.06em;text-transform:uppercase;padding:.45rem .8rem;border-radius:999px;box-shadow:0 10px 24px -10px rgba(0,0,0,.6);white-space:nowrap}
+html[lang="en"] .igstage .glow::after{content:"it works · touch it"}
 
 /* barra de progreso de lectura */
 .prog{position:fixed;top:0;left:0;right:0;height:3px;background:var(--cherry);transform-origin:0 50%;transform:scaleX(0);z-index:60;pointer-events:none}
@@ -742,7 +742,7 @@ footer h2{font-weight:800;letter-spacing:-.05em}
   footer{padding-bottom:6rem}
 }
 .swipe{display:none;align-items:center;gap:.5rem;margin-top:.6rem;font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--soft)}
-.swipe::after{content:"→";color:var(--candy);animation:nudge 1.4s ease-in-out infinite}
+.swipe::after{content:"";display:inline-block;width:1em;height:1em;vertical-align:-.15em;background:currentColor;-webkit-mask:var(--ic-r) center/contain no-repeat;mask:var(--ic-r) center/contain no-repeat;color:var(--candy);animation:nudge 1.4s ease-in-out infinite}
 @keyframes nudge{50%{transform:translateX(6px)}}
 @media (prefers-reduced-motion:reduce){.swipe::after{animation:none}.mcta{transition:none}}
 
@@ -938,7 +938,7 @@ footer .contact a{border-radius:.2rem;background:transparent}
 .index li::after{content:"";position:absolute;left:2.4rem;right:0;bottom:0;height:1px;background:var(--candy);transform:scaleX(0);transform-origin:left;transition:transform .6s var(--ease)}
 .index li:hover::after{transform:scaleX(1)}
 .index a{position:relative;z-index:1;transition:padding-left .5s var(--ease),transform .5s var(--ease)}
-.index a::after{content:"↗";font-size:1rem;color:var(--candy);opacity:0;transform:translate(-8px,4px);transition:opacity .35s,transform .5s var(--ease)}
+.index a::after{content:"";font-size:1rem;color:var(--candy);opacity:0;transform:translate(-8px,4px);transition:opacity .35s,transform .5s var(--ease)}
 .index a:hover{padding-left:1.2rem;transform:translateX(4px)}
 .index a:hover::after{opacity:1;transform:translate(0,0)}
 .index a::before{transition:transform .5s var(--ease),color .3s}
@@ -1172,12 +1172,12 @@ footer .contact a{border-radius:.2rem;background:transparent}
             <h1 data-en="Hi, I'm Paula and I design websites.">Hola, soy Paula y diseño webs.</h1>
       <p class="sub" data-en="I live in Valencia, I study Multimedia and Digital Arts at UCV and I've been making websites for clients since 2025. I'm available to start now.">Vivo en Valencia, estudio Multimedia y Artes Digitales en la UCV y desde 2025 hago webs para clientes. Estoy disponible para empezar ya.</p>
       <div class="cta">
-        <a class="btn fill" href="#nails" data-en="See the work ↓">Ver proyectos ↓</a>
-        <a class="btn" href="Paula-Urbano-Portfolio.pdf?v=3" download data-en="Portfolio PDF ↓">Portfolio en PDF ↓</a>
-        <a class="btn" href="Paula-Urbano-CV.pdf?v=3" download data-en="CV ↓">CV ↓</a>
+        <a class="btn fill" href="#nails" data-en="See the work <i class=ic-d></i>">Ver proyectos <i class=ic-d></i></a>
+        <a class="btn" href="Paula-Urbano-Portfolio.pdf?v=3" download data-en="Portfolio PDF <i class=ic-d></i>">Portfolio en PDF <i class=ic-d></i></a>
+        <a class="btn" href="Paula-Urbano-CV.pdf?v=3" download data-en="CV <i class=ic-d></i>">CV <i class=ic-d></i></a>
       </div>
     </div>
-    <div class="hero-web-wrap rise"><p class="hand hw-hand" data-en="my favourite ↓">mi favorita ↓</p><a class="hero-web" href="#nails" aria-label="Ver Nails by MelyG"><span class="mbar"><i></i><i></i><i></i><span>nailsbymelyg.com</span></span><span class="hw-view"><img class="on" src="img/tall-nails.jpg" alt="Web de Nails by MelyG" loading="eager"></span></a></div>
+    <div class="hero-web-wrap rise"><p class="hand hw-hand" data-en="my favourite <i class=ic-d></i>">mi favorita <i class=ic-d></i></p><a class="hero-web" href="#nails" aria-label="Ver Nails by MelyG"><span class="mbar"><i></i><i></i><i></i><span>nailsbymelyg.com</span></span><span class="hw-view"><img class="on" src="img/tall-nails.jpg" alt="Web de Nails by MelyG" loading="eager"></span></a></div>
     <div class="stack rise" aria-hidden="true">
       <a class="mini m1" href="#nacar" tabindex="-1"><span class="mbar"><i></i><i></i><i></i><span>Nácar Estilismo</span></span><span class="pv"><img class="pan" src="img/tall-nacar.jpg" alt="" loading="eager"></span></a>
       <a class="mini m2" href="#rebolica" tabindex="-1"><span class="mbar"><i></i><i></i><i></i><span>Rebolica</span></span><span class="pv"><img class="pan" src="img/tall-rebolica.jpg" alt="" loading="eager"></span></a>
@@ -1236,10 +1236,10 @@ footer .contact a{border-radius:.2rem;background:transparent}
 
     <p class="swipe" aria-hidden="true" data-en="Swipe">Desliza</p>
 
-    <p class="hand note-r" data-en="it's the real site, go in ↓">es la web real, entra ↓</p>
+    <p class="hand note-r" data-en="it's the real site, go in <i class=ic-d></i>">es la web real, entra <i class=ic-d></i></p>
     <div class="win-wrap rise" style="--glow:#662E3A">
       <div class="win" data-win>
-        <div class="bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="url"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9V7A5 5 0 0 0 7 7v2H5v13h14V9h-2zM9 7a3 3 0 0 1 6 0v2H9V7z"/></svg><span data-u>nailsbymelyg.com</span></span><div class="tabs" role="group" aria-label="Vistas"><button type="button" data-src="https://nailsbymelyg.com/" data-shot="img/tall-nails.jpg" data-url="nailsbymelyg.com" aria-pressed="true" data-en="Home">Inicio</button><button type="button" data-src="https://nailsbymelyg.com/galeria.html" data-shot="img/tall-nails-gal.jpg" data-url="nailsbymelyg.com/galeria" aria-pressed="false" data-en="Gallery">Galería</button><button type="button" data-src="https://nailsbymelyg.com/giftcard.html" data-shot="img/tall-nails-gift.jpg" data-url="nailsbymelyg.com/giftcard" aria-pressed="false" data-en="Gift cards">Gift cards</button></div><span class="act"><a href="https://nailsbymelyg.com" target="_blank" rel="noopener" aria-label="Abrir en otra pestaña" title="Abrir en otra pestaña">↗</a><button type="button" data-max aria-label="Pantalla completa" title="Pantalla completa">⤢</button></span></div>
+        <div class="bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="url"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9V7A5 5 0 0 0 7 7v2H5v13h14V9h-2zM9 7a3 3 0 0 1 6 0v2H9V7z"/></svg><span data-u>nailsbymelyg.com</span></span><div class="tabs" role="group" aria-label="Vistas"><button type="button" data-src="https://nailsbymelyg.com/" data-shot="img/tall-nails.jpg" data-url="nailsbymelyg.com" aria-pressed="true" data-en="Home">Inicio</button><button type="button" data-src="https://nailsbymelyg.com/galeria.html" data-shot="img/tall-nails-gal.jpg" data-url="nailsbymelyg.com/galeria" aria-pressed="false" data-en="Gallery">Galería</button><button type="button" data-src="https://nailsbymelyg.com/giftcard.html" data-shot="img/tall-nails-gift.jpg" data-url="nailsbymelyg.com/giftcard" aria-pressed="false" data-en="Gift cards">Gift cards</button></div><span class="act"><a href="https://nailsbymelyg.com" target="_blank" rel="noopener" aria-label="Abrir en otra pestaña" title="Abrir en otra pestaña"><i class=ic-ne></i></a><button type="button" data-max aria-label="Pantalla completa" title="Pantalla completa"><i class=ic-max></i></button></span></div>
         <div class="view" data-src="https://nailsbymelyg.com/" data-title="nailsbymelyg.com">
           <img class="pan" src="img/tall-nails.jpg" alt="nailsbymelyg.com" loading="lazy">
           <button type="button" class="enter" data-enter><svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z"/></svg><span data-en="Enter the site">Entrar en la web</span></button>
@@ -1261,14 +1261,14 @@ footer .contact a{border-radius:.2rem;background:transparent}
     </div>
 
     <div class="sauces rise">
-      <div class="sauce"><video src="video/fosca.webm" muted loop playsinline autoplay preload="metadata"></video></div>
-      <div class="sauce"><video src="video/llamp.webm" muted loop playsinline autoplay preload="metadata"></video></div>
-      <div class="sauce"><video src="video/traca.webm" muted loop playsinline autoplay preload="metadata"></video></div>
+      <div class="sauce"><video src="video/fosca.webm?v=2" muted loop playsinline autoplay preload="metadata"></video></div>
+      <div class="sauce"><video src="video/llamp.webm?v=2" muted loop playsinline autoplay preload="metadata"></video></div>
+      <div class="sauce"><video src="video/traca.webm?v=2" muted loop playsinline autoplay preload="metadata"></video></div>
     </div>
 
     <div class="win-wrap rise" style="--glow:#d7282f">
       <div class="win" data-win>
-        <div class="bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="url"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9V7A5 5 0 0 0 7 7v2H5v13h14V9h-2zM9 7a3 3 0 0 1 6 0v2H9V7z"/></svg><span data-u>Rebolica · web del QR</span></span><span class="act"><button type="button" data-max aria-label="Pantalla completa" title="Pantalla completa">⤢</button></span></div>
+        <div class="bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="url"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9V7A5 5 0 0 0 7 7v2H5v13h14V9h-2zM9 7a3 3 0 0 1 6 0v2H9V7z"/></svg><span data-u>Rebolica · web del QR</span></span><span class="act"><button type="button" data-max aria-label="Pantalla completa" title="Pantalla completa"><i class=ic-max></i></button></span></div>
         <div class="view" data-src="demos/rebolica.html" data-title="Rebolica · web del QR">
           <img class="pan" src="img/tall-rebolica.jpg" alt="Rebolica · web del QR" loading="lazy">
           <button type="button" class="enter" data-enter><svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z"/></svg><span data-en="Open the site">Abrir la web</span></button>
@@ -1291,7 +1291,7 @@ footer .contact a{border-radius:.2rem;background:transparent}
 
     <div class="win-wrap rise" style="--glow:#A08C7B">
       <div class="win" data-win>
-        <div class="bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="url"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9V7A5 5 0 0 0 7 7v2H5v13h14V9h-2zM9 7a3 3 0 0 1 6 0v2H9V7z"/></svg><span data-u>Nácar Estilismo · tienda</span></span><span class="act"><button type="button" data-max aria-label="Pantalla completa" title="Pantalla completa">⤢</button></span></div>
+        <div class="bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="url"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9V7A5 5 0 0 0 7 7v2H5v13h14V9h-2zM9 7a3 3 0 0 1 6 0v2H9V7z"/></svg><span data-u>Nácar Estilismo · tienda</span></span><span class="act"><button type="button" data-max aria-label="Pantalla completa" title="Pantalla completa"><i class=ic-max></i></button></span></div>
         <div class="view" data-src="demos/nacar.html" data-title="Nácar Estilismo · tienda">
           <img class="pan" src="img/tall-nacar.jpg" alt="Nácar Estilismo · tienda" loading="lazy">
           <button type="button" class="enter" data-enter><svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z"/></svg><span data-en="Enter the store">Entrar en la tienda</span></button>
@@ -1318,7 +1318,7 @@ footer .contact a{border-radius:.2rem;background:transparent}
         <p class="duo-d" data-en="His music videos, photos, prices and reviews. Before messaging him on WhatsApp, the client accepts the shoot terms.">Sus videoclips, fotos, precios y reseñas. Antes de escribirle por WhatsApp, el cliente acepta las condiciones del rodaje.</p>
         <div class="win-wrap" style="--glow:#5b3cff">
           <div class="win" data-win>
-            <div class="bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="url"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9V7A5 5 0 0 0 7 7v2H5v13h14V9h-2zM9 7a3 3 0 0 1 6 0v2H9V7z"/></svg><span data-u>kronoxprod.netlify.app</span></span><span class="act"><a href="https://kronoxprod.netlify.app/" target="_blank" rel="noopener" aria-label="Abrir la web en otra pestaña" title="Abrir la web en otra pestaña">↗</a><button type="button" data-max aria-label="Pantalla completa" title="Pantalla completa">⤢</button></span></div>
+            <div class="bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="url"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9V7A5 5 0 0 0 7 7v2H5v13h14V9h-2zM9 7a3 3 0 0 1 6 0v2H9V7z"/></svg><span data-u>kronoxprod.netlify.app</span></span><span class="act"><a href="https://kronoxprod.netlify.app/" target="_blank" rel="noopener" aria-label="Abrir la web en otra pestaña" title="Abrir la web en otra pestaña"><i class=ic-ne></i></a><button type="button" data-max aria-label="Pantalla completa" title="Pantalla completa"><i class=ic-max></i></button></span></div>
             <div class="view duo-v" data-src="https://kronoxprod.netlify.app/" data-title="Web de Kronox" data-autolive>
               <img class="poster-img" src="img/kronox-1.jpg" alt="" loading="lazy">
               <button type="button" class="enter" data-enter><svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z"/></svg><span data-en="Open the website">Ver la web</span></button>
@@ -1331,7 +1331,7 @@ footer .contact a{border-radius:.2rem;background:transparent}
         <p class="duo-d" data-en="Here he uploads videos and photos, changes prices and approves reviews. This is a test copy, so touch whatever you like.">Aquí sube videos y fotos, cambia precios y aprueba reseñas. Es una copia de prueba, así que puedes tocar lo que quieras.</p>
         <div class="win-wrap" style="--glow:#5b3cff">
           <div class="win" data-win>
-            <div class="bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="url"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9V7A5 5 0 0 0 7 7v2H5v13h14V9h-2zM9 7a3 3 0 0 1 6 0v2H9V7z"/></svg><span data-u data-en="Kronox · admin panel">Kronox · panel</span></span><span class="act"><button type="button" data-max aria-label="Pantalla completa" title="Pantalla completa">⤢</button></span></div>
+            <div class="bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="url"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9V7A5 5 0 0 0 7 7v2H5v13h14V9h-2zM9 7a3 3 0 0 1 6 0v2H9V7z"/></svg><span data-u data-en="Kronox · admin panel">Kronox · panel</span></span><span class="act"><button type="button" data-max aria-label="Pantalla completa" title="Pantalla completa"><i class=ic-max></i></button></span></div>
             <div class="view duo-v" data-src="demos/kronox-panel.html" data-title="Panel de Kronox">
               <img class="poster-img" src="img/kronox-fotos.jpg" alt="Panel de Kronox" loading="lazy" style="filter:none;object-position:50% 0">
               <button type="button" class="enter" data-enter><svg viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z"/></svg><span data-en="Try the panel">Probar el panel</span></button>
@@ -1379,21 +1379,21 @@ footer .contact a{border-radius:.2rem;background:transparent}
         <span class="cr-n">01</span>
         <span class="cr-name">Jairo Azogue</span>
         <span class="cr-meta"><em data-en="Video director and editor">Director y editor de video</em><span data-en="His work sorted by type of piece and his tools laid out like his desk. It is on his own domain now.">Su trabajo ordenado por tipo de pieza y sus herramientas como si fueran su escritorio. Ya está en su propio dominio.</span></span>
-        <span class="cr-go" aria-hidden="true">↗</span>
+        <span class="cr-go" aria-hidden="true"><i class=ic-ne></i></span>
         <span class="cr-pv" aria-hidden="true"><span class="mbar"><i></i><i></i><i></i><span>jairoazogue.com</span></span><span class="pv" style="--g:linear-gradient(135deg,#3b2a1c,#120c08)"><img class="shot" src="img/jairo-herramientas.jpg" alt="Web de Jairo Azogue, sección de herramientas" loading="lazy"></span></span>
       </a></li>
       <li><a class="cr" href="https://zoguekidd.netlify.app/" target="_blank" rel="noopener">
         <span class="cr-n">02</span>
         <span class="cr-name">ZogueKidd</span>
         <span class="cr-meta"><em data-en="Music videos">Videoclips</em><span data-en="It uses the same base as the Kronox site, with a completely different look.">Usa la misma base que la web de Kronox, con una estética totalmente distinta.</span></span>
-        <span class="cr-go" aria-hidden="true">↗</span>
+        <span class="cr-go" aria-hidden="true"><i class=ic-ne></i></span>
         <span class="cr-pv" aria-hidden="true"><span class="mbar"><i></i><i></i><i></i><span>zoguekidd.netlify.app</span></span><span class="pv" style="--g:linear-gradient(135deg,#2b2b2b,#0d0d0d)"><img class="pan" src="img/tall-zoguekidd.jpg" alt="Web de ZogueKidd" loading="lazy"></span></span>
       </a></li>
       <li><a class="cr" href="https://catalinasilva.netlify.app/" target="_blank" rel="noopener">
         <span class="cr-n">03</span>
         <span class="cr-name">Catalina Silva</span>
         <span class="cr-meta"><em data-en="3D and animation">3D y animación</em><span data-en="We made it so she could apply for internships at 3D studios.">La hicimos para que pudiera pedir prácticas en estudios de 3D.</span></span>
-        <span class="cr-go" aria-hidden="true">↗</span>
+        <span class="cr-go" aria-hidden="true"><i class=ic-ne></i></span>
         <span class="cr-pv" aria-hidden="true"><span class="mbar"><i></i><i></i><i></i><span>catalinasilva.netlify.app</span></span><span class="pv" style="--g:linear-gradient(135deg,#243a52,#0b1522)"><span class="fb">Catalina Silva</span><iframe data-crsrc="https://catalinasilva.netlify.app/" title="Vista previa de Catalina Silva" tabindex="-1"></iframe></span></span>
       </a></li>
     </ol>
@@ -1414,10 +1414,10 @@ footer .contact a{border-radius:.2rem;background:transparent}
       <div class="fg-txt">
         <h3>DTR</h3>
         <p data-en="Online shop for a made-up clothing brand. My biggest Figma project: home, collections, product page, cart, wishlist, login and the brand's social profiles.">Tienda online de una marca de ropa inventada. Es mi proyecto más grande en Figma: home, colecciones, ficha de producto, carrito, favoritos, login y sus perfiles en redes.</p>
-        <a class="fg-link" href="https://www.figma.com/proto/O1BYlgEZKLjiQEM1RxontS/Web-Detroit?node-id=13-2&amp;starting-point-node-id=534%3A1999" target="_blank" rel="noopener" data-en="Open the prototype ↗">Abrir el prototipo ↗</a>
+        <a class="fg-link" href="https://www.figma.com/proto/O1BYlgEZKLjiQEM1RxontS/Web-Detroit?node-id=13-2&amp;starting-point-node-id=534%3A1999" target="_blank" rel="noopener" data-en="Open the prototype <i class=ic-ne></i>">Abrir el prototipo <i class=ic-ne></i></a>
       </div>
       <div class="fg-imgs fg-dtr">
-        <div class="fg-tall"><span class="mbar"><i></i><i></i><i></i><span>DTR · home</span></span><div class="fg-scroll"><img src="img/figma/dtr-home.jpg" alt="Home de DTR en Figma" loading="lazy"></div><p class="hand fg-hand" data-en="scroll inside ↓">baja dentro ↓</p></div>
+        <div class="fg-tall"><span class="mbar"><i></i><i></i><i></i><span>DTR · home</span></span><div class="fg-scroll"><img src="img/figma/dtr-home.jpg" alt="Home de DTR en Figma" loading="lazy"></div><p class="hand fg-hand" data-en="scroll inside <i class=ic-d></i>">baja dentro <i class=ic-d></i></p></div>
         <figure><img src="img/figma/dtr-producto.jpg" alt="Ficha de producto de DTR" loading="lazy"><figcaption data-en="Product">Producto</figcaption></figure>
         <figure><img src="img/figma/dtr-carrito.jpg" alt="Carrito de DTR" loading="lazy"><figcaption data-en="Cart">Carrito</figcaption></figure>
         <figure><img src="img/figma/dtr-login.jpg" alt="Login de DTR" loading="lazy"><figcaption>Login</figcaption></figure>
@@ -1427,7 +1427,7 @@ footer .contact a{border-radius:.2rem;background:transparent}
       <div class="fg-txt">
         <h3>Coldculture</h3>
         <p data-en="A class exercise: redesigning the online shop of Coldculture, a clothing brand that already exists. Home, shop and store finder.">Ejercicio de clase: rediseñar la tienda online de Coldculture, una marca de ropa que ya existe. Home, tienda y buscador de tiendas físicas.</p>
-        <a class="fg-link" href="https://www.figma.com/proto/zeYWEDgQy5vbrUZvUGmheu/Untitled?node-id=1-2&amp;starting-point-node-id=1%3A2" target="_blank" rel="noopener" data-en="Open the prototype ↗">Abrir el prototipo ↗</a>
+        <a class="fg-link" href="https://www.figma.com/proto/zeYWEDgQy5vbrUZvUGmheu/Untitled?node-id=1-2&amp;starting-point-node-id=1%3A2" target="_blank" rel="noopener" data-en="Open the prototype <i class=ic-ne></i>">Abrir el prototipo <i class=ic-ne></i></a>
       </div>
       <div class="fg-imgs fg-two">
         <figure><img src="img/figma/cold-home.jpg" alt="Home de Coldculture rediseñada" loading="lazy"><figcaption>Home</figcaption></figure>
@@ -1438,7 +1438,7 @@ footer .contact a{border-radius:.2rem;background:transparent}
       <div class="fg-txt">
         <h3>Estilo Vivo</h3>
         <p data-en="A practice on components and variants: product cards, star ratings and buttons with states, in a furniture shop app.">Práctica de componentes y variantes: tarjetas de producto, valoraciones con estrellas y botones con estados, en una app de muebles.</p>
-        <a class="fg-link" href="https://www.figma.com/proto/P8oK1mFGqyMTF5QIxZDxtT/Pra%CC%81ctica-3.-Introduccio%CC%81n-a-_Modos_?node-id=1-4&amp;starting-point-node-id=1%3A4" target="_blank" rel="noopener" data-en="Open the prototype ↗">Abrir el prototipo ↗</a>
+        <a class="fg-link" href="https://www.figma.com/proto/P8oK1mFGqyMTF5QIxZDxtT/Pra%CC%81ctica-3.-Introduccio%CC%81n-a-_Modos_?node-id=1-4&amp;starting-point-node-id=1%3A4" target="_blank" rel="noopener" data-en="Open the prototype <i class=ic-ne></i>">Abrir el prototipo <i class=ic-ne></i></a>
       </div>
       <div class="fg-imgs fg-phones">
         <figure><img src="img/figma/ev-inicio.jpg" alt="Estilo Vivo, pantalla de ofertas" loading="lazy"></figure>
@@ -1493,7 +1493,7 @@ footer .contact a{border-radius:.2rem;background:transparent}
             <img src="img/id/c-antes.jpg" alt="Logo original de Café del Sur">
             <img class="after" src="img/id/c-despues.jpg" alt="Logo rediseñado de Café del Sur">
             <span class="lab l" data-en="Before">Antes</span><span class="lab r" data-en="After">Después</span>
-            <span class="line"></span><span class="knob">↔</span>
+            <span class="line"></span><span class="knob"><i class=ic-lr></i></span>
             <input type="range" min="0" max="100" value="50" aria-label="Comparar antes y después">
           </div></div>
         <div class="idb-info">
@@ -1542,7 +1542,7 @@ footer .contact a{border-radius:.2rem;background:transparent}
         <button type="button" role="tab" aria-selected="false" aria-controls="rs-reb" data-rs="reb" style="--bc:#fce200">Rebolica</button>
       </div>
 <div class="rs-brand on" id="rs-vora" role="tabpanel" aria-label="Vora">
-  <p class="rs-lab"><span data-en="Carousel · A day at Vora">Carrusel · Un día en Vora</span><span class="rs-hint" data-en="Swipe →">Desliza →</span></p>
+  <p class="rs-lab"><span data-en="Carousel · A day at Vora">Carrusel · Un día en Vora</span><span class="rs-hint" data-en="Swipe <i class=ic-r></i>">Desliza <i class=ic-r></i></span></p>
   <div class="rs-car" tabindex="0"><button type="button" class="rs-it" data-gal="img/rrss/vora-c1.jpg,img/rrss/vora-c2.jpg,img/rrss/vora-c3.jpg,img/rrss/vora-c4.jpg,img/rrss/vora-c5.jpg,img/rrss/vora-p1.jpg,img/rrss/vora-p2.jpg,img/rrss/vora-s1.jpg,img/rrss/vora-s2.jpg" data-start="0" data-name="Vora"><img src="img/rrss/vora-c1.jpg" alt="Vora, carrusel 1 de 5" loading="lazy"></button><button type="button" class="rs-it" data-gal="img/rrss/vora-c1.jpg,img/rrss/vora-c2.jpg,img/rrss/vora-c3.jpg,img/rrss/vora-c4.jpg,img/rrss/vora-c5.jpg,img/rrss/vora-p1.jpg,img/rrss/vora-p2.jpg,img/rrss/vora-s1.jpg,img/rrss/vora-s2.jpg" data-start="1" data-name="Vora"><img src="img/rrss/vora-c2.jpg" alt="Vora, carrusel 2 de 5" loading="lazy"></button><button type="button" class="rs-it" data-gal="img/rrss/vora-c1.jpg,img/rrss/vora-c2.jpg,img/rrss/vora-c3.jpg,img/rrss/vora-c4.jpg,img/rrss/vora-c5.jpg,img/rrss/vora-p1.jpg,img/rrss/vora-p2.jpg,img/rrss/vora-s1.jpg,img/rrss/vora-s2.jpg" data-start="2" data-name="Vora"><img src="img/rrss/vora-c3.jpg" alt="Vora, carrusel 3 de 5" loading="lazy"></button><button type="button" class="rs-it" data-gal="img/rrss/vora-c1.jpg,img/rrss/vora-c2.jpg,img/rrss/vora-c3.jpg,img/rrss/vora-c4.jpg,img/rrss/vora-c5.jpg,img/rrss/vora-p1.jpg,img/rrss/vora-p2.jpg,img/rrss/vora-s1.jpg,img/rrss/vora-s2.jpg" data-start="3" data-name="Vora"><img src="img/rrss/vora-c4.jpg" alt="Vora, carrusel 4 de 5" loading="lazy"></button><button type="button" class="rs-it" data-gal="img/rrss/vora-c1.jpg,img/rrss/vora-c2.jpg,img/rrss/vora-c3.jpg,img/rrss/vora-c4.jpg,img/rrss/vora-c5.jpg,img/rrss/vora-p1.jpg,img/rrss/vora-p2.jpg,img/rrss/vora-s1.jpg,img/rrss/vora-s2.jpg" data-start="4" data-name="Vora"><img src="img/rrss/vora-c5.jpg" alt="Vora, carrusel 5 de 5" loading="lazy"></button></div>
   <div class="rs-row">
     <figure class="rs-post"><button type="button" class="rs-it" data-gal="img/rrss/vora-c1.jpg,img/rrss/vora-c2.jpg,img/rrss/vora-c3.jpg,img/rrss/vora-c4.jpg,img/rrss/vora-c5.jpg,img/rrss/vora-p1.jpg,img/rrss/vora-p2.jpg,img/rrss/vora-s1.jpg,img/rrss/vora-s2.jpg" data-start="5" data-name="Vora"><img src="img/rrss/vora-p1.jpg" alt="Vora, post: El nombre" loading="lazy"></button><figcaption data-en="Post · The name">Post · El nombre</figcaption></figure>
@@ -1552,7 +1552,7 @@ footer .contact a{border-radius:.2rem;background:transparent}
   </div>
 </div>
 <div class="rs-brand" id="rs-cafe" role="tabpanel" aria-label="Café del Sur" hidden>
-  <p class="rs-lab"><span data-en="Carousel · Bean by bean">Carrusel · Grano a grano</span><span class="rs-hint" data-en="Swipe →">Desliza →</span></p>
+  <p class="rs-lab"><span data-en="Carousel · Bean by bean">Carrusel · Grano a grano</span><span class="rs-hint" data-en="Swipe <i class=ic-r></i>">Desliza <i class=ic-r></i></span></p>
   <div class="rs-car" tabindex="0"><button type="button" class="rs-it" data-gal="img/rrss/cafe-c1.jpg,img/rrss/cafe-c2.jpg,img/rrss/cafe-c3.jpg,img/rrss/cafe-c4.jpg,img/rrss/cafe-c5.jpg,img/rrss/cafe-c6.jpg,img/rrss/cafe-p1.jpg,img/rrss/cafe-p2.jpg,img/rrss/cafe-s1.jpg,img/rrss/cafe-s2.jpg" data-start="0" data-name="Café del Sur"><img src="img/rrss/cafe-c1.jpg" alt="Café del Sur, carrusel 1 de 6" loading="lazy"></button><button type="button" class="rs-it" data-gal="img/rrss/cafe-c1.jpg,img/rrss/cafe-c2.jpg,img/rrss/cafe-c3.jpg,img/rrss/cafe-c4.jpg,img/rrss/cafe-c5.jpg,img/rrss/cafe-c6.jpg,img/rrss/cafe-p1.jpg,img/rrss/cafe-p2.jpg,img/rrss/cafe-s1.jpg,img/rrss/cafe-s2.jpg" data-start="1" data-name="Café del Sur"><img src="img/rrss/cafe-c2.jpg" alt="Café del Sur, carrusel 2 de 6" loading="lazy"></button><button type="button" class="rs-it" data-gal="img/rrss/cafe-c1.jpg,img/rrss/cafe-c2.jpg,img/rrss/cafe-c3.jpg,img/rrss/cafe-c4.jpg,img/rrss/cafe-c5.jpg,img/rrss/cafe-c6.jpg,img/rrss/cafe-p1.jpg,img/rrss/cafe-p2.jpg,img/rrss/cafe-s1.jpg,img/rrss/cafe-s2.jpg" data-start="2" data-name="Café del Sur"><img src="img/rrss/cafe-c3.jpg" alt="Café del Sur, carrusel 3 de 6" loading="lazy"></button><button type="button" class="rs-it" data-gal="img/rrss/cafe-c1.jpg,img/rrss/cafe-c2.jpg,img/rrss/cafe-c3.jpg,img/rrss/cafe-c4.jpg,img/rrss/cafe-c5.jpg,img/rrss/cafe-c6.jpg,img/rrss/cafe-p1.jpg,img/rrss/cafe-p2.jpg,img/rrss/cafe-s1.jpg,img/rrss/cafe-s2.jpg" data-start="3" data-name="Café del Sur"><img src="img/rrss/cafe-c4.jpg" alt="Café del Sur, carrusel 4 de 6" loading="lazy"></button><button type="button" class="rs-it" data-gal="img/rrss/cafe-c1.jpg,img/rrss/cafe-c2.jpg,img/rrss/cafe-c3.jpg,img/rrss/cafe-c4.jpg,img/rrss/cafe-c5.jpg,img/rrss/cafe-c6.jpg,img/rrss/cafe-p1.jpg,img/rrss/cafe-p2.jpg,img/rrss/cafe-s1.jpg,img/rrss/cafe-s2.jpg" data-start="4" data-name="Café del Sur"><img src="img/rrss/cafe-c5.jpg" alt="Café del Sur, carrusel 5 de 6" loading="lazy"></button><button type="button" class="rs-it" data-gal="img/rrss/cafe-c1.jpg,img/rrss/cafe-c2.jpg,img/rrss/cafe-c3.jpg,img/rrss/cafe-c4.jpg,img/rrss/cafe-c5.jpg,img/rrss/cafe-c6.jpg,img/rrss/cafe-p1.jpg,img/rrss/cafe-p2.jpg,img/rrss/cafe-s1.jpg,img/rrss/cafe-s2.jpg" data-start="5" data-name="Café del Sur"><img src="img/rrss/cafe-c6.jpg" alt="Café del Sur, carrusel 6 de 6" loading="lazy"></button></div>
   <div class="rs-row">
     <figure class="rs-post"><button type="button" class="rs-it" data-gal="img/rrss/cafe-c1.jpg,img/rrss/cafe-c2.jpg,img/rrss/cafe-c3.jpg,img/rrss/cafe-c4.jpg,img/rrss/cafe-c5.jpg,img/rrss/cafe-c6.jpg,img/rrss/cafe-p1.jpg,img/rrss/cafe-p2.jpg,img/rrss/cafe-s1.jpg,img/rrss/cafe-s2.jpg" data-start="6" data-name="Café del Sur"><img src="img/rrss/cafe-p1.jpg" alt="Café del Sur, post: Antes y ahora" loading="lazy"></button><figcaption data-en="Post · Before and after">Post · Antes y ahora</figcaption></figure>
@@ -1562,7 +1562,7 @@ footer .contact a{border-radius:.2rem;background:transparent}
   </div>
 </div>
 <div class="rs-brand" id="rs-reb" role="tabpanel" aria-label="Rebolica" hidden>
-  <p class="rs-lab"><span data-en="Carousel · Pick your level of chaos">Carrusel · Elige tu nivel de caos</span><span class="rs-hint" data-en="Swipe →">Desliza →</span></p>
+  <p class="rs-lab"><span data-en="Carousel · Pick your level of chaos">Carrusel · Elige tu nivel de caos</span><span class="rs-hint" data-en="Swipe <i class=ic-r></i>">Desliza <i class=ic-r></i></span></p>
   <div class="rs-car" tabindex="0"><button type="button" class="rs-it" data-gal="img/rrss/reb-c1.jpg,img/rrss/reb-c2.jpg,img/rrss/reb-c3.jpg,img/rrss/reb-c4.jpg,img/rrss/reb-c5.jpg,img/rrss/reb-p1.jpg,img/rrss/reb-p2.jpg,img/rrss/reb-s1.jpg,img/rrss/reb-s2.jpg" data-start="0" data-name="Rebolica"><img src="img/rrss/reb-c1.jpg" alt="Rebolica, carrusel 1 de 5" loading="lazy"></button><button type="button" class="rs-it" data-gal="img/rrss/reb-c1.jpg,img/rrss/reb-c2.jpg,img/rrss/reb-c3.jpg,img/rrss/reb-c4.jpg,img/rrss/reb-c5.jpg,img/rrss/reb-p1.jpg,img/rrss/reb-p2.jpg,img/rrss/reb-s1.jpg,img/rrss/reb-s2.jpg" data-start="1" data-name="Rebolica"><img src="img/rrss/reb-c2.jpg" alt="Rebolica, carrusel 2 de 5" loading="lazy"></button><button type="button" class="rs-it" data-gal="img/rrss/reb-c1.jpg,img/rrss/reb-c2.jpg,img/rrss/reb-c3.jpg,img/rrss/reb-c4.jpg,img/rrss/reb-c5.jpg,img/rrss/reb-p1.jpg,img/rrss/reb-p2.jpg,img/rrss/reb-s1.jpg,img/rrss/reb-s2.jpg" data-start="2" data-name="Rebolica"><img src="img/rrss/reb-c3.jpg" alt="Rebolica, carrusel 3 de 5" loading="lazy"></button><button type="button" class="rs-it" data-gal="img/rrss/reb-c1.jpg,img/rrss/reb-c2.jpg,img/rrss/reb-c3.jpg,img/rrss/reb-c4.jpg,img/rrss/reb-c5.jpg,img/rrss/reb-p1.jpg,img/rrss/reb-p2.jpg,img/rrss/reb-s1.jpg,img/rrss/reb-s2.jpg" data-start="3" data-name="Rebolica"><img src="img/rrss/reb-c4.jpg" alt="Rebolica, carrusel 4 de 5" loading="lazy"></button><button type="button" class="rs-it" data-gal="img/rrss/reb-c1.jpg,img/rrss/reb-c2.jpg,img/rrss/reb-c3.jpg,img/rrss/reb-c4.jpg,img/rrss/reb-c5.jpg,img/rrss/reb-p1.jpg,img/rrss/reb-p2.jpg,img/rrss/reb-s1.jpg,img/rrss/reb-s2.jpg" data-start="4" data-name="Rebolica"><img src="img/rrss/reb-c5.jpg" alt="Rebolica, carrusel 5 de 5" loading="lazy"></button></div>
   <div class="rs-row">
     <figure class="rs-post"><button type="button" class="rs-it" data-gal="img/rrss/reb-c1.jpg,img/rrss/reb-c2.jpg,img/rrss/reb-c3.jpg,img/rrss/reb-c4.jpg,img/rrss/reb-c5.jpg,img/rrss/reb-p1.jpg,img/rrss/reb-p2.jpg,img/rrss/reb-s1.jpg,img/rrss/reb-s2.jpg" data-start="5" data-name="Rebolica"><img src="img/rrss/reb-p1.jpg" alt="Rebolica, post: Lema" loading="lazy"></button><figcaption data-en="Post · Tagline">Post · Lema</figcaption></figure>
@@ -1596,7 +1596,7 @@ footer .contact a{border-radius:.2rem;background:transparent}
         <div class="dev">
           <span class="notch" aria-hidden="true"></span>
           <div class="scr" id="scr">
-            <div class="sb"><span>9:41</span><span>●●● ▮</span></div>
+            <div class="sb"><span>9:41</span><span><i class=ic-sig></i> <i class=ic-bat></i></span></div>
             <div class="feedwrap" id="feed"></div>
             <div class="postv" id="postv" aria-hidden="true"></div>
             <div class="nav" aria-hidden="true"><i></i><i class="r"></i><i></i><i></i><i class="r"></i></div>
@@ -1685,16 +1685,16 @@ footer .contact a{border-radius:.2rem;background:transparent}
 </section>
 
 </main>
-<a class="mcta" href="mailto:mariaurbanoeu@gmail.com" aria-label="Escribir a Paula"><span><i></i><span data-en="Available now">Disponible ya</span></span><b data-en="Email me →">Escríbeme →</b></a>
+<a class="mcta" href="mailto:mariaurbanoeu@gmail.com" aria-label="Escribir a Paula"><span><i></i><span data-en="Available now">Disponible ya</span></span><b data-en="Email me <i class=ic-r></i>">Escríbeme <i class=ic-r></i></b></a>
 
 <footer>
   <div class="wrap">
     <h2 class="rise" data-en="Let's talk">Hablemos</h2>
     <div class="contact rise">
       <a href="mailto:mariaurbanoeu@gmail.com"><strong>mariaurbanoeu@gmail.com</strong><span>Email</span></a>
-      <a href="https://www.linkedin.com/in/paula-urbano-436619332" target="_blank" rel="noopener"><strong>Paula Urbano ↗</strong><span>LinkedIn</span></a>
-      <a href="Paula-Urbano-CV.pdf?v=3" download><strong data-en="Download CV ↓">Descargar CV ↓</strong><span>PDF</span></a>
-      <a href="Paula-Urbano-Portfolio.pdf?v=3" download><strong data-en="Download portfolio ↓">Descargar portfolio ↓</strong><span>PDF</span></a>
+      <a href="https://www.linkedin.com/in/paula-urbano-436619332" target="_blank" rel="noopener"><strong>Paula Urbano <i class=ic-ne></i></strong><span>LinkedIn</span></a>
+      <a href="Paula-Urbano-CV.pdf?v=3" download><strong data-en="Download CV <i class=ic-d></i>">Descargar CV <i class=ic-d></i></strong><span>PDF</span></a>
+      <a href="Paula-Urbano-Portfolio.pdf?v=3" download><strong data-en="Download portfolio <i class=ic-d></i>">Descargar portfolio <i class=ic-d></i></strong><span>PDF</span></a>
     </div>
     <p class="note" data-en="I designed and coded this website too.">Esta web también la diseñé y la programé yo.</p>
   </div>
@@ -1703,7 +1703,7 @@ footer .contact a{border-radius:.2rem;background:transparent}
 <!-- visor de historias -->
 <div class="sv" id="igsv" data-igsv aria-hidden="true" role="dialog" aria-label="Historias">
   <div class="bgblur" id="svbg"></div>
-  <button class="arrow p" id="svPrev" aria-label="Anterior">‹</button>
+  <button class="arrow p" id="svPrev" aria-label="Anterior"><i class=ic-l></i></button>
   <div class="card" id="card">
     <div class="blur" id="cblur"></div>
     <div class="m" id="cm"></div>
@@ -1713,12 +1713,12 @@ footer .contact a{border-radius:.2rem;background:transparent}
     <button class="tap p" id="tapP" aria-label="Anterior"></button>
     <button class="tap n" id="tapN" aria-label="Siguiente"></button>
   </div>
-  <button class="arrow n" id="svNext" aria-label="Siguiente">›</button>
+  <button class="arrow n" id="svNext" aria-label="Siguiente"><i class=ic-rr></i></button>
 </div>
 
 <div class="mv" id="mv" role="dialog" aria-modal="true" aria-label="Manual de marca" aria-hidden="true">
   <div class="mv-top"><span><b id="mvName"></b> · <span id="mvCount"></span></span><button type="button" id="mvClose" aria-label="Cerrar">×</button></div>
-  <div class="mv-stage"><button type="button" class="nb p" id="mvPrev" aria-label="Página anterior">‹</button><img id="mvImg" alt=""><button type="button" class="nb n" id="mvNext" aria-label="Página siguiente">›</button></div>
+  <div class="mv-stage"><button type="button" class="nb p" id="mvPrev" aria-label="Página anterior"><i class=ic-l></i></button><img id="mvImg" alt=""><button type="button" class="nb n" id="mvNext" aria-label="Página siguiente"><i class=ic-rr></i></button></div>
   <div class="mv-th" id="mvTh"></div>
 </div>
 
@@ -1775,13 +1775,13 @@ footer .contact a{border-radius:.2rem;background:transparent}
   var maxed = null, holder = null;
   function closeMax(){
     if (!maxed) return;
-    maxed.classList.remove('is-max'); maxed.querySelector('[data-max]').textContent = '⤢';
+    maxed.classList.remove('is-max'); maxed.querySelector('[data-max]').innerHTML = '<i class="ic-max"></i>';
     scrim.classList.remove('show'); document.body.classList.remove('locked');
     maxed.querySelectorAll('.pan').forEach(setPan); maxed = null;
   }
   function openMax(w){
     closeMax(); maxed = w;
-    w.classList.add('is-max'); w.querySelector('[data-max]').textContent = '✕';
+    w.classList.add('is-max'); w.querySelector('[data-max]').innerHTML = '<i class="ic-x"></i>';
     scrim.classList.add('show'); document.body.classList.add('locked');
     goLive(w.querySelector('.view'));
   }
@@ -1919,7 +1919,7 @@ footer .contact a{border-radius:.2rem;background:transparent}
     {
       id: 'nidoo', name: 'nidoo.studio', short: 'Nidoo', kind: 'Estudio digital', glow: '#5a2bd6',
       av: I + 'n-iso.jpg', cat: 'Estudio de diseño digital',
-      bio: 'built to evolve ✦ Diseñamos experiencias digitales.', link: 'nidoo.studio',
+      bio: 'built to evolve · Diseñamos experiencias digitales.', link: 'nidoo.studio',
       grid: [im(I+'n-post1.jpg'), im(I+'n-post2.jpg'), im(I+'n-post3.jpg'), im(I+'n-post4.jpg'), im(I+'n-web.jpg'), im(I+'n-recursos.jpg', 1),
              im(I+'n-tarjetas.jpg'), im(I+'n-acreditacion.jpg'), im(I+'n-laptop.jpg'), im(I+'n-carpeta.jpg'), im(I+'n-sobres.jpg'), im(I+'n-logo.jpg', 1)],
       hl: [
@@ -1966,7 +1966,7 @@ footer .contact a{border-radius:.2rem;background:transparent}
     {
       id: 'rebolica', name: 'Rebolica', short: 'Rebolica', kind: 'Salsas picantes', glow: '#d7282f',
       av: 'img/rebolica-logo.png', avbg: '#1b1c1c', cat: 'Salsas picantes · Valencia',
-      bio: 'Bendito caos. Embotellamos el revuelo perfecto. 🌶', link: 'rebolica',
+      bio: 'Bendito caos. Embotellamos el revuelo perfecto.', link: 'rebolica',
       grid: [vd('video/fosca.webm'), vd('video/llamp.webm'), vd('video/traca.webm'), im('img/fosca.png', 1), im('img/llamp.png', 1), im('img/traca.png', 1), im('img/reb-hero.jpg')],
       hl: [
         { t: 'Fosca', s: [vd('video/fosca.webm'), im('img/fosca.png', 1)] },
@@ -2010,9 +2010,9 @@ footer .contact a{border-radius:.2rem;background:transparent}
   }
   function openPost(k){
     var b = BRANDS[current], it = b.grid[k], p = $('postv');
-    p.innerHTML = '<div class="ph"><button aria-label="Volver" id="pback">‹</button><img src="' + b.av + '" alt="" style="' + avs(b) + '"><span>' + b.name + '</span></div>' +
+    p.innerHTML = '<div class="ph"><button aria-label="Volver" id="pback"><i class="ic-l"></i></button><img src="' + b.av + '" alt="" style="' + avs(b) + '"><span>' + b.name + '</span></div>' +
       '<div class="media' + (it.fit ? ' fit' : '') + '">' + media(it, true) + '</div>' +
-      '<div class="acts" aria-hidden="true">♡ ◯ ➤</div>' +
+      '<div class="acts" aria-hidden="true"><i class="ic-heart"></i> <i class="ic-comment"></i> <i class="ic-send"></i></div>' +
       '<p class="igcap"><b>' + b.name + '</b>' + b.bio + '</p>';
     p.classList.add('open'); p.setAttribute('aria-hidden', 'false');
     $('pback').addEventListener('click', closePost);
@@ -2036,7 +2036,7 @@ footer .contact a{border-radius:.2rem;background:transparent}
     var n = b.hl.reduce(function(a, h){ return a + h.s.length; }, 0);
     return '<button class="tk" data-ring="' + i + '" role="listitem" style="--bc:' + b.glow + '" data-cursor="Historias" aria-label="Ver las historias de ' + b.short + '">' +
       '<span class="tk-img"><img src="' + (COVERS[b.id] || b.av) + '" alt="" loading="lazy"><span class="tk-bar">' + b.hl.map(function(){ return '<i></i>'; }).join('') + '</span></span>' +
-      '<span class="tk-b"><span><b>' + b.short + '</b><small>' + b.kind + ' · ' + n + ' historias</small></span><span class="tk-go">▶</span></span></button>';
+      '<span class="tk-b"><span><b>' + b.short + '</b><small>' + b.kind + ' · ' + n + ' historias</small></span><span class="tk-go"><i class="ic-play"></i></span></span></button>';
   }).join('');
   document.querySelectorAll('[data-ring]').forEach(function(r){ r.addEventListener('click', function(){ openStories(+r.dataset.ring, 0); }); });
 
