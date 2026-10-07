@@ -338,3 +338,50 @@ footer h2{font-size:clamp(3rem,10vw,8rem)!important}
 .about .lead{font-family:var(--serif)!important;font-style:italic!important;font-weight:400!important;letter-spacing:0!important;font-size:clamp(1.6rem,3vw,2.4rem)!important;line-height:1.2!important}
 .about .lead em{color:inherit!important}
 .mcta i{display:none!important}
+
+/* =====================================================================
+   Versión oscura: wine, plum y oliva oscuro; milk e ivory para textos.
+   Titulares en sans geométrica gruesa, caligráfica para acentos y
+   serif fina para nombres.
+   ===================================================================== */
+:root{
+  --paper:#221616;--card:#2C1C1B;--card2:#381A17;--ink:#FAF6F0;--soft:#C7B8AA;
+  --rule:rgba(250,246,240,.13);--candy:#EBA9BD;--cherry:#EBA9BD;--red:#EBA9BD;
+  --sans:'Montserrat','Helvetica Neue',Arial,sans-serif;--display:'Montserrat','Helvetica Neue',Arial,sans-serif;
+  --script:'Pinyon Script',cursive;
+}
+html,body{background:#221616!important;background-image:none!important}
+body{font-family:var(--sans)!important}
+.top{background:rgba(34,22,22,.9)!important}
+.sec--olive{--card:#2E2B1B;--card2:#45412B;background:#36321F!important;background-image:none!important}
+.sec--cream{--ink:#FAF6F0;--soft:#C7B8AA;--candy:#EBA9BD;--cherry:#EBA9BD;--rule:rgba(250,246,240,.13);--card:#2C1515;--card2:#4A2420;
+  background:#381A17!important;background-image:none!important;color:#FAF6F0!important}
+.sec--cream .btn.fill,.sec--cream .enter{background:#E8D9C9!important;color:#221616!important;border-color:#E8D9C9!important}
+.sec--cream .btn{color:#FAF6F0;border-color:rgba(250,246,240,.4)}
+.sec--milk{--ink:#221616;--soft:#5E4B45;--candy:#A8506D;--cherry:#A8506D;--rule:rgba(34,22,22,.15);--card:#F1E6DA;
+  background:#E8D9C9!important;background-image:none!important;color:#221616!important}
+footer{background:#36321F!important;background-image:none!important}
+/* titulares: sans geométrica gruesa en mayúsculas */
+.hero h1,.sec h2,footer h2,.about h2,.tools h2{
+  font-family:var(--display)!important;font-weight:800!important;font-style:normal!important;
+  letter-spacing:-.01em!important;line-height:.98!important;text-transform:uppercase!important}
+.sec h2{font-size:clamp(2.4rem,6vw,5.2rem)!important}
+.hero h1{font-size:clamp(2.8rem,7vw,6.2rem)!important;max-width:11ch!important;letter-spacing:-.015em!important}
+footer h2{font-size:clamp(3.4rem,11vw,9rem)!important}
+/* acentos en caligráfica */
+.kick,.work-kicker{font-family:var(--script)!important;font-style:normal!important;font-weight:400!important;
+  font-size:clamp(2rem,3.6vw,3rem)!important;line-height:1!important;color:var(--candy)!important;margin-bottom:-.35em!important;position:relative;z-index:1}
+.hand{font-family:var(--script)!important;font-weight:400!important;font-size:2rem!important}
+/* nombres en serif fina */
+.project-copy b,.idb-info h3,.cr-name,.fg h3{font-family:var(--serif)!important;font-weight:400!important;text-transform:none!important;letter-spacing:-.01em!important;line-height:1!important}
+.project-copy b{font-size:clamp(1.4rem,2.4vw,2rem)!important}
+.idb-info h3,.fg h3{font-size:clamp(2.4rem,4.4vw,3.6rem)!important}
+.cr-name{font-size:clamp(2.2rem,4.6vw,3.8rem)!important}
+.cr-meta em{font-family:var(--script)!important;font-style:normal!important;font-size:1.6rem!important}
+.about .lead{font-family:var(--serif)!important;font-style:normal!important;font-weight:400!important}
+/* botones y detalles */
+.btn{font-family:var(--sans)!important;letter-spacing:.14em!important;font-weight:600!important}
+.btn.fill,.enter,.lang button[aria-pressed="true"],.mcta,.cr:hover .cr-go,.prog,.cur i{background:#E8D9C9!important;color:#221616!important;border-color:#E8D9C9!important}
+.sec--milk .btn.fill{background:#221616!important;color:#FAF6F0!important;border-color:#221616!important}
+.win .bar,.hero-web .mbar{background:#2C1C1B!important}
+.hero-web-wrap::after,.fg-tall::after,.idb-cover::after{background:rgba(232,217,201,.5)!important}
