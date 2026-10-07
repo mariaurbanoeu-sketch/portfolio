@@ -385,3 +385,16 @@ footer h2{font-size:clamp(3.4rem,11vw,9rem)!important}
 .sec--milk .btn.fill{background:#221616!important;color:#FAF6F0!important;border-color:#221616!important}
 .win .bar,.hero-web .mbar{background:#2C1C1B!important}
 .hero-web-wrap::after,.fg-tall::after,.idb-cover::after{background:rgba(232,217,201,.5)!important}
+/* proyectos en portadas */
+.pgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3rem 2rem;margin-top:1.4rem}
+.pcard{display:block;text-decoration:none;color:var(--ink)}
+.pc-img{display:block;aspect-ratio:4/3;overflow:hidden;background:var(--card);border:1px solid var(--rule)}
+.pc-img img{width:100%;height:100%;object-fit:cover;object-position:50% 0;transition:object-position 2.4s ease,transform .8s var(--ease)}
+.pcard:hover .pc-img img{object-position:50% 30%;transform:scale(1.02)}
+.pc-cap{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-top:.9rem}
+.pc-cap b{font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,2.4vw,2.1rem);line-height:1.05;letter-spacing:-.01em}
+.pc-cap em{font-family:var(--script);font-style:normal;font-size:1.6rem;color:var(--candy);white-space:nowrap}
+.pcard:hover .pc-cap b{color:var(--candy)}
+@media(max-width:700px){.pgrid{grid-template-columns:1fr;gap:2.2rem}}
+.pc-phone{display:flex!important;justify-content:center;align-items:flex-start;padding-top:1.4rem;background:#36321F!important}
+.pc-phone img{width:42%!important;height:auto!important;border-radius:1rem 1rem 0 0;border:5px solid #120c0c;border-bottom:0}
