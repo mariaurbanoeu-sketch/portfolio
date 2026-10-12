@@ -19,7 +19,7 @@
 <meta property="og:type" content="website">
 <link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/pinyon.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=15">
+<link rel="stylesheet" href="css/site.css?v=16">
 <script>(function(d){d.classList.add('js');try{if(!sessionStorage.getItem('wf')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('wire');sessionStorage.setItem('wf','1')}}catch(e){}})(document.documentElement)</script>
 </head>
 <body>
@@ -36,6 +36,7 @@
     <a href="#contacto" class="hd-cta">Escríbeme</a>
   </nav>
   <button class="hd-insp" id="insp" type="button" aria-pressed="false"><span class="sw" aria-hidden="true"></span><b class="long">Ver cómo está hecho</b><b class="short">Guías</b></button>
+  <button class="hd-here" id="here" type="button" aria-haspopup="dialog" aria-label="Secciones"><canvas width="9" height="9" aria-hidden="true"></canvas><span id="hereT">Inicio</span><i aria-hidden="true"></i></button>
   <button class="hd-menu" type="button" aria-expanded="false" aria-controls="nav"><span></span><span></span><b>Menú</b></button>
 </header>
 
@@ -515,6 +516,60 @@
   <a href="#contacto" data-to="contacto"><canvas width="9" height="9" data-dk="mail" aria-hidden="true"></canvas><span>Escríbeme</span></a>
 </nav>
 
+<div class="tools-bar" id="toolsBar" role="toolbar" aria-label="Herramientas de diseño" hidden>
+  <button type="button" data-tool="move" aria-pressed="true" title="Mover (V)"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 2v11l3-3 2 4 2-1-2-4h4z"/></svg><span>Mover</span><kbd>V</kbd></button>
+  <button type="button" data-tool="pick" aria-pressed="false" title="Cuentagotas (I)"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M11 1.5l3.5 3.5-2 2-.8-.8-6.2 6.2H3v-2.5L9.2 3.7l-.7-.7z"/></svg><span>Color</span><kbd>I</kbd></button>
+  <button type="button" data-tool="text" aria-pressed="false" title="Texto (T)"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2h12v3h-1.5V3.5h-3.7V12.5H11V14H5v-1.5h2.2V3.5H3.5V5H2z"/></svg><span>Texto</span><kbd>T</kbd></button>
+  <button type="button" data-tool="measure" aria-pressed="false" title="Medir (M)"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 6h14v4H1zM3.5 6v2M6 6v3M8.5 6v2M11 6v3M13.5 6v2" fill="none" stroke="currentColor" stroke-width="1.3"/></svg><span>Medir</span><kbd>M</kbd></button>
+  <button type="button" data-tool="comment" aria-pressed="false" title="Comentar (C)"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5a6 6 0 0 1 0 12H1.5V8A6.5 6.5 0 0 1 8 1.5z"/></svg><span>Comentar</span><kbd>C</kbd></button>
+  <i class="tb-sep" aria-hidden="true"></i>
+  <button type="button" class="tb-desk" id="deskBtn" title="Mi escritorio (D)"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 2.5h13v9h-13zM6 13.5h4M8 11.5v2" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Mi escritorio</span><kbd>D</kbd></button>
+  <p class="tb-hint" id="tbHint">Úsala como en Figma: cambia de herramienta y explora la web</p>
+</div>
+<div class="tool-chip" id="toolChip" aria-hidden="true"></div>
+<div class="tool-box" id="toolBox" aria-hidden="true"><b></b></div>
+<div class="tool-ref" id="toolRef" aria-hidden="true"></div>
+<div class="tool-lines" id="toolLines" aria-hidden="true"></div>
+<form class="tool-cmt" id="toolCmt" hidden><p><b>Paula</b> recibirá tu comentario</p><textarea rows="3" maxlength="500" placeholder="Escribe algo sobre esta parte…" required aria-label="Comentario"></textarea><div><button type="button" data-x>Cancelar</button><button type="submit">Enviar</button></div></form>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<div class="desk" id="desk" role="dialog" aria-modal="true" aria-label="El escritorio de Paula" hidden>
+  <div class="desk-menu"><span class="dm-logo"><canvas id="deskFace" width="32" height="32" aria-hidden="true"></canvas>Paula</span><span>Archivo</span><span>Editar</span><span>Ver</span><span class="dm-r"><span id="deskStatus"></span><span id="deskClock"></span><button type="button" id="deskX">Salir del escritorio <kbd>Esc</kbd></button></span></div>
+  <div class="desk-icons">
+    <button type="button" data-open="webs"><canvas width="9" height="9" data-px="web" aria-hidden="true"></canvas><span>Mis webs</span></button>
+    <button type="button" data-open="figma"><canvas width="9" height="9" data-px="pen" aria-hidden="true"></canvas><span>Figma</span></button>
+    <button type="button" data-open="gotchi"><canvas width="9" height="9" data-px="me" aria-hidden="true"></canvas><span>Paulagotchi</span></button>
+    <button type="button" data-open="notas"><canvas width="9" height="9" data-px="note" aria-hidden="true"></canvas><span>notas.txt</span></button>
+    <button type="button" data-open="correo"><canvas width="9" height="9" data-px="mail" aria-hidden="true"></canvas><span>Correo</span></button>
+    <a href="Paula-Urbano-CV.pdf" target="_blank" rel="noopener"><canvas width="9" height="9" data-px="doc" aria-hidden="true"></canvas><span>CV.pdf</span></a>
+    <button type="button" data-open="bugs"><canvas width="9" height="9" data-px="trash" aria-hidden="true"></canvas><span>Papelera</span></button>
+  </div>
+  <section class="win" data-win="webs" style="--x:6%;--y:9%;--w:min(46rem,56vw)">
+    <header class="win-t"><span class="win-d"><i data-x></i><i></i><i></i></span><b>Mis webs</b></header>
+    <div class="win-c dw-webs">
+      <nav class="dw-tabs"><button type="button" aria-pressed="true" data-v="0">Nails by MelyG</button><button type="button" aria-pressed="false" data-v="1">Kronox</button><button type="button" aria-pressed="false" data-v="2">Nácar</button><button type="button" aria-pressed="false" data-v="3">Entre Amigos</button></nav>
+      <div class="dw-view"><img data-v="0" src="img/nails-d.webp" alt="Nails by MelyG" class="on"><img data-v="1" data-src="img/kpanel-d.webp" alt="Panel de Kronox"><img data-v="2" data-src="img/nacar-d.webp" alt="Nácar Estilismo"><img data-v="3" data-src="img/ea-m.webp" alt="Entre Amigos" class="m"></div>
+      <p class="dw-go"><a href="#nails" data-goto="nails">Ver el caso</a></p>
+    </div>
+  </section>
+  <section class="win" data-win="gotchi" style="--x:58%;--y:11%;--w:17rem">
+    <header class="win-t"><span class="win-d"><i data-x></i><i></i><i></i></span><b>Paulagotchi</b></header>
+    <div class="win-c dw-g"><canvas id="deskG" width="64" height="64" aria-hidden="true"></canvas><p id="deskGs"></p><button type="button" data-open="bugs">Jugar a los bugs</button></div>
+  </section>
+  <section class="win" data-win="notas" style="--x:61%;--y:52%;--w:20rem">
+    <header class="win-t"><span class="win-d"><i data-x></i><i></i><i></i></span><b>notas.txt</b></header>
+    <div class="win-c dw-notes"><p>3 cosas de mí</p><ol><li>No puedo caminar sobre césped.</li><li>Siempre pido la misma comida en los restaurantes.</li><li>Escucho todo tipo de música. Mi Spotify no tiene sentido.</li></ol><p>Disponible para empezar ya.</p></div>
+  </section>
+  <section class="win" data-win="figma" style="--x:14%;--y:24%;--w:min(40rem,50vw)" hidden>
+    <header class="win-t"><span class="win-d"><i data-x></i><i></i><i></i></span><b>Figma · Diseños de la uni</b></header>
+    <div class="win-c dw-fig"><img data-src="img/figma/dtr-producto.webp" alt="DTR, producto"><img data-src="img/figma/cold-home.webp" alt="Coldculture, home"><img data-src="img/figma/dtr-carrito.webp" alt="DTR, carrito"><img data-src="img/figma/cold-shop.webp" alt="Coldculture, tienda"><p class="dw-go"><a href="#figma" data-goto="figma">Ver todos</a></p></div>
+  </section>
+  <section class="win" data-win="correo" style="--x:30%;--y:30%;--w:24rem" hidden>
+    <header class="win-t"><span class="win-d"><i data-x></i><i></i><i></i></span><b>Nuevo mensaje</b></header>
+    <form class="win-c dw-mail"><p><span>Para</span>mariaurbanoeu@gmail.com</p><textarea rows="6" maxlength="800" placeholder="Hola Paula, vi tu escritorio y…" required aria-label="Mensaje"></textarea><button type="submit">Enviar</button></form>
+  </section>
+</div>
+
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetT" hidden>
   <div class="sheet-bg" data-close></div>
   <div class="sheet-p"><div class="sheet-h" aria-hidden="true"><i></i></div><p class="sheet-t" id="sheetT"></p><div class="sheet-c" id="sheetC"></div><button class="sheet-x" type="button" data-close>Cerrar</button></div>
@@ -541,6 +596,6 @@
   <div class="mv-stage"><button type="button" class="mv-nav" id="mvPrev" aria-label="Página anterior"><i class="ic ic-left"></i></button><img id="mvImg" alt=""><button type="button" class="mv-nav" id="mvNext" aria-label="Página siguiente"><i class="ic ic-right"></i></button></div>
 </div>
 
-<script src="js/site.js?v=14" defer></script>
+<script src="js/site.js?v=16" defer></script>
 </body>
 </html>
