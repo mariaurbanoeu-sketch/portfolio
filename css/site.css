@@ -5,16 +5,6 @@
 @font-face{font-family:'Bodoni Moda';src:url(../fonts/bodoni.woff2) format('woff2');font-weight:400;font-display:swap}
 @font-face{font-family:'Pinyon Script';src:url(../fonts/pinyon.woff2) format('woff2');font-weight:400;font-display:swap}
 
-/* tipografías de cada cliente: el navegador solo las descarga al llegar a su sección */
-@font-face{font-family:'Nails Display';src:url(../fonts/nails-display.woff2) format('woff2');font-display:swap}
-@font-face{font-family:'Nails Display';src:url(../fonts/nails-display-i.woff2) format('woff2');font-style:italic;font-display:swap}
-@font-face{font-family:'Nails Sans';src:url(../fonts/nails-sans.woff2) format('woff2');font-display:swap}
-@font-face{font-family:'Nacar Display';src:url(../fonts/nacar-display.woff2) format('woff2');font-display:swap}
-@font-face{font-family:'Nacar Display';src:url(../fonts/nacar-display-i.woff2) format('woff2');font-style:italic;font-display:swap}
-@font-face{font-family:'Nacar Sans';src:url(../fonts/nacar-sans.woff2) format('woff2');font-display:swap}
-@font-face{font-family:'Kronox Display';src:url(../fonts/kronox-display.woff2) format('woff2');font-display:swap}
-@font-face{font-family:'Amigos Display';src:url(../fonts/amigos-display.woff2) format('woff2');font-display:swap}
-@font-face{font-family:'Amigos Sans';src:url(../fonts/amigos-sans.woff2) format('woff2');font-display:swap}
 
 :root{
   --wine:#221616;--plum:#381A17;--olive:#36321F;--milk:#E8D9C9;--ivory:#FAF6F0;

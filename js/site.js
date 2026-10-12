@@ -42,6 +42,28 @@
   }, { rootMargin: '0px 0px -12% 0px' });
   $$('[data-reveal]').forEach(function (el) { revIO.observe(el); });
 
+
+  /* ---------- carga perezosa: portadas de video y tipografías de cada cliente ---------- */
+  var postIO = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { var v = e.target; if (v.dataset.poster) { v.poster = v.dataset.poster; v.removeAttribute('data-poster'); } postIO.unobserve(v); } });
+  }, { rootMargin: '900px 0px' });
+  $$('video[data-poster]').forEach(function (v) { if (!v.closest('.bw')) postIO.observe(v); });
+  var FONTS = {
+    nails: [['Nails Display', 'nails-display', 'normal'], ['Nails Display', 'nails-display-i', 'italic'], ['Nails Sans', 'nails-sans', 'normal']],
+    nacar: [['Nacar Display', 'nacar-display', 'normal'], ['Nacar Display', 'nacar-display-i', 'italic'], ['Nacar Sans', 'nacar-sans', 'normal']],
+    kronox: [['Kronox Display', 'kronox-display', 'normal']],
+    amigos: [['Amigos Display', 'amigos-display', 'normal'], ['Amigos Sans', 'amigos-sans', 'normal']]
+  };
+  if (window.FontFace && document.fonts) {
+    var fontIO = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return; fontIO.unobserve(e.target);
+        (FONTS[e.target.id] || []).forEach(function (f) { var ff = new FontFace(f[0], 'url(fonts/' + f[1] + '.woff2) format("woff2")', { style: f[2], display: 'swap' }); ff.load().then(function (x) { document.fonts.add(x); }).catch(function () {}); });
+      });
+    }, { rootMargin: '700px 0px' });
+    Object.keys(FONTS).forEach(function (id) { var el = $('#' + id); if (el) fontIO.observe(el); });
+  }
+
   /* ---------- videos: se cargan cerca y solo suenan (mudos) a la vista ---------- */
   var vids = $$('video[data-src]').filter(function (v) { return !v.closest('.bw'); });
   function load(v) { if (!v.src) { v.src = v.dataset.src; v.load(); } }
@@ -522,6 +544,7 @@
       bwV.forEach(function (v, k) {
         v.classList.toggle('on', k === i);
         var vid = $('video', v);
+        if ((k === i || k === i + 1) && vid.dataset.poster) { vid.poster = vid.dataset.poster; vid.removeAttribute('data-poster'); }
         if (k === i && bwVis) { load(vid); if (!reduce) { var pp = vid.play(); if (pp && pp.catch) pp.catch(function () {}); } }
         else if (!vid.paused) vid.pause();
       });

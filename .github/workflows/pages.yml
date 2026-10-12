@@ -32,7 +32,13 @@ jobs:
       - name: Build clean site
         run: |
           mkdir -p _site
-          rsync -a --exclude '.git' --exclude '_site' ./ _site/
+          rsync -a --exclude '.git' --exclude '.github' --exclude '_site' --exclude 'README.md' ./ _site/
+
+      - name: Minify CSS and JS (si falla, se publica sin comprimir)
+        run: |
+          npx --yes terser@5.31.6 js/site.js -c -m -o _site/js/site.js || cp js/site.js _site/js/site.js
+          npx --yes csso-cli@4.0.2 css/site.css -o _site/css/site.css || cp css/site.css _site/css/site.css
+          npx --yes terser@5.31.6 sw.js -c -m -o _site/sw.js || cp sw.js _site/sw.js
 
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
