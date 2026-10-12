@@ -987,3 +987,6 @@ html[data-tool] .tool-cmt textarea{cursor:text!important}
 @media(max-width:760px){.enter-who small,.enter-act a{display:none}.enter-mis{order:3;flex-basis:100%}.enter-bar{gap:.5rem}}
 
 @media(max-width:760px){.game{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(20,10,12,.94)}.sheet-bg{background:rgba(10,5,6,.7)}}
+
+/* celular: sin las fichas-etiqueta de cada proyecto */
+@media(max-width:899px){.pj-top>.fi{display:none!important}.pj-top{gap:0}}
