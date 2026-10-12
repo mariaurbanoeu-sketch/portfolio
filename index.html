@@ -6,6 +6,8 @@
 <title>Paula Urbano · Diseñadora web</title>
 <meta name="description" content="Paula Urbano, diseñadora web en Valencia. Diseño en Figma, pienso la experiencia (UX/UI) y programo webs que funcionan.">
 <meta name="theme-color" content="#221616">
+<link rel="icon" href="favicon.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="canonical" href="https://paulaurbanog.com/">
 <meta property="og:title" content="Paula Urbano · Diseñadora web">
 <meta property="og:description" content="Diseño en Figma, pienso la experiencia y programo webs que funcionan. Disponible ya.">
@@ -13,8 +15,8 @@
 <meta property="og:type" content="website">
 <link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/pinyon.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=4">
-<script>document.documentElement.classList.add('js')</script>
+<link rel="stylesheet" href="css/site.css?v=6">
+<script>(function(d){d.classList.add('js');try{if(!sessionStorage.getItem('wf')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('wire');sessionStorage.setItem('wf','1')}}catch(e){}})(document.documentElement)</script>
 </head>
 <body>
 <a class="skip" href="#main">Saltar al contenido</a>
@@ -28,13 +30,18 @@
     <a href="#sobre">Sobre mí</a>
     <a href="#contacto" class="hd-cta">Escríbeme</a>
   </nav>
+  <button class="hd-insp" id="insp" type="button" aria-pressed="false"><span class="sw" aria-hidden="true"></span><b class="long">Ver cómo está hecho</b><b class="short">Guías</b></button>
   <button class="hd-menu" type="button" aria-expanded="false" aria-controls="nav"><span></span><span></span><b>Menú</b></button>
 </header>
 
 <main id="main">
 
 <!-- ============ PORTADA ============ -->
-<section class="hero" id="top" data-bg="wine">
+<section class="hero" id="top" data-bg="wine" data-frame="Portada">
+  <div class="wf" aria-hidden="true">
+    <div class="wf-txt"><em>H1 · Montserrat 800</em><i class="h"></i><i class="h"></i><i class="h s"></i><i class="sc"></i><i class="p"></i><i class="p"></i><i class="p s"></i><span class="wf-btns"><i></i><i></i></span></div>
+    <div class="wf-img"><em>Paulagotchi · canvas 64 × 64</em></div>
+  </div>
   <div class="hero-txt">
     <h1 class="hero-h"><span class="ln"><span>¿Buscas a alguien</span></span> <span class="ln"><span>que diseñe</span></span> <span class="ln"><span>y programe?</span></span></h1>
     <p class="script hero-me">esa soy yo</p>
@@ -68,7 +75,7 @@
 </section>
 
 <!-- ============ LO QUE MÁS ME GUSTA (se ilumina palabra por palabra) ============ -->
-<section class="love" id="gusta" data-bg="wine" aria-label="Lo que más me gusta">
+<section class="love" id="gusta" data-bg="wine" data-frame="Lo que más me gusta" aria-label="Lo que más me gusta">
   <div class="love-stick">
     <p class="script">lo que más me gusta</p>
     <p class="love-txt" id="loveTxt">Diseñar webs en <b class="k">Figma</b>, pensar cómo las va a usar la gente <b class="k">(UX/UI)</b> y después <b class="k">programarlas</b> para que funcionen de verdad.</p>
@@ -81,7 +88,7 @@
 <div id="proyectos">
 
 <!-- NAILS · carta de esmaltes -->
-<article class="pj nails" id="nails" data-bg="nails" data-icon="nail">
+<article class="pj nails" id="nails" data-bg="nails" data-frame="Nails by MelyG" data-icon="nail">
   <div class="pj-in">
     <header class="pj-hd" data-reveal>
       <p class="nails-kick">Manicurista · Katy, Texas</p>
@@ -93,21 +100,22 @@
       <svg class="nail n1" viewBox="0 0 40 60" aria-hidden="true"><path d="M6 58 V22 C6 8 34 8 34 22 V58 Z"/><path class="sh" d="M12 22 C12 15 18 13 20 13"/></svg>
       <svg class="nail n2" viewBox="0 0 40 60" aria-hidden="true"><path d="M6 58 V22 C6 8 34 8 34 22 V58 Z"/><path class="sh" d="M12 22 C12 15 18 13 20 13"/></svg>
       <svg class="nail n3" viewBox="0 0 40 60" aria-hidden="true"><path d="M6 58 V22 C6 8 34 8 34 22 V58 Z"/><path class="sh" d="M12 22 C12 15 18 13 20 13"/></svg>
-      <figure class="browser"><figcaption><i></i><i></i><i></i><span>nailsbymelyg.com</span></figcaption><video muted playsinline loop preload="none" poster="img/nails-d.webp" data-src="video/nails-d.mp4"></video></figure>
+      <figure class="browser"><figcaption><i></i><i></i><i></i><span>nailsbymelyg.com</span></figcaption><div class="vbox"><video muted playsinline loop preload="none" poster="img/nails-d.webp" data-src="video/nails-d.mp4"></video><div class="pins"><button class="pin" type="button" style="--x:43.8%;--y:78.4%" aria-expanded="false" aria-label="Comentario 1"><span>1</span></button><p class="cmt"><b>Paula</b>«Diseña tu manicura» abre el simulador.</p><button class="pin" type="button" style="--x:73.7%;--y:5.5%" aria-expanded="false" aria-label="Comentario 2"><span>2</span></button><p class="cmt"><b>Paula</b>ES / EN: se elige sola según el idioma del teléfono.</p><button class="pin" type="button" style="--x:5.2%;--y:88.3%" aria-expanded="false" aria-label="Comentario 3"><span>3</span></button><p class="cmt"><b>Paula</b>La gift card se diseña aquí y se envía por WhatsApp.</p></div></div></figure>
       <figure class="phone"><video muted playsinline loop preload="none" poster="img/nails-m.webp?v=2" data-src="video/nails-m.mp4?v=2"></video></figure>
     </div>
+    <p class="pin-hint" data-reveal>Toca los puntos de la web para ver dónde está cada decisión.</p>
     <p class="nails-sub" data-reveal>Lo que pensé para sus clientas</p>
     <ul class="bottles" data-reveal>
-      <li style="--c:#662E3A"><span class="bottle" aria-hidden="true"><i></i></span><b>Probar antes de reservar</b><span>Un simulador para elegir color, forma y acabado. La clienta llega a la cita sabiendo lo que quiere.</span></li>
-      <li style="--c:#C98E95"><span class="bottle" aria-hidden="true"><i></i></span><b>En su idioma sin pedirlo</b><span>La web detecta si el teléfono está en español o en inglés y se abre así.</span></li>
-      <li style="--c:#B99A88"><span class="bottle" aria-hidden="true"><i></i></span><b>Regalar en un minuto</b><span>La gift card se diseña en la web y se envía por WhatsApp.</span></li>
+      <li style="--c:#662E3A"><span class="bottle" aria-hidden="true"><i></i><em>1</em></span><b>Probar antes de reservar</b><span>Un simulador para elegir color, forma y acabado. La clienta llega a la cita sabiendo lo que quiere.</span></li>
+      <li style="--c:#C98E95"><span class="bottle" aria-hidden="true"><i></i><em>2</em></span><b>En su idioma sin pedirlo</b><span>La web detecta si el teléfono está en español o en inglés y se abre así.</span></li>
+      <li style="--c:#B99A88"><span class="bottle" aria-hidden="true"><i></i><em>3</em></span><b>Regalar en un minuto</b><span>La gift card se diseña en la web y se envía por WhatsApp.</span></li>
     </ul>
     <p class="pj-actions"><a class="btn nails-btn" href="https://nailsbymelyg.com/" target="_blank" rel="noopener">Ver la web en vivo <i class="ic ic-out"></i></a></p>
   </div>
 </article>
 
 <!-- KRONOX · cine -->
-<article class="pj kronox" id="kronox" data-bg="kronox" data-icon="cam">
+<article class="pj kronox" id="kronox" data-bg="kronox" data-frame="Kronox" data-icon="cam">
   <div class="pj-in">
     <header class="pj-hd" data-reveal>
       <p class="kx-kick"><span class="rec"></span>REC <span class="tc">00:00:00:00</span></p>
@@ -116,11 +124,12 @@
       <p class="pj-desc">Me pidió una web para su trabajo. Tiene dos partes: la web que ven sus clientes y un panel para que él cambie videos, fotos y precios sin depender de mí.</p>
       <p class="pj-role">UX/UI · Desarrollo · Panel de administración · Firebase</p>
     </header>
+    <div class="devbar kx-devbar" data-for="kronox" data-reveal><span>Ver</span><button type="button" aria-pressed="true" data-w="video">Grabación</button><button type="button" aria-pressed="false" data-w="1280">Escritorio</button><button type="button" aria-pressed="false" data-w="820">Tablet</button><button type="button" aria-pressed="false" data-w="390">Celular</button></div>
     <div class="kx-stage" data-reveal>
       <div class="kx-monitor">
         <div class="kx-hud" aria-hidden="true"><span>Panel · Kronox</span><span class="tc">00:00:00:00</span></div>
         <span class="kx-c tl" aria-hidden="true"></span><span class="kx-c tr" aria-hidden="true"></span><span class="kx-c bl" aria-hidden="true"></span><span class="kx-c br" aria-hidden="true"></span>
-        <video muted playsinline loop preload="none" poster="img/kpanel-d.webp" data-src="video/kpanel-d.mp4"></video>
+        <div class="vbox" data-demo="demos/kronox-panel.html" data-title="Demo del panel de Kronox"><video muted playsinline loop preload="none" poster="img/kpanel-d.webp" data-src="video/kpanel-d.mp4"></video><div class="pins"><button class="pin" type="button" style="--x:48%;--y:18%" aria-expanded="false" aria-label="Comentario 1"><span>1</span></button><p class="cmt"><b>Paula</b>Una pestaña por cada cosa que puede cambiar: videos, fotos, textos, tarifas y reseñas.</p><button class="pin" type="button" style="--x:87%;--y:35%" aria-expanded="false" aria-label="Comentario 2"><span>2</span></button><p class="cmt"><b>Paula</b>Para subir un video solo pega el enlace de YouTube. El título se pone solo.</p><button class="pin" type="button" style="--x:84.2%;--y:66.7%" aria-expanded="false" aria-label="Comentario 3"><span>3</span></button><p class="cmt"><b>Paula</b>Con las flechas cambia el orden en que salen sus videos en la web.</p></div></div>
       </div>
       <figure class="phone kx-phone"><video muted playsinline loop preload="none" poster="img/kpanel-m.webp?v=2" data-src="video/kpanel-m.mp4?v=2"></video></figure>
     </div>
@@ -134,7 +143,7 @@
 </article>
 
 <!-- NÁCAR · revista de moda -->
-<article class="pj nacar" id="nacar" data-bg="nacar" data-icon="bag">
+<article class="pj nacar" id="nacar" data-bg="nacar" data-frame="Nácar" data-icon="bag">
   <div class="pj-in">
     <header class="nc-hd" data-reveal>
       <p class="nc-issue"><span>N.º 03</span><span>Tienda online · Sevilla</span></p>
@@ -143,7 +152,7 @@
       <p class="pj-role">E-commerce · UX/UI · Shopify · Liquid</p>
     </header>
     <div class="nc-spread" data-reveal>
-      <figure class="nc-big"><video muted playsinline loop preload="none" poster="img/nacar-d.webp" data-src="video/nacar-d.mp4"></video><figcaption><b>Fig. 1</b> La tienda en el ordenador</figcaption></figure>
+      <figure class="nc-big"><div class="devbar nc-devbar" data-for="nacar"><span>Ver</span><button type="button" aria-pressed="true" data-w="video">Grabación</button><button type="button" aria-pressed="false" data-w="1280">Escritorio</button><button type="button" aria-pressed="false" data-w="820">Tablet</button><button type="button" aria-pressed="false" data-w="390">Celular</button></div><div class="vbox" data-demo="demos/nacar.html" data-title="Demo de la tienda de Nácar"><video muted playsinline loop preload="none" poster="img/nacar-d.webp" data-src="video/nacar-d.mp4"></video><div class="pins"><button class="pin" type="button" style="--x:96%;--y:4.5%" aria-expanded="false" aria-label="Comentario 01"><span>01</span></button><p class="cmt"><b>Paula</b>La cesta se abre a un lado.</p><button class="pin" type="button" style="--x:83.8%;--y:4.5%" aria-expanded="false" aria-label="Comentario 02"><span>02</span></button><p class="cmt"><b>Paula</b>Selector de idioma: seis idiomas.</p></div></div><figcaption><b>Fig. 1</b> La tienda en el ordenador</figcaption></figure>
       <figure class="nc-small"><div class="phone"><video muted playsinline loop preload="none" poster="img/nacar-m.webp?v=2" data-src="video/nacar-m.mp4?v=2"></video></div><figcaption><b>Fig. 2</b> Y en el celular</figcaption></figure>
     </div>
     <ul class="tags" data-reveal>
@@ -155,7 +164,7 @@
 </article>
 
 <!-- ENTRE AMIGOS · el camino de una ayuda -->
-<article class="pj amigos" id="amigos" data-bg="amigos" data-icon="heart">
+<article class="pj amigos" id="amigos" data-bg="amigos" data-frame="Entre Amigos" data-icon="heart">
   <div class="pj-in">
     <header class="pj-hd" data-reveal>
       <p class="ea-kick"><span></span><span></span><span></span>Proyecto personal</p>
@@ -164,16 +173,19 @@
       <p class="pj-role">Investigación · UX/UI · Desarrollo · 7 idiomas</p>
     </header>
     <div class="ea-grid">
-      <figure class="phone ea-phone" data-reveal><video muted playsinline loop preload="none" poster="img/ea-m.webp?v=2" data-src="video/ea-m.mp4?v=2"></video></figure>
+      <div class="ea-left">
+        <figure class="phone ea-phone" data-reveal><video muted playsinline loop preload="none" poster="img/ea-m.webp?v=2" data-src="video/ea-m.mp4?v=2"></video><img class="ea-scr" data-step="1" src="img/ea/s1.webp" alt="" loading="lazy" width="390" height="844"><img class="ea-scr" data-step="2" src="img/ea/s2.webp" alt="" loading="lazy" width="390" height="844"><img class="ea-scr" data-step="3" src="img/ea/s3.webp" alt="" loading="lazy" width="390" height="844"><img class="ea-scr" data-step="4" src="img/ea/s4.webp" alt="" loading="lazy" width="390" height="844"><img class="ea-scr" data-step="5" src="img/ea/s5.webp" alt="" loading="lazy" width="390" height="844"></figure>
+      </div>
       <div class="ea-route" data-reveal>
         <p class="ea-route-t">El camino de una ayuda</p>
         <ol>
-          <li><b>Se publica la necesidad</b></li>
-          <li><b>Match automático</b></li>
-          <li><b>Comprado</b></li>
-          <li><b>En tránsito</b></li>
-          <li><b>Recibido + PIN</b><span>quien donó comprueba que llegó</span></li>
+          <li data-step="1"><b>Se publica la necesidad</b><span>Qué hace falta, cuánto y dónde. Quien la publica pone un PIN de 4 dígitos.</span><img class="ea-thumb" src="img/ea/s1.webp" alt="Pantalla de la app: se publica la necesidad" loading="lazy" width="390" height="844"></li>
+          <li data-step="2"><b>Match automático</b><span>Si un local cercano tiene eso disponible, la app lo avisa.</span><img class="ea-thumb" src="img/ea/s2.webp" alt="Pantalla de la app: match automático" loading="lazy" width="390" height="844"></li>
+          <li data-step="3"><b>Comprado</b><span>Un donante lo compra y lo marca.</span><img class="ea-thumb" src="img/ea/s3.webp" alt="Pantalla de la app: comprado" loading="lazy" width="390" height="844"></li>
+          <li data-step="4"><b>En tránsito</b><span>Un conductor se ofrece a llevarlo y se ve quién fue a buscarlo.</span><img class="ea-thumb" src="img/ea/s4.webp" alt="Pantalla de la app: en tránsito" loading="lazy" width="390" height="844"></li>
+          <li data-step="5"><b>Recibido + PIN</b><span>Se confirma con el PIN, así quien donó sabe que llegó.</span><img class="ea-thumb" src="img/ea/s5.webp" alt="Pantalla de la app: recibido + pin" loading="lazy" width="390" height="844"></li>
         </ol>
+        <canvas class="ea-box" width="10" height="10" aria-hidden="true"></canvas>
       </div>
     </div>
     <p class="pj-actions"><a class="btn ea-btn" href="demos/entre-amigos.html" target="_blank" rel="noopener">Probar la app <i class="ic ic-out"></i></a></p>
@@ -181,7 +193,7 @@
 </article>
 
 <!-- CREATIVOS · hoja de contactos -->
-<section class="pj crea" id="creativos" data-bg="film" data-icon="star">
+<section class="pj crea" id="creativos" data-bg="film" data-frame="Otros creativos" data-icon="star">
   <div class="pj-in">
     <header class="pj-hd" data-reveal>
       <p class="script">portfolios para</p>
@@ -201,7 +213,7 @@
 <div class="px-sep" aria-hidden="true"><i></i><i></i><i></i></div>
 
 <!-- ============ FIGMA · el lienzo ============ -->
-<section class="fig" id="figma" data-bg="figma" data-icon="pen">
+<section class="fig" id="figma" data-bg="figma" data-frame="Figma" data-icon="pen">
   <div class="fig-in">
     <div class="fig-bar" aria-hidden="true"><span class="fig-logo"><i></i><i></i><i></i><i></i><i></i></span><span class="fig-file">Diseños de la uni <small>/ Página 1</small></span><span class="fig-who"><i>P</i></span></div>
     <header class="pj-hd" data-reveal>
@@ -233,7 +245,7 @@
 </section>
 
 <!-- ============ MARCAS · fichas que se voltean ============ -->
-<section class="brands" id="marcas" data-bg="plum" data-icon="star">
+<section class="brands" id="marcas" data-bg="plum" data-frame="Marcas" data-icon="star">
   <header class="pj-hd" data-reveal>
     <p class="script">y también</p>
     <h2>Identidades de marca</h2>
@@ -292,7 +304,7 @@
 </section>
 
 <!-- ============ SOBRE MÍ ============ -->
-<section class="about" id="sobre" data-bg="milk" data-icon="heart">
+<section class="about" id="sobre" data-bg="milk" data-frame="Sobre mí" data-icon="heart">
   <div class="about-in">
     <figure class="polaroid" data-reveal><canvas id="aboutCanvas" width="64" height="64" aria-hidden="true"></canvas><figcaption>yo, en pixel</figcaption></figure>
     <div class="about-body">
@@ -317,14 +329,14 @@
 </section>
 
 <!-- ============ HERRAMIENTAS · en pixel, como el Paulagotchi ============ -->
-<section class="tools" id="herramientas" data-bg="wine" data-icon="pen">
+<section class="tools" id="herramientas" data-bg="wine" data-frame="Herramientas" data-icon="pen">
   <header class="pj-hd" data-reveal>
     <p class="script">lo que uso</p>
     <h2>Herramientas</h2>
     <p class="pj-desc">Lo que uso para diseñar y para programar.</p>
   </header>
   <div class="tg" data-reveal>
-    <p class="tg-h"><span>Diseño</span><span class="tg-n">06</span></p>
+    <p class="tg-h"><span>Diseño</span><span class="tg-n">07</span></p>
     <ul class="tgrid">
       <li class="tl"><canvas class="tl-ic" width="16" height="16" data-tool="FG" data-c="#A259FF" aria-hidden="true"></canvas><b>Figma</b><span>Interfaces, prototipos navegables y el diseño de cada web antes de programarla.</span></li>
       <li class="tl"><canvas class="tl-ic" width="16" height="16" data-tool="AI" data-c="#FF9A00" aria-hidden="true"></canvas><b>Illustrator</b><span>Logotipos, isotipos, geometría y recursos gráficos de marca.</span></li>
@@ -332,6 +344,7 @@
       <li class="tl"><canvas class="tl-ic" width="16" height="16" data-tool="ID" data-c="#FF3366" aria-hidden="true"></canvas><b>InDesign</b><span>Manuales de marca, cartas de restaurante y maquetación editorial.</span></li>
       <li class="tl"><canvas class="tl-ic" width="16" height="16" data-tool="AF" data-c="#1BC6B4" aria-hidden="true"></canvas><b>Affinity</b><span>Diseño vectorial y edición de imagen para piezas de marca.</span></li>
       <li class="tl"><canvas class="tl-ic" width="16" height="16" data-tool="CA" data-c="#00C4CC" aria-hidden="true"></canvas><b>Canva</b><span>Plantillas de redes que el cliente puede editar sin mí.</span></li>
+      <li class="tl"><canvas class="tl-ic" width="16" height="16" data-tool="CC" data-c="#DADADA" aria-hidden="true"></canvas><b>CapCut</b><span>Edición de video.</span></li>
     </ul>
   </div>
   <div class="tg" data-reveal>
@@ -348,9 +361,12 @@
     </ul>
   </div>
   <div class="tg" data-reveal>
-    <p class="tg-h"><span>Y también</span><span class="tg-n">01</span></p>
-    <ul class="tgrid one">
+    <p class="tg-h"><span>Y también</span><span class="tg-n">04</span></p>
+    <ul class="tgrid">
       <li class="tl"><canvas class="tl-ic" width="16" height="16" data-tool="CP" data-c="#9A6BFF" aria-hidden="true"></canvas><b>Copilot</b><span>Me ayuda a escribir y revisar código más rápido, sin perder el control.</span></li>
+      <li class="tl"><canvas class="tl-ic" width="16" height="16" data-tool="CL" data-c="#D97757" aria-hidden="true"></canvas><b>Claude</b><span>Dominio total.</span></li>
+      <li class="tl"><canvas class="tl-ic" width="16" height="16" data-tool="GP" data-c="#10A37F" aria-hidden="true"></canvas><b>ChatGPT</b><span>Para pensar ideas en voz alta.</span></li>
+      <li class="tl"><canvas class="tl-ic" width="16" height="16" data-tool="GE" data-c="#4C8DF6" aria-hidden="true"></canvas><b>Gemini</b><span>Otra opinión cuando la necesito.</span></li>
     </ul>
   </div>
   <div class="tools-ask" data-reveal>
@@ -362,7 +378,7 @@
 </main>
 
 <!-- ============ CONTACTO · mensaje desde el Paulagotchi ============ -->
-<footer class="ft" id="contacto" data-bg="olive">
+<footer class="ft" id="contacto" data-bg="olive" data-frame="Contacto">
   <div class="ft-in">
     <div>
       <p class="script">¿hablamos?</p>
@@ -407,6 +423,6 @@
   <div class="mv-stage"><button type="button" class="mv-nav" id="mvPrev" aria-label="Página anterior"><i class="ic ic-left"></i></button><img id="mvImg" alt=""><button type="button" class="mv-nav" id="mvNext" aria-label="Página siguiente"><i class="ic ic-right"></i></button></div>
 </div>
 
-<script src="js/site.js?v=4" defer></script>
+<script src="js/site.js?v=6" defer></script>
 </body>
 </html>

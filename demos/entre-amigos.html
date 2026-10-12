@@ -1749,7 +1749,7 @@ function clearDemoDataIfPresent() {
 }
 
 function seedDemoData() {
-  if (localStorage.getItem('eav_seeded_v1')) return;
+  if (localStorage.getItem('eav_seeded_v2')) return;
   const needId = 'demo-necesidad-1';
   const transitId = 'demo-necesidad-2';
   const driverId = 'demo-transporte-1';
@@ -1758,13 +1758,13 @@ function seedDemoData() {
     { id: transitId, descripcion: 'Agua potable para familias de la zona costera', categoria: 'alimentos_agua', cantidad: 40, unidad: 'cajas', ciudad: 'La Guaira', hospital_centro: 'Punto comunitario Maiquetia', estado_ayuda: 'en_transito', id_transporte: driverId, lat: 10.6, lng: -66.93, creado_en: now() }
   ]);
   DB.set('inventario', [
-    { id: 'demo-inventario-1', descripcion: 'Gasas esteriles, guantes y material de cura', categoria: 'insumos_medicos', cantidad_disponible: 25, unidad: 'kits', ciudad: 'La Guaira', nombre_local: 'Farmacia Solidaria La Guaira', activo: true, precio: 0, productos_lista: 'Gasas, guantes, suero', creado_en: now() }
+    { id: 'demo-inventario-1', descripcion: 'Gasas esteriles y suero fisiologico, guantes y material de cura', categoria: 'insumos_medicos', cantidad_disponible: 25, unidad: 'kits', ciudad: 'La Guaira', nombre_local: 'Farmacia Solidaria La Guaira', activo: true, precio: 0, productos_lista: 'Gasas, guantes, suero', creado_en: now() }
   ]);
   DB.set('transporte', [
     { id: driverId, id_insumo: transitId, nombre_conductor: 'Carlos M.', ciudad_origen: 'Caracas', ciudad_destino: 'La Guaira', estado_traslado: 'en_transito', whatsapp_link: 'https://wa.me/584120000000', creado_en: now() }
   ]);
   runAutoMatch('La Guaira');
-  localStorage.setItem('eav_seeded_v1', '1');
+  localStorage.setItem('eav_seeded_v2', '1');
 }
 
 /* ─── MÓDULO D: Auto-Match ─── */
