@@ -821,9 +821,9 @@ body[data-bg="milk"] .btn,body[data-bg="nails"] .btn,body[data-bg="nacar"] .btn{
 @media(max-width:760px){.cmt{display:none!important}}
 
 /* inclinar el teléfono */
-.g-tilt{display:block;margin:1.2rem auto 0;min-height:2.75rem;padding:0 1rem;border:1px dashed rgba(250,246,240,.3);border-radius:22px;background:none;color:var(--soft);font:600 .72rem/1 var(--sans);letter-spacing:.04em;cursor:pointer}
+.g-tilt{display:block;margin:1rem auto 0;min-height:2.75rem;padding:0;border:0;background:none;color:var(--soft);font:600 .74rem/1 var(--sans);letter-spacing:.02em;text-decoration:underline;text-underline-offset:.3em;cursor:pointer}
 .g-tilt[hidden]{display:none}
-.g-tilt.on{border-style:solid;color:var(--pink)}
+.g-tilt.on{color:var(--pink);text-decoration:none}
 .gotchi-wrap{flex-direction:column;align-items:center}
 
 /* compartir y guardar contacto */
@@ -841,10 +841,11 @@ body[data-bg="milk"] .btn,body[data-bg="nails"] .btn,body[data-bg="nacar"] .btn{
   .hd-menu{display:none!important}
   .hd-insp{margin-left:auto;margin-right:.6rem}
   .hd-insp .short{display:none}
-  .hd-here{display:inline-flex;align-items:center;gap:.45rem;max-width:11rem;min-height:2.6rem;padding:0 .7rem 0 .55rem;border:1px solid var(--line);border-radius:20px;background:rgba(0,0,0,.12);color:var(--ink);font:600 .74rem/1 var(--sans);cursor:pointer}
-  .hd-here canvas{width:18px;height:18px;image-rendering:pixelated;flex:0 0 auto}
-  .hd-here span{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+  .hd-here{display:inline-flex;align-items:center;gap:.45rem;max-width:12rem;min-height:2.75rem;margin-left:auto;padding:0;border:0;background:none;color:var(--ink);font:600 .8rem/1 var(--sans);cursor:pointer}
+  .hd-here canvas{width:16px;height:16px;image-rendering:pixelated;flex:0 0 auto}
+  .hd-here span{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;border-bottom:1px solid currentColor;padding-bottom:2px}
   .hd-here i{flex:0 0 auto;width:8px;height:5px;background:currentColor;clip-path:polygon(0 0,100% 0,50% 100%);opacity:.7}
+  .hd-insp{display:none!important}
   .hd-here.pop span{animation:fade .35s var(--ease)}
 }
 .sec-list{list-style:none;margin:0;padding:0;display:grid;gap:2px}
@@ -994,3 +995,5 @@ html[data-tool] .tool-cmt textarea{cursor:text!important}
 .enter-load span{width:12px;height:12px;background:#EBA9BD;animation:bob .5s steps(2) infinite}
 .enter-load.off{display:none}
 @media(max-width:760px){.enter-who small,.enter-act a{display:none}.enter-mis{order:3;flex-basis:100%}.enter-bar{gap:.5rem}}
+
+@media(max-width:760px){.game{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(20,10,12,.94)}.sheet-bg{background:rgba(10,5,6,.7)}}

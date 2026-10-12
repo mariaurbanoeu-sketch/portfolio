@@ -173,6 +173,7 @@
     var gx = g.cv.getContext('2d'), mx = mini.cv.getContext('2d');
     var last = 0, blinkAt = 2500;
     var loop = function (t) {
+      if ((typeof game !== 'undefined' && game && !game.hidden) || document.hidden) { if (!reduce) requestAnimationFrame(loop); return; }
       g.t = t;
       if (t - last > 120) {
         last = t;
@@ -240,7 +241,7 @@
     var liveIO = new IntersectionObserver(function (es) {
       es.forEach(function (e) {
         var f = e.target;
-        if (e.isIntersecting && !f.src) { f.addEventListener('load', function () { f.classList.add('ok'); }); f.src = f.dataset.live; fitLive(f); }
+        if (e.isIntersecting && !f.src && !small.matches) { f.addEventListener('load', function () { f.classList.add('ok'); }); f.src = f.dataset.live; fitLive(f); }
         if (!e.isIntersecting) f.parentNode.classList.remove('nav');
       });
     }, { rootMargin: '300px 0px' });
@@ -355,7 +356,7 @@
       var map = { h1: 'Título H1', h2: 'Título H2', h3: 'Título H3', p: 'Texto', a: 'Enlace', button: 'Botón', img: 'Imagen', video: 'Video', canvas: 'Canvas (pixel)', li: 'Elemento de lista', figure: 'Marco', b: 'Texto en negrita', span: 'Texto', textarea: 'Campo de texto' };
       return (map[t] || 'Bloque') + (el.classList[0] ? ' · .' + el.classList[0] : '');
     };
-    var show = function (el) {
+    var inspShow = function (el) {
       if (!el || el === cur) return; cur = el;
       var r = el.getBoundingClientRect(), cs = getComputedStyle(el);
       box.style.cssText = 'display:block;left:' + r.left + 'px;top:' + r.top + 'px;width:' + r.width + 'px;height:' + r.height + 'px';
@@ -379,7 +380,7 @@
       var el = e.target;
       if (!on || !el || el.closest('.insp-panel,.hd-insp')) return;
       if (el.closest('.hd')) el = el.closest('a,button,.hd-logo') || el;
-      show(el);
+      inspShow(el);
     };
     var guard = function (e) {
       if (!on || e.target.closest('.hd-insp,.insp-panel')) return;
@@ -396,7 +397,7 @@
     insp.addEventListener('click', toggle);
     document.addEventListener('mouseover', pick, true);
     document.addEventListener('click', guard, true);
-    addEventListener('scroll', function () { if (on && cur) { var c = cur; cur = null; show(c); } }, { passive: true });
+    addEventListener('scroll', function () { if (on && cur) { var c = cur; cur = null; inspShow(c); } }, { passive: true });
   }
 
   /* ======================= comentarios sobre la web ======================= */
@@ -888,7 +889,7 @@
       mail: ["XXXXXXXXX","XX.....XX","X.X...X.X","X..X.X..X","X...X...X","X.......X","X.......X","XXXXXXXXX","........."] };
     $$('canvas[data-dk]', dock).forEach(function (c) { var x = c.getContext('2d'); x.fillStyle = '#EBA9BD'; dk[c.dataset.dk].forEach(function (r, y) { for (var i = 0; i < 9; i++) if (r[i] === 'X') x.fillRect(i, y, 1, 1); }); });
     var dcx = $('#dockCanvas').getContext('2d');
-    (function dloop(t) { dcx.clearRect(0, 0, 32, 32); drawSprite(dcx, 0, 1 - (Math.floor((t || 0) / 480) % 2), 1, g.sleep ? 'blink' : 'idle'); if (!reduce) requestAnimationFrame(dloop); })();
+    drawSprite(dcx, 0, 1, 1, 'idle');
     $('#dockG').addEventListener('click', function () { buzz(14); openGame(); });
     $$('a', dock).forEach(function (a) { a.addEventListener('click', function () { buzz(6); }); });
     var map = { proyectos: 'proyectos', nails: 'proyectos', kronox: 'proyectos', nacar: 'proyectos', amigos: 'proyectos', creativos: 'proyectos', figma: 'figma', marcas: 'figma', sobre: 'sobre', herramientas: 'sobre', contacto: 'contacto' };
@@ -915,14 +916,14 @@
       var m = Math.abs(a.x || 0) + Math.abs(a.y || 0) + Math.abs(a.z || 0), now = Date.now();
       if (m > 34) { shakes.push(now); shakes = shakes.filter(function (t) { return now - t < 900; }); if (shakes.length >= 4 && game.hidden) { shakes = []; buzz(30); openGame(); } }
     };
-    var start = function () { addEventListener('deviceorientation', onTilt); addEventListener('devicemotion', onShake); tiltBtn.classList.add('on'); tiltBtn.textContent = 'Inclínalo · agítalo para jugar'; };
+    var startTilt = function () { addEventListener('deviceorientation', onTilt); addEventListener('devicemotion', onShake); tiltBtn.classList.add('on'); tiltBtn.textContent = 'Inclínalo · agítalo para jugar'; };
     tiltBtn.addEventListener('click', function () {
       buzz(10);
       var asks = [];
       if (typeof DeviceOrientationEvent.requestPermission === 'function') asks.push(DeviceOrientationEvent.requestPermission());
       if (window.DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === 'function') asks.push(DeviceMotionEvent.requestPermission());
-      if (!asks.length) { start(); return; }
-      Promise.all(asks).then(function (r) { if (r.every(function (x) { return x === 'granted'; })) start(); else tiltBtn.textContent = 'Sin permiso para el movimiento'; }).catch(function () {});
+      if (!asks.length) { startTilt(); return; }
+      Promise.all(asks).then(function (r) { if (r.every(function (x) { return x === 'granted'; })) startTilt(); else tiltBtn.textContent = 'Sin permiso para el movimiento'; }).catch(function () {});
     });
   }
 
@@ -961,10 +962,11 @@
   function start() {
     $('#gEnd').hidden = true;
     st = { bugs: [], score: 0, t0: performance.now(), last: performance.now(), spawn: 0, splats: [], raf: 0 };
-    st.raf = requestAnimationFrame(step);
+    step(performance.now());
   }
   function step(now) {
     if (!st) return;
+    if (!st.first) { st.first = 1; st.t0 = now; st.last = now; }
     var dt = Math.min(50, now - st.last); st.last = now;
     var left = Math.max(0, 20 - (now - st.t0) / 1000);
     $('#gTime').textContent = Math.ceil(left) + ' s'; $('#gScore').textContent = st.score + ' bugs';
