@@ -15,7 +15,7 @@
 <meta property="og:type" content="website">
 <link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/pinyon.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=9">
+<link rel="stylesheet" href="css/site.css?v=10">
 <script>(function(d){d.classList.add('js');try{if(!sessionStorage.getItem('wf')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('wire');sessionStorage.setItem('wf','1')}}catch(e){}})(document.documentElement)</script>
 </head>
 <body>
@@ -215,19 +215,57 @@
   </div>
 </article>
 
-<!-- CREATIVOS · hoja de contactos -->
-<section class="pj crea" id="creativos" data-bg="film" data-frame="Otros creativos" data-icon="star">
+<!-- CREATIVOS · hoja de contactos en grande -->
+<section class="pj crea" id="creativos" data-bg="film" data-icon="star" data-frame="Portfolios para creativos">
   <div class="pj-in">
     <header class="pj-hd" data-reveal>
-      <p class="script">portfolios para</p>
-      <h2>Otros creativos</h2>
+      <p class="pj-n">Extra · 3 portfolios</p>
+      <p class="script">mis favoritos</p>
+      <h2>Portfolios para creativos</h2>
       <p class="pj-desc">Webs para tres personas que también crean. Antes de diseñar, miré qué busca cada uno en su sector.</p>
     </header>
-    <div class="strip" data-reveal>
-      <a class="frame" href="https://jairoazogue.com/" target="_blank" rel="noopener"><span class="fn">12A</span><span class="shot"><img src="img/jairo.webp" alt="Web de Jairo Azogue" loading="lazy" width="900" height="501"></span><b>Jairo Azogue</b><em>Director y editor de video</em></a>
-      <a class="frame" href="https://zoguekidd.netlify.app/" target="_blank" rel="noopener"><span class="fn">13</span><span class="shot"><img src="img/zoguekidd.webp" alt="Web de ZogueKidd" loading="lazy" width="900" height="562"></span><b>ZogueKidd</b><em>Videoclips</em></a>
-      <a class="frame" href="https://catalinasilva.netlify.app/" target="_blank" rel="noopener"><span class="fn">14A</span><span class="shot ph"><span>Catalina Silva</span></span><b>Catalina Silva</b><em>3D y animación</em></a>
-    </div>
+  </div>
+  <div class="mq" aria-hidden="true"><div class="mq-in"><span>Jairo Azogue</span><i>12A</i><span>ZogueKidd</span><i>13</i><span>Catalina Silva</span><i>14A</i><span>Jairo Azogue</span><i>12A</i><span>ZogueKidd</span><i>13</i><span>Catalina Silva</span><i>14A</i></div></div>
+  <div class="pj-in">
+    <article class="take" data-reveal>
+      <div class="take-film"><span class="take-ec">12A ▸ KODAK 400TX</span>
+        <div class="take-media take-pan"><img src="img/jairo.webp" alt="Web de Jairo Azogue: su sección de herramientas" loading="lazy" width="900" height="501"></div>
+        <svg class="take-mark" viewBox="0 0 120 60" aria-hidden="true"><path d="M14 34 C 10 10, 100 4, 108 26 C 116 50, 30 58, 12 40"/></svg><span class="take-ok" aria-hidden="true">OK</span>
+      </div>
+      <div class="take-txt">
+        <p class="take-n">Toma 01</p>
+        <h3>Jairo Azogue</h3>
+        <p class="take-k">Director y editor de video</p>
+        <p>Su trabajo ordenado por tipo de pieza y sus herramientas como si fueran su escritorio. Ya está en su propio dominio.</p>
+        <a class="btn" href="https://jairoazogue.com/" target="_blank" rel="noopener">Ver su web <i class="ic ic-out"></i></a>
+      </div>
+    </article>
+    <article class="take rev" data-reveal>
+      <div class="take-film"><span class="take-ec">13 ▸ KODAK 400TX</span>
+        <div class="take-media"><video muted playsinline loop preload="none" poster="img/zk-d.webp" data-src="video/zk-d.mp4"></video><figure class="phone take-phone"><video muted playsinline loop preload="none" poster="img/zk-m.webp" data-src="video/zk-m.mp4"></video></figure></div>
+        <svg class="take-mark" viewBox="0 0 120 60" aria-hidden="true"><path d="M14 34 C 10 10, 100 4, 108 26 C 116 50, 30 58, 12 40"/></svg><span class="take-ok" aria-hidden="true">OK</span>
+      </div>
+      <div class="take-txt">
+        <p class="take-n">Toma 02</p>
+        <h3>ZogueKidd</h3>
+        <p class="take-k">Videoclips</p>
+        <p>Usa la misma base que la web de Kronox, con una estética totalmente distinta.</p>
+        <a class="btn" href="https://zoguekidd.netlify.app/" target="_blank" rel="noopener">Ver su web <i class="ic ic-out"></i></a>
+      </div>
+    </article>
+    <article class="take" data-reveal>
+      <div class="take-film"><span class="take-ec">14A ▸ KODAK 400TX</span>
+        <div class="take-media take-ph"><span>Catalina Silva</span><em>3D y animación</em></div>
+        <svg class="take-mark" viewBox="0 0 120 60" aria-hidden="true"><path d="M14 34 C 10 10, 100 4, 108 26 C 116 50, 30 58, 12 40"/></svg><span class="take-ok" aria-hidden="true">OK</span>
+      </div>
+      <div class="take-txt">
+        <p class="take-n">Toma 03</p>
+        <h3>Catalina Silva</h3>
+        <p class="take-k">3D y animación</p>
+        <p>La hicimos para que pudiera pedir prácticas en estudios de 3D.</p>
+        <a class="btn" href="https://catalinasilva.netlify.app/" target="_blank" rel="noopener">Ver su web <i class="ic ic-out"></i></a>
+      </div>
+    </article>
   </div>
 </section>
 
@@ -447,6 +485,6 @@
   <div class="mv-stage"><button type="button" class="mv-nav" id="mvPrev" aria-label="Página anterior"><i class="ic ic-left"></i></button><img id="mvImg" alt=""><button type="button" class="mv-nav" id="mvNext" aria-label="Página siguiente"><i class="ic ic-right"></i></button></div>
 </div>
 
-<script src="js/site.js?v=9" defer></script>
+<script src="js/site.js?v=10" defer></script>
 </body>
 </html>
