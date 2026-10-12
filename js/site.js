@@ -252,6 +252,33 @@
     });
   }
 
+
+  /* ======================= herramientas: iconos en pixel ======================= */
+  var GLYPH = {
+    A: ['.X.', 'X.X', 'XXX', 'X.X', 'X.X'], B: ['XX.', 'X.X', 'XX.', 'X.X', 'XX.'], C: ['.XX', 'X..', 'X..', 'X..', '.XX'],
+    D: ['XX.', 'X.X', 'X.X', 'X.X', 'XX.'], F: ['XXX', 'X..', 'XX.', 'X..', 'X..'], G: ['.XX', 'X..', 'X.X', 'X.X', '.XX'],
+    H: ['X.X', 'X.X', 'XXX', 'X.X', 'X.X'], I: ['XXX', '.X.', '.X.', '.X.', 'XXX'], J: ['..X', '..X', '..X', 'X.X', '.X.'],
+    P: ['XX.', 'X.X', 'XX.', 'X..', 'X..'], Q: ['.X.', 'X.X', 'X.X', 'XX.', '.XX'], S: ['.XX', 'X..', '.X.', '..X', 'XX.'],
+    T: ['XXX', '.X.', '.X.', '.X.', '.X.'], W: ['X.X', 'X.X', 'XXX', 'XXX', 'X.X']
+  };
+  function shade(hex, k) {
+    var n = parseInt(hex.slice(1), 16), r = n >> 16, g2 = (n >> 8) & 255, b = n & 255;
+    return 'rgb(' + Math.round(r * k) + ',' + Math.round(g2 * k) + ',' + Math.round(b * k) + ')';
+  }
+  $$('canvas[data-tool]').forEach(function (cv) {
+    var x = cv.getContext('2d'), c = cv.dataset.c, ab = cv.dataset.tool;
+    /* ficha con esquinas en escalón, como los botones del Paulagotchi */
+    x.fillStyle = shade(c, .28); x.fillRect(2, 1, 12, 14); x.fillRect(1, 2, 14, 12);
+    x.fillStyle = c; x.fillRect(2, 1, 12, 1); x.fillRect(1, 2, 1, 12); x.fillRect(2, 14, 12, 1); x.fillRect(14, 2, 1, 12);
+    x.fillStyle = shade(c, .55); x.fillRect(3, 13, 11, 1); x.fillRect(13, 3, 1, 10);
+    x.fillStyle = 'rgba(255,255,255,.35)'; x.fillRect(3, 3, 2, 1); x.fillRect(3, 4, 1, 1);
+    x.fillStyle = c;
+    for (var k = 0; k < 2; k++) {
+      var gl = GLYPH[ab[k]]; if (!gl) continue;
+      for (var y = 0; y < 5; y++) for (var i = 0; i < 3; i++) if (gl[y][i] === 'X') x.fillRect(4 + k * 5 + i, 6 + y, 1, 1);
+    }
+  });
+
   /* ---------- si te vas a otra pestaña ---------- */
   var title = document.title;
   document.addEventListener('visibilitychange', function () { document.title = document.hidden ? 'vuelve :(' : title; });
