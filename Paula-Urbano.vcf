@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Urbano;Paula;;;
+FN:Paula Urbano
+TITLE:Diseñadora web
+EMAIL;TYPE=INTERNET:mariaurbanoeu@gmail.com
+URL:https://paulaurbanog.com/
+X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/paula-urbano-436619332
+ADR;TYPE=HOME:;;;Valencia;;;España
+NOTE:Diseño y programo webs.
+END:VCARD

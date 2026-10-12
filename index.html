@@ -8,6 +8,10 @@
 <meta name="theme-color" content="#221616">
 <link rel="icon" href="favicon.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Paula">
 <link rel="canonical" href="https://paulaurbanog.com/">
 <meta property="og:title" content="Paula Urbano · Diseñadora web">
 <meta property="og:description" content="Diseño en Figma, pienso la experiencia y programo webs que funcionan. Disponible ya.">
@@ -15,13 +19,14 @@
 <meta property="og:type" content="website">
 <link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/pinyon.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=13">
+<link rel="stylesheet" href="css/site.css?v=14">
 <script>(function(d){d.classList.add('js');try{if(!sessionStorage.getItem('wf')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('wire');sessionStorage.setItem('wf','1')}}catch(e){}})(document.documentElement)</script>
 </head>
 <body>
 <a class="skip" href="#main">Saltar al contenido</a>
 
 <header class="hd">
+  <span class="hd-prog" aria-hidden="true"></span>
   <a class="hd-logo" href="#top">Paula Urbano</a>
   <nav class="hd-nav" id="nav" aria-label="Secciones">
     <a href="#proyectos">Proyectos</a>
@@ -71,6 +76,7 @@
         <p class="g-legend"><span>proyectos</span><span>jugar</span><span>hablar</span></p>
       </div>
     </div>
+    <button class="g-tilt" id="gTilt" type="button" hidden>Inclina el teléfono · agítalo para jugar</button>
   </div>
 </section>
 
@@ -83,11 +89,13 @@
     </header>
     <div class="bw-wrap">
       <div class="bw-win">
+        <div class="bw-prog" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
         <div class="bw-tabs" role="tablist" aria-label="Proyectos"><button class="bw-tab" type="button" role="tab" id="tab-nails" aria-controls="bw-view" aria-selected="true" data-i="0"><i style="--d:#662E3A"></i><span>Nails by MelyG</span></button><button class="bw-tab" type="button" role="tab" id="tab-kronox" aria-controls="bw-view" aria-selected="false" data-i="1"><i style="--d:#EDE6DA"></i><span>Kronox</span></button><button class="bw-tab" type="button" role="tab" id="tab-nacar" aria-controls="bw-view" aria-selected="false" data-i="2"><i style="--d:#8A6A4F"></i><span>Nácar Estilismo</span></button><button class="bw-tab" type="button" role="tab" id="tab-amigos" aria-controls="bw-view" aria-selected="false" data-i="3"><i style="--d:#FFD23F"></i><span>Entre Amigos</span></button></div>
         <div class="bw-bar"><span class="bw-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="bw-url" id="bwUrl" data-urls="nailsbymelyg.com|kronoxprod.netlify.app|nácar · tienda online|entre amigos por venezuela · app">nailsbymelyg.com</span></div>
         <div class="bw-load" aria-hidden="true"></div>
         <div class="bw-view" id="bw-view" role="tabpanel"><div class="bw-v on" data-i="0"><video muted playsinline loop preload="none" poster="img/nails-d.webp" data-src="video/nails-d.mp4"></video></div><div class="bw-v" data-i="1"><video muted playsinline loop preload="none" poster="img/kpanel-d.webp" data-src="video/kpanel-d.mp4"></video><iframe class="live" data-live="https://kronoxprod.netlify.app/" title="Web de Kronox en vivo" tabindex="-1"></iframe></div><div class="bw-v" data-i="2"><video muted playsinline loop preload="none" poster="img/nacar-d.webp" data-src="video/nacar-d.mp4"></video></div><div class="bw-v m" data-i="3"><video muted playsinline loop preload="none" poster="img/ea-m.webp?v=2" data-src="video/ea-m.mp4?v=2"></video></div></div>
       </div>
+      <button class="bw-insp" type="button">Inspeccionar este proyecto</button>
       <aside class="bw-panel" aria-live="polite"><p class="bw-ph">Inspeccionar</p><div class="bw-p on" data-i="0"><div class="bw-who"><canvas class="bw-ic" data-icon="nail" width="8" height="8" aria-hidden="true"></canvas><p class="bw-n"><span>Proyecto 01 / 04</span><span class="bw-lvl" aria-hidden="true"><i class="f"></i><i></i><i></i><i></i></span></p></div><dl><div><dt>Cliente</dt><dd>Mely G., manicurista en Katy, Texas</dd></div><div><dt>Tipo</dt><dd>Web con reservas y gift cards</dd></div><div><dt>Qué hice</dt><dd>Diseño en Figma, UX/UI y desarrollo</dd></div><div><dt>Herramientas</dt><dd>Figma · HTML · CSS · JavaScript · GSAP · Square</dd></div><div><dt>Año</dt><dd>2026</dd></div></dl><a class="bw-go" href="#nails"><span class="px-arr" aria-hidden="true"></span>Ver el caso</a></div><div class="bw-p" data-i="1"><div class="bw-who"><canvas class="bw-ic" data-icon="cam" width="8" height="8" aria-hidden="true"></canvas><p class="bw-n"><span>Proyecto 02 / 04</span><span class="bw-lvl" aria-hidden="true"><i class="f"></i><i class="f"></i><i></i><i></i></span></p></div><dl><div><dt>Cliente</dt><dd>Kronox, director de videoclips en Sevilla</dd></div><div><dt>Tipo</dt><dd>Web + panel de administración</dd></div><div><dt>Qué hice</dt><dd>UX/UI y desarrollo</dd></div><div><dt>Herramientas</dt><dd>HTML · CSS · JavaScript · Firebase</dd></div><div><dt>Año</dt><dd>2026</dd></div></dl><a class="bw-go" href="#kronox"><span class="px-arr" aria-hidden="true"></span>Ver el caso</a></div><div class="bw-p" data-i="2"><div class="bw-who"><canvas class="bw-ic" data-icon="bag" width="8" height="8" aria-hidden="true"></canvas><p class="bw-n"><span>Proyecto 03 / 04</span><span class="bw-lvl" aria-hidden="true"><i class="f"></i><i class="f"></i><i class="f"></i><i></i></span></p></div><dl><div><dt>Cliente</dt><dd>Nácar Estilismo, tienda de ropa en Sevilla</dd></div><div><dt>Tipo</dt><dd>Tienda online en seis idiomas</dd></div><div><dt>Qué hice</dt><dd>Diseño y desarrollo del tema</dd></div><div><dt>Herramientas</dt><dd>Shopify · Liquid</dd></div><div><dt>Año</dt><dd>2026</dd></div></dl><a class="bw-go" href="#nacar"><span class="px-arr" aria-hidden="true"></span>Ver el caso</a></div><div class="bw-p" data-i="3"><div class="bw-who"><canvas class="bw-ic" data-icon="heart" width="8" height="8" aria-hidden="true"></canvas><p class="bw-n"><span>Proyecto 04 / 04</span><span class="bw-lvl" aria-hidden="true"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i></span></p></div><dl><div><dt>Cliente</dt><dd>Proyecto personal</dd></div><div><dt>Tipo</dt><dd>App web que funciona sin conexión</dd></div><div><dt>Qué hice</dt><dd>Investigación, UX/UI y desarrollo</dd></div><div><dt>Herramientas</dt><dd>HTML · CSS · JavaScript</dd></div><div><dt>Año</dt><dd>2026</dd></div></dl><a class="bw-go" href="#amigos"><span class="px-arr" aria-hidden="true"></span>Ver el caso</a></div></aside>
     </div>
   </div>
@@ -480,6 +488,7 @@
       <p class="script">¿hablamos?</p>
       <h2 class="ft-h">Escríbeme</h2>
       <a class="ft-mail" href="mailto:mariaurbanoeu@gmail.com">mariaurbanoeu@gmail.com</a>
+      <p class="ft-share"><button class="btn ghost" type="button" id="shareBtn">Compartir mi portfolio <i class="ic ic-out"></i></button><a class="btn ghost" href="Paula-Urbano.vcf" download>Guardar mi contacto <i class="ic ic-down"></i></a></p>
       <p class="ft-links">
         <a href="https://www.linkedin.com/in/paula-urbano-436619332" target="_blank" rel="noopener">LinkedIn <i class="ic ic-out"></i></a>
         <a href="Paula-Urbano-CV.pdf" download>Descargar CV <i class="ic ic-down"></i></a>
@@ -498,6 +507,19 @@
 </footer>
 
 <!-- mini Paulagotchi que acompaña al bajar -->
+<nav class="dock" id="dock" aria-label="Navegación rápida">
+  <a href="#proyectos" data-to="proyectos"><canvas width="9" height="9" data-dk="web" aria-hidden="true"></canvas><span>Webs</span></a>
+  <a href="#figma" data-to="figma"><canvas width="9" height="9" data-dk="pen" aria-hidden="true"></canvas><span>Figma</span></a>
+  <button type="button" class="dock-g" id="dockG" aria-label="Paulagotchi: jugar"><canvas id="dockCanvas" width="32" height="32" aria-hidden="true"></canvas></button>
+  <a href="#sobre" data-to="sobre"><canvas width="9" height="9" data-dk="me" aria-hidden="true"></canvas><span>Sobre mí</span></a>
+  <a href="#contacto" data-to="contacto"><canvas width="9" height="9" data-dk="mail" aria-hidden="true"></canvas><span>Escríbeme</span></a>
+</nav>
+
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetT" hidden>
+  <div class="sheet-bg" data-close></div>
+  <div class="sheet-p"><div class="sheet-h" aria-hidden="true"><i></i></div><p class="sheet-t" id="sheetT"></p><div class="sheet-c" id="sheetC"></div><button class="sheet-x" type="button" data-close>Cerrar</button></div>
+</div>
+
 <button class="mini-g" id="miniG" type="button" aria-label="Jugar con el Paulagotchi"><canvas id="miniCanvas" width="32" height="32" aria-hidden="true"></canvas></button>
 
 <!-- minijuego -->
@@ -519,6 +541,6 @@
   <div class="mv-stage"><button type="button" class="mv-nav" id="mvPrev" aria-label="Página anterior"><i class="ic ic-left"></i></button><img id="mvImg" alt=""><button type="button" class="mv-nav" id="mvNext" aria-label="Página siguiente"><i class="ic ic-right"></i></button></div>
 </div>
 
-<script src="js/site.js?v=12" defer></script>
+<script src="js/site.js?v=14" defer></script>
 </body>
 </html>

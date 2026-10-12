@@ -767,3 +767,83 @@ body[data-bg="milk"] .btn,body[data-bg="nails"] .btn,body[data-bg="nacar"] .btn{
 .cam-screen .live-go{bottom:2.2rem}
 .b3-card .live{pointer-events:none!important}
 .b3-card.live-box{position:absolute;overflow:hidden}
+
+/* ============ celular: experiencia de app ============ */
+/* barra de lectura arriba (animación ligada al scroll, sin JavaScript) */
+.hd-prog{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:var(--pink);transform-origin:left;transform:scaleX(0)}
+@supports (animation-timeline: scroll()){.hd-prog{animation:prog linear both;animation-timeline:scroll(root)}}
+@keyframes prog{to{transform:scaleX(1)}}
+
+/* barra de navegación abajo, al alcance del pulgar */
+.dock{display:none}
+@media(max-width:760px){
+  .hd-menu,.mini-g{display:none!important}
+  .dock{position:fixed;z-index:60;left:50%;bottom:calc(.7rem + env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:flex;align-items:center;gap:.15rem;padding:.35rem;border-radius:22px;background:rgba(20,13,13,.82);-webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);border:1px solid rgba(250,246,240,.12);box-shadow:0 18px 40px -12px rgba(0,0,0,.7);transition:transform .45s var(--ease),opacity .3s}
+  .dock.hide{transform:translate(-50%,calc(100% + 1.5rem));opacity:0}
+  .dock a{display:grid;justify-items:center;gap:.2rem;min-width:3.6rem;padding:.35rem .2rem .3rem;border-radius:14px;color:#cdbfb2;text-decoration:none;font:600 .56rem/1 var(--sans);letter-spacing:.02em;transition:background .25s,color .25s}
+  .dock a canvas{width:22px;height:22px;image-rendering:pixelated}
+  .dock a.on{background:rgba(250,246,240,.1);color:#FAF6F0}
+  .dock-g{width:3.6rem;height:3.6rem;margin:-1.2rem .2rem 0;padding:.55rem;border:0;border-radius:50% 50% 46% 46% / 54% 54% 46% 46%;background:radial-gradient(120% 90% at 30% 20%,#7a3c45,#3c1a20 75%);box-shadow:inset -5px -7px 12px rgba(0,0,0,.45),0 10px 20px rgba(0,0,0,.5);cursor:pointer}
+  .dock-g canvas{width:100%;height:100%;border-radius:8px;background:#c4c9aa;image-rendering:pixelated}
+  .dock-g:active{transform:scale(.92)}
+  body{padding-bottom:calc(5rem + env(safe-area-inset-bottom,0px))}
+  .hd-insp{margin-left:auto;margin-right:0}
+  .insp-panel{bottom:calc(5.6rem + env(safe-area-inset-bottom,0px))}
+}
+
+/* "Mis webs" como historias */
+.bw-prog,.bw-insp{display:none}
+@media(max-width:899px){
+  .bw{height:auto}
+  .bw-stick{position:relative;top:0;min-height:0;padding-top:clamp(3.5rem,10vw,5rem);padding-bottom:2rem}
+  .bw-prog{display:flex;gap:4px;padding:.55rem .6rem 0;background:#0e0909}
+  .bw-prog i{flex:1;height:3px;border-radius:2px;background:rgba(250,246,240,.2);overflow:hidden}
+  .bw-prog b{display:block;height:100%;width:100%;background:#FAF6F0;transform:scaleX(0);transform-origin:left}
+  .bw-prog i.done b{transform:none}
+  .bw-prog i.now b{animation:story 7s linear forwards}
+  .bw.hold .bw-prog i.now b{animation-play-state:paused}
+  @keyframes story{to{transform:none}}
+  .bw-view{touch-action:pan-y}
+  .bw-view::before,.bw-view::after{content:"";position:absolute;z-index:3;top:0;bottom:0;width:30%}
+  .bw-view::before{left:0}.bw-view::after{right:0}
+  .bw-panel{display:none}
+  .bw-insp{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:3rem;padding:0 1rem;border:1px solid var(--line);border-radius:10px;background:rgba(0,0,0,.2);color:var(--ink);font:700 .78rem/1 'Courier New',monospace;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+  .bw-insp::after{content:"";width:9px;height:7px;background:var(--pink);clip-path:polygon(50% 0,100% 100%,0 100%)}
+}
+
+/* hoja que sube desde abajo */
+.sheet{position:fixed;inset:0;z-index:220}
+.sheet[hidden]{display:none}
+.sheet-bg{position:absolute;inset:0;background:rgba(10,5,6,.55);opacity:0;transition:opacity .3s}
+.sheet.open .sheet-bg{opacity:1}
+.sheet-p{position:absolute;left:0;right:0;bottom:0;max-height:82svh;overflow:auto;padding:.4rem 1.2rem calc(1.4rem + env(safe-area-inset-bottom,0px));background:#1b1212;color:var(--ivory);border-radius:20px 20px 0 0;box-shadow:0 -20px 50px rgba(0,0,0,.5);transform:translateY(100%);transition:transform .45s var(--ease);overscroll-behavior:contain}
+.sheet.open .sheet-p{transform:translateY(var(--dy,0px))}
+.sheet.drag .sheet-p{transition:none}
+.sheet-h{display:grid;place-items:center;height:1.6rem;touch-action:none;cursor:grab}
+.sheet-h i{width:2.6rem;height:4px;border-radius:2px;background:rgba(250,246,240,.3)}
+.sheet-t{font:700 .7rem/1 'Courier New',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-bottom:.9rem}
+.sheet-c{font-size:.95rem}
+.sheet-c dl{margin:0;display:grid;gap:.7rem}
+.sheet-c dl div{display:grid;gap:.1rem}
+.sheet-c dt{font:700 .62rem/1.2 'Courier New',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
+.sheet-c dd{margin:0}
+.sheet-c .bw-go{margin-top:.8rem}
+.sheet-c .bw-p{display:block}
+.sheet-x{margin-top:1.2rem;width:100%;min-height:3rem;border:1px solid rgba(250,246,240,.2);border-radius:12px;background:none;color:var(--ivory);font:600 .78rem/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+@media(min-width:761px){.sheet-p{left:50%;right:auto;width:min(28rem,90vw);transform:translate(-50%,100%)}.sheet.open .sheet-p{transform:translate(-50%,var(--dy,0px))}}
+@media(max-width:760px){.cmt{display:none!important}}
+
+/* inclinar el teléfono */
+.g-tilt{display:block;margin:1.2rem auto 0;min-height:2.75rem;padding:0 1rem;border:1px dashed rgba(250,246,240,.3);border-radius:22px;background:none;color:var(--soft);font:600 .72rem/1 var(--sans);letter-spacing:.04em;cursor:pointer}
+.g-tilt[hidden]{display:none}
+.g-tilt.on{border-style:solid;color:var(--pink)}
+.gotchi-wrap{flex-direction:column;align-items:center}
+
+/* compartir y guardar contacto */
+.ft-share{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2rem}
+
+/* transiciones entre vistas */
+::view-transition-old(root),::view-transition-new(root){animation-duration:.35s}
+.bw-view{view-transition-name:bwview}
+@media (prefers-reduced-motion:reduce){.hd-prog{animation:none}.bw-prog i.now b{animation:none;transform:none}.dock,.sheet-p{transition:none}}
+.sheet-c>p>b:first-child{display:block;margin-bottom:.3rem;font:700 .8rem/1 var(--sans);color:var(--pink)}
