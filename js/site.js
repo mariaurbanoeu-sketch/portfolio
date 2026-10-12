@@ -602,6 +602,63 @@
   }
 
 
+
+  /* ======================= retos y "entrar en la web" ======================= */
+  var ENTER = {
+    nails: { n: 'Nails by MelyG', u: 'https://nailsbymelyg.com/', r: 'https://nailsbymelyg.com/#estudio', m: 'Toca «Diseña tu manicura» y prueba colores, formas y acabados.' },
+    kronoxweb: { n: 'Kronox', u: 'https://kronoxprod.netlify.app/' },
+    kronox: { n: 'el panel de Kronox', u: 'demos/kronox-panel.html', m: 'En «Vídeos», usa las flechas para cambiar el orden de sus videoclips.' },
+    nacar: { n: 'Nácar Estilismo', u: 'demos/nacar.html', m: 'Abre una prenda, añádela a la cesta y mira cómo se abre a un lado.' },
+    amigos: { n: 'Entre Amigos por Venezuela', u: 'demos/entre-amigos.html', m: 'Ve a «Necesidades» y publica una. Si un local cercano la tiene, sale el match.' }
+  };
+  var RETOS = ['nails', 'kronox', 'nacar', 'amigos'], done = {};
+  try { done = JSON.parse(localStorage.getItem('retos') || '{}'); } catch (e) {}
+  var retoPaint = function () {
+    var n = RETOS.filter(function (k) { return done[k]; }).length;
+    $$('.reto').forEach(function (r) {
+      r.classList.toggle('done', !!done[r.dataset.reto]);
+      $$('.reto-bar i', r).forEach(function (i, k) { i.classList.toggle('f', k < n); });
+      $('.reto-cn', r).textContent = n === 4 ? '¡Las 4 webs probadas!' : 'Webs probadas: ' + n + '/4';
+    });
+    return n;
+  };
+  retoPaint();
+  var ent = $('#enter'), entF = $('#enterFrame'), entLoad = $('#enterLoad'), entOpener = null, entKey = null, entReto = false;
+  var entFace = $('#enterFace') && $('#enterFace').getContext('2d');
+  function openEnter(k, reto) {
+    var c = ENTER[k]; if (!c || !ent) return;
+    entOpener = document.activeElement; entKey = k; entReto = !!reto && !!c.m;
+    $('#enterName').textContent = c.n;
+    var url = entReto && c.r ? c.r : c.u;
+    $('#enterOut').href = url;
+    $('#enterMis').hidden = !entReto; $('#enterDone').hidden = !entReto;
+    if (entReto) { $('#enterRn').textContent = 'Reto ' + (RETOS.indexOf(k) + 1) + '/4'; $('#enterMt').textContent = c.m; }
+    entLoad.classList.remove('off'); entF.onload = function () { entLoad.classList.add('off'); };
+    entF.src = url;
+    if (entFace) { entFace.clearRect(0, 0, 32, 32); drawSprite(entFace, 0, 0, 1, 'happy'); }
+    ent.hidden = false; document.body.style.overflow = 'hidden'; buzz(10);
+    $('#enterX').focus();
+  }
+  function closeEnter() {
+    if (!ent || ent.hidden) return;
+    ent.hidden = true; entF.src = 'about:blank'; document.body.style.overflow = '';
+    if (entOpener && entOpener.focus) entOpener.focus({ preventScroll: true });
+  }
+  if (ent) {
+    $$('[data-enter]').forEach(function (b) { b.addEventListener('click', function (e) { e.preventDefault(); openEnter(b.dataset.enter, b.dataset.mode === 'reto'); }); });
+    $('#enterX').addEventListener('click', closeEnter);
+    $('#enterDone').addEventListener('click', function () {
+      var k = entKey; done[k] = 1; try { localStorage.setItem('retos', JSON.stringify(done)); } catch (e) {}
+      closeEnter(); var n = retoPaint(); buzz([12, 40, 12]);
+      var card = $('.reto[data-reto="' + k + '"]'); if (card) { card.classList.remove('cheer'); void card.offsetWidth; card.classList.add('cheer'); }
+      g.mood = 'happy'; g.jump = 24;
+      if (n === 4) { if (g.status) g.status.textContent = '¡probaste todas!'; toastMsg('¡Probaste las 4 webs! El Paulagotchi está feliz :)'); }
+      else toastMsg('Reto superado · ' + n + '/4 webs probadas');
+    });
+    addEventListener('keydown', function (e) { if (e.key === 'Escape' && !ent.hidden) closeEnter(); });
+  }
+  function toastMsg(t) { var el = $('#toast'); if (!el) return; el.textContent = t; el.classList.add('show'); clearTimeout(el._t); el._t = setTimeout(function () { el.classList.remove('show'); }, 2600); }
+
   /* ======================= iconos en pixel (9 × 9) ======================= */
   var PX9 = {
     home: ["....X....","...XXX...","..XXXXX..",".XXXXXXX.","XXXXXXXXX",".X.....X.",".X.XX..X.",".X.XX..X.",".XXXXXXX."],
@@ -670,7 +727,7 @@
       cform.hidden = true;
     };
     $$('[data-tool]', tb).forEach(function (b) { b.addEventListener('click', function () { setTool(b.dataset.tool); }); });
-    var safe = function (el) { return !el || el.closest('#toolsBar,#toolCmt,#desk,#sheet,#game,#mv,.toast'); };
+    var safe = function (el) { return !el || el.closest('#toolsBar,#toolCmt,#desk,#sheet,#game,#mv,#enter,.toast'); };
     var place = function (el, x, y) { var w = el.offsetWidth, h = el.offsetHeight; el.style.left = Math.min(innerWidth - w - 8, x + 16) + 'px'; el.style.top = Math.min(innerHeight - h - 8, y + 18) + 'px'; };
     var outline = function (el, b) { var r = el.getBoundingClientRect(); b.style.cssText = 'display:block;left:' + r.left + 'px;top:' + r.top + 'px;width:' + r.width + 'px;height:' + r.height + 'px'; return r; };
     /* el color exacto del pixel cuando es una imagen o un video de esta web */
@@ -753,7 +810,7 @@
     });
     addEventListener('keydown', function (e) {
       var t = e.target; if (e.metaKey || e.ctrlKey || e.altKey || (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable))) return;
-      if (!game.hidden || !mv.hidden || (sheet && !sheet.hidden)) return;
+      if (!game.hidden || !mv.hidden || (sheet && !sheet.hidden) || (ent && !ent.hidden)) return;
       var k = e.key.toLowerCase(), map = { v: 'move', i: 'pick', t: 'text', m: 'measure', c: 'comment' };
       if (desk && !desk.hidden) { if (e.key === 'Escape') closeDesk(); return; }
       if (map[k]) { setTool(map[k]); e.preventDefault(); }

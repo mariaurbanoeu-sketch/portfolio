@@ -956,3 +956,41 @@ html[data-tool] .tool-cmt textarea{cursor:text!important}
 .dw-mail textarea{width:100%;border:0;background:none;font:400 .9rem/1.5 var(--sans);resize:none}
 .dw-mail button{justify-self:end;min-height:2.3rem;padding:0 1.1rem;border:0;border-radius:6px;background:#0D99FF;color:#fff;font:600 .74rem/1 var(--sans);cursor:pointer}
 @media (prefers-reduced-motion:reduce){.desk.in,.win{animation:none}}
+
+/* ============ retos: probar cada web ============ */
+.reto{display:grid;gap:1.2rem;margin:2.6rem 4px 0;padding:1.2rem 1.3rem;background:rgba(0,0,0,.06);box-shadow:0 -4px 0 0 currentColor,0 4px 0 0 currentColor,-4px 0 0 0 currentColor,4px 0 0 0 currentColor;color:var(--ink)}
+.kronox .reto,.amigos .reto{background:rgba(255,255,255,.04)}
+.reto-n{font:700 .68rem/1 'Courier New',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.kronox .reto-n{color:#E0362C}
+.reto-t{margin:.45rem 0 .35rem;font:800 clamp(1.4rem,3vw,2rem)/1.05 var(--sans);text-transform:uppercase;letter-spacing:-.01em}
+.reto-d{max-width:52ch;color:var(--soft);font-size:.95rem}
+.reto-r{display:grid;gap:.7rem;justify-items:start;align-content:center}
+.reto-c{display:flex;align-items:center;gap:.6rem;font:700 .66rem/1 'Courier New',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--soft)}
+.reto-bar{display:flex;gap:3px}
+.reto-bar i{width:14px;height:8px;background:currentColor;opacity:.25}
+.reto-bar i.f{opacity:1;background:var(--pink)}
+.reto.done .reto-go::after{content:" ✓"}
+.reto.done .reto-n::after{content:" · superado";color:var(--soft)}
+.reto.cheer{animation:retowin .6s steps(4)}
+@keyframes retowin{25%{transform:translate(-3px,0)}50%{transform:translate(3px,-3px)}75%{transform:translate(-2px,2px)}}
+@media(min-width:900px){.reto{grid-template-columns:1fr auto;align-items:center;gap:2.5rem}}
+
+/* ============ entrar en la web (pantalla completa, en vivo) ============ */
+.enter{position:fixed;inset:0;z-index:330;display:grid;grid-template-rows:auto 1fr;background:#120c0c;animation:deskin .35s var(--ease)}
+.enter[hidden]{display:none}
+.enter-bar{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;padding:calc(.55rem + env(safe-area-inset-top,0px)) 1rem .55rem;background:#221616;color:#FAF6F0;border-bottom:1px solid rgba(250,246,240,.12);font-family:var(--sans)}
+.enter-who{display:flex;align-items:center;gap:.6rem;font-size:.8rem}
+.enter-who canvas{width:30px;height:30px;image-rendering:pixelated;border-radius:6px;background:#c4c9aa}
+.enter-who small{display:block;color:#b9aaa0;font-size:.66rem}
+.enter-mis{flex:1;min-width:14rem;display:flex;align-items:center;gap:.7rem;padding:.45rem .8rem;background:#140d0d;box-shadow:0 -3px 0 0 #EBA9BD,0 3px 0 0 #EBA9BD,-3px 0 0 0 #EBA9BD,3px 0 0 0 #EBA9BD;margin:3px;font-size:.8rem}
+.enter-mis[hidden]{display:none}
+.enter-act{margin-left:auto;display:flex;align-items:center;gap:.5rem}
+.enter-act a,.enter-act button{display:inline-flex;align-items:center;gap:.35rem;min-height:2.4rem;padding:0 .8rem;border:1px solid rgba(250,246,240,.25);border-radius:6px;background:none;color:#FAF6F0;font:600 .72rem/1 var(--sans);text-decoration:none;cursor:pointer}
+.enter-act kbd{opacity:.55;font:inherit}
+.enter-done{background:#EBA9BD!important;border-color:#EBA9BD!important;color:#221616!important}
+.enter-done[hidden]{display:none!important}
+.enter iframe{width:100%;height:100%;border:0;background:#fff}
+.enter-load{position:absolute;left:50%;top:55%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:.7rem;color:#b9aaa0;font:600 .8rem/1 var(--sans);pointer-events:none}
+.enter-load span{width:12px;height:12px;background:#EBA9BD;animation:bob .5s steps(2) infinite}
+.enter-load.off{display:none}
+@media(max-width:760px){.enter-who small,.enter-act a{display:none}.enter-mis{order:3;flex-basis:100%}.enter-bar{gap:.5rem}}
