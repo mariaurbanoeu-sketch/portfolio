@@ -1,13 +1,8 @@
-# Paula Urbano — Portfolio
+# Paula Urbano · portfolio
 
-Diseño gráfico, identidad visual y web. HTML, CSS y JavaScript sin frameworks.
+Web estática sin librerías: `index.html`, `css/site.css` y `js/site.js`.
+Se publica sola en https://paulaurbanog.com con GitHub Pages al hacer push a `main`.
 
-- `index.html`: el portfolio (ES / EN).
-- `demos/`: copias navegables de las webs (Rebolica, Nácar, panel de Kronox, Entre Amigos).
-- `img/`: capturas, identidades (`img/id/`) y páginas de los manuales (`img/manual/`).
-- `fonts/`: tipografías alojadas aquí (Unbounded, Poppins, Playfair Display, Jost).
-- `Paula-Urbano-Portfolio.pdf` y `Paula-Urbano-CV.pdf`: descargables.
-
-Publicado con GitHub Pages en https://paulaurbanog.com (archivo `CNAME`).
-
-Contacto: mariaurbanoeu@gmail.com
+- `video/` y `img/`: grabaciones y capturas reales de las webs (MP4 y WebP).
+- `demos/`: copias navegables del panel de Kronox, la tienda de Nácar y la app de Entre Amigos.
+- `img/manual/`: páginas de los manuales de marca.
