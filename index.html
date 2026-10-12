@@ -15,7 +15,7 @@
 <meta property="og:type" content="website">
 <link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/pinyon.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=7">
+<link rel="stylesheet" href="css/site.css?v=9">
 <script>(function(d){d.classList.add('js');try{if(!sessionStorage.getItem('wf')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('wire');sessionStorage.setItem('wf','1')}}catch(e){}})(document.documentElement)</script>
 </head>
 <body>
@@ -74,28 +74,42 @@
   </div>
 </section>
 
-<!-- ============ LO QUE MÁS ME GUSTA (se ilumina palabra por palabra) ============ -->
-<section class="love" id="gusta" data-bg="wine" data-frame="Lo que más me gusta" aria-label="Lo que más me gusta">
-  <div class="love-stick">
-    <p class="script">lo que más me gusta</p>
-    <p class="love-txt" id="loveTxt">Diseñar webs en <b class="k">Figma</b>, pensar cómo las va a usar la gente <b class="k">(UX/UI)</b> y después <b class="k">programarlas</b> para que funcionen de verdad.</p>
+<!-- ============ MIS WEBS · un navegador con pestañas ============ -->
+<section class="bw" id="proyectos" data-bg="wine" data-frame="Mis webs" aria-label="Mis webs">
+  <div class="bw-stick">
+    <header class="bw-hd">
+      <p class="script">mira lo que hago</p>
+      <h2>Mis webs</h2>
+    </header>
+    <div class="bw-wrap">
+      <div class="bw-win">
+        <div class="bw-tabs" role="tablist" aria-label="Proyectos"><button class="bw-tab" type="button" role="tab" id="tab-nails" aria-controls="bw-view" aria-selected="true" data-i="0"><i style="--d:#662E3A"></i><span>Nails by MelyG</span></button><button class="bw-tab" type="button" role="tab" id="tab-kronox" aria-controls="bw-view" aria-selected="false" data-i="1"><i style="--d:#EDE6DA"></i><span>Kronox</span></button><button class="bw-tab" type="button" role="tab" id="tab-nacar" aria-controls="bw-view" aria-selected="false" data-i="2"><i style="--d:#8A6A4F"></i><span>Nácar Estilismo</span></button><button class="bw-tab" type="button" role="tab" id="tab-amigos" aria-controls="bw-view" aria-selected="false" data-i="3"><i style="--d:#FFD23F"></i><span>Entre Amigos</span></button></div>
+        <div class="bw-bar"><span class="bw-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="bw-url" id="bwUrl" data-urls="nailsbymelyg.com|kronoxprod.netlify.app/panel|nácar · tienda online|entre amigos por venezuela · app">nailsbymelyg.com</span></div>
+        <div class="bw-load" aria-hidden="true"></div>
+        <div class="bw-view" id="bw-view" role="tabpanel"><div class="bw-v on" data-i="0"><video muted playsinline loop preload="none" poster="img/nails-d.webp" data-src="video/nails-d.mp4"></video></div><div class="bw-v" data-i="1"><video muted playsinline loop preload="none" poster="img/kpanel-d.webp" data-src="video/kpanel-d.mp4"></video></div><div class="bw-v" data-i="2"><video muted playsinline loop preload="none" poster="img/nacar-d.webp" data-src="video/nacar-d.mp4"></video></div><div class="bw-v m" data-i="3"><video muted playsinline loop preload="none" poster="img/ea-m.webp?v=2" data-src="video/ea-m.mp4?v=2"></video></div></div>
+      </div>
+      <aside class="bw-panel" aria-live="polite"><p class="bw-ph">Inspeccionar</p><div class="bw-p on" data-i="0"><div class="bw-who"><canvas class="bw-ic" data-icon="nail" width="8" height="8" aria-hidden="true"></canvas><p class="bw-n"><span>Proyecto 01 / 04</span><span class="bw-lvl" aria-hidden="true"><i class="f"></i><i></i><i></i><i></i></span></p></div><dl><div><dt>Cliente</dt><dd>Mely G., manicurista en Katy, Texas</dd></div><div><dt>Tipo</dt><dd>Web con reservas y gift cards</dd></div><div><dt>Qué hice</dt><dd>Diseño en Figma, UX/UI y desarrollo</dd></div><div><dt>Herramientas</dt><dd>Figma · HTML · CSS · JavaScript · GSAP · Square</dd></div><div><dt>Año</dt><dd>2026</dd></div></dl><a class="bw-go" href="#nails"><span class="px-arr" aria-hidden="true"></span>Ver el caso</a></div><div class="bw-p" data-i="1"><div class="bw-who"><canvas class="bw-ic" data-icon="cam" width="8" height="8" aria-hidden="true"></canvas><p class="bw-n"><span>Proyecto 02 / 04</span><span class="bw-lvl" aria-hidden="true"><i class="f"></i><i class="f"></i><i></i><i></i></span></p></div><dl><div><dt>Cliente</dt><dd>Kronox, director de videoclips en Sevilla</dd></div><div><dt>Tipo</dt><dd>Web + panel de administración</dd></div><div><dt>Qué hice</dt><dd>UX/UI y desarrollo</dd></div><div><dt>Herramientas</dt><dd>HTML · CSS · JavaScript · Firebase</dd></div><div><dt>Año</dt><dd>2026</dd></div></dl><p class="bw-note">En la ventana: el panel que usa él.</p><a class="bw-go" href="#kronox"><span class="px-arr" aria-hidden="true"></span>Ver el caso</a></div><div class="bw-p" data-i="2"><div class="bw-who"><canvas class="bw-ic" data-icon="bag" width="8" height="8" aria-hidden="true"></canvas><p class="bw-n"><span>Proyecto 03 / 04</span><span class="bw-lvl" aria-hidden="true"><i class="f"></i><i class="f"></i><i class="f"></i><i></i></span></p></div><dl><div><dt>Cliente</dt><dd>Nácar Estilismo, tienda de ropa en Sevilla</dd></div><div><dt>Tipo</dt><dd>Tienda online en seis idiomas</dd></div><div><dt>Qué hice</dt><dd>Diseño y desarrollo del tema</dd></div><div><dt>Herramientas</dt><dd>Shopify · Liquid</dd></div><div><dt>Año</dt><dd>2026</dd></div></dl><a class="bw-go" href="#nacar"><span class="px-arr" aria-hidden="true"></span>Ver el caso</a></div><div class="bw-p" data-i="3"><div class="bw-who"><canvas class="bw-ic" data-icon="heart" width="8" height="8" aria-hidden="true"></canvas><p class="bw-n"><span>Proyecto 04 / 04</span><span class="bw-lvl" aria-hidden="true"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i></span></p></div><dl><div><dt>Cliente</dt><dd>Proyecto personal</dd></div><div><dt>Tipo</dt><dd>App web que funciona sin conexión</dd></div><div><dt>Qué hice</dt><dd>Investigación, UX/UI y desarrollo</dd></div><div><dt>Herramientas</dt><dd>HTML · CSS · JavaScript</dd></div><div><dt>Año</dt><dd>2026</dd></div></dl><a class="bw-go" href="#amigos"><span class="px-arr" aria-hidden="true"></span>Ver el caso</a></div></aside>
+    </div>
   </div>
 </section>
 
 <div class="px-sep" aria-hidden="true"><i></i><i></i><i></i></div>
 
 <!-- ============ PROYECTOS ============ -->
-<div id="proyectos">
+<div id="casos">
 
 <!-- NAILS · carta de esmaltes -->
 <article class="pj nails" id="nails" data-bg="nails" data-frame="Nails by MelyG" data-icon="nail">
   <div class="pj-in">
+    <div class="pj-top">
     <header class="pj-hd" data-reveal>
+      <p class="pj-n">01 / 04</p>
       <p class="nails-kick">Manicurista · Katy, Texas</p>
       <h2 class="nails-h">Nails by <em>MelyG</em></h2>
       <p class="pj-desc">Mely tiene un estudio de manicura rusa. Diseñé su web en Figma y la programé: las clientas se prueban colores y formas antes de reservar, ven sus trabajos y compran gift cards.</p>
-      <p class="pj-role">Figma · UX/UI · Desarrollo · Español e inglés · Reservas con Square</p>
     </header>
+    <aside class="fi fi-nails" data-reveal aria-label="Ficha del proyecto"><p class="fi-t">Nails by <em>MelyG</em></p><p class="fi-s">Tono 01 · Colección 2026</p><dl><div><dt>Tipo</dt><dd>Web con reservas y gift cards</dd></div><div><dt>Qué hice</dt><dd>Diseño en Figma, UX/UI y desarrollo</dd></div><div><dt>Hecha con</dt><dd>Figma · HTML · CSS · JavaScript · GSAP · Square</dd></div><div><dt>Idiomas</dt><dd>Español e inglés</dd></div></dl><p class="fi-f">nailsbymelyg.com</p></aside>
+    </div>
     <div class="pj-media nails-media" data-reveal>
       <svg class="nail n1" viewBox="0 0 40 60" aria-hidden="true"><path d="M6 58 V22 C6 8 34 8 34 22 V58 Z"/><path class="sh" d="M12 22 C12 15 18 13 20 13"/></svg>
       <svg class="nail n2" viewBox="0 0 40 60" aria-hidden="true"><path d="M6 58 V22 C6 8 34 8 34 22 V58 Z"/><path class="sh" d="M12 22 C12 15 18 13 20 13"/></svg>
@@ -117,13 +131,16 @@
 <!-- KRONOX · cine -->
 <article class="pj kronox" id="kronox" data-bg="kronox" data-frame="Kronox" data-icon="cam">
   <div class="pj-in">
+    <div class="pj-top">
     <header class="pj-hd" data-reveal>
+      <p class="pj-n">02 / 04</p>
       <p class="kx-kick"><span class="rec"></span>REC <span class="tc">00:00:00:00</span></p>
       <h2 class="kx-h">Kronox</h2>
       <p class="kx-credit">Director de videoclips · Sevilla</p>
       <p class="pj-desc">Me pidió una web para su trabajo. Tiene dos partes: la web que ven sus clientes y un panel para que él cambie videos, fotos y precios sin depender de mí.</p>
-      <p class="pj-role">UX/UI · Desarrollo · Panel de administración · Firebase</p>
     </header>
+    <aside class="fi fi-kx" data-reveal aria-label="Ficha del proyecto"><div class="clap" aria-hidden="true"><i></i></div><dl class="slate"><div><dt>Producción</dt><dd>Kronox</dd></div><div><dt>Rollo</dt><dd>Web + panel</dd></div><div><dt>Escena</dt><dd>UX/UI · Desarrollo</dd></div><div><dt>Toma</dt><dd>2026</dd></div><div class="w"><dt>Equipo</dt><dd>HTML · CSS · JavaScript · Firebase</dd></div><div><dt>Dirección</dt><dd>Kronox</dd></div><div><dt>Diseño y código</dt><dd>Paula Urbano</dd></div></dl></aside>
+    </div>
     <div class="devbar kx-devbar" data-for="kronox" data-reveal><span>Ver</span><button type="button" aria-pressed="true" data-w="video">Grabación</button><button type="button" aria-pressed="false" data-w="1280">Escritorio</button><button type="button" aria-pressed="false" data-w="820">Tablet</button><button type="button" aria-pressed="false" data-w="390">Celular</button></div>
     <div class="kx-stage" data-reveal>
       <div class="kx-monitor">
@@ -145,12 +162,15 @@
 <!-- NÁCAR · revista de moda -->
 <article class="pj nacar" id="nacar" data-bg="nacar" data-frame="Nácar" data-icon="bag">
   <div class="pj-in">
+    <div class="pj-top">
     <header class="nc-hd" data-reveal>
+      <p class="pj-n">03 / 04</p>
       <p class="nc-issue"><span>N.º 03</span><span>Tienda online · Sevilla</span></p>
       <h2 class="nc-h">Nácar <em>Estilismo</em></h2>
       <p class="nc-lead">Una tienda de ropa en Sevilla. Diseñé y programé su tema de Shopify desde cero, en seis idiomas, y sigo encargándome de subir los productos nuevos.</p>
-      <p class="pj-role">E-commerce · UX/UI · Shopify · Liquid</p>
     </header>
+    <aside class="fi fi-nc" data-reveal aria-label="Ficha del proyecto"><p class="fi-brand">Nácar</p><dl><div><dt>Composición</dt><dd>100% Shopify · Liquid</dd></div><div><dt>Confección</dt><dd>Diseño y desarrollo del tema</dd></div><div><dt>Idiomas</dt><dd>Seis</dd></div><div><dt>Temporada</dt><dd>2026</dd></div></dl><p class="fi-care">Mantenimiento: sigo subiendo los productos nuevos.</p></aside>
+    </div>
     <div class="nc-spread" data-reveal>
       <figure class="nc-big"><div class="devbar nc-devbar" data-for="nacar"><span>Ver</span><button type="button" aria-pressed="true" data-w="video">Grabación</button><button type="button" aria-pressed="false" data-w="1280">Escritorio</button><button type="button" aria-pressed="false" data-w="820">Tablet</button><button type="button" aria-pressed="false" data-w="390">Celular</button></div><div class="vbox" data-demo="demos/nacar.html" data-title="Demo de la tienda de Nácar"><video muted playsinline loop preload="none" poster="img/nacar-d.webp" data-src="video/nacar-d.mp4"></video><div class="pins"><button class="pin" type="button" style="--x:96%;--y:4.5%" aria-expanded="false" aria-label="Comentario 01"><span>01</span></button><p class="cmt"><b>Paula</b>La cesta se abre a un lado.</p><button class="pin" type="button" style="--x:83.8%;--y:4.5%" aria-expanded="false" aria-label="Comentario 02"><span>02</span></button><p class="cmt"><b>Paula</b>Selector de idioma: seis idiomas.</p></div></div><figcaption><b>Fig. 1</b> La tienda en el ordenador</figcaption></figure>
       <figure class="nc-small"><div class="phone"><video muted playsinline loop preload="none" poster="img/nacar-m.webp?v=2" data-src="video/nacar-m.mp4?v=2"></video></div><figcaption><b>Fig. 2</b> Y en el celular</figcaption></figure>
@@ -166,12 +186,15 @@
 <!-- ENTRE AMIGOS · el camino de una ayuda -->
 <article class="pj amigos" id="amigos" data-bg="amigos" data-frame="Entre Amigos" data-icon="heart">
   <div class="pj-in">
+    <div class="pj-top">
     <header class="pj-hd" data-reveal>
+      <p class="pj-n">04 / 04</p>
       <p class="ea-kick"><span></span><span></span><span></span>Proyecto personal</p>
       <h2 class="ea-h">Entre Amigos por Venezuela</h2>
       <p class="pj-desc">Después de los terremotos en Venezuela hice en una semana una app para organizar donaciones, transporte y voluntarios. Funciona sin conexión, porque en una emergencia la señal falla. No llegó a usarse porque ya había otra herramienta parecida, pero es de lo que más aprendí.</p>
-      <p class="pj-role">Investigación · UX/UI · Desarrollo · 7 idiomas</p>
     </header>
+    <aside class="fi fi-ea" data-reveal aria-label="Ficha del proyecto"><div class="ship-top"><b>Envío</b><span>EAV · 2026</span></div><div class="ship-row"><span>De</span><b>Paula Urbano</b></div><div class="ship-row"><span>Para</span><b>Venezuela</b></div><dl class="ship-grid"><div><dt>Contenido</dt><dd>App web</dd></div><div><dt>Idiomas</dt><dd>7</dd></div><div><dt>Sin conexión</dt><dd>Sí</dd></div><div><dt>Fecha</dt><dd>2026</dd></div></dl><div class="ship-row"><span>Hecha con</span><b>Investigación · UX/UI · Desarrollo</b></div><div class="barcode" aria-hidden="true"></div><p class="stamp" aria-hidden="true">Urgente</p></aside>
+    </div>
     <div class="ea-grid">
       <div class="ea-left">
         <figure class="phone ea-phone" data-reveal><video muted playsinline loop preload="none" poster="img/ea-m.webp?v=2" data-src="video/ea-m.mp4?v=2"></video><img class="ea-scr" data-step="1" src="img/ea/s1.webp" alt="" loading="lazy" width="390" height="844"><img class="ea-scr" data-step="2" src="img/ea/s2.webp" alt="" loading="lazy" width="390" height="844"><img class="ea-scr" data-step="3" src="img/ea/s3.webp" alt="" loading="lazy" width="390" height="844"><img class="ea-scr" data-step="4" src="img/ea/s4.webp" alt="" loading="lazy" width="390" height="844"><img class="ea-scr" data-step="5" src="img/ea/s5.webp" alt="" loading="lazy" width="390" height="844"></figure>
@@ -424,6 +447,6 @@
   <div class="mv-stage"><button type="button" class="mv-nav" id="mvPrev" aria-label="Página anterior"><i class="ic ic-left"></i></button><img id="mvImg" alt=""><button type="button" class="mv-nav" id="mvNext" aria-label="Página siguiente"><i class="ic ic-right"></i></button></div>
 </div>
 
-<script src="js/site.js?v=7" defer></script>
+<script src="js/site.js?v=9" defer></script>
 </body>
 </html>

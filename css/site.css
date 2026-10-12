@@ -140,15 +140,6 @@ body[data-bg="milk"] .btn,body[data-bg="nails"] .btn,body[data-bg="nacar"] .btn{
 .px-sep i:nth-child(2){opacity:.45}.px-sep i:nth-child(3){opacity:.2}
 :root{--heart:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 7 6' shape-rendering='crispEdges'%3E%3Cpath d='M1 0h2v1H1zM4 0h2v1H4zM0 1h7v2H0zM1 3h5v1H1zM2 4h3v1H2zM3 5h1v1H3z'/%3E%3C/svg%3E")}
 
-/* ============ lo que más me gusta: se ilumina palabra por palabra ============ */
-.love{position:relative;height:210vh}
-.love-stick{position:sticky;top:calc(var(--hd) + env(safe-area-inset-top,0px));height:calc(100svh - var(--hd) - env(safe-area-inset-top,0px));display:flex;flex-direction:column;justify-content:center;max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
-.love-txt{font:800 clamp(2rem,min(6.4vw,8.5vh),4.6rem)/1.04 var(--sans);text-transform:uppercase;letter-spacing:-.015em;max-width:19ch}
-.love-txt .w{opacity:.14;transition:opacity .35s,color .35s}
-.love-txt .w.on{opacity:1}
-.love-txt .k .w.on{color:var(--pink)}
-.no-js .love-txt .w,.love.done .w{opacity:1}
-
 /* ============ base de proyectos ============ */
 .pj{padding:clamp(4.5rem,11vw,9rem) var(--gut);position:relative}
 .pj-in,.fig-in{max-width:var(--max);margin:0 auto}
@@ -485,7 +476,7 @@ body[data-bg="milk"] .btn,body[data-bg="nails"] .btn,body[data-bg="nacar"] .btn{
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important;transition-delay:0s!important}
   .hero-me{clip-path:none}
-  .love{height:auto}.love-stick{position:relative;height:auto;padding:5rem var(--gut)}.love-txt .w{opacity:1}
+  .bw{height:auto}.bw-stick{position:relative;height:auto}
   .cursor-p,.kronox::after{display:none}
 }
 
@@ -579,3 +570,128 @@ body[data-bg="milk"] .btn,body[data-bg="nails"] .btn,body[data-bg="nacar"] .btn{
   .nails a,.nails button,.kronox a,.kronox button,.fig a,.fig button,.pin,.card-in{cursor:pointer}
 }
 @media (prefers-reduced-motion:reduce){.wf{display:none!important}.ea-route li::before{transition:none}}
+
+/* ============ mis webs: un navegador con pestañas ============ */
+.bw{position:relative;height:420vh}
+.bw-stick{position:sticky;top:calc(var(--hd) + env(safe-area-inset-top,0px));min-height:calc(100svh - var(--hd) - env(safe-area-inset-top,0px));max-width:var(--max);margin:0 auto;padding:1.4rem var(--gut) 1.4rem;display:flex;flex-direction:column;justify-content:center;gap:1rem}
+.bw-hd h2{font-size:clamp(2rem,6vw,3.6rem)}
+.bw-hd .script{font-size:clamp(1.7rem,4.5vw,2.6rem)}
+.bw-wrap{display:grid;gap:1rem}
+.bw-win{border-radius:12px;overflow:hidden;background:#140d0d;border:1px solid var(--line);box-shadow:0 40px 80px -40px rgba(0,0,0,.85)}
+.bw-tabs{display:flex;gap:2px;padding:.45rem .5rem 0;background:#0e0909;overflow-x:auto;scrollbar-width:none}
+.bw-tabs::-webkit-scrollbar{display:none}
+.bw-tab{flex:1 1 0;min-width:0;display:flex;align-items:center;gap:.45rem;min-height:2.6rem;padding:0 .75rem;border:0;border-radius:9px 9px 0 0;background:transparent;color:#a8958c;font:500 .74rem/1 var(--sans);text-align:left;cursor:pointer;transition:background .25s,color .25s}
+.bw-tab span{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.bw-tab i{flex:0 0 auto;width:.6rem;height:.6rem;border-radius:2px;background:var(--d)}
+.bw-tab:hover{color:var(--ivory)}
+.bw-tab[aria-selected="true"]{background:#241818;color:var(--ivory)}
+.bw-bar{display:flex;align-items:center;gap:.7rem;padding:.5rem .8rem;background:#241818}
+.bw-dots{display:flex;gap:.3rem}
+.bw-dots i{width:.5rem;height:.5rem;border-radius:50%;background:rgba(250,246,240,.22)}
+.bw-url{flex:1;min-width:0;padding:.4rem .8rem;border-radius:20px;background:#140d0d;color:#cdbfb2;font:500 .72rem/1 var(--sans);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bw-load{height:2px;background:var(--pink);transform:scaleX(0);transform-origin:left}
+.bw-load.go{animation:bwload .7s var(--ease) forwards}
+@keyframes bwload{0%{transform:scaleX(0);opacity:1}80%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
+.bw-view{position:relative;aspect-ratio:16/10;background:#1a1111}
+.bw-v{position:absolute;inset:0;opacity:0;transition:opacity .45s;display:grid;place-items:center}
+.bw-v.on{opacity:1}
+.bw-v video{width:100%;height:100%;object-fit:cover}
+.bw-v.m{background:#0F1E3D}
+.bw-v.m video{position:absolute;top:4%;left:50%;transform:translateX(-50%);height:92%;width:auto;aspect-ratio:390/844;object-fit:cover;border-radius:16px;border:5px solid #07101f}
+.bw-panel{position:relative;padding:.9rem 1rem;border:1px solid var(--line);border-radius:10px;background:rgba(0,0,0,.18);font-size:.8rem}
+.bw-ph{font:600 .66rem/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--soft);margin-bottom:.6rem}
+.bw-p{display:none}
+.bw-p.on{display:block;animation:fade .45s var(--ease)}
+.bw-n{font:600 .7rem/1 var(--sans);color:var(--pink);margin-bottom:.5rem}
+.bw-p dl{margin:0;display:grid;gap:.35rem}
+.bw-p dl div{display:grid;grid-template-columns:7rem 1fr;gap:.6rem}
+.bw-p dt{color:var(--soft)}
+.bw-p dd{margin:0}
+.bw-note{margin-top:.6rem;color:var(--soft);font-style:italic}
+.bw-go{display:inline-flex;align-items:center;gap:.4rem;min-height:2.75rem;margin-top:.4rem;color:var(--pink);font-weight:600;text-decoration:underline;text-underline-offset:.3em}
+@media(max-width:899px){
+  .bw-p dl div:nth-child(n+4){display:none}
+  .bw-p dl div{grid-template-columns:5.5rem 1fr}
+  .bw-tab{padding:0 .5rem;font-size:.68rem}
+  .bw-tab span{max-width:100%}
+}
+@media(min-width:900px){
+  .bw-wrap{grid-template-columns:1fr 17rem;align-items:stretch;gap:1.2rem}
+  .bw-stick{gap:1.4rem}
+  .bw-view{aspect-ratio:auto;height:min(calc((min(100vw,var(--max)) - 17rem - 4rem) * .625),calc(100svh - var(--hd) - 16rem))}
+  .bw-v video{object-position:top}
+  .bw-panel{padding:1.2rem 1.2rem;font-size:.82rem}
+  .bw-p dl div{grid-template-columns:1fr;gap:.1rem}
+  .bw-p dl{gap:.7rem}
+}
+
+/* ============ números y fichas de cada proyecto ============ */
+.pj-n{font:600 .72rem/1 var(--sans);letter-spacing:.14em;color:var(--soft);margin-bottom:1rem}
+.pj-top{display:grid;gap:2.2rem;align-items:start}
+@media(min-width:900px){.pj-top{grid-template-columns:1fr 20rem;gap:4rem}.nacar .pj-top{grid-template-columns:1fr 15rem}}
+.fi dl{margin:0}
+.fi dd{margin:0}
+/* Nails: etiqueta de esmalte */
+.fi-nails{justify-self:start;max-width:20rem;padding:1.3rem 1.4rem;background:#fff;border:1px solid #662E3A;outline:4px solid #fff;box-shadow:0 0 0 5px #662E3A,0 24px 40px -24px rgba(102,46,58,.5);border-radius:6px;text-align:center;font-family:'Nails Sans',var(--sans);color:#3A1A21;margin:6px}
+.fi-t{font:400 1.7rem/1 'Nails Display',var(--serif)}
+.fi-t em{font-style:italic;color:#662E3A}
+.fi-s{margin:.5rem 0 1rem;padding-bottom:.8rem;border-bottom:1px solid rgba(102,46,58,.25);font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:#662E3A}
+.fi-nails dl{display:grid;gap:.6rem}
+.fi-nails dt{font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:#7A5A5F}
+.fi-nails dd{font-size:.86rem}
+.fi-f{margin-top:1rem;padding-top:.8rem;border-top:1px solid rgba(102,46,58,.25);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase}
+/* Kronox: claqueta */
+.fi-kx{max-width:22rem;font-family:'Courier New',monospace;color:#EDE6DA}
+.clap{height:2.1rem;border-radius:4px 4px 0 0;background:repeating-linear-gradient(-55deg,#EDE6DA 0 16px,#0B0B0A 16px 32px);border:2px solid #EDE6DA;transform-origin:0 100%;transform:rotate(-14deg);transition:transform .35s .6s cubic-bezier(.5,0,.3,1.4)}
+.fi-kx.in .clap{transform:none}
+.slate{display:grid;grid-template-columns:1fr 1fr;border:2px solid #EDE6DA;border-top:0;background:#141413}
+.slate div{padding:.55rem .7rem;border-top:1px solid rgba(237,230,218,.35)}
+.slate div:nth-child(odd):not(.w){border-right:1px solid rgba(237,230,218,.35)}
+.slate .w{grid-column:1/-1}
+.slate dt{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:#8F877C}
+.slate dd{font:500 .95rem/1.25 'Kronox Display',var(--serif);letter-spacing:.06em}
+/* Nácar: etiqueta de cuidados */
+.fi-nc{justify-self:start;width:13.5rem;padding:1.4rem 1.1rem 1.6rem;background:#FAF6F0;color:#4a4037;text-align:center;font-family:'Nacar Sans',var(--sans);border-radius:2px;box-shadow:0 18px 30px -20px rgba(43,35,28,.45);outline:1px dashed rgba(43,35,28,.35);outline-offset:-7px;position:relative}
+.fi-nc::before{content:"";position:absolute;left:0;right:0;top:-10px;height:12px;background:#E5DACB;clip-path:polygon(0 100%,8% 0,92% 0,100% 100%)}
+.fi-brand{font:300 1.9rem/1 'Nacar Display',var(--serif);color:#2B231C;margin-bottom:1rem}
+.fi-nc dl{display:grid;gap:.75rem}
+.fi-nc dt{font-size:.58rem;letter-spacing:.26em;text-transform:uppercase;color:#8a7d70}
+.fi-nc dd{font-size:.82rem;color:#2B231C}
+.fi-care{margin-top:1rem;padding-top:.8rem;border-top:1px solid rgba(43,35,28,.2);font-size:.7rem;line-height:1.45}
+/* Entre Amigos: etiqueta de envío */
+.fi-ea{position:relative;max-width:21rem;background:#F4F1EA;color:#0F1E3D;border-radius:4px;font-family:'Amigos Sans',var(--sans);box-shadow:0 24px 40px -24px rgba(0,0,0,.8);transform:rotate(-1.5deg)}
+.js .fi-ea[data-reveal]{transform:translateY(28px) rotate(-1.5deg)}
+.js .fi-ea[data-reveal].in{transform:rotate(-1.5deg)}
+.ship-top{display:flex;justify-content:space-between;align-items:center;padding:.7rem 1rem;background:#0F1E3D;color:#FFD23F;border-radius:4px 4px 0 0;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
+.ship-top b{font:700 1rem/1 'Amigos Display',var(--sans);letter-spacing:.06em}
+.ship-row{display:grid;grid-template-columns:5.2rem 1fr;gap:.5rem;padding:.55rem 1rem;border-bottom:1px solid rgba(15,30,61,.15);font-size:.85rem}
+.ship-row span,.ship-grid dt{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#56627a;align-self:center}
+.ship-grid{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid rgba(15,30,61,.15)}
+.ship-grid div{padding:.55rem 1rem}
+.ship-grid div:nth-child(odd){border-right:1px solid rgba(15,30,61,.15)}
+.ship-grid div:nth-child(-n+2){border-bottom:1px solid rgba(15,30,61,.15)}
+.ship-grid dd{font:600 .95rem/1.2 'Amigos Display',var(--sans)}
+.barcode{height:2.6rem;margin:.8rem 1rem 1rem;background:repeating-linear-gradient(90deg,#0F1E3D 0 2px,transparent 2px 4px,#0F1E3D 4px 7px,transparent 7px 9px,#0F1E3D 9px 10px,transparent 10px 13px,#0F1E3D 13px 16px,transparent 16px 17px)}
+.stamp{position:absolute;right:.8rem;bottom:3.9rem;padding:.25rem .6rem;border:2px solid #E5383B;color:#E5383B;font:700 .8rem/1 'Amigos Display',var(--sans);letter-spacing:.2em;text-transform:uppercase;transform:rotate(-12deg);opacity:.85}
+
+/* ficha de "Inspeccionar" con estilo de videojuego */
+.bw-panel{border:0;border-radius:0;margin:4px;background:#140d0d;box-shadow:0 -4px 0 0 #CDBFB2,0 4px 0 0 #CDBFB2,-4px 0 0 0 #CDBFB2,4px 0 0 0 #CDBFB2,inset 0 4px 0 0 rgba(255,255,255,.06),inset 0 -4px 0 0 rgba(0,0,0,.35)}
+.bw-ph{font-family:'Courier New',monospace;font-weight:700}
+.bw-who{display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem}
+.bw-ic{width:40px;height:40px;image-rendering:pixelated;background:#2a1b1b;padding:4px;box-shadow:0 -2px 0 0 #6b5552,0 2px 0 0 #6b5552,-2px 0 0 0 #6b5552,2px 0 0 0 #6b5552;animation:bob 1s steps(2) infinite}
+@keyframes bob{50%{transform:translateY(-3px)}}
+.bw-n{display:grid;gap:.35rem;margin:0;font-family:'Courier New',monospace;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.bw-lvl{display:flex;gap:3px}
+.bw-lvl i{width:14px;height:8px;background:#3a2a2a}
+.bw-lvl i.f{background:var(--pink)}
+.bw-p.on .bw-lvl i.f:last-of-type{animation:blink .8s steps(2) infinite}
+.bw-p dt{font:700 .62rem/1.2 'Courier New',monospace;letter-spacing:.1em;text-transform:uppercase}
+.bw-p.on{animation:pop .32s steps(3)}
+@keyframes pop{0%{transform:scale(.92);opacity:0}100%{transform:none;opacity:1}}
+.ty-rest{color:transparent}
+.ty-car{display:inline-block;width:.5em;height:1em;margin-left:1px;vertical-align:-.12em;background:var(--ink);animation:blink .5s steps(2) infinite}
+.bw-go{text-decoration:none;font-family:'Courier New',monospace;font-weight:700;text-transform:uppercase;letter-spacing:.06em;gap:.55rem}
+.bw-go:hover{text-decoration:underline}
+.px-arr{width:7px;height:10px;background:var(--pink);clip-path:polygon(0 0,0 100%,100% 50%);animation:nudge .6s steps(2) infinite}
+@keyframes nudge{50%{transform:translateX(3px)}}
+@media (prefers-reduced-motion:reduce){.bw-ic,.px-arr,.ty-car{animation:none}}

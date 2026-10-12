@@ -34,7 +34,7 @@
   $$('[data-reveal]').forEach(function (el) { revIO.observe(el); });
 
   /* ---------- videos: se cargan cerca y solo suenan (mudos) a la vista ---------- */
-  var vids = $$('video[data-src]');
+  var vids = $$('video[data-src]').filter(function (v) { return !v.closest('.bw'); });
   function load(v) { if (!v.src) { v.src = v.dataset.src; v.load(); } }
   var vIO = new IntersectionObserver(function (es) {
     es.forEach(function (e) {
@@ -444,6 +444,74 @@
     };
     addEventListener('scroll', function () { requestAnimationFrame(eaScroll); }, { passive: true });
     addEventListener('resize', eaScroll); eaScroll();
+  }
+
+
+  /* ======================= mis webs: navegador con pestañas ======================= */
+  var bw = $('.bw');
+  if (bw) {
+    var bwTabs = $$('.bw-tab', bw), bwV = $$('.bw-v', bw), bwP = $$('.bw-p', bw), bwUrl = $('#bwUrl'), bwLoad = $('.bw-load', bw);
+    var urls = bwUrl.dataset.urls.split('|'), bwCur = -1, bwVis = false, sticky = !reduce, tyT = null;
+    $$('.bw-ic', bw).forEach(function (c) { drawIcon(c.getContext('2d'), c.dataset.icon, 1, 0, 1); });
+    /* el texto se escribe letra por letra, como un diálogo de videojuego */
+    var typeP = function (p) {
+      clearInterval(tyT);
+      $$('.ty-car', bw).forEach(function (c) { c.remove(); });
+      var els = $$('dd, .bw-note', p);
+      els.forEach(function (el) {
+        if (!el.dataset.t) el.dataset.t = el.textContent;
+        el.innerHTML = reduce ? '' : '<span class="ty-done"></span><span class="ty-rest"></span>';
+        if (reduce) el.textContent = el.dataset.t; else $('.ty-rest', el).textContent = el.dataset.t;
+      });
+      if (reduce) return;
+      var e = 0, ch = 0, car = document.createElement('span'); car.className = 'ty-car';
+      tyT = setInterval(function () {
+        var el = els[e]; if (!el) { clearInterval(tyT); car.remove(); return; }
+        var t = el.dataset.t, done = $('.ty-done', el), rest = $('.ty-rest', el);
+        ch = Math.min(t.length, ch + 2);
+        done.textContent = t.slice(0, ch); rest.textContent = t.slice(ch);
+        el.insertBefore(car, rest);
+        if (ch >= t.length) { e++; ch = 0; }
+      }, 16);
+    };
+    var bwSet = function (i) {
+      if (i === bwCur) return; bwCur = i;
+      bwTabs.forEach(function (t, k) { t.setAttribute('aria-selected', String(k === i)); t.tabIndex = k === i ? 0 : -1; });
+      bwV.forEach(function (v, k) {
+        v.classList.toggle('on', k === i);
+        var vid = $('video', v);
+        if (k === i && bwVis) { load(vid); if (!reduce) { var pp = vid.play(); if (pp && pp.catch) pp.catch(function () {}); } }
+        else if (!vid.paused) vid.pause();
+      });
+      bwP.forEach(function (p, k) { p.classList.toggle('on', k === i); });
+      typeP(bwP[i]);
+      bwUrl.textContent = urls[i];
+      bwLoad.classList.remove('go'); void bwLoad.offsetWidth; bwLoad.classList.add('go');
+    };
+    var bwScroll = function () {
+      if (!sticky) return;
+      var r = bw.getBoundingClientRect(), span = bw.offsetHeight - innerHeight;
+      var q = Math.min(.999, Math.max(0, -r.top / Math.max(1, span)));
+      bwSet(Math.floor(q * bwTabs.length));
+    };
+    new IntersectionObserver(function (es) {
+      bwVis = es[0].isIntersecting;
+      var vid = $('video', bwV[Math.max(0, bwCur)]);
+      if (bwVis) { load(vid); if (!reduce) { var pp = vid.play(); if (pp && pp.catch) pp.catch(function () {}); } } else vid.pause();
+    }, { rootMargin: '100px 0px' }).observe(bw);
+    bwTabs.forEach(function (t, i) {
+      t.addEventListener('click', function () {
+        if (!sticky) { bwSet(i); return; }
+        var top = bw.getBoundingClientRect().top + scrollY, span = bw.offsetHeight - innerHeight;
+        scrollTo({ top: top + span * (i + .5) / bwTabs.length, behavior: 'smooth' });
+      });
+      t.addEventListener('keydown', function (e) {
+        var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return;
+        var n = (i + d + bwTabs.length) % bwTabs.length; bwTabs[n].focus(); bwTabs[n].click();
+      });
+    });
+    addEventListener('scroll', function () { requestAnimationFrame(bwScroll); }, { passive: true });
+    bwSet(0); bwScroll();
   }
 
   /* ---------- si te vas a otra pestaña ---------- */
