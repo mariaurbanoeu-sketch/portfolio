@@ -766,4 +766,4 @@ body[data-bg="milk"] .btn,body[data-bg="nails"] .btn,body[data-bg="nacar"] .btn{
 .live-box.nav .live-go{background:#4c8df6}
 .cam-screen .live-go{bottom:2.2rem}
 .b3-card .live{pointer-events:none!important}
-.b3-card{overflow:hidden}
+.b3-card.live-box{position:absolute;overflow:hidden}
