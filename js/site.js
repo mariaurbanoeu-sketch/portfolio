@@ -48,8 +48,24 @@
     if (reduce) v.addEventListener('click', function () { load(v); v.paused ? v.play() : v.pause(); });
   });
 
-  /* ---------- "lo que más me gusta" crece hasta el video ---------- */
-  var zoom = $('.zoom'), zStick = zoom && $('.zoom-stick', zoom);
+  /* ---------- "lo que más me gusta": las palabras se encienden al bajar ---------- */
+  var love = $('.love'), words = [];
+  if (love) {
+    var split = function (node) {
+      Array.prototype.slice.call(node.childNodes).forEach(function (n) {
+        if (n.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(function (t) {
+            if (!t) return;
+            if (/^\s+$/.test(t)) { frag.appendChild(document.createTextNode(t)); return; }
+            var w = document.createElement('span'); w.className = 'w'; w.textContent = t; frag.appendChild(w); words.push(w);
+          });
+          node.replaceChild(frag, n);
+        } else if (n.nodeType === 1) split(n);
+      });
+    };
+    split($('#loveTxt'));
+  }
   /* ---------- Figma en carrete horizontal (escritorio) ---------- */
   var fig = $('.fig'), figPin = fig && $('.fig-pin', fig), figTrack = fig && $('.fig-track', fig);
   var figDist = 0;
@@ -62,15 +78,17 @@
     fig.style.setProperty('--pin-h', (figDist + innerHeight * .9) + 'px');
   }
   function onScroll() {
-    if (zStick && !reduce) {
-      var r = zoom.getBoundingClientRect(), span = zoom.offsetHeight - zStick.offsetHeight;
-      var p = Math.min(1, Math.max(0, -r.top / span));
-      zStick.style.setProperty('--p', p.toFixed(4));
+    if (love && !reduce) {
+      var r = love.getBoundingClientRect(), span = love.offsetHeight - innerHeight * .8;
+      var p = Math.min(1, Math.max(0, (innerHeight * .35 - r.top) / span));
+      var lit = Math.round(p * 1.2 * words.length);
+      words.forEach(function (w, i) { w.classList.toggle('on', i < lit); });
     }
     if (fig && fig.classList.contains('pinned')) {
       var fr = figPin.getBoundingClientRect(), total = figPin.offsetHeight - innerHeight * .9;
       var q = Math.min(1, Math.max(0, -fr.top / Math.max(1, total)));
       figTrack.style.setProperty('--fx', (q * figDist).toFixed(1));
+      fig.style.setProperty('--cur', fr.top < innerHeight * .3 && fr.bottom > innerHeight * .8 ? 1 : 0);
     }
     mini.el.classList.toggle('show', scrollY > innerHeight * .8);
   }
@@ -108,10 +126,34 @@
     }
   }
 
-  var g = { el: $('#gotchi'), cv: $('#gCanvas'), status: $('#gStatus'), mood: 'idle', jump: 0, t: 0 };
+  var g = { el: $('#gotchi'), cv: $('#gCanvas'), status: $('#gStatus'), mood: 'idle', jump: 0, t: 0, sleep: false };
   var mini = { el: $('#miniG'), cv: $('#miniCanvas'), icon: null };
-  var STATUS = ['disponible ya', 'ánimo: feliz', 'hambre: proyectos', 'nivel: diseñadora web', 'ama: figma y ux/ui'];
-  var sIdx = 0;
+  /* su día de verdad, con la hora de Valencia */
+  var ROUTINE = [
+    [0, 'durmiendo zzz', 'sleep'], [7 * 60, 'corriendo a la uni. tarde, como siempre'], [8 * 60 + 30, 'en clase adelantando cosas mías'],
+    [14 * 60, 'almorzando'], [15 * 60, 'trabajando en webs'], [19 * 60, 'recogiendo y limpiando'], [19 * 60 + 45, 'en la ducha'],
+    [20 * 60 + 30, 'cenando'], [21 * 60 + 15, 'llamando a mi familia, que está lejos'], [22 * 60, 'una cosita más (un poco workaholic)'], [23 * 60 + 45, 'durmiendo zzz', 'sleep']
+  ];
+  function madrid() {
+    try {
+      var parts = new Intl.DateTimeFormat('es-ES', { timeZone: 'Europe/Madrid', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(new Date());
+      var h = 0, m = 0; parts.forEach(function (x) { if (x.type === 'hour') h = +x.value % 24; if (x.type === 'minute') m = +x.value; });
+      return { h: h, m: m };
+    } catch (e) { var d = new Date(); return { h: d.getHours(), m: d.getMinutes() }; }
+  }
+  function now() {
+    var t = madrid(), mins = t.h * 60 + t.m, cur = ROUTINE[0];
+    ROUTINE.forEach(function (r) { if (mins >= r[0]) cur = r; });
+    return { txt: cur[1], sleep: cur[2] === 'sleep', clock: ('0' + t.h).slice(-2) + ':' + ('0' + t.m).slice(-2) };
+  }
+  var STATUS = [], sIdx = 0;
+  function refresh() {
+    var n = now(), clk = $('#gClock');
+    if (clk) clk.innerHTML = '<span>valencia</span><span>' + n.clock + '</span>';
+    STATUS = [n.txt, 'disponible ya', 'ama: figma y ux/ui'];
+    g.sleep = n.sleep;
+    $('.g-screen').classList.toggle('zz', n.sleep);
+  }
   if (g.cv) {
     var gx = g.cv.getContext('2d'), mx = mini.cv.getContext('2d');
     var last = 0, blinkAt = 2500;
@@ -121,6 +163,7 @@
         last = t;
         var mood = g.mood;
         if (mood === 'idle' && (t % 3200) > 3000) mood = 'blink';
+        if (mood === 'idle' && g.sleep) mood = 'blink';
         var bounce = g.jump > 0 ? Math.round(Math.sin(g.jump / 8 * Math.PI) * 4) : (Math.floor(t / 480) % 2);
         if (g.jump > 0) g.jump--; else if (g.mood === 'happy') g.mood = 'idle';
         gx.clearRect(0, 0, 64, 64);
@@ -128,6 +171,7 @@
         /* teclas que brillan mientras programa */
         if (g.jump === 0) { gx.fillStyle = (Math.floor(t / 240) % 2) ? '#eba9bd' : '#d6dcc0'; gx.fillRect(22 + (Math.floor(t / 240) % 5) * 4, 56, 3, 2); }
         if (g.jump > 0) drawIcon(gx, 'heart', 44, 2, 2);
+        else if (g.sleep) { gx.fillStyle = '#3a2e32'; var zy = 10 - (Math.floor(t / 480) % 3) * 2; gx.fillRect(48, zy, 6, 2); gx.fillRect(52, zy + 2, 2, 2); gx.fillRect(50, zy + 4, 2, 2); gx.fillRect(48, zy + 6, 6, 2); }
         /* mini */
         mx.clearRect(0, 0, 32, 32);
         drawSprite(mx, 0, 1 - (Math.floor(t / 480) % 2), 1, mood);
@@ -135,9 +179,10 @@
       }
       if (!reduce) requestAnimationFrame(loop);
     };
+    refresh(); g.status.textContent = STATUS[0];
     if (reduce) { drawSprite(gx, 0, 4, 2, 'idle'); drawSprite(mx, 0, 1, 1, 'idle'); }
     else requestAnimationFrame(loop);
-    setInterval(function () { sIdx = (sIdx + 1) % STATUS.length; g.status.textContent = STATUS[sIdx]; }, 2600);
+    setInterval(function () { if (sIdx === 0) refresh(); sIdx = (sIdx + 1) % STATUS.length; g.status.textContent = STATUS[sIdx]; }, 3400);
 
     /* se inclina siguiendo el mouse */
     if (!reduce && matchMedia('(hover:hover)').matches) {
@@ -158,6 +203,58 @@
     });
     mini.el.addEventListener('click', openGame);
   }
+
+
+  /* ======================= Kronox: código de tiempo ======================= */
+  var tcs = $$('.kronox .tc'), tcOn = false, tc0 = 0;
+  if (tcs.length && !reduce) {
+    new IntersectionObserver(function (es) { tcOn = es[0].isIntersecting; if (tcOn && !tc0) tc0 = performance.now(); }).observe($('#kronox'));
+    setInterval(function () {
+      if (!tcOn) return;
+      var f = Math.floor((performance.now() - tc0) / (1000 / 24)), pad = function (n) { return ('0' + n).slice(-2); };
+      var txt = pad(Math.floor(f / 86400)) + ':' + pad(Math.floor(f / 1440) % 60) + ':' + pad(Math.floor(f / 24) % 60) + ':' + pad(f % 24);
+      tcs.forEach(function (el) { el.textContent = txt; });
+    }, 42);
+  }
+
+  /* ======================= fichas de marca que se voltean ======================= */
+  $$('.card-in').forEach(function (b) {
+    var name = $('h3', b.parentNode).textContent;
+    var set = function () { var on = b.getAttribute('aria-pressed') === 'true'; b.setAttribute('aria-label', (on ? 'Volver a la portada de ' : 'Dar la vuelta a la ficha de ') + name); };
+    set();
+    b.addEventListener('click', function () { b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true')); set(); });
+  });
+
+  /* ======================= sobre mí: yo en pixel y 3 iconos ======================= */
+  var ab = $('#aboutCanvas');
+  if (ab) { var ax = ab.getContext('2d'); ax.fillStyle = '#e9dccd'; ax.fillRect(0, 0, 64, 64); drawSprite(ax, 0, 2, 2, 'happy'); }
+  var PX = {
+    grass: { c: { r: '#c0392b', g: '#7d9a45', G: '#4f6b2a' }, m: ["r..........r",".r........r.","..r......r..","...r....r...","....r..r....",".....rr.....",".....rr.....","....r..r....","g..r.g..r.g.","g.rg.gg.gr.g","gGrgGggGgrGg","GGGGGGGGGGGG"] },
+    plate: { c: { o: '#c9b29a', w: '#fffaf5', y: '#e8bc50', R: '#c0392b' }, m: ["............","...oooooo...","..owwwwwwo..",".owwyyRRwwo.",".owyyyRRRwo.",".owyyyyRRwo.",".owwyyyywwo.","..owwwwwwo..","...oooooo...","............","............","............"] },
+    music: { c: { n: '#2A1714', p: '#a34a68' }, m: ["............","......nnnnnn","......nnnnnn","......n....n","......n....n","......n....n","......n....n","....nnn..ppn","...nnnn.pppp","...nnnn.pppp","....nn...pp.","............"] }
+  };
+  $$('canvas[data-px]').forEach(function (c) {
+    var d = PX[c.dataset.px], x = c.getContext('2d');
+    d.m.forEach(function (row, y) { for (var i = 0; i < row.length; i++) { var k = row[i]; if (d.c[k]) { x.fillStyle = d.c[k]; x.fillRect(i, y, 1, 1); } } });
+  });
+
+  /* ======================= contacto: mensaje al Paulagotchi ======================= */
+  var mf = $('#msgForm'), mc = $('#msgCanvas');
+  if (mf && mc) {
+    var mcx = mc.getContext('2d'); drawSprite(mcx, 0, 0, 1, 'idle');
+    mf.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var txt = $('#msgTxt').value.trim(); if (!txt) return;
+      mcx.clearRect(0, 0, 32, 32); drawSprite(mcx, 0, 0, 1, 'happy');
+      mc.classList.remove('hop'); void mc.offsetWidth; mc.classList.add('hop');
+      $('#msgSay').textContent = '¡gracias! abriendo tu correo…';
+      setTimeout(function () { location.href = 'mailto:mariaurbanoeu@gmail.com?subject=' + encodeURIComponent('Hola Paula') + '&body=' + encodeURIComponent(txt); }, 700);
+    });
+  }
+
+  /* ---------- si te vas a otra pestaña ---------- */
+  var title = document.title;
+  document.addEventListener('visibilitychange', function () { document.title = document.hidden ? 'vuelve :(' : title; });
 
   /* ======================= minijuego: atrapa los bugs ======================= */
   var game = $('#game'), gc = $('#gameCanvas'), gctx = gc && gc.getContext('2d');

@@ -13,7 +13,7 @@
 <meta property="og:type" content="website">
 <link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/pinyon.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=1">
+<link rel="stylesheet" href="css/site.css?v=3">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -52,8 +52,9 @@
       <div class="g-shell">
         <p class="g-brand">Paulagotchi</p>
         <div class="g-screen">
+          <p class="g-clock" id="gClock" aria-hidden="true"></p>
           <canvas id="gCanvas" width="64" height="64" aria-hidden="true"></canvas>
-          <p class="g-status" id="gStatus">disponible ya</p>
+          <p class="g-status" id="gStatus" aria-live="polite">disponible ya</p>
         </div>
         <div class="g-btns">
           <button type="button" data-g="a" aria-label="A: ver proyectos"><span>A</span></button>
@@ -66,166 +67,226 @@
   </div>
 </section>
 
-<!-- ============ LO QUE MÁS ME GUSTA → NAILS ============ -->
-<section class="zoom" id="gusta" data-bg="wine" aria-label="Lo que más me gusta">
-  <div class="zoom-stick">
-    <div class="zoom-txt">
-      <p class="script">lo que más me gusta</p>
-      <p class="zoom-big">Diseñar webs<br>en <em>Figma</em>, pensar<br>cómo se usan <span class="zoom-tag">(UX/UI)</span><br>y programarlas</p>
-    </div>
-    <div class="zoom-media">
-      <video muted playsinline loop preload="none" poster="img/nails-d.webp" data-src="video/nails-d.mp4"></video>
-    </div>
+<!-- ============ LO QUE MÁS ME GUSTA (se ilumina palabra por palabra) ============ -->
+<section class="love" id="gusta" data-bg="wine" aria-label="Lo que más me gusta">
+  <div class="love-stick">
+    <p class="script">lo que más me gusta</p>
+    <p class="love-txt" id="loveTxt">Diseñar webs en <b class="k">Figma</b>, pensar cómo las va a usar la gente <b class="k">(UX/UI)</b> y después <b class="k">programarlas</b> para que funcionen de verdad.</p>
   </div>
 </section>
+
+<div class="px-sep" aria-hidden="true"><i></i><i></i><i></i></div>
 
 <!-- ============ PROYECTOS ============ -->
 <div id="proyectos">
 
-<article class="pj" id="nails" data-bg="plum" data-icon="nail">
-  <header class="pj-hd" data-reveal>
-    <p class="script">la web de</p>
-    <h2>Nails by MelyG</h2>
-    <p class="pj-desc">Mely tiene un estudio de manicura rusa en Katy, Texas. Diseñé la web en Figma y la programé: las clientas se prueban colores y formas antes de reservar, ven sus trabajos y compran gift cards.</p>
-    <p class="pj-role">Figma · UX/UI · Desarrollo · Español e inglés · Reservas con Square</p>
-  </header>
-  <div class="pj-media" data-reveal>
-    <figure class="browser"><figcaption><i></i><i></i><i></i><span>nailsbymelyg.com</span></figcaption><video muted playsinline loop preload="none" poster="img/nails-d.webp" data-src="video/nails-d.mp4"></video></figure>
-    <figure class="phone"><video muted playsinline loop preload="none" poster="img/nails-m.webp?v=2" data-src="video/nails-m.mp4?v=2"></video></figure>
-  </div>
-  <ul class="pj-ux" data-reveal>
-    <li><b>Probar antes de reservar.</b> Un simulador para elegir color, forma y acabado. La clienta llega a la cita sabiendo lo que quiere.</li>
-    <li><b>En su idioma sin pedirlo.</b> La web detecta si el teléfono está en español o en inglés y se abre así.</li>
-    <li><b>Regalar en un minuto.</b> La gift card se diseña en la web y se envía por WhatsApp.</li>
-  </ul>
-  <p class="pj-actions"><a class="btn" href="https://nailsbymelyg.com/" target="_blank" rel="noopener">Ver la web en vivo <i class="ic ic-out"></i></a></p>
-</article>
-
-<article class="pj" id="kronox" data-bg="wine" data-icon="cam">
-  <header class="pj-hd" data-reveal>
-    <p class="script">la web de</p>
-    <h2>Kronox</h2>
-    <p class="pj-desc">Kronox es director de videoclips en Sevilla y me pidió una web para su trabajo. Tiene dos partes: la web que ven sus clientes y un panel para que él cambie videos, fotos y precios sin depender de mí.</p>
-    <p class="pj-role">UX/UI · Desarrollo · Panel de administración · Firebase</p>
-  </header>
-  <div class="pj-media" data-reveal>
-    <figure class="browser"><figcaption><i></i><i></i><i></i><span>Panel de Kronox</span></figcaption><video muted playsinline loop preload="none" poster="img/kpanel-d.webp" data-src="video/kpanel-d.mp4"></video></figure>
-    <figure class="phone"><video muted playsinline loop preload="none" poster="img/kpanel-m.webp?v=2" data-src="video/kpanel-m.mp4?v=2"></video></figure>
-  </div>
-  <ul class="pj-ux" data-reveal>
-    <li><b>Sin malentendidos.</b> Antes de escribirle por WhatsApp, el cliente acepta las condiciones del rodaje.</li>
-    <li><b>Él lo controla todo.</b> Sube videos, cambia precios y aprueba reseñas desde el panel, también en el celular.</li>
-  </ul>
-  <p class="pj-actions"><a class="btn" href="https://kronoxprod.netlify.app/" target="_blank" rel="noopener">Ver la web en vivo <i class="ic ic-out"></i></a> <a class="btn ghost" href="demos/kronox-panel.html" target="_blank" rel="noopener">Probar el panel <i class="ic ic-out"></i></a></p>
-</article>
-
-<article class="pj" id="nacar" data-bg="plum" data-icon="bag">
-  <header class="pj-hd" data-reveal>
-    <p class="script">la tienda de</p>
-    <h2>Nácar Estilismo</h2>
-    <p class="pj-desc">Una tienda de ropa en Sevilla. Diseñé y programé su tema de Shopify desde cero, en seis idiomas, y sigo encargándome de subir los productos nuevos.</p>
-    <p class="pj-role">E-commerce · UX/UI · Shopify · Liquid</p>
-  </header>
-  <div class="pj-media" data-reveal>
-    <figure class="browser"><figcaption><i></i><i></i><i></i><span>Nácar Estilismo</span></figcaption><video muted playsinline loop preload="none" poster="img/nacar-d.webp" data-src="video/nacar-d.mp4"></video></figure>
-    <figure class="phone"><video muted playsinline loop preload="none" poster="img/nacar-m.webp?v=2" data-src="video/nacar-m.mp4?v=2"></video></figure>
-  </div>
-  <ul class="pj-ux" data-reveal>
-    <li><b>Seguir mirando.</b> La cesta se abre a un lado, así nadie pierde la página en la que estaba.</li>
-    <li><b>Una tienda para todas.</b> Seis idiomas desde el primer día.</li>
-  </ul>
-  <p class="pj-actions"><a class="btn" href="demos/nacar.html" target="_blank" rel="noopener">Ver la tienda <i class="ic ic-out"></i></a></p>
-</article>
-
-<article class="pj pj-app" id="amigos" data-bg="olive" data-icon="heart">
-  <header class="pj-hd" data-reveal>
-    <p class="script">proyecto personal</p>
-    <h2>Entre Amigos por Venezuela</h2>
-    <p class="pj-desc">Después de los terremotos en Venezuela hice en una semana una app para organizar donaciones, transporte y voluntarios. No llegó a usarse porque ya había otra herramienta parecida, pero es de lo que más aprendí.</p>
-    <p class="pj-role">Investigación · UX/UI · Desarrollo · 7 idiomas</p>
-  </header>
-  <div class="pj-media" data-reveal>
-    <figure class="phone solo"><video muted playsinline loop preload="none" poster="img/ea-m.webp?v=2" data-src="video/ea-m.mp4?v=2"></video></figure>
-    <ul class="pj-ux">
-      <li><b>Funciona sin conexión.</b> En una emergencia la señal falla, así que guarda todo en el teléfono.</li>
-      <li><b>Cada ayuda se sigue hasta el final.</b> Quien dona puede comprobar con un PIN que llegó.</li>
+<!-- NAILS · carta de esmaltes -->
+<article class="pj nails" id="nails" data-bg="nails" data-icon="nail">
+  <div class="pj-in">
+    <header class="pj-hd" data-reveal>
+      <p class="nails-kick">Manicurista · Katy, Texas</p>
+      <h2 class="nails-h">Nails by <em>MelyG</em></h2>
+      <p class="pj-desc">Mely tiene un estudio de manicura rusa. Diseñé su web en Figma y la programé: las clientas se prueban colores y formas antes de reservar, ven sus trabajos y compran gift cards.</p>
+      <p class="pj-role">Figma · UX/UI · Desarrollo · Español e inglés · Reservas con Square</p>
+    </header>
+    <div class="pj-media nails-media" data-reveal>
+      <svg class="nail n1" viewBox="0 0 40 60" aria-hidden="true"><path d="M6 58 V22 C6 8 34 8 34 22 V58 Z"/><path class="sh" d="M12 22 C12 15 18 13 20 13"/></svg>
+      <svg class="nail n2" viewBox="0 0 40 60" aria-hidden="true"><path d="M6 58 V22 C6 8 34 8 34 22 V58 Z"/><path class="sh" d="M12 22 C12 15 18 13 20 13"/></svg>
+      <svg class="nail n3" viewBox="0 0 40 60" aria-hidden="true"><path d="M6 58 V22 C6 8 34 8 34 22 V58 Z"/><path class="sh" d="M12 22 C12 15 18 13 20 13"/></svg>
+      <figure class="browser"><figcaption><i></i><i></i><i></i><span>nailsbymelyg.com</span></figcaption><video muted playsinline loop preload="none" poster="img/nails-d.webp" data-src="video/nails-d.mp4"></video></figure>
+      <figure class="phone"><video muted playsinline loop preload="none" poster="img/nails-m.webp?v=2" data-src="video/nails-m.mp4?v=2"></video></figure>
+    </div>
+    <p class="nails-sub" data-reveal>Lo que pensé para sus clientas</p>
+    <ul class="bottles" data-reveal>
+      <li style="--c:#662E3A"><span class="bottle" aria-hidden="true"><i></i></span><b>Probar antes de reservar</b><span>Un simulador para elegir color, forma y acabado. La clienta llega a la cita sabiendo lo que quiere.</span></li>
+      <li style="--c:#C98E95"><span class="bottle" aria-hidden="true"><i></i></span><b>En su idioma sin pedirlo</b><span>La web detecta si el teléfono está en español o en inglés y se abre así.</span></li>
+      <li style="--c:#B99A88"><span class="bottle" aria-hidden="true"><i></i></span><b>Regalar en un minuto</b><span>La gift card se diseña en la web y se envía por WhatsApp.</span></li>
     </ul>
+    <p class="pj-actions"><a class="btn nails-btn" href="https://nailsbymelyg.com/" target="_blank" rel="noopener">Ver la web en vivo <i class="ic ic-out"></i></a></p>
   </div>
-  <p class="pj-actions"><a class="btn" href="demos/entre-amigos.html" target="_blank" rel="noopener">Probar la app <i class="ic ic-out"></i></a></p>
 </article>
 
-<section class="crea" id="creativos" data-bg="wine" data-icon="star">
-  <header class="pj-hd" data-reveal>
-    <p class="script">portfolios para</p>
-    <h2>Otros creativos</h2>
-    <p class="pj-desc">Webs para tres personas que también crean. Antes de diseñar, miré qué busca cada uno en su sector.</p>
-  </header>
-  <div class="crea-grid">
-    <a class="crea-card" href="https://jairoazogue.com/" target="_blank" rel="noopener" data-reveal>
-      <span class="crea-img"><img src="img/jairo.webp" alt="Web de Jairo Azogue" loading="lazy" width="800" height="500"></span>
-      <b>Jairo Azogue</b><span>Director y editor de video</span>
-    </a>
-    <a class="crea-card" href="https://zoguekidd.netlify.app/" target="_blank" rel="noopener" data-reveal>
-      <span class="crea-img"><img src="img/zoguekidd.webp" alt="Web de ZogueKidd" loading="lazy" width="800" height="500"></span>
-      <b>ZogueKidd</b><span>Videoclips</span>
-    </a>
-    <a class="crea-card" href="https://catalinasilva.netlify.app/" target="_blank" rel="noopener" data-reveal>
-      <span class="crea-img crea-ph"><span>Catalina Silva</span></span>
-      <b>Catalina Silva</b><span>3D y animación</span>
-    </a>
+<!-- KRONOX · cine -->
+<article class="pj kronox" id="kronox" data-bg="kronox" data-icon="cam">
+  <div class="pj-in">
+    <header class="pj-hd" data-reveal>
+      <p class="kx-kick"><span class="rec"></span>REC <span class="tc">00:00:00:00</span></p>
+      <h2 class="kx-h">Kronox</h2>
+      <p class="kx-credit">Director de videoclips · Sevilla</p>
+      <p class="pj-desc">Me pidió una web para su trabajo. Tiene dos partes: la web que ven sus clientes y un panel para que él cambie videos, fotos y precios sin depender de mí.</p>
+      <p class="pj-role">UX/UI · Desarrollo · Panel de administración · Firebase</p>
+    </header>
+    <div class="kx-stage" data-reveal>
+      <div class="kx-monitor">
+        <div class="kx-hud" aria-hidden="true"><span>Panel · Kronox</span><span class="tc">00:00:00:00</span></div>
+        <span class="kx-c tl" aria-hidden="true"></span><span class="kx-c tr" aria-hidden="true"></span><span class="kx-c bl" aria-hidden="true"></span><span class="kx-c br" aria-hidden="true"></span>
+        <video muted playsinline loop preload="none" poster="img/kpanel-d.webp" data-src="video/kpanel-d.mp4"></video>
+      </div>
+      <figure class="phone kx-phone"><video muted playsinline loop preload="none" poster="img/kpanel-m.webp?v=2" data-src="video/kpanel-m.mp4?v=2"></video></figure>
+    </div>
+    <p class="kx-label" data-reveal>Esto es el panel que usa él para cambiar su web.</p>
+    <div class="kx-subs" data-reveal>
+      <p>Antes de escribirle por WhatsApp, el cliente acepta las condiciones del rodaje. Así no hay malentendidos.</p>
+      <p>Él sube videos, cambia precios y aprueba reseñas desde el panel. También desde el celular.</p>
+    </div>
+    <p class="pj-actions"><a class="btn kx-btn" href="https://kronoxprod.netlify.app/" target="_blank" rel="noopener">Ver la web en vivo <i class="ic ic-out"></i></a> <a class="btn ghost" href="demos/kronox-panel.html" target="_blank" rel="noopener">Probar el panel <i class="ic ic-out"></i></a></p>
+  </div>
+</article>
+
+<!-- NÁCAR · revista de moda -->
+<article class="pj nacar" id="nacar" data-bg="nacar" data-icon="bag">
+  <div class="pj-in">
+    <header class="nc-hd" data-reveal>
+      <p class="nc-issue"><span>N.º 03</span><span>Tienda online · Sevilla</span></p>
+      <h2 class="nc-h">Nácar <em>Estilismo</em></h2>
+      <p class="nc-lead">Una tienda de ropa en Sevilla. Diseñé y programé su tema de Shopify desde cero, en seis idiomas, y sigo encargándome de subir los productos nuevos.</p>
+      <p class="pj-role">E-commerce · UX/UI · Shopify · Liquid</p>
+    </header>
+    <div class="nc-spread" data-reveal>
+      <figure class="nc-big"><video muted playsinline loop preload="none" poster="img/nacar-d.webp" data-src="video/nacar-d.mp4"></video><figcaption><b>Fig. 1</b> La tienda en el ordenador</figcaption></figure>
+      <figure class="nc-small"><div class="phone"><video muted playsinline loop preload="none" poster="img/nacar-m.webp?v=2" data-src="video/nacar-m.mp4?v=2"></video></div><figcaption><b>Fig. 2</b> Y en el celular</figcaption></figure>
+    </div>
+    <ul class="tags" data-reveal>
+      <li><b>Ref. 01</b><span>Seguir mirando</span>La cesta se abre a un lado, así nadie pierde la página en la que estaba.</li>
+      <li><b>Ref. 02</b><span>Para todas</span>Seis idiomas desde el primer día.</li>
+    </ul>
+    <p class="pj-actions"><a class="btn nc-btn" href="demos/nacar.html" target="_blank" rel="noopener">Ver la tienda <i class="ic ic-out"></i></a></p>
+  </div>
+</article>
+
+<!-- ENTRE AMIGOS · el camino de una ayuda -->
+<article class="pj amigos" id="amigos" data-bg="amigos" data-icon="heart">
+  <div class="pj-in">
+    <header class="pj-hd" data-reveal>
+      <p class="ea-kick"><span></span><span></span><span></span>Proyecto personal</p>
+      <h2 class="ea-h">Entre Amigos por Venezuela</h2>
+      <p class="pj-desc">Después de los terremotos en Venezuela hice en una semana una app para organizar donaciones, transporte y voluntarios. Funciona sin conexión, porque en una emergencia la señal falla. No llegó a usarse porque ya había otra herramienta parecida, pero es de lo que más aprendí.</p>
+      <p class="pj-role">Investigación · UX/UI · Desarrollo · 7 idiomas</p>
+    </header>
+    <div class="ea-grid">
+      <figure class="phone ea-phone" data-reveal><video muted playsinline loop preload="none" poster="img/ea-m.webp?v=2" data-src="video/ea-m.mp4?v=2"></video></figure>
+      <div class="ea-route" data-reveal>
+        <p class="ea-route-t">El camino de una ayuda</p>
+        <ol>
+          <li><b>Se publica la necesidad</b></li>
+          <li><b>Match automático</b></li>
+          <li><b>Comprado</b></li>
+          <li><b>En tránsito</b></li>
+          <li><b>Recibido + PIN</b><span>quien donó comprueba que llegó</span></li>
+        </ol>
+      </div>
+    </div>
+    <p class="pj-actions"><a class="btn ea-btn" href="demos/entre-amigos.html" target="_blank" rel="noopener">Probar la app <i class="ic ic-out"></i></a></p>
+  </div>
+</article>
+
+<!-- CREATIVOS · hoja de contactos -->
+<section class="pj crea" id="creativos" data-bg="film" data-icon="star">
+  <div class="pj-in">
+    <header class="pj-hd" data-reveal>
+      <p class="script">portfolios para</p>
+      <h2>Otros creativos</h2>
+      <p class="pj-desc">Webs para tres personas que también crean. Antes de diseñar, miré qué busca cada uno en su sector.</p>
+    </header>
+    <div class="strip" data-reveal>
+      <a class="frame" href="https://jairoazogue.com/" target="_blank" rel="noopener"><span class="fn">12A</span><span class="shot"><img src="img/jairo.webp" alt="Web de Jairo Azogue" loading="lazy" width="900" height="501"></span><b>Jairo Azogue</b><em>Director y editor de video</em></a>
+      <a class="frame" href="https://zoguekidd.netlify.app/" target="_blank" rel="noopener"><span class="fn">13</span><span class="shot"><img src="img/zoguekidd.webp" alt="Web de ZogueKidd" loading="lazy" width="900" height="562"></span><b>ZogueKidd</b><em>Videoclips</em></a>
+      <a class="frame" href="https://catalinasilva.netlify.app/" target="_blank" rel="noopener"><span class="fn">14A</span><span class="shot ph"><span>Catalina Silva</span></span><b>Catalina Silva</b><em>3D y animación</em></a>
+    </div>
   </div>
 </section>
 
 </div>
 
-<!-- ============ FIGMA ============ -->
-<section class="fig" id="figma" data-bg="olive" data-icon="pen">
-  <header class="pj-hd" data-reveal>
-    <p class="script">diseñado en Figma</p>
-    <h2>Sin programar <span class="fig-tag">todavía</span></h2>
-    <p class="pj-desc">Proyectos de la universidad que viven en Figma, con su prototipo navegable.</p>
-  </header>
+<div class="px-sep" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<!-- ============ FIGMA · el lienzo ============ -->
+<section class="fig" id="figma" data-bg="figma" data-icon="pen">
+  <div class="fig-in">
+    <div class="fig-bar" aria-hidden="true"><span class="fig-logo"><i></i><i></i><i></i><i></i><i></i></span><span class="fig-file">Diseños de la uni <small>/ Página 1</small></span><span class="fig-who"><i>P</i></span></div>
+    <header class="pj-hd" data-reveal>
+      <p class="script">diseñado en Figma</p>
+      <h2>Sin programar <span class="fig-tag">todavía</span></h2>
+      <p class="pj-desc">Proyectos de la universidad que viven en Figma, con su prototipo navegable.</p>
+    </header>
+  </div>
   <div class="fig-pin">
     <div class="fig-track">
-      <figure class="fig-card tall"><img src="img/figma/dtr-home.webp" alt="DTR, home de la tienda" loading="lazy" width="720" height="1044"><figcaption><b>DTR</b> · home</figcaption></figure>
-      <figure class="fig-card"><img src="img/figma/dtr-producto.webp" alt="DTR, ficha de producto" loading="lazy" width="1200" height="868"><figcaption><b>DTR</b> · producto</figcaption></figure>
-      <figure class="fig-card"><img src="img/figma/dtr-carrito.webp" alt="DTR, carrito" loading="lazy" width="1200" height="853"><figcaption><b>DTR</b> · carrito</figcaption></figure>
-      <figure class="fig-card"><img src="img/figma/dtr-login.webp" alt="DTR, login" loading="lazy" width="900" height="640"><figcaption><b>DTR</b> · login</figcaption></figure>
-      <figure class="fig-card"><img src="img/figma/cold-home.webp" alt="Coldculture rediseñada, home" loading="lazy" width="1200" height="853"><figcaption><b>Coldculture</b> · home</figcaption></figure>
-      <figure class="fig-card"><img src="img/figma/cold-shop.webp" alt="Coldculture rediseñada, tienda" loading="lazy" width="1200" height="847"><figcaption><b>Coldculture</b> · tienda</figcaption></figure>
-      <figure class="fig-card phonecard"><img src="img/figma/ev-inicio.webp" alt="Estilo Vivo, ofertas" loading="lazy" width="412" height="917"><figcaption><b>Estilo Vivo</b> · app</figcaption></figure>
-      <figure class="fig-card phonecard"><img src="img/figma/ev-producto.webp" alt="Estilo Vivo, producto" loading="lazy" width="412" height="917"><figcaption><b>Estilo Vivo</b> · producto</figcaption></figure>
+      <figure class="fig-card tall"><figcaption>DTR / Home</figcaption><img src="img/figma/dtr-home.webp" alt="DTR, home de la tienda" loading="lazy" width="720" height="1044"></figure>
+      <figure class="fig-card"><figcaption>DTR / Producto</figcaption><img src="img/figma/dtr-producto.webp" alt="DTR, ficha de producto" loading="lazy" width="1200" height="868"></figure>
+      <figure class="fig-card"><figcaption>DTR / Carrito</figcaption><img src="img/figma/dtr-carrito.webp" alt="DTR, carrito" loading="lazy" width="1200" height="853"></figure>
+      <figure class="fig-card"><figcaption>DTR / Login</figcaption><img src="img/figma/dtr-login.webp" alt="DTR, login" loading="lazy" width="900" height="640"></figure>
+      <figure class="fig-card"><figcaption>Coldculture / Home</figcaption><img src="img/figma/cold-home.webp" alt="Coldculture rediseñada, home" loading="lazy" width="1200" height="853"></figure>
+      <figure class="fig-card"><figcaption>Coldculture / Tienda</figcaption><img src="img/figma/cold-shop.webp" alt="Coldculture rediseñada, tienda" loading="lazy" width="1200" height="847"></figure>
+      <figure class="fig-card phonecard"><figcaption>Estilo Vivo / App</figcaption><img src="img/figma/ev-inicio.webp" alt="Estilo Vivo, ofertas" loading="lazy" width="412" height="917"></figure>
+      <figure class="fig-card phonecard"><figcaption>Estilo Vivo / Producto</figcaption><img src="img/figma/ev-producto.webp" alt="Estilo Vivo, producto" loading="lazy" width="412" height="917"></figure>
     </div>
+    <div class="cursor-p" aria-hidden="true"><svg viewBox="0 0 16 20"><path d="M1 1 L1 16 L5 12 L8 19 L11 18 L8 11 L14 11 Z"/></svg><span>Paula</span></div>
   </div>
-  <ul class="fig-links" data-reveal>
-    <li><b>DTR</b><span>Tienda online de una marca de ropa inventada: home, colecciones, producto, carrito, favoritos y login.</span><a href="https://www.figma.com/proto/O1BYlgEZKLjiQEM1RxontS/Web-Detroit?node-id=13-2&amp;starting-point-node-id=534%3A1999" target="_blank" rel="noopener">Abrir prototipo <i class="ic ic-out"></i></a></li>
-    <li><b>Coldculture</b><span>Ejercicio de clase: rediseño de la tienda online de una marca que ya existe.</span><a href="https://www.figma.com/proto/zeYWEDgQy5vbrUZvUGmheu/Untitled?node-id=1-2&amp;starting-point-node-id=1%3A2" target="_blank" rel="noopener">Abrir prototipo <i class="ic ic-out"></i></a></li>
-    <li><b>Estilo Vivo</b><span>Práctica de componentes y variantes: tarjetas, valoraciones y botones con estados.</span><a href="https://www.figma.com/proto/P8oK1mFGqyMTF5QIxZDxtT/Pra%CC%81ctica-3.-Introduccio%CC%81n-a-_Modos_?node-id=1-4&amp;starting-point-node-id=1%3A4" target="_blank" rel="noopener">Abrir prototipo <i class="ic ic-out"></i></a></li>
-  </ul>
+  <div class="fig-in">
+    <ul class="fig-links" data-reveal>
+      <li><b>DTR</b><span>Tienda online de una marca de ropa inventada: home, colecciones, producto, carrito, favoritos y login.</span><a href="https://www.figma.com/proto/O1BYlgEZKLjiQEM1RxontS/Web-Detroit?node-id=13-2&amp;starting-point-node-id=534%3A1999" target="_blank" rel="noopener">Abrir prototipo <i class="ic ic-out"></i></a></li>
+      <li><b>Coldculture</b><span>Ejercicio de clase: rediseño de la tienda online de una marca que ya existe.</span><a href="https://www.figma.com/proto/zeYWEDgQy5vbrUZvUGmheu/Untitled?node-id=1-2&amp;starting-point-node-id=1%3A2" target="_blank" rel="noopener">Abrir prototipo <i class="ic ic-out"></i></a></li>
+      <li><b>Estilo Vivo</b><span>Práctica de componentes y variantes: tarjetas, valoraciones y botones con estados.</span><a href="https://www.figma.com/proto/P8oK1mFGqyMTF5QIxZDxtT/Pra%CC%81ctica-3.-Introduccio%CC%81n-a-_Modos_?node-id=1-4&amp;starting-point-node-id=1%3A4" target="_blank" rel="noopener">Abrir prototipo <i class="ic ic-out"></i></a></li>
+    </ul>
+  </div>
 </section>
 
-<!-- ============ MARCAS ============ -->
+<!-- ============ MARCAS · fichas que se voltean ============ -->
 <section class="brands" id="marcas" data-bg="plum" data-icon="star">
   <header class="pj-hd" data-reveal>
     <p class="script">y también</p>
     <h2>Identidades de marca</h2>
-    <p class="pj-desc">Antes de la web viene la marca. Estas las hice desde cero; abre el manual y pásalo página a página.</p>
+    <p class="pj-desc">Antes de la web viene la marca. Toca cada ficha para darle la vuelta.</p>
   </header>
-  <div class="brand-list">
-    <article class="brand" data-reveal>
-      <img src="img/brand-vora.webp" alt="Logotipo de Vora Beach Club" loading="lazy" width="1200" height="849">
-      <div><h3>Vora</h3><p>Beach club en El Saler. «Vora» significa orilla en valenciano: hice el nombre, el logo, la carta, la señalética y el merch.</p>
-      <button class="link" type="button" data-manual="vora" data-n="29" data-name="Vora">Ver el manual · 29 págs.</button></div>
+  <div class="cards">
+    <article class="card" data-reveal>
+      <button class="card-in" type="button" aria-pressed="false">
+        <span class="face front" style="--bc:#AB4729">
+          <img src="img/brand-vora.webp" alt="Logotipo de Vora Beach Club" loading="lazy" width="1000" height="708">
+          <span class="c-meta"><span class="c-sw"><i style="--s:#8B8635"><small>Oliva</small></i><i style="--s:#D06222"><small>Teja</small></i><i style="--s:#EAC892"><small>Arena</small></i></span><span class="c-type">Moret · Brandon Grotesque</span></span>
+          <span class="c-flip">Dar la vuelta</span>
+        </span>
+        <span class="face back">
+          <span class="c-apps"><img src="img/vora-1.webp" alt="" loading="lazy" width="640" height="513"><img src="img/vora-2.webp" alt="" loading="lazy" width="640" height="453"><img src="img/vora-3.webp" alt="" loading="lazy" width="640" height="453"></span>
+          <span class="c-flip">Volver</span>
+        </span>
+      </button>
+      <h3>Vora</h3>
+      <p>Beach club en El Saler. «Vora» significa orilla en valenciano: hice el nombre, el logo, la carta, la señalética y el merch.</p>
+      <button class="link" type="button" data-manual="vora" data-n="29" data-name="Vora">Ver el manual · 29 págs.</button>
     </article>
-    <article class="brand" data-reveal>
-      <img src="img/brand-cafe.webp" alt="Logotipo de Café del Sur" loading="lazy" width="1200" height="849">
-      <div><h3>Café del Sur</h3><p>Una marca de café con una imagen muy anticuada. La rediseñé para que pareciera un café de especialidad.</p>
-      <button class="link" type="button" data-manual="cafe" data-n="36" data-name="Café del Sur">Ver el manual · 36 págs.</button></div>
+    <article class="card" data-reveal>
+      <button class="card-in" type="button" aria-pressed="false">
+        <span class="face front light" style="--bc:#FBE9D6">
+          <img class="mult" src="img/cafe-logo.webp" alt="Logotipo de Café del Sur" loading="lazy" width="350" height="340">
+          <span class="c-meta"><span class="c-sw"><i style="--s:#E63837"><small>Rojo</small></i><i style="--s:#FBE9D6"><small>Crema</small></i></span><span class="c-type">ITC Avant Garde · Brandon</span></span>
+          <span class="c-flip">Dar la vuelta</span>
+        </span>
+        <span class="face back">
+          <span class="c-apps"><img src="img/cafe-1.webp" alt="" loading="lazy" width="449" height="640"><img src="img/cafe-2.webp" alt="" loading="lazy" width="640" height="435"><img src="img/cafe-3.webp" alt="" loading="lazy" width="640" height="453"></span>
+          <span class="c-flip">Volver</span>
+        </span>
+      </button>
+      <h3>Café del Sur</h3>
+      <p>Una marca de café con una imagen muy anticuada. La rediseñé para que pareciera un café de especialidad.</p>
+      <button class="link" type="button" data-manual="cafe" data-n="36" data-name="Café del Sur">Ver el manual · 36 págs.</button>
     </article>
-    <article class="brand" data-reveal>
-      <img src="img/brand-nidoo.webp" alt="Logotipo de Nidoo" loading="lazy" width="1200" height="849">
-      <div><h3>Nidoo</h3><p>Un estudio de diseño digital: la marca, los personajes, la papelería y la web.</p>
-      <button class="link" type="button" data-manual="nidoo" data-n="43" data-name="Nidoo">Ver el manual · 43 págs.</button></div>
+    <article class="card" data-reveal>
+      <button class="card-in" type="button" aria-pressed="false">
+        <span class="face front" style="--bc:#2D1B7F">
+          <img src="img/brand-nidoo.webp" alt="Logotipo de Nidoo" loading="lazy" width="1000" height="708">
+          <span class="c-meta"><span class="c-sw"><i style="--s:#2D1B7F"><small>Índigo</small></i><i style="--s:#FF4B00"><small>Naranja</small></i><i style="--s:#191A1A"><small>Negro</small></i><i style="--s:#E6E6E6"><small>Gris</small></i></span><span class="c-type">Articulat CF · Tenon</span></span>
+          <span class="c-flip">Dar la vuelta</span>
+        </span>
+        <span class="face back">
+          <span class="c-apps"><img src="img/nidoo-1.webp" alt="" loading="lazy" width="512" height="640"><img src="img/nidoo-2.webp" alt="" loading="lazy" width="640" height="431"><img src="img/nidoo-3.webp" alt="" loading="lazy" width="640" height="434"></span>
+          <span class="c-flip">Volver</span>
+        </span>
+      </button>
+      <h3>Nidoo</h3>
+      <p>Un estudio de diseño digital: la marca, los personajes, la papelería y la web.</p>
+      <button class="link" type="button" data-manual="nidoo" data-n="43" data-name="Nidoo">Ver el manual · 43 págs.</button>
     </article>
   </div>
 </section>
@@ -233,33 +294,56 @@
 <!-- ============ SOBRE MÍ ============ -->
 <section class="about" id="sobre" data-bg="milk" data-icon="heart">
   <div class="about-in">
-    <header data-reveal>
-      <p class="script">sobre mí</p>
-      <h2>Vengo del diseño gráfico</h2>
-    </header>
-    <div class="about-txt" data-reveal>
-      <p>Aprendí a programar porque quería que mis diseños salieran de Figma y funcionaran de verdad. Estoy en el último año de Multimedia y Artes Digitales en la UCV y desde 2025 hago webs para clientes reales.</p>
-      <p>Vivo en Valencia, hablo español e inglés y estoy disponible para empezar ya.</p>
+    <figure class="polaroid" data-reveal><canvas id="aboutCanvas" width="64" height="64" aria-hidden="true"></canvas><figcaption>yo, en pixel</figcaption></figure>
+    <div class="about-body">
+      <header data-reveal>
+        <p class="script">sobre mí</p>
+        <h2>Vengo del diseño gráfico</h2>
+      </header>
+      <div class="about-txt" data-reveal>
+        <p>Aprendí a programar porque quería que mis diseños salieran de Figma y funcionaran de verdad. Estoy en el último año de Multimedia y Artes Digitales en la UCV y desde 2025 hago webs para clientes reales.</p>
+        <p>Vivo en Valencia, hablo español e inglés y estoy disponible para empezar ya.</p>
+      </div>
     </div>
-    <div class="tools" data-reveal>
-      <div><p class="script small">diseño</p><p>Figma · Illustrator · Photoshop · InDesign · Affinity · Canva</p></div>
-      <div><p class="script small">código</p><p>HTML · CSS · JavaScript · Shopify · Liquid · WordPress · PHP · Firebase · Git</p></div>
-    </div>
+  </div>
+  <div class="facts">
+    <p class="script small" data-reveal>3 cosas de mí</p>
+    <ol>
+      <li data-reveal><canvas class="px" data-px="grass" width="12" height="12" aria-hidden="true"></canvas><p><b>No puedo caminar sobre césped.</b></p></li>
+      <li data-reveal><canvas class="px" data-px="plate" width="12" height="12" aria-hidden="true"></canvas><p><b>Siempre pido la misma comida en los restaurantes.</b> No soy de probar nada nuevo.</p></li>
+      <li data-reveal><canvas class="px" data-px="music" width="12" height="12" aria-hidden="true"></canvas><p><b>Escucho todo tipo de música.</b> Mi Spotify no tiene sentido.</p></li>
+    </ol>
+  </div>
+  <div class="tools" data-reveal>
+    <div><p class="script small">diseño</p><p>Figma · Illustrator · Photoshop · InDesign · Affinity · Canva</p></div>
+    <div><p class="script small">código</p><p>HTML · CSS · JavaScript · Shopify · Liquid · WordPress · PHP · Firebase · Git</p></div>
   </div>
 </section>
 
 </main>
 
+<!-- ============ CONTACTO · mensaje desde el Paulagotchi ============ -->
 <footer class="ft" id="contacto" data-bg="olive">
-  <p class="script">¿hablamos?</p>
-  <h2 class="ft-h">Escríbeme</h2>
-  <a class="ft-mail" href="mailto:mariaurbanoeu@gmail.com">mariaurbanoeu@gmail.com</a>
-  <p class="ft-links">
-    <a href="https://www.linkedin.com/in/paula-urbano-436619332" target="_blank" rel="noopener">LinkedIn <i class="ic ic-out"></i></a>
-    <a href="Paula-Urbano-CV.pdf" download>Descargar CV <i class="ic ic-down"></i></a>
-    <a href="Paula-Urbano-Portfolio.pdf" download>Portfolio en PDF <i class="ic ic-down"></i></a>
-  </p>
-  <p class="ft-note">Esta web también la diseñé y la programé yo.</p>
+  <div class="ft-in">
+    <div>
+      <p class="script">¿hablamos?</p>
+      <h2 class="ft-h">Escríbeme</h2>
+      <a class="ft-mail" href="mailto:mariaurbanoeu@gmail.com">mariaurbanoeu@gmail.com</a>
+      <p class="ft-links">
+        <a href="https://www.linkedin.com/in/paula-urbano-436619332" target="_blank" rel="noopener">LinkedIn <i class="ic ic-out"></i></a>
+        <a href="Paula-Urbano-CV.pdf" download>Descargar CV <i class="ic ic-down"></i></a>
+        <a href="Paula-Urbano-Portfolio.pdf" download>Portfolio en PDF <i class="ic ic-down"></i></a>
+      </p>
+    </div>
+    <form class="msg" id="msgForm">
+      <div class="msg-lcd"><canvas id="msgCanvas" width="32" height="32" aria-hidden="true"></canvas><p id="msgSay">déjame un mensaje</p></div>
+      <label class="sr" for="msgTxt">Tu mensaje</label>
+      <textarea id="msgTxt" rows="4" maxlength="800" placeholder="Hola Paula, vi tu portfolio y…" required></textarea>
+      <button class="btn" type="submit">Enviar <i class="ic ic-out"></i></button>
+      <p class="msg-note">Se abre tu correo con el mensaje listo.</p>
+    </form>
+  </div>
+  <p class="ft-note">Esta web pesa menos que una foto de tu celular. La diseñé y la programé yo.</p>
 </footer>
 
 <!-- mini Paulagotchi que acompaña al bajar -->
@@ -284,6 +368,6 @@
   <div class="mv-stage"><button type="button" class="mv-nav" id="mvPrev" aria-label="Página anterior"><i class="ic ic-left"></i></button><img id="mvImg" alt=""><button type="button" class="mv-nav" id="mvNext" aria-label="Página siguiente"><i class="ic ic-right"></i></button></div>
 </div>
 
-<script src="js/site.js?v=1" defer></script>
+<script src="js/site.js?v=3" defer></script>
 </body>
 </html>
