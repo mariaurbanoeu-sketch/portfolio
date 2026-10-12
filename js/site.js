@@ -212,15 +212,42 @@
 
 
   /* ======================= Kronox: código de tiempo ======================= */
-  var tcs = $$('.kronox .tc'), tcOn = false, tc0 = 0;
+  var tcs = $$('.kronox .tc, .crea .tc'), tcOn = false, tc0 = 0;
   if (tcs.length && !reduce) {
-    new IntersectionObserver(function (es) { tcOn = es[0].isIntersecting; if (tcOn && !tc0) tc0 = performance.now(); }).observe($('#kronox'));
+    var tcIO = new IntersectionObserver(function (es) { es.forEach(function (e) { e.target._v = e.isIntersecting; }); tcOn = $('#kronox')._v || $('#creativos')._v; if (tcOn && !tc0) tc0 = performance.now(); });
+    tcIO.observe($('#kronox')); tcIO.observe($('#creativos'));
     setInterval(function () {
       if (!tcOn) return;
       var f = Math.floor((performance.now() - tc0) / (1000 / 24)), pad = function (n) { return ('0' + n).slice(-2); };
       var txt = pad(Math.floor(f / 86400)) + ':' + pad(Math.floor(f / 1440) % 60) + ':' + pad(Math.floor(f / 24) % 60) + ':' + pad(f % 24);
       tcs.forEach(function (el) { el.textContent = txt; });
     }, 42);
+  }
+
+  /* las webs de los creativos, en vivo */
+  var lives = $$('iframe.live');
+  var fitLive = function (f) { var b = f.parentNode, k = b.clientWidth / 1280; f.style.transform = 'scale(' + k + ')'; f.style.height = (b.clientHeight / k) + 'px'; };
+  if (lives.length) {
+    var liveIO = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        var f = e.target;
+        if (e.isIntersecting && !f.src) { f.addEventListener('load', function () { f.classList.add('ok'); }); f.src = f.dataset.live; fitLive(f); }
+        if (!e.isIntersecting) f.parentNode.classList.remove('nav');
+      });
+    }, { rootMargin: '300px 0px' });
+    lives.forEach(function (f) { liveIO.observe(f); });
+    addEventListener('resize', function () { lives.forEach(fitLive); });
+    $$('.live-go').forEach(function (b) {
+      b.addEventListener('click', function () { var on = b.parentNode.classList.toggle('nav'); b.textContent = on ? 'Listo' : 'Navegar aquí'; });
+    });
+  }
+
+  /* visor 3D: el plano sigue un poco al ratón */
+  var b3 = $('.b3-view');
+  if (b3 && !reduce && matchMedia('(hover:hover)').matches) {
+    var obj = $('.b3-obj', b3);
+    b3.addEventListener('pointermove', function (e) { var r = b3.getBoundingClientRect(); obj.style.animation = 'none'; obj.style.setProperty('--ty', ((e.clientX - r.left) / r.width - .5) * 50 + 'deg'); obj.style.setProperty('--tx', (-(e.clientY - r.top) / r.height + .5) * 30 + 'deg'); });
+    b3.addEventListener('pointerleave', function () { obj.style.animation = ''; obj.style.removeProperty('--tx'); });
   }
 
   /* ======================= fichas de marca que se voltean ======================= */
@@ -412,7 +439,11 @@
         w = b.dataset.w;
         $$('button', bar).forEach(function (o) { o.setAttribute('aria-pressed', String(o === b)); });
         var demo = w !== 'video';
-        if (demo && !fr) { fr = document.createElement('iframe'); fr.src = vb.dataset.demo; fr.title = vb.dataset.title; fr.loading = 'lazy'; vb.appendChild(fr); }
+        var url = b.dataset.url || vb.dataset.demo;
+        if (demo && (!fr || fr.dataset.u !== url)) {
+          if (!fr) { fr = document.createElement('iframe'); fr.loading = 'lazy'; vb.appendChild(fr); }
+          fr.dataset.u = url; fr.src = url; fr.title = b.dataset.url ? 'Web de Kronox en vivo' : vb.dataset.title;
+        }
         if (fr) fr.hidden = !demo;
         vb.classList.toggle('demo', demo);
         var ks = sec.querySelector('.kx-stage'); if (ks) ks.classList.toggle('demo', demo);
