@@ -926,28 +926,40 @@
 
   /* ======================= inclinar y agitar el teléfono ======================= */
   var tiltBtn = $('#gTilt');
-  if (tiltBtn && ('ontouchstart' in window) && window.DeviceOrientationEvent && !reduce) {
+  if (tiltBtn && ('ontouchstart' in window) && window.DeviceMotionEvent && !reduce) {
     tiltBtn.hidden = false;
-    var b3o = $('.b3-obj'), shakes = [];
+    /* un teléfono en pixel que se agita */
+    var sc = $('#shakeCv').getContext('2d'), PH = ["XXXXXXXXXXXX","X..........X","X.XXXXXXXX.X","X.XPPPPPPX.X","X.XPWPPWPX.X","X.XPPPPPPX.X","X.XPPWWPPX.X","X.XPPPPPPX.X","X.XPPPPPPX.X","X.XPPPPPPX.X","X.XPPPPPPX.X","X.XPPPPPPX.X","X.XPPPPPPX.X","X.XXXXXXXX.X","X..........X","X....XX....X","X..........X","XXXXXXXXXXXX"], PC = { X: '#FAF6F0', P: '#EBA9BD', W: '#221616' };
+    PH.forEach(function (r, y) { for (var i = 0; i < 12; i++) if (PC[r[i]]) { sc.fillStyle = PC[r[i]]; sc.fillRect(i, y, 1, 1); } });
+    var b3o = $('.b3-obj'), peaks = [], lastPeak = 0;
     var onTilt = function (e) {
       var gx = Math.max(-1, Math.min(1, (e.gamma || 0) / 30)), gy = Math.max(-1, Math.min(1, ((e.beta || 45) - 45) / 30));
       if (g.el) { g.el.style.setProperty('--ry', (gx * 22) + 'deg'); g.el.style.setProperty('--rx', (-gy * 16) + 'deg'); }
       if (b3o) { b3o.style.animation = 'none'; b3o.style.setProperty('--ty', (gx * 30) + 'deg'); b3o.style.setProperty('--tx', (8 - gy * 14) + 'deg'); }
     };
     var onShake = function (e) {
-      var a = e.accelerationIncludingGravity || e.acceleration; if (!a) return;
-      var m = Math.abs(a.x || 0) + Math.abs(a.y || 0) + Math.abs(a.z || 0), now = Date.now();
-      if (m > 34) { shakes.push(now); shakes = shakes.filter(function (t) { return now - t < 900; }); if (shakes.length >= 4 && game.hidden) { shakes = []; buzz(30); openGame(); } }
+      var a = e.acceleration, m;
+      if (a && a.x !== null) m = Math.abs(a.x || 0) + Math.abs(a.y || 0) + Math.abs(a.z || 0);
+      else { a = e.accelerationIncludingGravity; if (!a) return; m = Math.abs(a.x || 0) + Math.abs(a.y || 0) + Math.abs(a.z || 0) - 10; }
+      var t = Date.now();
+      if (m > 16 && t - lastPeak > 90) { lastPeak = t; peaks.push(t); peaks = peaks.filter(function (x) { return t - x < 1000; });
+        if (peaks.length >= 3 && game.hidden && (!ent || ent.hidden)) { peaks = []; buzz([20, 30, 20]); tiltBtn.classList.remove('hit'); void tiltBtn.offsetWidth; tiltBtn.classList.add('hit'); openGame(); } }
     };
-    var startTilt = function () { addEventListener('deviceorientation', onTilt); addEventListener('devicemotion', onShake); tiltBtn.classList.add('on'); tiltBtn.textContent = 'Inclínalo · agítalo para jugar'; };
-    tiltBtn.addEventListener('click', function () {
-      buzz(10);
-      var asks = [];
-      if (typeof DeviceOrientationEvent.requestPermission === 'function') asks.push(DeviceOrientationEvent.requestPermission());
-      if (window.DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === 'function') asks.push(DeviceMotionEvent.requestPermission());
-      if (!asks.length) { startTilt(); return; }
-      Promise.all(asks).then(function (r) { if (r.every(function (x) { return x === 'granted'; })) startTilt(); else tiltBtn.textContent = 'Sin permiso para el movimiento'; }).catch(function () {});
-    });
+    var started = false;
+    var startTilt = function () {
+      if (started) return; started = true;
+      addEventListener('deviceorientation', onTilt); addEventListener('devicemotion', onShake);
+      tiltBtn.classList.add('on'); $('#shakeB').textContent = '¡Agítalo ya!'; $('#shakeS').textContent = 'Agita el teléfono para atrapar bugs · inclínalo y el Paulagotchi te sigue';
+    };
+    var needsAsk = typeof DeviceMotionEvent.requestPermission === 'function';
+    if (!needsAsk) startTilt();   /* Android: se activa solo, al momento */
+    var ask = function () {
+      if (started) return;
+      var asks = [DeviceMotionEvent.requestPermission()];
+      if (window.DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission === 'function') asks.push(DeviceOrientationEvent.requestPermission());
+      Promise.all(asks).then(function (r) { if (r[0] === 'granted') startTilt(); else { $('#shakeB').textContent = 'Sin permiso'; $('#shakeS').textContent = 'Actívalo en Ajustes de Safari si quieres jugar así'; } }).catch(function () {});
+    };
+    tiltBtn.addEventListener('click', function () { buzz(10); if (started) openGame(); else ask(); });
   }
 
   /* ======================= compartir ======================= */

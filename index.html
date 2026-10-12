@@ -19,7 +19,7 @@
 <meta property="og:type" content="website">
 <link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/pinyon.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=20">
+<link rel="stylesheet" href="css/site.css?v=21">
 <script>(function(d){d.classList.add('js');try{if(!sessionStorage.getItem('wf')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('wire');sessionStorage.setItem('wf','1')}}catch(e){}})(document.documentElement)</script>
 </head>
 <body>
@@ -77,7 +77,7 @@
         <p class="g-legend"><span>proyectos</span><span>jugar</span><span>hablar</span></p>
       </div>
     </div>
-    <button class="g-tilt" id="gTilt" type="button" hidden>Inclina el teléfono · agítalo para jugar</button>
+    <button class="shake" id="gTilt" type="button" hidden><span class="shake-ph" aria-hidden="true"><canvas id="shakeCv" width="12" height="18"></canvas></span><span class="shake-t"><b id="shakeB">Agita tu teléfono</b><small id="shakeS">Toca aquí una vez y agítalo para atrapar bugs</small></span></button>
   </div>
 </section>
 
@@ -622,6 +622,6 @@
   <div class="mv-stage"><button type="button" class="mv-nav" id="mvPrev" aria-label="Página anterior"><i class="ic ic-left"></i></button><img id="mvImg" alt=""><button type="button" class="mv-nav" id="mvNext" aria-label="Página siguiente"><i class="ic ic-right"></i></button></div>
 </div>
 
-<script src="js/site.js?v=19" defer></script>
+<script src="js/site.js?v=21" defer></script>
 </body>
 </html>
