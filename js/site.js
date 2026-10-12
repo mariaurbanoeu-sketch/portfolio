@@ -77,6 +77,12 @@
     figDist = Math.max(0, figTrack.scrollWidth - figPin.clientWidth);
     fig.style.setProperty('--pin-h', (figDist + innerHeight * .9) + 'px');
   }
+  var figN = $('#figN');
+  if (figTrack && figN) figTrack.addEventListener('scroll', function () {
+    var cards = $$('.fig-card', figTrack), mid = figTrack.scrollLeft + figTrack.clientWidth / 2, best = 0, d = 1e9;
+    cards.forEach(function (c, i) { var dd = Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid); if (dd < d) { d = dd; best = i; } });
+    figN.textContent = best + 1;
+  }, { passive: true });
   function onScroll() {
     if (love && !reduce) {
       var r = love.getBoundingClientRect(), span = love.offsetHeight - innerHeight * .8;

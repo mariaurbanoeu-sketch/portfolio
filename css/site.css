@@ -322,17 +322,20 @@ body[data-bg="milk"] .btn,body[data-bg="nails"] .btn,body[data-bg="nacar"] .btn{
 .fig-who{margin-left:auto}
 .fig-who i{display:grid;place-items:center;width:1.7rem;height:1.7rem;border-radius:50%;border:2px solid var(--pink);font:700 .72rem/1 var(--sans);font-style:normal;color:var(--pink)}
 .fig .script{color:var(--pink)}
-.fig-tag{font:400 .5em/1 var(--script);text-transform:none;color:var(--pink);vertical-align:middle;margin-left:.2em}
+.fig-tag{display:inline-block;font:400 max(.5em,2rem)/1 var(--script);text-transform:none;color:var(--pink);vertical-align:middle;margin-left:.2em}
 .fig-pin{position:relative;margin-top:2.6rem}
-.fig-track{position:relative;display:flex;gap:1.6rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:0 var(--gut) 1rem}
+.fig-track{position:relative;display:flex;align-items:flex-start;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:0 var(--gut) 1rem}
 .fig-track::-webkit-scrollbar{display:none}
-.fig-card{margin:0;flex:0 0 82%;scroll-snap-align:center}
+.fig-card{margin:0;flex:0 0 84%;scroll-snap-align:center}
 .fig-card figcaption{margin-bottom:.45rem;font:500 .72rem/1 var(--sans);color:#B3B3B3}
-.fig-card img{width:100%;aspect-ratio:16/10.5;object-fit:cover;object-position:top;background:#fff;outline:1px solid transparent;transition:outline-color .2s}
+.fig-card img{width:100%;height:auto;object-fit:cover;object-position:top;background:#fff;outline:1px solid transparent;transition:outline-color .2s}
 .fig-card:hover img{outline:2px solid #0D99FF}
 .fig-card:hover figcaption{color:#0D99FF}
 .fig-card.tall,.fig-card.phonecard{flex:0 0 auto}
-.fig-card.tall img,.fig-card.phonecard img{aspect-ratio:auto;height:min(62vh,430px);width:auto;max-width:none}
+.fig-card.tall img,.fig-card.phonecard img{height:min(56vh,420px);width:auto;max-width:none}
+.fig-count{display:flex;justify-content:space-between;padding:.4rem var(--gut) 0;font:500 .72rem/1 var(--sans);color:#B3B3B3}
+.fig-count b{color:#fff;font-weight:600}
+@media(min-width:900px){.fig-count{display:none}}
 .fig-card.phonecard img{border-radius:22px}
 .cursor-p{position:absolute;z-index:3;left:0;top:0;display:flex;align-items:flex-start;pointer-events:none;animation:cur 14s ease-in-out infinite}
 .cursor-p svg{width:18px;height:22px;fill:var(--pink);stroke:#fff;stroke-width:1.2}
