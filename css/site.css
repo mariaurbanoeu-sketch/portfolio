@@ -774,22 +774,9 @@ body[data-bg="milk"] .btn,body[data-bg="nails"] .btn,body[data-bg="nacar"] .btn{
 @supports (animation-timeline: scroll()){.hd-prog{animation:prog linear both;animation-timeline:scroll(root)}}
 @keyframes prog{to{transform:scaleX(1)}}
 
-/* barra de navegación abajo, al alcance del pulgar */
-.dock{display:none}
-@media(max-width:760px){
-  .hd-menu,.mini-g{display:none!important}
-  .dock{position:fixed;z-index:60;left:50%;bottom:calc(.7rem + env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:flex;align-items:center;gap:.15rem;padding:.35rem;border-radius:22px;background:rgba(20,13,13,.82);-webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);border:1px solid rgba(250,246,240,.12);box-shadow:0 18px 40px -12px rgba(0,0,0,.7);transition:transform .45s var(--ease),opacity .3s}
-  .dock.hide{transform:translate(-50%,calc(100% + 1.5rem));opacity:0}
-  .dock a{display:grid;justify-items:center;gap:.2rem;min-width:3.6rem;padding:.35rem .2rem .3rem;border-radius:14px;color:#cdbfb2;text-decoration:none;font:600 .56rem/1 var(--sans);letter-spacing:.02em;transition:background .25s,color .25s}
-  .dock a canvas{width:22px;height:22px;image-rendering:pixelated}
-  .dock a.on{background:rgba(250,246,240,.1);color:#FAF6F0}
-  .dock-g{width:3.6rem;height:3.6rem;margin:-1.2rem .2rem 0;padding:.55rem;border:0;border-radius:50% 50% 46% 46% / 54% 54% 46% 46%;background:radial-gradient(120% 90% at 30% 20%,#7a3c45,#3c1a20 75%);box-shadow:inset -5px -7px 12px rgba(0,0,0,.45),0 10px 20px rgba(0,0,0,.5);cursor:pointer}
-  .dock-g canvas{width:100%;height:100%;border-radius:8px;background:#c4c9aa;image-rendering:pixelated}
-  .dock-g:active{transform:scale(.92)}
-  body{padding-bottom:calc(5rem + env(safe-area-inset-bottom,0px))}
-  .hd-insp{margin-left:auto;margin-right:0}
-  .insp-panel{bottom:calc(5.6rem + env(safe-area-inset-bottom,0px))}
-}
+/* barra de abajo: desactivada (en iPhone choca con la barra de Safari) */
+.dock{display:none!important}
+@media(max-width:760px){.insp-panel{bottom:calc(1rem + env(safe-area-inset-bottom,0px))}}
 
 /* "Mis webs" como historias */
 .bw-prog,.bw-insp{display:none}
