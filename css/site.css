@@ -1044,3 +1044,12 @@ html[data-tool] .tool-cmt textarea{cursor:text!important}
 @media(min-width:900px){.facts li .mp{max-width:none}}
 .facts .mp-list{display:grid;grid-template-columns:1fr!important;gap:.15rem!important;margin:.8rem 0 0}
 .facts .mp-list li{flex-direction:row!important;align-items:baseline!important;cursor:pointer}
+
+/* Nails: decisiones con número y muestra de color (sin frascos) */
+.bottles li{grid-template-columns:4.2rem 1fr;column-gap:1.1rem;padding-top:1.4rem;border-top:1px solid rgba(102,46,58,.2)}
+.swatch{grid-row:span 2;display:grid;justify-items:start;gap:.55rem}
+.swatch em{font:400 2.4rem/1 'Nails Display',var(--serif);font-style:italic;color:#662E3A}
+.swatch i{width:2.2rem;height:.55rem;border-radius:1rem;background:var(--c);box-shadow:inset 0 -2px 0 rgba(0,0,0,.12)}
+.bottles li:hover .swatch i{width:3rem;transition:width .4s var(--ease)}
+/* Nácar: el celular centrado en móvil */
+@media(max-width:899px){.nc-small{display:grid;justify-items:center}.nc-small figcaption{justify-self:center;text-align:center}}
