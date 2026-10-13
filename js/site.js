@@ -32,6 +32,7 @@
       if (window.dockMark) dockMark(e.target);
       if (window.hereMark) hereMark(e.target);
       window.curSec = e.target.dataset.here || e.target.id;
+      if (window.autoSay) autoSay();
       if (e.target.dataset.icon) mini.icon = e.target.dataset.icon;
     } });
   }, { rootMargin: '-48% 0px -48% 0px' });
@@ -732,9 +733,22 @@
     say.hidden = false; g.mood = 'happy'; g.jump = 14; buzz(8);
     clearTimeout(sayT); sayT = setTimeout(function () { say.hidden = true; }, 5000);
   }
+  /* aparecen solos al llegar a cada sección (una vez por sección) */
+  var said = {}, lastSay = 0, autoT = null;
+  window.autoSay = function () {
+    var k = window.curSec; if (!say || !k || said[k] || k === 'top' || !SAY[k]) return;
+    clearTimeout(autoT);
+    autoT = setTimeout(function () {
+      if (window.curSec !== k || said[k]) return;
+      var busy = !game.hidden || (sheet && !sheet.hidden) || (ent && !ent.hidden) || (desk && !desk.hidden) || !mini.el.classList.contains('show');
+      if (busy || Date.now() - lastSay < 6000) return;
+      said[k] = 1; lastSay = Date.now();
+      $('#gSayT').textContent = SAY[k]; say.hidden = false; say._t = Date.now() + 1500; g.mood = 'happy'; g.jump = 12;
+      clearTimeout(sayT); sayT = setTimeout(function () { say.hidden = true; }, 4500);
+    }, 900);
+  };
   if (say) {
     $('#gSayPlay').addEventListener('click', function () { say.hidden = true; openGame(); });
-    addEventListener('scroll', function () { if (!say.hidden && Date.now() - (say._t || 0) > 600) say.hidden = true; }, { passive: true });
     new MutationObserver(function () { if (!say.hidden) say._t = Date.now(); }).observe(say, { attributes: true, attributeFilter: ['hidden'] });
   }
 
