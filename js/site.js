@@ -583,13 +583,21 @@
     /* historias: avanzan solas, se tocan los lados o se desliza */
     var go = function (d) { var n = bwCur + d; if (n < 0) n = 0; if (n > bwTabs.length - 1) n = 0; buzz(6); if (document.startViewTransition && !reduce) document.startViewTransition(function () { bwSet(n); }); else bwSet(n); };
     prog.forEach(function (p) { $('b', p).addEventListener('animationend', function () { if (!sticky) go(1); }); });
-    var view = $('.bw-view', bw), sx = 0, sy = 0, st = 0;
-    view.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; st = Date.now(); bw.classList.add('hold'); }, { passive: true });
-    view.addEventListener('touchend', function (e) {
+    var view = $('.bw-view', bw), win = $('.bw-win', bw), sx = 0, sy = 0, st = 0, lock = null;
+    win.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; st = Date.now(); lock = null; bw.classList.add('hold'); }, { passive: true });
+    /* al deslizar de lado, la página no se mueve hacia abajo */
+    win.addEventListener('touchmove', function (e) {
+      if (sticky) return;
+      var dx = e.touches[0].clientX - sx, dy = e.touches[0].clientY - sy;
+      if (lock === null && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) lock = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+      if (lock === 'x' && e.cancelable) e.preventDefault();
+    }, { passive: false });
+    win.addEventListener('touchend', function (e) {
       bw.classList.remove('hold'); if (sticky) return;
+      if (lock === 'y') return;
       var t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy;
       if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? 1 : -1);
-      else if (Math.abs(dx) < 10 && Math.abs(dy) < 10 && Date.now() - st < 350) { var r = view.getBoundingClientRect(); if (t.clientX < r.left + r.width * .3) go(-1); else if (t.clientX > r.right - r.width * .3) go(1); }
+      else if (Math.abs(dx) < 10 && Math.abs(dy) < 10 && Date.now() - st < 350 && view.contains(e.target)) { var r = view.getBoundingClientRect(); if (t.clientX < r.left + r.width * .3) go(-1); else if (t.clientX > r.right - r.width * .3) go(1); }
     }, { passive: true });
     $('.bw-insp', bw).addEventListener('click', function () {
       var p = bwP[bwCur].cloneNode(true); clearInterval(tyT);
@@ -931,6 +939,7 @@
     /* un teléfono en pixel que se agita */
     var sc = $('#shakeCv').getContext('2d'), PH = ["XXXXXXXXXXXX","X..........X","X.XXXXXXXX.X","X.XPPPPPPX.X","X.XPWPPWPX.X","X.XPPPPPPX.X","X.XPPWWPPX.X","X.XPPPPPPX.X","X.XPPPPPPX.X","X.XPPPPPPX.X","X.XPPPPPPX.X","X.XPPPPPPX.X","X.XPPPPPPX.X","X.XXXXXXXX.X","X..........X","X....XX....X","X..........X","XXXXXXXXXXXX"], PC = { X: '#FAF6F0', P: '#EBA9BD', W: '#221616' };
     PH.forEach(function (r, y) { for (var i = 0; i < 12; i++) if (PC[r[i]]) { sc.fillStyle = PC[r[i]]; sc.fillRect(i, y, 1, 1); } });
+    $$('.shake-bugs canvas', tiltBtn).forEach(function (cv) { var x = cv.getContext('2d'); ["..K..K..","...KK...",".KppppK.","KpKppKpK",".pppppp.","K.pppp.K",".K....K."].forEach(function (r, y) { for (var i = 0; i < 8; i++) { var k = r[i]; if (k !== '.') { x.fillStyle = PAL[k]; x.fillRect(i, y, 1, 1); } } }); });
     var b3o = $('.b3-obj'), peaks = [], lastPeak = 0;
     var onTilt = function (e) {
       var gx = Math.max(-1, Math.min(1, (e.gamma || 0) / 30)), gy = Math.max(-1, Math.min(1, ((e.beta || 45) - 45) / 30));
@@ -949,15 +958,16 @@
     var startTilt = function () {
       if (started) return; started = true;
       addEventListener('deviceorientation', onTilt); addEventListener('devicemotion', onShake);
-      tiltBtn.classList.add('on'); $('#shakeB').textContent = '¡Agítalo ya!'; $('#shakeS').textContent = 'Agita el teléfono para atrapar bugs · inclínalo y el Paulagotchi te sigue';
+      tiltBtn.classList.add('on'); $('#shakeS').textContent = 'Agita el teléfono para sacarlos'; $('#shakeE').textContent = 'o toca aquí para jugar';
     };
     var needsAsk = typeof DeviceMotionEvent.requestPermission === 'function';
     if (!needsAsk) startTilt();   /* Android: se activa solo, al momento */
+    else { $('#shakeS').textContent = 'Toca aquí y después agita el teléfono para sacarlos'; $('#shakeE').textContent = 'un toque y listo'; }
     var ask = function () {
       if (started) return;
       var asks = [DeviceMotionEvent.requestPermission()];
       if (window.DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission === 'function') asks.push(DeviceOrientationEvent.requestPermission());
-      Promise.all(asks).then(function (r) { if (r[0] === 'granted') startTilt(); else { $('#shakeB').textContent = 'Sin permiso'; $('#shakeS').textContent = 'Actívalo en Ajustes de Safari si quieres jugar así'; } }).catch(function () {});
+      Promise.all(asks).then(function (r) { if (r[0] === 'granted') { startTilt(); $('#shakeS').textContent = '¡Listo! Agítalo ahora'; } else { $('#shakeB').textContent = 'Sin permiso'; $('#shakeS').textContent = 'Actívalo en Ajustes de Safari si quieres jugar así'; } }).catch(function () {});
     };
     tiltBtn.addEventListener('click', function () { buzz(10); if (started) openGame(); else ask(); });
   }

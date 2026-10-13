@@ -780,7 +780,8 @@ body[data-bg="milk"] .btn,body[data-bg="nails"] .btn,body[data-bg="nacar"] .btn{
   .bw-prog i.now b{animation:story 7s linear forwards}
   .bw.hold .bw-prog i.now b{animation-play-state:paused}
   @keyframes story{to{transform:none}}
-  .bw-view{touch-action:pan-y}
+  .bw-win{touch-action:pan-y}
+  .bw-tabs{overflow-x:hidden}
   .bw-view::before,.bw-view::after{content:"";position:absolute;z-index:3;top:0;bottom:0;width:30%}
   .bw-view::before{left:0}.bw-view::after{right:0}
   .bw-panel{display:none}
@@ -1002,3 +1003,17 @@ html[data-tool] .tool-cmt textarea{cursor:text!important}
 .shake.on .shake-ph canvas{animation-duration:.6s}
 .shake.hit{animation:retowin .5s steps(4)}
 @media (prefers-reduced-motion:reduce){.shake-ph canvas{animation:none}}
+
+.shake{position:relative;overflow:hidden;width:min(100%,26rem);padding:1.3rem 1.2rem}
+.shake-t b{font-size:clamp(1.5rem,6.4vw,1.9rem)}
+.shake-t small{font-size:.8rem;color:#FAF6F0}
+.shake-t em{display:inline-block;margin-top:.55rem;font:700 .66rem/1 'Courier New',monospace;font-style:normal;letter-spacing:.08em;text-transform:uppercase;color:#cdbfb2;border-bottom:1px solid currentColor;padding-bottom:2px}
+.shake-bugs{position:absolute;inset:0;pointer-events:none}
+.shake-bugs canvas{position:absolute;width:24px;height:21px;image-rendering:pixelated;opacity:.9}
+.shake-bugs canvas:nth-child(1){top:.4rem;animation:crawl 7s linear infinite}
+.shake-bugs canvas:nth-child(2){bottom:.4rem;animation:crawl 9s linear infinite reverse;animation-delay:-3s}
+.shake-bugs canvas:nth-child(3){top:45%;animation:crawl 11s linear infinite;animation-delay:-6s}
+@keyframes crawl{from{left:-30px}to{left:calc(100% + 30px)}}
+.shake.on .shake-ph canvas{animation-duration:.8s}
+@media (prefers-reduced-motion:reduce){.shake-bugs canvas{animation:none;left:auto;right:.5rem}}
+@media(min-width:900px){.shake{display:none!important}}
