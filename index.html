@@ -19,7 +19,7 @@
 <meta property="og:type" content="website">
 <link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/pinyon.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=22">
+<link rel="stylesheet" href="css/site.css?v=24">
 <script>(function(d){d.classList.add('js');try{if(!sessionStorage.getItem('wf')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('wire');sessionStorage.setItem('wf','1')}}catch(e){}})(document.documentElement)</script>
 </head>
 <body>
@@ -444,7 +444,15 @@
     <ol>
       <li data-reveal><canvas class="px" data-px="grass" width="12" height="12" aria-hidden="true"></canvas><p><b>No puedo caminar sobre césped.</b></p></li>
       <li data-reveal><canvas class="px" data-px="plate" width="12" height="12" aria-hidden="true"></canvas><p><b>Siempre pido la misma comida en los restaurantes.</b> No soy de probar nada nuevo.</p></li>
-      <li data-reveal><canvas class="px" data-px="music" width="12" height="12" aria-hidden="true"></canvas><p><b>Escucho todo tipo de música.</b> Mi Spotify no tiene sentido.</p></li>
+      <li data-reveal><canvas class="px" data-px="music" width="12" height="12" aria-hidden="true"></canvas><p><b>Escucho todo tipo de música.</b> Mi Spotify no tiene sentido. Prueba:</p>
+        <div class="mp" id="mp" aria-label="Algunas canciones que escucho">
+          <div class="mp-top"><span class="mp-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>Sonando · aleatorio total</span></div>
+          <p class="mp-now"><b id="mpT">Pink Matter</b><span id="mpA">Frank Ocean</span></p>
+          <div class="mp-bar" aria-hidden="true"><i id="mpBar"></i></div>
+          <div class="mp-ctl"><button type="button" id="mpPrev" aria-label="Canción anterior"><i class="ic ic-left"></i></button><a id="mpGo" href="#" target="_blank" rel="noopener">Escuchar en Spotify <i class="ic ic-out"></i></a><button type="button" id="mpNext" aria-label="Siguiente canción"><i class="ic ic-right"></i></button></div>
+          <ol class="mp-list" id="mpList"></ol>
+        </div>
+      </li>
     </ol>
   </div>
 </section>
@@ -622,6 +630,6 @@
   <div class="mv-stage"><button type="button" class="mv-nav" id="mvPrev" aria-label="Página anterior"><i class="ic ic-left"></i></button><img id="mvImg" alt=""><button type="button" class="mv-nav" id="mvNext" aria-label="Página siguiente"><i class="ic ic-right"></i></button></div>
 </div>
 
-<script src="js/site.js?v=22" defer></script>
+<script src="js/site.js?v=23" defer></script>
 </body>
 </html>

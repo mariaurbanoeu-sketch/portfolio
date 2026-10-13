@@ -201,7 +201,7 @@
         last = t;
         var mood = g.mood;
         if (mood === 'idle' && (t % 3200) > 3000) mood = 'blink';
-        if (mood === 'idle' && g.sleep) mood = 'blink';
+        if (mood === 'idle' && (g.sleep || g.nap)) mood = 'blink';
         var bounce = g.jump > 0 ? Math.round(Math.sin(g.jump / 8 * Math.PI) * 4) : (Math.floor(t / 480) % 2);
         if (g.jump > 0) g.jump--; else if (g.mood === 'happy') g.mood = 'idle';
         gx.clearRect(0, 0, 64, 64);
@@ -209,10 +209,11 @@
         /* teclas que brillan mientras programa */
         if (g.jump === 0) { gx.fillStyle = (Math.floor(t / 240) % 2) ? '#eba9bd' : '#d6dcc0'; gx.fillRect(22 + (Math.floor(t / 240) % 5) * 4, 56, 3, 2); }
         if (g.jump > 0) drawIcon(gx, 'heart', 44, 2, 2);
-        else if (g.sleep) { gx.fillStyle = '#3a2e32'; var zy = 10 - (Math.floor(t / 480) % 3) * 2; gx.fillRect(48, zy, 6, 2); gx.fillRect(52, zy + 2, 2, 2); gx.fillRect(50, zy + 4, 2, 2); gx.fillRect(48, zy + 6, 6, 2); }
+        else if (g.sleep || g.nap) { gx.fillStyle = '#3a2e32'; var zy = 10 - (Math.floor(t / 480) % 3) * 2; gx.fillRect(48, zy, 6, 2); gx.fillRect(52, zy + 2, 2, 2); gx.fillRect(50, zy + 4, 2, 2); gx.fillRect(48, zy + 6, 6, 2); }
         /* mini */
         mx.clearRect(0, 0, 32, 32);
         drawSprite(mx, 0, 1 - (Math.floor(t / 480) % 2), 1, mood);
+        if (g.nap && g.jump === 0) { mx.fillStyle = '#3a2e32'; var zz = 2 - (Math.floor(t / 480) % 2); mx.fillRect(25, zz, 4, 1); mx.fillRect(27, zz + 1, 1, 1); mx.fillRect(26, zz + 2, 1, 1); mx.fillRect(25, zz + 3, 4, 1); }
         if (mini.icon) drawIcon(mx, mini.icon, 25, 1, 1);
       }
       if (!reduce) requestAnimationFrame(loop);
@@ -220,7 +221,7 @@
     refresh(); g.status.textContent = STATUS[0];
     if (reduce) { drawSprite(gx, 0, 4, 2, 'idle'); drawSprite(mx, 0, 1, 1, 'idle'); }
     else requestAnimationFrame(loop);
-    setInterval(function () { if (sIdx === 0) refresh(); sIdx = (sIdx + 1) % STATUS.length; g.status.textContent = STATUS[sIdx]; }, 3400);
+    setInterval(function () { if (g.nap) return; if (sIdx === 0) refresh(); sIdx = (sIdx + 1) % STATUS.length; g.status.textContent = STATUS[sIdx]; }, 3400);
 
     /* se inclina siguiendo el mouse */
     if (!reduce && matchMedia('(hover:hover)').matches) {
@@ -634,6 +635,49 @@
   }
 
 
+
+
+  /* ======================= el Paulagotchi reacciona a lo que haces ======================= */
+  if (g.cv) {
+    var napT = null, ended = false;
+    var wake = function () {
+      clearTimeout(napT);
+      if (g.nap) { g.nap = false; g.mood = 'happy'; g.jump = 18; if (g.status) g.status.textContent = '¡volviste!'; toastMsg('¡Volviste! El Paulagotchi se había dormido esperándote'); }
+      napT = setTimeout(function () { if (document.hidden) return; g.nap = true; if (g.status) g.status.textContent = 'me dormí esperando… zzz'; }, 40000);
+    };
+    ['pointerdown', 'keydown', 'touchstart', 'wheel'].forEach(function (ev) { addEventListener(ev, wake, { passive: true }); });
+    addEventListener('scroll', function () { if (!g.nap) { clearTimeout(napT); napT = setTimeout(function () { g.nap = true; if (g.status) g.status.textContent = 'me dormí esperando… zzz'; }, 40000); } }, { passive: true });
+    wake();
+    /* si llegas al final, celebra */
+    var ft = $('#contacto');
+    if (ft) new IntersectionObserver(function (es) {
+      if (es[0].isIntersecting && !ended) { ended = true; g.mood = 'happy'; g.jump = 30; buzz([15, 40, 15]); toastMsg('¡Llegaste al final! El Paulagotchi está orgulloso :)'); }
+    }, { threshold: .6 }).observe(ft);
+  }
+
+  /* ======================= tu Spotify sin sentido ======================= */
+  var mp = $('#mp');
+  if (mp) {
+    var SONGS = [['Pink Matter', 'Frank Ocean'], ['El orgullo del barrio', ''], ['Eres más', 'Guaco']], si = 0, mpT0 = 0, mpOn = false;
+    var list = $('#mpList');
+    SONGS.forEach(function (s2, k) { var li = document.createElement('li'); li.textContent = s2[0] + (s2[1] ? ' · ' + s2[1] : ''); li.addEventListener('click', function () { playSong(k); }); list.appendChild(li); });
+    var playSong = function (k) {
+      si = (k + SONGS.length) % SONGS.length; var s2 = SONGS[si];
+      $('#mpT').textContent = s2[0]; $('#mpA').textContent = s2[1];
+      $('#mpGo').href = 'https://open.spotify.com/search/' + encodeURIComponent(s2[0] + (s2[1] ? ' ' + s2[1] : ''));
+      $$('li', list).forEach(function (l, n) { l.classList.toggle('on', n === si); });
+      mpT0 = performance.now();
+    };
+    $('#mpPrev').addEventListener('click', function () { buzz(6); playSong(si - 1); });
+    $('#mpNext').addEventListener('click', function () { buzz(6); playSong(si + 1); });
+    playSong(0);
+    new IntersectionObserver(function (es) { mpOn = es[0].isIntersecting; }).observe(mp);
+    (function tickMp(t) {
+      if (mpOn && !reduce) { var p = Math.min(1, (t - mpT0) / 9000); $('#mpBar').style.width = (p * 100) + '%'; if (p >= 1) playSong(si + 1); }
+      else mpT0 = t - (parseFloat($('#mpBar').style.width) || 0) * 90;
+      requestAnimationFrame(tickMp);
+    })(performance.now());
+  }
 
   /* ======================= retos y "entrar en la web" ======================= */
   var ENTER = {

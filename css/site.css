@@ -1017,3 +1017,30 @@ html[data-tool] .tool-cmt textarea{cursor:text!important}
 .shake.on .shake-ph canvas{animation-duration:.8s}
 @media (prefers-reduced-motion:reduce){.shake-bugs canvas{animation:none;left:auto;right:.5rem}}
 @media(min-width:900px){.shake{display:none!important}}
+
+/* tu Spotify sin sentido: reproductor en pixel */
+.facts li:has(.mp){flex-wrap:wrap;align-items:flex-start}
+.mp{flex:1 1 100%;margin-top:.9rem;padding:1rem 1.1rem;background:#221616;color:#FAF6F0;box-shadow:0 -4px 0 0 #221616,0 4px 0 0 #221616,-4px 0 0 0 #221616,4px 0 0 0 #221616;margin-left:4px;margin-right:4px;max-width:24rem}
+.mp-top{display:flex;align-items:center;gap:.6rem;font:700 .64rem/1 'Courier New',monospace;letter-spacing:.1em;text-transform:uppercase;color:#cdbfb2}
+.mp-eq{display:flex;align-items:flex-end;gap:2px;height:12px}
+.mp-eq i{width:3px;background:#EBA9BD;animation:eq .9s steps(3) infinite}
+.mp-eq i:nth-child(2){animation-delay:-.3s}.mp-eq i:nth-child(3){animation-delay:-.6s}.mp-eq i:nth-child(4){animation-delay:-.45s}
+@keyframes eq{0%{height:3px}33%{height:12px}66%{height:6px}100%{height:9px}}
+.mp-now{margin:.8rem 0 .7rem}
+.mp-now b{display:block;font:800 1.3rem/1.1 var(--sans)}
+.mp-now span{display:block;margin-top:.2rem;font-size:.85rem;color:#cdbfb2;min-height:1.2em}
+.mp-bar{height:6px;background:#3a2a2a}
+.mp-bar i{display:block;height:100%;width:0;background:#EBA9BD}
+.mp-ctl{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-top:.8rem}
+.mp-ctl button{display:grid;place-items:center;width:2.75rem;height:2.75rem;border:0;background:#3a2a2a;color:#FAF6F0;cursor:pointer}
+.mp-ctl a{font:700 .7rem/1 'Courier New',monospace;letter-spacing:.06em;text-transform:uppercase;color:#EBA9BD;display:inline-flex;align-items:center;gap:.3rem;min-height:2.75rem}
+.mp-list{list-style:none;margin:.8rem 0 0;padding:.7rem 0 0;border-top:1px solid #3a2a2a;display:grid;gap:.15rem;counter-reset:t}
+.mp-list li{display:flex!important;gap:.6rem;padding:.3rem 0!important;border:0!important;font-size:.82rem!important;color:#cdbfb2;counter-increment:t}
+.mp-list li::before{content:counter(t,decimal-leading-zero);font:700 .66rem/1.6 'Courier New',monospace;color:#7a6a66}
+.mp-list li.on{color:#FAF6F0}
+.mp-list li.on::before{color:#EBA9BD}
+@media (prefers-reduced-motion:reduce){.mp-eq i{animation:none;height:8px}}
+.facts li .mp{flex:none;align-self:stretch;width:auto;max-width:24rem;box-sizing:border-box}
+@media(min-width:900px){.facts li .mp{max-width:none}}
+.facts .mp-list{display:grid;grid-template-columns:1fr!important;gap:.15rem!important;margin:.8rem 0 0}
+.facts .mp-list li{flex-direction:row!important;align-items:baseline!important;cursor:pointer}
