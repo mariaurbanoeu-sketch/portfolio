@@ -31,6 +31,7 @@
       if (metaTheme && THEME[e.target.dataset.bg]) metaTheme.content = THEME[e.target.dataset.bg];
       if (window.dockMark) dockMark(e.target);
       if (window.hereMark) hereMark(e.target);
+      window.curSec = e.target.dataset.here || e.target.id;
       if (e.target.dataset.icon) mini.icon = e.target.dataset.icon;
     } });
   }, { rootMargin: '-48% 0px -48% 0px' });
@@ -58,10 +59,10 @@
     var fontIO = new IntersectionObserver(function (es) {
       es.forEach(function (e) {
         if (!e.isIntersecting) return; fontIO.unobserve(e.target);
-        (FONTS[e.target.id] || []).forEach(function (f) { var ff = new FontFace(f[0], 'url(fonts/' + f[1] + '.woff2) format("woff2")', { style: f[2], display: 'swap' }); ff.load().then(function (x) { document.fonts.add(x); }).catch(function () {}); });
+        (FONTS[e.target.dataset.fk || e.target.id] || []).forEach(function (f) { var ff = new FontFace(f[0], 'url(fonts/' + f[1] + '.woff2) format("woff2")', { style: f[2], display: 'swap' }); ff.load().then(function (x) { document.fonts.add(x); }).catch(function () {}); });
       });
     }, { rootMargin: '700px 0px' });
-    Object.keys(FONTS).forEach(function (id) { var el = $('#' + id); if (el) fontIO.observe(el); });
+    Object.keys(FONTS).forEach(function (id) { ['#' + id, '#r-' + id].forEach(function (q) { var el = $(q); if (el) { el.id && (el.dataset.fk = id); fontIO.observe(el); } }); });
   }
 
   /* ---------- videos: se cargan cerca y solo suenan (mudos) a la vista ---------- */
@@ -235,12 +236,12 @@
       b.addEventListener('click', function () {
         g.mood = 'happy'; g.jump = 16; buzz(12);
         var k = b.dataset.g;
-        if (k === 'a') { g.status.textContent = '¡vamos!'; setTimeout(function () { $('#proyectos').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); }, 350); }
+        if (k === 'a') { g.status.textContent = '¡vamos!'; setTimeout(function () { goTo('proyectos'); }, 350); }
         if (k === 'b') { g.status.textContent = '¡a jugar!'; setTimeout(openGame, 300); }
         if (k === 'c') { g.status.textContent = '¡escríbeme!'; setTimeout(function () { $('#contacto').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); }, 350); }
       });
     });
-    mini.el.addEventListener('click', openGame);
+    mini.el.addEventListener('click', function () { sayHi(); });
   }
 
 
@@ -679,6 +680,64 @@
     })(performance.now());
   }
 
+
+  /* ======================= celular: proyectos a pantalla completa ======================= */
+  var reels = $('#reels');
+  function goTo(id) {
+    var onReels = reels && reels.offsetParent !== null, t = null;
+    if (onReels) { if (id === 'proyectos') t = reels; else if ($('#r-' + id)) t = $('#r-' + id); }
+    t = t || $('#' + id); if (t) t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+  }
+  if (reels) {
+    $$('[data-more]', reels).forEach(function (b) {
+      b.addEventListener('click', function () {
+        var k = b.dataset.more, src = $('#' + k + ' .pj-in'); if (!src) return;
+        var cl = src.cloneNode(true); cl.removeAttribute('id');
+        $$('video,iframe,.pins', cl).forEach(function (x) { x.remove(); });
+        $$('[id]', cl).forEach(function (x) { x.removeAttribute('id'); });
+        buzz(8); openSheet($('.reel-h', b.closest('.reel')).textContent, cl);
+      });
+    });
+    /* mantener presionado: la web en grande */
+    var peek = $('#peek'), pv = $('video', peek), pt = null;
+    $$('.reel-ph', reels).forEach(function (f) {
+      var v = $('video', f);
+      var close = function () { clearTimeout(pt); f.classList.remove('press'); if (peek.classList.contains('on')) { peek.classList.remove('on'); setTimeout(function () { pv.pause(); }, 200); } };
+      f.addEventListener('touchstart', function () {
+        f.classList.add('press');
+        pt = setTimeout(function () {
+          load(v); if (pv.getAttribute('src') !== v.src) pv.src = v.src;
+          try { pv.currentTime = v.currentTime || 0; } catch (e) {}
+          var pp = pv.play(); if (pp && pp.catch) pp.catch(function () {});
+          peek.classList.add('on'); buzz(12);
+        }, 280);
+      }, { passive: true });
+      ['touchend', 'touchcancel', 'touchmove'].forEach(function (ev) { f.addEventListener(ev, close, { passive: true }); });
+      f.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+    });
+  }
+
+  /* ======================= el Paulagotchi te habla ======================= */
+  var SAY = {
+    top: '¡Hola! Soy Paula, en pixel.', proyectos: 'Desliza: cada web es una pantalla.', nails: 'Mely tiene un simulador de manicura. Pruébalo.',
+    kronox: 'Él cambia su web solo, sin llamarme.', nacar: 'Seis idiomas. Sí, seis.', amigos: 'Esta la hice en una semana.',
+    creativos: 'Mis favoritos, la verdad.', figma: 'Aquí todavía no hay código.', marcas: 'Toca las fichas y dales la vuelta.',
+    sobre: 'Por favor, no me hagas caminar por el césped.', herramientas: 'Claude: dominio total.', contacto: '¡Escríbeme!'
+  };
+  var say = $('#gSay'), sayT = null;
+  function sayHi() {
+    if (!say) { openGame(); return; }
+    var k = window.curSec || 'top';
+    $('#gSayT').textContent = SAY[k] || SAY.top;
+    say.hidden = false; g.mood = 'happy'; g.jump = 14; buzz(8);
+    clearTimeout(sayT); sayT = setTimeout(function () { say.hidden = true; }, 5000);
+  }
+  if (say) {
+    $('#gSayPlay').addEventListener('click', function () { say.hidden = true; openGame(); });
+    addEventListener('scroll', function () { if (!say.hidden && Date.now() - (say._t || 0) > 600) say.hidden = true; }, { passive: true });
+    new MutationObserver(function () { if (!say.hidden) say._t = Date.now(); }).observe(say, { attributes: true, attributeFilter: ['hidden'] });
+  }
+
   /* ======================= retos y "entrar en la web" ======================= */
   var ENTER = {
     nails: { n: 'Nails by MelyG', u: 'https://nailsbymelyg.com/', r: 'https://nailsbymelyg.com/#estudio', m: 'Toca «Diseña tu manicura» y prueba colores, formas y acabados.' },
@@ -721,7 +780,7 @@
     if (entOpener && entOpener.focus) entOpener.focus({ preventScroll: true });
   }
   if (ent) {
-    $$('[data-enter]').forEach(function (b) { b.addEventListener('click', function (e) { e.preventDefault(); openEnter(b.dataset.enter, b.dataset.mode === 'reto'); }); });
+    document.addEventListener('click', function (e) { var b = e.target.closest && e.target.closest('[data-enter]'); if (!b) return; e.preventDefault(); closeSheet(); openEnter(b.dataset.enter, b.dataset.mode === 'reto'); });
     $('#enterX').addEventListener('click', closeEnter);
     $('#enterDone').addEventListener('click', function () {
       var k = entKey; done[k] = 1; try { localStorage.setItem('retos', JSON.stringify(done)); } catch (e) {}
@@ -763,7 +822,7 @@
     var hereC = $('canvas', here), hereT = $('#hereT'), hereId = 'top';
     drawPx(hereC, 'home');
     window.hereMark = function (el) {
-      var s = SEC.filter(function (x) { return x[0] === el.id; })[0]; if (!s || s[0] === hereId) return;
+      var key = el.dataset.here || el.id, s = SEC.filter(function (x) { return x[0] === key; })[0]; if (!s || s[0] === hereId) return;
       hereId = s[0]; hereT.textContent = s[1]; drawPx(hereC, s[2]);
       here.classList.remove('pop'); void here.offsetWidth; here.classList.add('pop');
     };
@@ -777,7 +836,7 @@
         var t = document.createElement('span'); t.textContent = s[1];
         var em = document.createElement('em'); em.textContent = s[3] ? '' : ('0' + (n++)).slice(-2);
         a.append(c, t, em);
-        a.addEventListener('click', function (e) { e.preventDefault(); closeSheet(); setTimeout(function () { $('#' + s[0]).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); }, 250); });
+        a.addEventListener('click', function (e) { e.preventDefault(); closeSheet(); setTimeout(function () { goTo(s[0]); }, 250); });
         li.appendChild(a); ul.appendChild(li);
       });
       openSheet('¿A dónde vamos?', ul);

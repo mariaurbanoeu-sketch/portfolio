@@ -19,7 +19,7 @@
 <meta property="og:type" content="website">
 <link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/pinyon.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=25">
+<link rel="stylesheet" href="css/site.css?v=28">
 <script>(function(d){d.classList.add('js');try{if(!sessionStorage.getItem('wf')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('wire');sessionStorage.setItem('wf','1')}}catch(e){}})(document.documentElement)</script>
 </head>
 <body>
@@ -80,6 +80,36 @@
     <button class="shake" id="gTilt" type="button" hidden><span class="shake-bugs" aria-hidden="true"><canvas width="8" height="7"></canvas><canvas width="8" height="7"></canvas><canvas width="8" height="7"></canvas></span><span class="shake-ph" aria-hidden="true"><canvas id="shakeCv" width="12" height="18"></canvas></span><span class="shake-t"><b id="shakeB">Hay bugs en esta web</b><small id="shakeS">Agita el teléfono para sacarlos</small><em id="shakeE">o toca aquí para jugar</em></span></button>
   </div>
 </section>
+
+<!-- ============ CELULAR: proyectos a pantalla completa que se deslizan ============ -->
+<section class="reels" id="reels" aria-label="Mis webs">
+  <article class="reel reel-nails" id="r-nails" data-bg="nails" data-icon="nail" data-here="nails">
+    <div class="reel-top"><p class="reel-n">01 / 04 · <span>Manicurista · Katy, Texas</span></p><h2 class="reel-h">Nails by <em>MelyG</em></h2><p class="reel-d">Web con reservas, simulador de manicura y gift cards.</p></div>
+    <figure class="phone reel-ph"><video muted playsinline loop preload="none" data-poster="img/nails-m.webp?v=2" data-src="video/nails-m.mp4?v=2"></video><span class="reel-hold">Mantén presionado para verla en grande</span></figure>
+    <div class="reel-act"><button class="btn reel-go" type="button" data-enter="nails">Entrar en la web de Mely <i class="ic ic-right"></i></button><button class="btn ghost reel-more" type="button" data-more="nails">Ver detalles y reto</button></div>
+    <p class="reel-hint" aria-hidden="true"><i></i>Desliza hacia arriba</p>
+  </article>
+  <article class="reel reel-kronox" id="r-kronox" data-bg="kronox" data-icon="cam" data-here="kronox">
+    <div class="reel-top"><p class="reel-n">02 / 04 · <span>Director de videoclips · Sevilla</span></p><h2 class="reel-h">Kronox</h2><p class="reel-d">Su web y el panel para cambiarla sin depender de mí.</p></div>
+    <figure class="phone reel-ph"><video muted playsinline loop preload="none" data-poster="img/kpanel-m.webp?v=2" data-src="video/kpanel-m.mp4?v=2"></video><span class="reel-hold">Mantén presionado para verla en grande</span></figure>
+    <div class="reel-act"><button class="btn reel-go" type="button" data-enter="kronoxweb">Entrar en la web de Kronox <i class="ic ic-right"></i></button><button class="btn ghost reel-more" type="button" data-more="kronox">Ver detalles y reto</button></div>
+    
+  </article>
+  <article class="reel reel-nacar" id="r-nacar" data-bg="nacar" data-icon="bag" data-here="nacar">
+    <div class="reel-top"><p class="reel-n">03 / 04 · <span>Tienda online · Sevilla</span></p><h2 class="reel-h">Nácar <em>Estilismo</em></h2><p class="reel-d">Tema de Shopify desde cero, en seis idiomas.</p></div>
+    <figure class="phone reel-ph"><video muted playsinline loop preload="none" data-poster="img/nacar-m.webp?v=2" data-src="video/nacar-m.mp4?v=2"></video><span class="reel-hold">Mantén presionado para verla en grande</span></figure>
+    <div class="reel-act"><button class="btn reel-go" type="button" data-enter="nacar">Entrar en la tienda <i class="ic ic-right"></i></button><button class="btn ghost reel-more" type="button" data-more="nacar">Ver detalles y reto</button></div>
+    
+  </article>
+  <article class="reel reel-amigos" id="r-amigos" data-bg="amigos" data-icon="heart" data-here="amigos">
+    <div class="reel-top"><p class="reel-n">04 / 04 · <span>Proyecto personal</span></p><h2 class="reel-h">Entre Amigos por Venezuela</h2><p class="reel-d">App para organizar donaciones que funciona sin conexión.</p></div>
+    <figure class="phone reel-ph"><video muted playsinline loop preload="none" data-poster="img/ea-m.webp?v=2" data-src="video/ea-m.mp4?v=2"></video><span class="reel-hold">Mantén presionado para verla en grande</span></figure>
+    <div class="reel-act"><button class="btn reel-go" type="button" data-enter="amigos">Entrar en la app <i class="ic ic-right"></i></button><button class="btn ghost reel-more" type="button" data-more="amigos">Ver detalles y reto</button></div>
+    
+  </article>
+</section>
+<div class="peek" id="peek" aria-hidden="true"><video muted playsinline loop></video></div>
+<div class="g-say" id="gSay" role="status" hidden><p id="gSayT"></p><button type="button" id="gSayPlay">Jugar a los bugs</button></div>
 
 <!-- ============ MIS WEBS · un navegador con pestañas ============ -->
 <section class="bw" id="proyectos" data-bg="wine" data-frame="Mis webs" aria-label="Mis webs">
@@ -630,6 +660,6 @@
   <div class="mv-stage"><button type="button" class="mv-nav" id="mvPrev" aria-label="Página anterior"><i class="ic ic-left"></i></button><img id="mvImg" alt=""><button type="button" class="mv-nav" id="mvNext" aria-label="Página siguiente"><i class="ic ic-right"></i></button></div>
 </div>
 
-<script src="js/site.js?v=23" defer></script>
+<script src="js/site.js?v=26" defer></script>
 </body>
 </html>

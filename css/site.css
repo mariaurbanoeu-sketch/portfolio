@@ -1053,3 +1053,64 @@ html[data-tool] .tool-cmt textarea{cursor:text!important}
 .bottles li:hover .swatch i{width:3rem;transition:width .4s var(--ease)}
 /* Nácar: el celular centrado en móvil */
 @media(max-width:899px){.nc-small{display:grid;justify-items:center}.nc-small figcaption{justify-self:center;text-align:center}}
+
+/* ============ celular: proyectos a pantalla completa ============ */
+.reels,.peek{display:none}
+@media(max-width:760px){
+  html{scroll-snap-type:y proximity}
+  .bw,#nails,#kronox,#nacar,#amigos{display:none!important}
+  .reels{display:block}
+  .reel{position:relative;min-height:calc(100svh - var(--hd) - env(safe-area-inset-top,0px));scroll-snap-align:start;scroll-snap-stop:always;display:grid;grid-template-rows:auto 1fr auto auto;gap:1rem;padding:1.2rem var(--gut) 1.4rem;overflow:hidden}
+  .reel-n{font:700 .66rem/1 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+  .reel-n span{color:var(--accent)}
+  .reel-h{margin-top:.7rem;font-size:clamp(2.1rem,10vw,2.8rem);line-height:.95}
+  .reel-d{margin-top:.6rem;font-size:.92rem;color:var(--soft);max-width:30ch}
+  .reel-nails .reel-h{font:400 clamp(2.4rem,11vw,3rem)/.95 'Nails Display',var(--serif);text-transform:none;color:#3A1A21}
+  .reel-nails .reel-h em{font-style:italic;color:#662E3A}
+  .reel-kronox .reel-h{font:500 clamp(2.4rem,12vw,3.2rem)/.95 'Kronox Display',var(--serif);letter-spacing:.14em}
+  .reel-nacar .reel-h{font:300 clamp(2.6rem,12vw,3.3rem)/.9 'Nacar Display',var(--serif);text-transform:none;letter-spacing:-.03em}
+  .reel-nacar .reel-h em{font-style:italic}
+  .reel-amigos .reel-h{font:700 clamp(1.9rem,9vw,2.4rem)/1 'Amigos Display',var(--sans);text-transform:none}
+  .reel-ph{position:relative;right:auto;bottom:auto;justify-self:center;align-self:center;height:min(52svh,440px);width:auto;aspect-ratio:390/858;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;transition:transform .25s var(--ease)}
+  .reel-ph video{height:100%;width:100%;pointer-events:none}
+  .reel-ph.press{transform:scale(.96)}
+  .reel-hold{position:absolute;left:50%;bottom:-1.6rem;transform:translateX(-50%);white-space:nowrap;font:700 .6rem/1 'Courier New',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--soft)}
+  .reel-act{display:grid;gap:.6rem}
+  .reel-act .btn{width:100%}
+  .reel-nails .reel-go{background:#662E3A!important;border-color:#662E3A!important;color:#F3ECE8!important}
+  .reel-kronox .reel-go{background:#EDE6DA;border-color:#EDE6DA;color:#0B0B0A}
+  .reel-nacar .reel-go{background:#2B231C!important;border-color:#2B231C!important;color:#EFE7DC!important}
+  .reel-amigos .reel-go{background:#FFD23F;border-color:#FFD23F;color:#0F1E3D}
+  .reel-hint{justify-self:center;display:flex;align-items:center;gap:.4rem;font:700 .6rem/1 'Courier New',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);animation:bob 1s steps(2) infinite}
+  .reel-hint i{width:9px;height:6px;background:currentColor;clip-path:polygon(50% 0,100% 100%,0 100%)}
+  .reel-kronox::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .reel-amigos .reel-n::before{content:"";display:inline-block;width:.5rem;height:.5rem;margin-right:.45rem;border-radius:50%;background:#FFD23F;box-shadow:.75rem 0 0 #2F6FDB,1.5rem 0 0 #E5383B;margin-right:2rem;vertical-align:.05em}
+  /* ver en grande mientras mantienes presionado */
+  .peek{position:fixed;inset:0;z-index:240;display:grid;place-items:center;background:rgba(10,5,6,.92);opacity:0;pointer-events:none;transition:opacity .2s}
+  .peek.on{opacity:1}
+  .peek video{height:92svh;width:auto;max-width:96vw;border-radius:22px;transform:scale(.9);transition:transform .3s var(--ease)}
+  .peek.on video{transform:none}
+  /* detalles en la hoja */
+  .sheet-c .pj-in{color:var(--ivory)}
+  .sheet-c .pj-media,.sheet-c .kx-stage,.sheet-c .nc-spread,.sheet-c .ea-left,.sheet-c .ea-thumb,.sheet-c .devbar,.sheet-c .kx-label,.sheet-c .pin-hint,.sheet-c .fi,.sheet-c .ea-box,.sheet-c .pj-hd h2,.sheet-c .nc-h,.sheet-c .ea-h,.sheet-c .kx-h,.sheet-c .nails-h,.sheet-c .kx-kick,.sheet-c .nc-issue,.sheet-c .pj-n{display:none!important}
+  .sheet-c .pj-desc,.sheet-c .nc-lead{margin-top:0;color:#e6dbd2}
+  .sheet-c .reto{margin:1.4rem 4px;color:var(--ivory)}
+  .sheet-c .reto-d,.sheet-c .bottles li,.sheet-c .tags li,.sheet-c .ea-route li{color:#cdbfb2}
+  .sheet-c .bottles b,.sheet-c .tags span{color:var(--ivory)}
+  .sheet-c .kx-subs{margin-top:1.2rem}
+  .sheet-c .ea-route{padding:0}
+  .sheet-c .ea-route ol{gap:1rem}
+  .sheet-c .ea-route li b{color:var(--ivory)}
+  .sheet-c .pj-actions{margin-top:1.4rem}
+  .sheet-c .btn{width:100%}
+  .sheet-c [data-reveal]{opacity:1!important;transform:none!important}
+}
+/* el Paulagotchi te habla */
+.g-say{position:fixed;z-index:41;right:max(1rem,env(safe-area-inset-right,0px));bottom:calc(5.6rem + env(safe-area-inset-bottom,0px));width:min(15rem,70vw);padding:.8rem .9rem;background:#FAF6F0;color:#221616;box-shadow:0 -3px 0 0 #221616,0 3px 0 0 #221616,-3px 0 0 0 #221616,3px 0 0 0 #221616,0 14px 30px rgba(0,0,0,.35);margin:3px;animation:pop .3s steps(3)}
+.g-say[hidden]{display:none}
+.g-say::after{content:"";position:absolute;right:1.6rem;top:100%;border:8px solid transparent;border-top-color:#221616;margin-top:3px}
+.g-say p{font:700 .78rem/1.4 'Courier New',monospace}
+.g-say button{margin-top:.6rem;min-height:2.4rem;padding:0 .8rem;border:0;background:#221616;color:#FAF6F0;font:600 .7rem/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+@media(max-width:760px){.g-say{bottom:calc(4.8rem + env(safe-area-inset-bottom,0px));right:.7rem}}
+@media(min-width:900px) and (hover:hover) and (pointer:fine){.g-say{bottom:9.6rem}}
+@media(max-width:760px){.reel .btn.ghost{background:transparent!important;color:var(--ink)!important;border-color:var(--line)!important}.reel-ph{margin-bottom:1.6rem}}
