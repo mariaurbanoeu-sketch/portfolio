@@ -25,7 +25,7 @@
 <meta property="og:type" content="website">
 <link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/pinyon.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=52">
+<link rel="stylesheet" href="css/site.css?v=54">
 <script>(function(d){d.classList.add('js');try{if(!sessionStorage.getItem('intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('intro-on');sessionStorage.setItem('intro','1')}var m=sessionStorage.getItem('pm');if(!m){d.classList.add('ts-on');return}d.classList.add(m==='game'?'m-game':'m-fast')}catch(e){}})(document.documentElement)</script>
 </head>
 <body>
@@ -637,6 +637,8 @@
   </div>
   <div class="enter-load" id="enterLoad"><span></span>Cargando la web…</div>
   <iframe id="enterFrame" title="Web en vivo"></iframe>
+  <div class="eg-pt" id="egPt" aria-hidden="true" hidden><i></i><b></b></div>
+  <div class="eg" id="eg" role="status" aria-live="polite" hidden><div class="eg-lcd"><canvas id="egCv" width="32" height="32" aria-hidden="true"></canvas><p><small id="egN">Paso 1</small><span id="egT"></span></p></div></div>
 </div>
 
 <div class="desk" id="desk" role="dialog" aria-modal="true" aria-label="El escritorio de Paula" hidden>
@@ -732,6 +734,6 @@
   <div class="mv-stage"><button type="button" class="mv-nav" id="mvPrev" aria-label="Página anterior"><i class="ic ic-left"></i></button><img id="mvImg" alt=""><button type="button" class="mv-nav" id="mvNext" aria-label="Página siguiente"><i class="ic ic-right"></i></button></div>
 </div>
 
-<script src="js/site.js?v=53" defer></script>
+<script src="js/site.js?v=55" defer></script>
 </body>
 </html>

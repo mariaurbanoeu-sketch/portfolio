@@ -1534,3 +1534,23 @@ iframe.lv,.gl-live iframe{flex:none}
 .fig-dots i.on{background:#0D99FF;transform:scale(1.25)}
 @media(max-width:760px){.fig-nav{width:2.6rem;height:2.6rem;top:calc(50% - 1.8rem)}.fig-hint{display:none}.fig-count{justify-content:space-between}}
 @media(min-width:900px){.fig-track{padding:0 max(var(--gut),calc((100vw - var(--max))/2 + var(--gut))) 1rem;scroll-snap-type:x mandatory}.fig-card{scroll-snap-align:center}}
+/* el Paulagotchi te guía dentro de la web */
+.eg{position:absolute;z-index:6;left:max(1rem,env(safe-area-inset-left,0px));bottom:calc(1rem + env(safe-area-inset-bottom,0px));width:min(22rem,calc(100% - 2rem));padding:.55rem;border-radius:18px;background:radial-gradient(120% 90% at 30% 20%,#f3c9d4,#EBA9BD 55%,#c9849a);box-shadow:0 14px 34px rgba(0,0,0,.4)}
+.eg[hidden],.eg-pt[hidden]{display:none}
+.eg.pop{animation:pop .3s steps(3)}
+.eg-lcd{display:flex;gap:.7rem;align-items:center;padding:.6rem .75rem;border-radius:10px;background:#c4c9aa;box-shadow:inset 0 0 0 3px #3a2a2e;color:#221616}
+.eg-lcd canvas{flex:0 0 auto;width:44px;height:44px;image-rendering:pixelated}
+.eg-lcd p{font:700 .82rem/1.35 'Courier New',monospace}
+.eg-lcd small{display:block;margin-bottom:.2rem;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:#4a5a3a}
+.eg-pt{position:fixed;z-index:7;width:0;height:0;pointer-events:none;transition:left .25s steps(3),top .25s steps(3)}
+.eg-pt i{position:absolute;left:calc(var(--w) / -2);top:-6px;width:var(--w);height:var(--h);border:3px solid #FFD23F;border-radius:8px;box-shadow:0 0 0 4px rgba(255,210,63,.3);animation:egring 1s steps(2) infinite}
+.eg-pt b{position:absolute;left:-11px;top:-34px;width:22px;height:18px;background:#FFD23F;clip-path:polygon(0 0,100% 0,50% 100%);animation:bob .5s steps(2) infinite;filter:drop-shadow(0 2px 0 #221616)}
+@keyframes egring{50%{box-shadow:0 0 0 9px rgba(255,210,63,.15)}}
+@media(max-width:760px){.eg{left:.6rem;right:.6rem;width:auto}}
+.eg.up{bottom:auto}
+.eg{pointer-events:none}
+.eg.min{width:auto;padding:.35rem}
+.eg.min .eg-lcd{padding:.35rem .5rem}
+.eg.min .eg-lcd canvas{width:30px;height:30px}
+.eg.min #egT{display:none}
+.eg.min small{margin:0}

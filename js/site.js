@@ -889,15 +889,64 @@
     $('#enterOut').href = url;
     $('#enterMis').hidden = !entReto; $('#enterDone').hidden = !entReto;
     if (entReto) { $('#enterRn').textContent = RETOS.indexOf(k) < 0 ? 'Misión' : 'Reto ' + (RETOS.indexOf(k) + 1) + '/4'; $('#enterMt').textContent = c.m; }
-    entLoad.classList.remove('off'); entF.onload = function () { entLoad.classList.add('off'); };
+    entLoad.classList.remove('off'); egStop(); entF.onload = function () { entLoad.classList.add('off'); if (entReto) setTimeout(function () { egStart(k, c.m); }, 400); };
     entF.src = url;
     if (entFace) { entFace.clearRect(0, 0, 32, 32); drawSprite(entFace, 0, 0, 1, 'happy'); }
     ent.hidden = false; document.body.style.overflow = 'hidden'; buzz(10);
     $('#enterX').focus();
   }
+  /* ======================= el Paulagotchi te guía dentro de la web ======================= */
+  var egVis = function (d, q) { var e = d.querySelector(q); if (!e || !e.getClientRects().length) return false; var cs = d.defaultView.getComputedStyle(e); return cs.display !== 'none' && cs.visibility !== 'hidden' && +cs.opacity > 0; };
+  var GUIDE = {
+    kronox: [{ s: '#videoList button.ghost:not([disabled])', t: 'Toca una flecha ↑ para subir un videoclip.', c: 1 }],
+    nacar: [
+      { s: '.product-card', t: 'Toca una prenda para abrirla.', ok: function (d) { return egVis(d, '.prod-add-btn'); } },
+      { s: '.prod-add-btn', t: 'Ahora pulsa «Añadir a la cesta».', ok: function (d) { return ['cartHeaderCount', 'mobileTabCartBadge'].some(function (id) { var n = d.getElementById(id); return n && !n.hidden && +n.textContent > 0; }); } },
+      { s: '#cartHeaderBtn, .mobile-tab[data-mtab="cart"]', t: 'Abre la cesta: se abre a un lado, sin sacarte de la página.', c: 1 }],
+    amigos: [
+      { s: '.welcome-btn--necesito', t: 'Toca «Necesito ayuda».', ok: function (d) { return !egVis(d, '#welcomeScreen'); } },
+      { s: '#tabNecesidades .btn-primary', t: 'Ahora «+ Publicar necesidad».', ok: function (d) { var m = d.getElementById('modalNuevaNecesidad'); return m && !m.classList.contains('hidden'); } },
+      { s: '#modalNuevaNecesidad button[type=submit]', t: 'Rellena categoría, descripción, cantidad, ciudad y un PIN de 4 números. Luego «Publicar».', ok: function (d) { var m = d.getElementById('modalNuevaNecesidad'); return m && m.classList.contains('hidden'); } }]
+  };
+  var eg = $('#eg'), egPt = $('#egPt'), egT = null, egSteps = null, egI = 0, egDoc = null, egClicked = false, egScrolled = -1;
+  var egFace = function (mood) { var c = $('#egCv').getContext('2d'); c.clearRect(0, 0, 32, 32); drawSprite(c, 0, 0, 1, mood || 'happy'); };
+  var egMinT = null;
+  /* el cartel se encoge solo a los pocos segundos para no tapar la web */
+  var egSay = function (n, t, mood) { $('#egN').textContent = n; $('#egT').textContent = t; egFace(mood); eg.classList.remove('pop', 'min'); void eg.offsetWidth; eg.classList.add('pop'); clearTimeout(egMinT); egMinT = setTimeout(function () { if (egT) eg.classList.add('min'); }, 4500); };
+  var egStop = function () { clearInterval(egT); egT = null; egSteps = null; egPt.hidden = true; eg.hidden = true; };
+  var egStep = function () {
+    var st = egSteps[egI]; egClicked = false; egScrolled = -1;
+    var real = egSteps.filter(function (x) { return !x.q; }), n = real.indexOf(st);
+    egSay(st.q ? 'Antes de empezar' : 'Paso ' + (n + 1) + ' de ' + real.length, st.t);
+  };
+  var egStart = function (k, mis) {
+    egStop(); eg.hidden = false; egSteps = GUIDE[k] || null; egI = 0;
+    var d = null; try { d = entF.contentDocument; } catch (e) {}
+    if (!egSteps || !d || !d.body) { egSteps = null; egSay('Tu misión', mis); return; }
+    egDoc = d;
+    /* el aviso de cookies de la demo no es parte de la misión: se acepta solo */
+    var ck = d.getElementById('cookieAcceptBtn'); if (ck && ck.getClientRects().length) ck.click();
+    d.addEventListener('click', function (e) { var st = egSteps && egSteps[egI]; if (st && st.c && e.target.closest && e.target.closest(st.s)) egClicked = true; }, true);
+    egStep();
+    egT = setInterval(function () {
+      if (!egSteps) return; var st = egSteps[egI], el = null;
+      try { el = [].filter.call(egDoc.querySelectorAll(st.s), function (x) { return x.getClientRects().length; })[0] || null; } catch (e) {}
+      if (st.c ? egClicked : st.ok(egDoc)) {
+        egI++; if (st.q && egI < egSteps.length) { egStep(); return; } buzz([8, 20, 8]);
+        if (egI >= egSteps.length) { egPt.hidden = true; clearInterval(egT); egT = null; egSay('¡Misión cumplida!', '¡Eso es! Así funciona. Te devuelvo al juego…', 'happy'); setTimeout(function () { if (!ent.hidden && entReto) $('#enterDone').click(); }, 1800); return; }
+        egSay('¡Bien!', '¡Eso es!', 'happy'); setTimeout(function () { if (egSteps) egStep(); }, 700); return;
+      }
+      if (!el || !el.getClientRects().length) { egPt.hidden = true; return; }
+      var r = el.getBoundingClientRect(), fr = entF.getBoundingClientRect();
+      if ((r.top < 0 || r.bottom > fr.height) && egScrolled !== egI) { egScrolled = egI; el.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
+      var up = r.top + r.height / 2 > fr.height * .55; eg.classList.toggle('up', up); eg.style.top = up ? (fr.top + 12) + 'px' : '';
+      egPt.hidden = false; egPt.style.left = (fr.left + r.left + r.width / 2) + 'px'; egPt.style.top = (fr.top + r.top) + 'px';
+      egPt.style.setProperty('--w', Math.max(36, r.width + 12) + 'px'); egPt.style.setProperty('--h', Math.max(36, r.height + 12) + 'px');
+    }, 200);
+  };
   function closeEnter() {
     if (!ent || ent.hidden) return;
-    ent.hidden = true; entF.src = 'about:blank'; document.body.style.overflow = '';
+    egStop(); ent.hidden = true; entF.src = 'about:blank'; document.body.style.overflow = '';
     if (entOpener && entOpener.focus) entOpener.focus({ preventScroll: true });
   }
   if (ent) {
