@@ -1016,12 +1016,25 @@
   var copy = function (txt, html) { if (navigator.clipboard) navigator.clipboard.writeText(txt).then(function () { toast(html); }).catch(function () { toast(html); }); else toast(html); };
   var toHex = function (c) { var m = (c || '').match(/[\d.]+/g); if (!m || (m.length > 3 && +m[3] === 0)) return null; return '#' + m.slice(0, 3).map(function (n) { return ('0' + Math.round(+n).toString(16)).slice(-2); }).join('').toUpperCase(); };
   if (tb && fine.matches) {
-    tb.hidden = false;
+    var tbOpen = $('#tbOpen'), guide = $('#tbGuide'), gT = $('#tbGuideT'), gGo = $('#tbGuideGo'), gStep = 0, gDone = false;
+    try { gDone = !!localStorage.getItem('tbg'); } catch (e) {}
+    tbOpen.hidden = false;
     var chip = $('#toolChip'), tBox = $('#toolBox'), refBox = $('#toolRef'), lines = $('#toolLines'), cform = $('#toolCmt');
     var tool = 'move', ref = null, hov = null, pmx = 0, pmy = 0, cmtAt = null;
-    var hint = $('#tbHint'); try { if (localStorage.getItem('tbh')) hint.classList.add('off'); else setTimeout(function () { hint.classList.add('off'); try { localStorage.setItem('tbh', '1'); } catch (e) {} }, 8000); } catch (e) {}
+    /* una mini guía la primera vez: probar el cuentagotas */
+    var guideEnd = function () { guide.hidden = true; gDone = true; try { localStorage.setItem('tbg', '1'); } catch (e) {} };
+    var guideSay = function (t, btn) { gT.textContent = t; gGo.hidden = !btn; if (btn) gGo.textContent = btn; };
+    var openTools = function () {
+      tb.hidden = false; tbOpen.hidden = true; buzz(8);
+      if (!gDone) { var gc = $('#tbGuideCv').getContext('2d'); gc.clearRect(0, 0, 32, 32); drawSprite(gc, 0, 0, 1, 'happy'); guide.hidden = false; gStep = 0; guideSay('Así diseño yo, en Figma. Prueba a copiar un color de esta web.', 'Probar'); }
+    };
+    var closeTools = function () { setTool('move'); tb.hidden = true; tbOpen.hidden = false; guide.hidden = true; };
+    tbOpen.addEventListener('click', openTools);
+    $('#tbX').addEventListener('click', closeTools);
+    gGo.addEventListener('click', function () { if (gStep === 0) { gStep = 1; setTool('pick'); guideSay('Ahora toca cualquier parte de la web: un fondo, un botón, una foto…'); } else guideEnd(); });
+    $('#tbGuideX').addEventListener('click', guideEnd);
     var setTool = function (t) {
-      tool = t; hint.classList.add('off');
+      tool = t;
       $$('[data-tool]', tb).forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.tool === t)); });
       if (t === 'move') root.removeAttribute('data-tool'); else root.dataset.tool = t;
       chip.classList.remove('show'); tBox.style.display = 'none'; lines.innerHTML = ''; if (t !== 'measure') { ref = null; refBox.style.display = 'none'; }
@@ -1094,7 +1107,7 @@
     document.addEventListener('click', function (e) {
       if (tool === 'move' || safe(e.target)) return;
       e.preventDefault(); e.stopPropagation();
-      if (tool === 'pick' && chip.dataset.hex) copy(chip.dataset.hex, '<i style="background:' + chip.dataset.hex + '"></i>Copiado ' + chip.dataset.hex);
+      if (tool === 'pick' && chip.dataset.hex) { copy(chip.dataset.hex, '<i style="background:' + chip.dataset.hex + '"></i>Copiado ' + chip.dataset.hex); if (!guide.hidden && gStep === 1) { gStep = 2; guideSay('¡Copiado! ' + chip.dataset.hex + ' es un color de esta web. Así reviso cada detalle. Prueba también medir o ver la letra.', 'Entendido'); } }
       else if (tool === 'text' && chip.dataset.css) copy(chip.dataset.css, 'Estilo de texto copiado');
       else if (tool === 'measure') { ref = ref === e.target ? null : e.target; if (ref) outline(ref, refBox); else { refBox.style.display = 'none'; lines.innerHTML = ''; } hover(); }
       else if (tool === 'comment') {
@@ -1114,8 +1127,9 @@
       if (!game.hidden || !mv.hidden || (sheet && !sheet.hidden) || (ent && !ent.hidden)) return;
       var k = e.key.toLowerCase(), map = { v: 'move', i: 'pick', t: 'text', m: 'measure', c: 'comment' };
       if (desk && !desk.hidden) { if (e.key === 'Escape') closeDesk(); return; }
-      if (map[k]) { setTool(map[k]); e.preventDefault(); }
+      if (map[k]) { if (tb.hidden) openTools(); setTool(map[k]); e.preventDefault(); }
       else if (k === 'd') { openDesk(); e.preventDefault(); }
+      else if (e.key === 'Escape' && !tb.hidden && tool === 'move') closeTools();
       else if (e.key === 'Escape' && tool !== 'move') { if (ref) { ref = null; refBox.style.display = 'none'; lines.innerHTML = ''; } else setTool('move'); }
     });
     $('#deskBtn').addEventListener('click', function () { openDesk(); });
