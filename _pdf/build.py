@@ -39,7 +39,7 @@ pages.append('''<section class="pg cover" id="p1">
 <p class="k">Portfolio · 2026</p>
 <div class="cv-l"><h1>Paula<br>Urbano</h1><p class="script">diseñadora web</p>
 <p class="cv-d">Diseño webs en Figma y las programo yo, para que funcionen de verdad.</p>
-<p class="press"><span class="tri"></span>Pulsa para empezar</p></div>
+<p class="press"><span class="tri"></span>Busco prácticas · Valencia · desde enero</p></div>
 <div class="cv-r"><div class="egg"><div class="lcd-scr"><canvas data-g="happy" width="32" height="32"></canvas></div><div class="egg-b"><i></i><i></i><i></i></div></div><p class="egg-n">Paulagotchi</p></div>
 <footer class="cv-f"><a href="%s">paulaurbanog.com</a><a href="mailto:%s">%s</a><a href="%s">LinkedIn · Paula Urbano</a><span>Valencia, España</span></footer>
 </section>''' % (WEB, MAIL, MAIL, LI))
@@ -48,8 +48,8 @@ pages.append('''<section class="pg about" id="p2">%s
 <div class="ab-g"><div>
 <p class="script">sobre mí</p><h2>Vengo del diseño gráfico</h2>
 <p class="big">Aprendí a programar porque quería que mis diseños salieran de Figma y funcionaran de verdad.</p>
-<p>Estoy en el último año de Multimedia y Artes Digitales en la UCV y desde 2025 hago webs para clientes reales. Vivo en Valencia, hablo español e inglés y estoy disponible para empezar ya.</p>
-<dl class="meta ab-m"><div><dt>Estudios</dt><dd>Multimedia y Artes Digitales · UCV</dd></div><div><dt>Clientes reales</dt><dd>Desde 2025</dd></div><div><dt>Idiomas</dt><dd>Español e inglés</dd></div><div><dt>Disponibilidad</dt><dd>Para empezar ya</dd></div></dl>
+<p>Estoy en el último año de Multimedia y Artes Digitales en la UCV y desde 2025 hago webs para clientes reales. Vivo en Valencia, hablo español e inglés y busco prácticas a partir de enero, con convenio con la universidad.</p>
+<dl class="meta ab-m"><div><dt>Estudios</dt><dd>Multimedia y Artes Digitales · UCV</dd></div><div><dt>Clientes reales</dt><dd>Desde 2025</dd></div><div><dt>Idiomas</dt><dd>Español e inglés</dd></div><div><dt>Busco</dt><dd>Prácticas en Valencia desde enero · con convenio</dd></div></dl>
 </div><div class="facts"><p class="lab">3 cosas de mí</p>
 <figure><div class="lcd-w"><canvas data-scene="grass" data-t="2000" width="48" height="28"></canvas></div><figcaption><b>No puedo caminar sobre césped.</b></figcaption></figure>
 <figure><div class="lcd-w"><canvas data-scene="lemon" data-t="900" width="48" height="28"></canvas></div><figcaption><b>Siempre pido lo mismo: un helado de limón.</b> No soy de probar nada nuevo.</figcaption></figure>

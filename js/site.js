@@ -191,7 +191,7 @@
   function refresh() {
     var n = now(), clk = $('#gClock');
     if (clk) clk.innerHTML = '<span>valencia</span><span>' + n.clock + '</span>';
-    STATUS = [n.txt, 'disponible ya', 'ama: figma y ux/ui'];
+    STATUS = [n.txt, 'prácticas: enero', 'ama: figma y ux/ui'];
     g.sleep = n.sleep;
     $('.g-screen').classList.toggle('zz', n.sleep);
   }
