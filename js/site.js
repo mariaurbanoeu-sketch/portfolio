@@ -131,7 +131,6 @@
       fig.style.setProperty('--cur', fr.top < innerHeight * .3 && fr.bottom > innerHeight * .8 ? 1 : 0);
     }
     mini.el.classList.toggle('show', scrollY > innerHeight * .8);
-    var hudEl = $('#hud'); if (hudEl) hudEl.classList.toggle('show', scrollY > innerHeight * .8);
   }
   var ticking = false;
   addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; onScroll(); }); } }, { passive: true });
@@ -558,6 +557,7 @@
       prog.forEach(function (p, k) { p.classList.toggle('done', k < i); p.classList.remove('now'); });
       if (prog[i]) { void prog[i].offsetWidth; if (bwVis && !reduce) prog[i].classList.add('now'); }
       bwUrl.textContent = urls[i];
+      if (window.lvRefresh) setTimeout(lvRefresh, 60);
       bwLoad.classList.remove('go'); void bwLoad.offsetWidth; bwLoad.classList.add('go');
     };
     var bwScroll = function () {
@@ -662,10 +662,63 @@
     }, { threshold: .6 }).observe(ft);
   }
 
+
+  /* ======================= 3 cosas de mí: escenas en pixel ======================= */
+  var MINI = { a: ["...HHHHHH...","..HHHHHHHH..","..HssssssH..","..yseSSesy..","..yssllssy..","..yyssssyy..","..tttttttt..",".stfttgtfts.",".sttttttttS.","..tttttttt..","..LLLLLLLL..","..LLL..LLL..","..ss....ss..","..ss....ss..",".KKK....KKK."],
+    b: ["...HHHHHH...","..HHHHHHHH..","..HssssssH..","..yseSSesy..","..yssllssy..","..yyssssyy..","..tttttttt..",".stfttgtfts.",".sttttttttS.","..tttttttt..","..LLLLLLLL..","...LLLLLL...","...ss..ss...","....ss.ss...","...KKKKKK..."] };
+  var MP = { H: '#34221c', s: '#d69670', S: '#b87a5a', e: '#1e1212', l: '#aa3a54', y: '#deb67c', t: '#28201e', f: '#d67482', g: '#d4aa54', L: '#705c62', K: '#3a2e32' };
+  var mini2 = function (x, ctx, ox, oy, fr, flip) { var m = MINI[fr]; m.forEach(function (r, y) { for (var i = 0; i < 12; i++) { var k = r[flip ? 11 - i : i]; if (MP[k]) { x.fillStyle = MP[k]; x.fillRect(ox + i, oy + y, 1, 1); } } }); };
+  var px = function (x, c, a, b, w, h) { x.fillStyle = c; x.fillRect(a, b, w || 1, h || 1); };
+  var SCN = {
+    grass: function (x, t) {
+      var cyc = t % 3600, gx = 38;
+      px(x, '#9aa07f', 0, 33, 64, 1);
+      for (var i = 0; i < 22; i++) { px(x, i % 3 ? '#5f8a3a' : '#7db04a', gx + i, 30 + (i % 2), 1, 3 - (i % 2)); px(x, '#5f8a3a', gx + i, 32, 1, 1); }
+      var px0, py = 18, fr = Math.floor(t / 160) % 2 ? 'a' : 'b';
+      if (cyc < 1800) px0 = 4 + Math.floor(cyc / 1800 * 26);
+      else if (cyc < 2300) { px0 = 30; fr = 'a'; px(x, '#c0392b', 35, 10, 2, 5); px(x, '#c0392b', 35, 16, 2, 1); px(x, '#5aa0d6', 28, 16, 1, 2); }
+      else { var k = (cyc - 2300) / 1300; px0 = 30 - Math.floor(k * 26); py = 18 - Math.round(Math.sin(Math.min(1, k * 2.4) * Math.PI) * 6); }
+      mini2(x, x, px0, py, fr, cyc >= 2300);
+    },
+    lemon: function (x, t) {
+      var cyc = t % 4000, bites = Math.min(3, Math.floor(cyc / 900));
+      px(x, '#9aa07f', 0, 33, 64, 1);
+      mini2(x, x, 12, 18 - (Math.floor(t / 400) % 2), 'a');
+      /* cucurucho */
+      for (var r = 0; r < 7; r++) px(x, r % 2 ? '#c99a5b' : '#b5833f', 28 + Math.floor(r / 2), 24 + r, 5 - r * 2 / 3 | 0 || 1, 1);
+      var sc = 3 - bites;
+      if (cyc > 3400) { if (Math.floor(t / 120) % 2) { px(x, '#f6ef7a', 27, 18, 7, 6); px(x, '#e3d43f', 27, 22, 7, 2); } }
+      else if (sc > 0) { px(x, '#f6ef7a', 27, 24 - sc * 2, 7, sc * 2); px(x, '#fffbd0', 28, 24 - sc * 2, 2, 1); px(x, '#e3d43f', 27, 23, 7, 1); }
+      x.fillStyle = '#3a3f2c'; x.font = '6px monospace'; x.fillText('x' + (999 + Math.floor(t / 4000) % 9), 40, 9);
+      px(x, '#e68082', 46, 16, 2, 2); px(x, '#e68082', 49, 16, 2, 2); px(x, '#e68082', 46, 18, 5, 2); px(x, '#e68082', 47, 20, 3, 1); px(x, '#e68082', 48, 21, 1, 1);
+    },
+    music: function (x, t) {
+      var b = Math.floor(t / 300) % 2;
+      px(x, '#9aa07f', 0, 33, 64, 1);
+      mini2(x, x, 24, 18 + b, b ? 'a' : 'b');
+      px(x, '#eba9bd', 25, 17 + b, 10, 1); px(x, '#eba9bd', 24, 19 + b, 2, 3); px(x, '#eba9bd', 34, 19 + b, 2, 3);
+      var cols = ['#aa3a54', '#3a2e32', '#d4aa54', '#5aa0d6'];
+      for (var n = 0; n < 4; n++) {
+        var p = ((t / 1600) + n / 4) % 1, nx = [8, 46, 14, 52][n], ny = 30 - Math.floor(p * 26);
+        if (p < .92) { px(x, cols[n], nx, ny, 2, 2); px(x, cols[n], nx + 1, ny - 4, 1, 4); px(x, cols[n], nx + 2, ny - 4, 2, 1); }
+      }
+    }
+  };
+  var lcds = $$('canvas.lcd'), lcdOn = [];
+  if (lcds.length) {
+    var lio = new IntersectionObserver(function (es) { es.forEach(function (e) { e.target._on = e.isIntersecting; }); }, { rootMargin: '100px 0px' });
+    lcds.forEach(function (c) { lio.observe(c); c._x = c.getContext('2d'); });
+    var lcdT = 0;
+    (function lcdLoop(t) {
+      if (t - lcdT > 90) { lcdT = t; lcds.forEach(function (c) { if (!c._on && c._done) return; c._done = 1; c._x.clearRect(0, 0, 64, 36); SCN[c.dataset.scene](c._x, reduce ? 0 : t); }); }
+      if (!reduce) requestAnimationFrame(lcdLoop);
+    })(0);
+  }
+
   /* ======================= tu Spotify sin sentido ======================= */
   var mp = $('#mp');
   if (mp) {
-    var SONGS = [['Pink Matter', 'Frank Ocean'], ['El orgullo del barrio', ''], ['Eres más', 'Guaco']], si = 0, mpT0 = 0, mpOn = false;
+    var SONGS = [['Pink Matter', 'Frank Ocean'], ['Orgullo', 'El Barrio'], ['Eres más', 'Guaco'], ['Neo Romeo', 'Rusowsky']], si = 0, mpT0 = 0, mpOn = false;
     var list = $('#mpList');
     SONGS.forEach(function (s2, k) { var li = document.createElement('li'); li.textContent = s2[0] + (s2[1] ? ' · ' + s2[1] : ''); li.addEventListener('click', function () { playSong(k); }); list.appendChild(li); });
     var playSong = function (k) {
@@ -686,6 +739,39 @@
     })(performance.now());
   }
 
+
+
+  /* ======================= webs en vivo (cargadas solo cuando se miran) ======================= */
+  var lvs = $$('iframe.lv'), lvMax = small.matches ? 1 : 2, lvOn = [];
+  var lvVideo = function (f) { return $('video', f.parentNode); };
+  var lvFit = function (f) {
+    var v = lvVideo(f), W = +f.dataset.w; if (!v) return;
+    var w = v.offsetWidth, h = v.offsetHeight; if (!w || !h) return;
+    var k = w / W; f.style.left = v.offsetLeft + 'px'; f.style.top = v.offsetTop + 'px';
+    f.style.width = W + 'px'; f.style.height = (h / k) + 'px'; f.style.transform = 'scale(' + k + ')';
+    f.style.borderRadius = (parseFloat(getComputedStyle(v).borderTopLeftRadius) / k) + 'px';
+  };
+  var lvShown = function (f) { var bv = f.closest('.bw-v'); return !bv || bv.classList.contains('on'); };
+  var lvUnload = function (f) { f.classList.remove('ok'); f.removeAttribute('src'); f._t = 0; lvOn = lvOn.filter(function (x) { return x !== f; }); var v = lvVideo(f); if (v && v.src && !reduce && f._vis) { var pp = v.play(); if (pp && pp.catch) pp.catch(function () {}); } };
+  var lvLoad = function (f) {
+    if (f.getAttribute('src') || !lvShown(f)) return;
+    while (lvOn.length >= lvMax) lvUnload(lvOn[0]);
+    lvFit(f); f.onload = function () { if (!f.getAttribute('src')) return; f.classList.add('ok'); var v = lvVideo(f); if (v) v.pause(); };
+    f.src = f.dataset.live; lvOn.push(f);
+  };
+  if (lvs.length && 'IntersectionObserver' in window) {
+    var lvIO = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        var f = e.target._lv; f._vis = e.isIntersecting && e.intersectionRatio >= .35;
+        clearTimeout(f._t);
+        if (f._vis) f._t = setTimeout(function () { if (f._vis) lvLoad(f); }, 500);
+        else if (!e.isIntersecting && f.getAttribute('src')) lvUnload(f);
+      });
+    }, { threshold: [0, .35] });
+    lvs.forEach(function (f) { var box = f.parentNode; box._lv = f; lvIO.observe(box); });
+    addEventListener('resize', function () { lvOn.forEach(lvFit); });
+    window.lvRefresh = function () { lvs.forEach(function (f) { if (!lvShown(f) && f.getAttribute('src')) lvUnload(f); else if (f._vis && lvShown(f)) lvLoad(f); }); };
+  }
 
   /* ======================= celular: proyectos a pantalla completa ======================= */
   var reels = $('#reels');
@@ -1120,13 +1206,21 @@
     var LV = [['proyectos', 'Mundo 1', 'Mis webs'], ['nails', 'Nivel 1-1', 'Nails by MelyG'], ['kronox', 'Nivel 1-2', 'Kronox'], ['nacar', 'Nivel 1-3', 'Nácar'], ['amigos', 'Nivel 1-4', 'Entre Amigos'], ['creativos', 'Nivel 1-5', 'Portfolios'],
       ['figma', 'Nivel 2-1', 'Figma'], ['marcas', 'Nivel 2-2', 'Marcas'], ['sobre', 'Nivel 3-1', 'Sobre mí'], ['herramientas', 'Nivel 3-2', 'Herramientas'], ['contacto', 'Final', 'Créditos']];
     var WORK = { proyectos: 10, nails: 15, kronox: 15, nacar: 15, amigos: 15, creativos: 15, figma: 15 };
+    var retosDone = function () { try { return JSON.parse(localStorage.getItem('retos') || '{}'); } catch (e) { return {}; } };
+    var MIS = [['nails', 'Prueba la web de Mely (reto 1)', function () { return retosDone().nails; }], ['kronox', 'Ordena los videoclips de Kronox', function () { return retosDone().kronox; }],
+      ['nacar', 'Llena la cesta de Nácar', function () { return retosDone().nacar; }], ['amigos', 'Publica una necesidad en Entre Amigos', function () { return retosDone().amigos; }],
+      ['bugs', 'Atrapa 20 bugs', function () { return S.ach.bugs20; }], ['marcas', 'Dale la vuelta a las 3 marcas', function () { return S.ach.brands; }],
+      ['contacto', 'Llega a los créditos', function () { return S.ach.end; }]];
+    var mission = function () { for (var i = 0; i < MIS.length; i++) if (!MIS[i][2]()) return MIS[i]; return ['contacto', '¡Partida completa! Escríbeme', null]; };
     var total = function () { return S.st[0] + S.st[1] + S.st[2]; };
     var stage = function () { var t = total(), s = 0; STAGES.forEach(function (x, i) { if (t >= x[1]) s = i; }); return s; };
     var game = function () { return S.mode === 'game'; };
     var hud = $('#hud'), achT = $('#achT'), lvl = $('#lvl'), lastStage = stage(), seenLv = {}, lvT = null, achQ = [], achBusy = false;
     var paint = function () {
       if (!hud) return;
-      $('#hudLv').textContent = 'NV ' + (stage() + 1);
+      $('#hudLv').textContent = 'NV ' + (stage() + 1); $('#hudStage').textContent = STAGES[stage()][0];
+      var hc = $('#hudCv'); if (hc) { var hx = hc.getContext('2d'); hx.clearRect(0, 0, 32, 32); drawSprite(hx, 0, 0, 1, 'happy'); dress(hx, 0, 0, 1); }
+      var mi = mission(); $('#hudMisT').textContent = mi[1];
       S.st.forEach(function (v, i) { $('#hb' + i).style.width = v + '%'; });
       $('#hudAch').textContent = Object.keys(S.ach).length + '/' + ACH.length;
       var sw = $('#modeSwap'); if (sw) sw.textContent = game() ? 'Cambiar a modo rápido (sin juego)' : 'Cambiar a modo juego';
@@ -1190,7 +1284,9 @@
     });
     var sw0 = $('#modeSwap'); if (sw0) sw0.addEventListener('click', function () { setMode(game() ? 'fast' : 'game'); });
     /* el mapa: etapa, barras, niveles y logros */
-    if (hud) hud.addEventListener('click', function () {
+    var misB = $('#hudMis'); if (misB) misB.addEventListener('click', function () { var m = mission(); buzz(8); if (m[0] === 'bugs') openGame(); else goTo(m[0]); });
+    var achB = $('#hudAchB'); if (achB) achB.addEventListener('click', function () { $('#hudMap').click(); });
+    var hudMap = $('#hudMap'); if (hudMap) hudMap.addEventListener('click', function () {
       var d = document.createElement('div'); d.className = 'gm';
       var s = stage(), html = '<div class="gm-stage"><canvas width="32" height="32"></canvas><div><b>' + STAGES[s][0] + '</b><small>Nivel ' + (s + 1) + ' de 3' + (s < 2 ? ' · ' + (STAGES[s + 1][1] - total()) + ' puntos para evolucionar' : ' · ¡al máximo!') + '</small></div></div>';
       html += '<div class="gm-bars">' + [['Felicidad', '#EBA9BD'], ['Energía', '#FFD23F'], ['Ganas de trabajar', '#7fd16b']].map(function (b, i) { return '<p><span>' + b[0] + '</span><i><b style="width:' + S.st[i] + '%;background:' + b[1] + '"></b></i></p>'; }).join('') + '</div>';
@@ -1221,7 +1317,7 @@
           banner(v);
           if (LV.every(function (l) { return S.vis[l[0]]; })) unlock('explorer');
         }
-        if (type === 'reto') { add(0, 25); var n = 0; try { n = Object.keys(JSON.parse(localStorage.getItem('retos') || '{}')).length; } catch (e) {} if (n >= 4) unlock('webs4'); }
+        if (type === 'reto') { paint(); add(0, 25); var n = 0; try { n = Object.keys(JSON.parse(localStorage.getItem('retos') || '{}')).length; } catch (e) {} if (n >= 4) unlock('webs4'); }
         if (type === 'bugs') { S.bugs += v || 0; save(); add(1, Math.min(40, (v || 0) * 4)); if (S.bugs >= 20) unlock('bugs20'); }
         if (type === 'desk') { add(1, 10); unlock('desk'); }
         if (type === 'flip') { S.flips[v] = 1; save(); add(0, 5); if (Object.keys(S.flips).length >= 3) unlock('brands'); }

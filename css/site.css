@@ -1211,3 +1211,44 @@ html:not(.m-game) .g-only{display:none!important}
 .mode-pick.out{animation:mpout .4s steps(4) forwards}
 @keyframes mpout{to{opacity:0;transform:scale(.9)}}
 @media(hover:none){.mp-hint{display:none}}
+
+/* barra de juego arriba (solo en modo juego) */
+:root{--gh:0px}
+html.m-game{--gh:2.7rem}
+html.m-game body{padding-top:calc(var(--hd) + var(--gh) + env(safe-area-inset-top,0px))}
+html.m-game{scroll-padding-top:calc(var(--hd) + var(--gh) + env(safe-area-inset-top,0px) + 1rem)}
+.hud{position:fixed;z-index:49;left:0;right:0;top:calc(var(--hd) + env(safe-area-inset-top,0px));bottom:auto;height:var(--gh);padding:0;margin:0;display:block;opacity:1;transform:none;pointer-events:auto;background:#140d0d;color:#FAF6F0;box-shadow:0 3px 0 0 #EBA9BD;font:700 .66rem/1 'Courier New',monospace;letter-spacing:.04em}
+.hud-in{max-width:var(--max);height:100%;margin:0 auto;padding:0 var(--gut);display:flex;align-items:center;gap:1rem}
+.hud button{display:flex;align-items:center;gap:.5rem;min-height:2.3rem;padding:0;border:0;background:none;color:inherit;font:inherit;cursor:pointer;text-align:left}
+.hud-me canvas{width:26px;height:26px;image-rendering:pixelated;background:#c4c9aa;border-radius:4px}
+.hud-me b{display:block;color:#EBA9BD;font-size:.7rem}
+.hud-me small{display:block;margin-top:.15rem;font-size:.58rem;color:#cdbfb2;text-transform:uppercase;white-space:nowrap}
+.hud-bars{display:grid;gap:2px}
+.hud-bars i{display:block;width:3.2rem;height:5px;background:#3a2a2a}
+.hud-mis{flex:1;min-width:0;justify-content:center;gap:.6rem!important}
+.hud-mis small{flex:0 0 auto;padding:.25rem .4rem;background:#FFD23F;color:#221616;font-size:.56rem;letter-spacing:.14em;text-transform:uppercase}
+.hud-mis span{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;text-transform:uppercase;font-size:.68rem}
+.hud-mis:hover span{color:#FFD23F}
+.hud-ach canvas{width:16px;height:16px;image-rendering:pixelated}
+.hud.flash{animation:hudflash .9s steps(3) 2}
+@keyframes hudflash{50%{background:#3a1e26}}
+@media(max-width:760px){.hud-in{gap:.6rem}.hud-me small,.hud-bars{display:none}.hud-mis small{display:none}.hud-mis{justify-content:flex-start}}
+/* lo fijo se corre para dejar sitio a la barra */
+html.m-game .fig.pinned .fig-track{top:calc(var(--hd) + var(--gh) + 8vh)}
+html.m-game .ea-left{top:calc(var(--hd) + var(--gh) + 6vh)}
+html.m-game .lvl{top:40%}
+html.m-game .ach-t{top:calc(var(--hd) + var(--gh) + env(safe-area-inset-top,0px) + .8rem)}
+@media(max-width:760px){html.m-game .reel{min-height:calc(100svh - var(--hd) - var(--gh) - env(safe-area-inset-top,0px))}}
+
+/* webs en vivo sobre las grabaciones */
+iframe.lv{position:absolute;z-index:1;left:0;top:0;border:0;background:#fff;transform-origin:0 0;opacity:0;pointer-events:none;transition:opacity .5s}
+iframe.lv.ok{opacity:1}
+.bw-v,.vbox,.reel-ph,.phone{overflow:hidden}
+.vbox .pins{z-index:2}
+
+/* 3 cosas de mí: pantallitas de Paulagotchi */
+.lcd-w{margin:0 0 .4rem;padding:.55rem .55rem .45rem;width:min(100%,17rem);border-radius:16px;background:radial-gradient(120% 90% at 30% 20%,#7a3c45 0%,#5a2731 40%,#3c1a20 100%);box-shadow:inset -6px -8px 14px rgba(0,0,0,.4),0 14px 24px -14px rgba(0,0,0,.5)}
+.lcd{display:block;width:100%;height:auto;aspect-ratio:64/36;image-rendering:pixelated;border-radius:9px;background:linear-gradient(160deg,#cfd3b8,#b9bf9e);box-shadow:inset 0 2px 6px rgba(0,0,0,.4)}
+.lcd-w figcaption{margin-top:.4rem;text-align:center;font:700 .58rem/1.2 'Courier New',monospace;letter-spacing:.06em;text-transform:uppercase;color:#f3d9df}
+.facts li{align-items:flex-start}
+@media(max-width:899px){.facts li{flex-direction:column}}
