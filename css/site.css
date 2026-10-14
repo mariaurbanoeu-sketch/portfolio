@@ -1374,3 +1374,6 @@ html.gw-on .ach-t{top:calc(4.6rem + env(safe-area-inset-top,0px))}
 @media(max-width:760px){.gw-hm{display:none}.gw-back{min-height:2.6rem;padding:0 .8rem}}
 .ts-o{flex-direction:column;gap:.35rem;min-height:4.2rem}
 .ts-o small{font:700 .6rem/1 'Courier New',monospace;letter-spacing:.1em;text-transform:uppercase;opacity:.75}
+.gl-live{position:relative;overflow:hidden;background:#140d0d}
+.gl-live::before{content:"Cargando su web…";position:absolute;inset:0;display:grid;place-items:center;font:700 .66rem/1 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#7a6a66}
+.gl-live iframe{position:absolute;left:0;top:0;border:0;background:transparent;transform-origin:0 0;pointer-events:none}

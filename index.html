@@ -19,7 +19,7 @@
 <meta property="og:type" content="website">
 <link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/pinyon.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=43">
+<link rel="stylesheet" href="css/site.css?v=44">
 <script>(function(d){d.classList.add('js');try{if(!sessionStorage.getItem('intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('intro-on');sessionStorage.setItem('intro','1')}var m=sessionStorage.getItem('pm');if(!m){d.classList.add('ts-on');return}d.classList.add(m==='game'?'m-game':'m-fast')}catch(e){}})(document.documentElement)</script>
 </head>
 <body>
@@ -32,7 +32,7 @@
     <p class="ts-t" id="tsT">¿Ver o jugar?</p>
     <p class="ts-d">Puedes ver mi portfolio normal o recorrerlo jugando. Tú eliges.</p>
     <div class="ts-b">
-      <button type="button" class="ts-o on" data-ts="game"><span class="ts-cur" aria-hidden="true"></span>Jugar<small>Un mapa con 4 niveles · 3 min</small></button>
+      <button type="button" class="ts-o on" data-ts="game"><span class="ts-cur" aria-hidden="true"></span>Jugar<small>Un mapa con 6 niveles · unos 4 min</small></button>
       <button type="button" class="ts-o" data-ts="fast"><span class="ts-cur" aria-hidden="true"></span>Ver<small>El portfolio normal, directo</small></button>
     </div>
     <p class="ts-h">← → para elegir · Enter</p>
@@ -672,8 +672,8 @@
 
 <div class="gw" id="gw" role="dialog" aria-modal="true" aria-label="Modo juego: el mapa de Paula" hidden>
   <div class="gw-top">
-    <p class="gw-me"><canvas id="gwFace" width="32" height="32" aria-hidden="true"></canvas><span><b id="gwStage">Paula estudiante</b><small id="gwProg">Nivel 1 de 4</small></span></p>
-    <p class="gw-coins" aria-label="Monedas"><canvas class="coin-ic" width="8" height="8" aria-hidden="true"></canvas><span id="gwCoins">0/8</span></p>
+    <p class="gw-me"><canvas id="gwFace" width="32" height="32" aria-hidden="true"></canvas><span><b id="gwStage">Paula estudiante</b><small id="gwProg">Nivel 1 de 6</small></span></p>
+    <p class="gw-coins" aria-label="Monedas"><canvas class="coin-ic" width="8" height="8" aria-hidden="true"></canvas><span id="gwCoins">0/12</span></p>
     <button class="gw-out" id="gwOut" type="button">Ver <span class="gw-hm">el </span>portfolio</button>
   </div>
   <div class="gw-world">
@@ -721,6 +721,6 @@
   <div class="mv-stage"><button type="button" class="mv-nav" id="mvPrev" aria-label="Página anterior"><i class="ic ic-left"></i></button><img id="mvImg" alt=""><button type="button" class="mv-nav" id="mvNext" aria-label="Página siguiente"><i class="ic ic-right"></i></button></div>
 </div>
 
-<script src="js/site.js?v=43" defer></script>
+<script src="js/site.js?v=44" defer></script>
 </body>
 </html>

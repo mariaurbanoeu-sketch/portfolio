@@ -905,6 +905,8 @@
     kronoxweb: { n: 'Kronox', u: 'https://kronoxprod.netlify.app/' },
     kronox: { n: 'el panel de Kronox', u: 'demos/kronox-panel.html', m: 'En «Vídeos», usa las flechas para cambiar el orden de sus videoclips.' },
     nacar: { n: 'Nácar Estilismo', u: 'demos/nacar.html', m: 'Abre una prenda, añádela a la cesta y mira cómo se abre a un lado.' },
+    jairo: { n: 'la web de Jairo Azogue', u: 'https://jairoazogue.com/', m: 'Mira cómo ordené su trabajo por tipo de pieza y abre el que más te guste.' },
+    cata: { n: 'la web de Catalina Silva', u: 'https://catalinasilva.netlify.app/', m: 'Recorre su web como lo haría un estudio de 3D que busca a alguien en prácticas.' },
     amigos: { n: 'Entre Amigos por Venezuela', u: 'demos/entre-amigos.html', m: 'Ve a «Necesidades» y publica una. Si un local cercano la tiene, sale el match.' }
   };
   var RETOS = ['nails', 'kronox', 'nacar', 'amigos'], done = {};
@@ -928,7 +930,7 @@
     var url = entReto && c.r ? c.r : c.u;
     $('#enterOut').href = url;
     $('#enterMis').hidden = !entReto; $('#enterDone').hidden = !entReto;
-    if (entReto) { $('#enterRn').textContent = 'Reto ' + (RETOS.indexOf(k) + 1) + '/4'; $('#enterMt').textContent = c.m; }
+    if (entReto) { $('#enterRn').textContent = RETOS.indexOf(k) < 0 ? 'Misión' : 'Reto ' + (RETOS.indexOf(k) + 1) + '/4'; $('#enterMt').textContent = c.m; }
     entLoad.classList.remove('off'); entF.onload = function () { entLoad.classList.add('off'); };
     entF.src = url;
     if (entFace) { entFace.clearRect(0, 0, 32, 32); drawSprite(entFace, 0, 0, 1, 'happy'); }
@@ -973,6 +975,7 @@
     note: ["XXXXXXX..","X.....XX.","X.XXX..X.","X......X.","X.XXXX.X.","X......X.","X.XXX..X.","X......X.","XXXXXXXX."],
     doc: [".XXXXX...",".X...XX..",".X....XX.",".X.XX..X.",".X.....X.",".X.XXX.X.",".X.....X.",".X.XXX.X.",".XXXXXXX."],
     lock: ["...XXX...","..X...X..","..X...X..",".XXXXXXX.",".XXXXXXX.",".XXX.XXX.",".XXX.XXX.",".XXXXXXX.","........."],
+    cube: ["....X....","..XX.XX..","XX.....XX","X.XX.XX.X","X...X...X","X...X...X","X...X...X",".XX.X.XX.","...XXX..."],
     trash: ["...XXX...","XXXXXXXXX",".........",".XXXXXXX.",".X.X.X.X.",".X.X.X.X.",".X.X.X.X.",".X.X.X.X.","..XXXXX.."]
   };
   function drawPx(c, name, col) { var x = c.getContext('2d'), m = PX9[name]; if (!m) return; x.clearRect(0, 0, 9, 9); x.fillStyle = col || '#EBA9BD'; m.forEach(function (r, y) { for (var i = 0; i < 9; i++) if (r[i] === 'X') x.fillRect(i, y, 1, 1); }); }
@@ -1282,12 +1285,22 @@
         hi: 'Después de los terremotos en Venezuela hice en una semana una app para organizar donaciones.',
         why: 'Funciona sin conexión, porque en una emergencia la señal falla.',
         fact: 'Un detalle: quien recibe la ayuda la confirma con un PIN, así quien donó sabe que llegó.',
-        c: [[18, 34], [80, 74]] }
+        c: [[18, 34], [80, 74]] },
+      { k: 'jairo', n: 'Jairo Azogue', ic: 'film', who: 'Director y editor de video', live: 'https://jairoazogue.com/', url: 'jairoazogue.com',
+        hi: 'Jairo es director y editor de video. Le hice su web, y ya está en su propio dominio.',
+        why: 'Su trabajo va ordenado por tipo de pieza, y sus herramientas salen como si fueran su escritorio.',
+        fact: 'Un detalle: antes de diseñar miré qué busca la gente de su sector en un portfolio.',
+        c: [[80, 18], [24, 70]] },
+      { k: 'cata', n: 'Catalina Silva', ic: 'cube', who: '3D y animación', live: 'https://catalinasilva.netlify.app/', url: 'catalinasilva.netlify.app',
+        hi: 'Catalina hace 3D y animación.',
+        why: 'Hicimos su web para que pudiera pedir prácticas en estudios de 3D.',
+        fact: 'Un detalle: antes de diseñar miré qué buscan los estudios de 3D cuando revisan un portfolio.',
+        c: [[26, 24], [76, 80]] }
     ];
     var NC = LVS.length * 2;
-    var ACH = [['webs4', 'Probaste las 4 webs'], ['coins', 'Monedera: las ' + NC + ' monedas'], ['bugs20', 'Cazabugs'], ['desk', 'Curiosidad'], ['brands', 'Marquista'], ['music', 'Spotify sin sentido'], ['hired', '¡Contratada!']];
+    var ACH = [['webs4', 'Probaste todas las webs'], ['coins', 'Monedera: las ' + NC + ' monedas'], ['bugs20', 'Cazabugs'], ['desk', 'Curiosidad'], ['brands', 'Marquista'], ['music', 'Spotify sin sentido'], ['hired', '¡Contratada!']];
     var nDone = function () { return LVS.filter(function (l) { return S.lv[l.k]; }).length; };
-    var stage = function () { return S.lv.fin ? 2 : nDone() >= 2 ? 1 : 0; };
+    var stage = function () { return S.lv.fin ? 2 : nDone() >= 3 ? 1 : 0; };
     var nCoins = function () { return Object.keys(S.coins).filter(function (c) { return c.indexOf('-') > 0; }).length; };
     var achT = $('#achT'), achQ = [], achBusy = false;
     var showAch = function () {
@@ -1329,7 +1342,7 @@
 
     /* ---------- el mapa ---------- */
     var NODES = [{ k: 'start', n: 'Inicio', ic: 'home' }].concat(LVS).concat([{ k: 'fin', n: 'Contrátame', ic: 'mail' }]);
-    var POS = { v: [[22, 88], [70, 74], [28, 58], [72, 43], [30, 28], [66, 13]], h: [[7, 72], [23, 34], [41, 70], [58, 32], [75, 68], [92, 30]] };
+    var POS = { v: [[20, 91], [70, 80], [28, 68], [72, 56], [28, 44], [72, 32], [28, 20], [68, 8]], h: [[5, 72], [18, 32], [31, 70], [44, 32], [57, 70], [70, 32], [83, 70], [91, 30]] };
     var nodeEls = [], mapSay = typer($('#gwMapT')), gwG = $('#gwG');
     NODES.forEach(function (nd, i) {
       var b = document.createElement('button'); b.type = 'button'; b.className = 'gw-n' + (i === 0 ? ' start' : '') + (nd.k === 'fin' ? ' fin' : '');
@@ -1372,7 +1385,8 @@
       var c = cur();
       if (S.lv.fin) return '¡Lo lograste! Puedes repetir cualquier nivel, o ver el portfolio completo.';
       if (c === 1) return '¡Hola! Soy el Paulagotchi. Cada parada del mapa es una web que hizo Paula. Toca el nivel 1 para empezar.';
-      if (c === NODES.length - 1) return '¡Probaste las 4 webs! Solo queda el final. Tócalo.';
+      if (c === NODES.length - 1) return '¡Probaste las ' + LVS.length + ' webs! Solo queda el final. Tócalo.';
+      if (c === 5) return '¡Las 4 webs listas! Ahora vienen dos portfolios que hizo Paula. Toca el nivel 5: Jairo Azogue.';
       return '¡Bien! Ahora toca el nivel ' + c + ': ' + NODES[c].n + '.';
     };
     var opener = null;
@@ -1399,7 +1413,12 @@
     var go = function (txt) { return '<span class="gl-cur" aria-hidden="true"></span>' + txt; };
     var showAct = function (fn) { act.innerHTML = ''; act.classList.remove('in'); fn(); void act.offsetWidth; act.classList.add('in'); var f = $('button', act); if (f && !small.matches) f.focus({ preventScroll: true }); };
     var setDots = function (n, tot) { dots.innerHTML = ''; for (var i = 0; i < tot; i++) { var d = document.createElement('i'); if (i < n) d.className = 'f'; dots.appendChild(d); } };
-    var phoneHTML = function (l) { if (l.d && horiz()) return '<figure class="gl-ph gl-br"><figcaption><i></i><i></i><i></i><span>' + l.url + '</span></figcaption><div class="gl-sc"><img src="' + l.d + '" alt="La web de ' + l.n + ' en el ordenador"></div></figure>'; return '<figure class="gl-ph"><img src="' + l.img + '" alt="La web de ' + l.n + ' en el celular" width="390" height="844"></figure>'; };
+    var phoneHTML = function (l) {
+      if (l.live) return horiz() ? '<figure class="gl-ph gl-br"><figcaption><i></i><i></i><i></i><span>' + l.url + '</span></figcaption><div class="gl-sc gl-live" data-w="1280"><iframe src="' + l.live + '" title="La web de ' + l.n + ' en vivo" tabindex="-1"></iframe></div></figure>' : '<figure class="gl-ph gl-live" data-w="390"><iframe src="' + l.live + '" title="La web de ' + l.n + ' en vivo" tabindex="-1"></iframe></figure>';
+      if (l.d && horiz()) return '<figure class="gl-ph gl-br"><figcaption><i></i><i></i><i></i><span>' + l.url + '</span></figcaption><div class="gl-sc"><img src="' + l.d + '" alt="La web de ' + l.n + ' en el ordenador"></div></figure>'; return '<figure class="gl-ph"><img src="' + l.img + '" alt="La web de ' + l.n + ' en el celular" width="390" height="844"></figure>'; };
+    /* la web en vivo cabe en el marco como si fuera su tamaño real */
+    var fitLive = function () { $$('.gl-live', stg).forEach(function (b) { var f = $('iframe', b), w = +b.dataset.w, k = b.clientWidth / w; f.style.width = w + 'px'; f.style.height = (b.clientHeight / k) + 'px'; f.style.transform = 'scale(' + k + ')'; }); };
+    addEventListener('resize', function () { if (L) fitLive(); });
     var talk = function (txt, mood, then) { face($('#glFace'), mood); act.innerHTML = ''; say.say(txt, function () { showAct(then); }); };
     var STEPS = 4;
     var run = function () {
@@ -1407,11 +1426,11 @@
       if (L.fin) return runFin();
       var l = L;
       if (step === 0) {
-        stg.innerHTML = phoneHTML(l); stg.className = 'gl-stage';
+        stg.innerHTML = phoneHTML(l); stg.className = 'gl-stage'; fitLive();
         talk(l.hi + ' ' + l.why, 'happy', function () { btn(go('Siguiente'), function () { step++; run(); }); });
       } else if (step === 1) {
         stg.className = 'gl-stage hunt';
-        if (!$('.gl-ph', stg)) stg.innerHTML = phoneHTML(l); var ph = $('.gl-sc', stg) || $('.gl-ph', stg);
+        if (!$('.gl-ph', stg)) { stg.innerHTML = phoneHTML(l); fitLive(); } var ph = $('.gl-sc', stg) || $('.gl-ph', stg);
         var got = 0, need = 0;
         l.c.forEach(function (p, j) {
           var id = l.k + '-' + j; need++;
@@ -1451,7 +1470,7 @@
       map.parentNode.hidden = true; lvBox.hidden = false; lvBox.classList.remove('in'); void lvBox.offsetWidth; lvBox.classList.add('in');
       buzz(14); run();
     };
-    var backToMap = function () { lvBox.hidden = true; $('#gwWin').hidden = true; map.parentNode.hidden = false; L = null; paintMap(); mapSay.say(mapLine()); };
+    var backToMap = function () { stg.innerHTML = ''; lvBox.hidden = true; $('#gwWin').hidden = true; map.parentNode.hidden = false; L = null; paintMap(); mapSay.say(mapLine()); };
     $('#glBack').addEventListener('click', function () { buzz(8); backToMap(); moveG(Math.min(cur(), NODES.length - 1) - (S.lv.fin ? 0 : 1), true); setTimeout(function () { if (!S.lv.fin) moveG(cur()); }, 200); });
     $('.gl-box').addEventListener('click', function () { say.skip(); });
     /* ganaste el nivel */
@@ -1480,7 +1499,7 @@
       var t = S.t1 - (S.t0 || S.t1);
       stg.innerHTML = '<div class="gl-sum"><canvas id="glBig" width="32" height="32" aria-hidden="true"></canvas><p class="gl-st">' + STAGES[2] + '</p><dl><div><dt>Webs probadas</dt><dd>' + nDone() + '/' + LVS.length + '</dd></div><div><dt>Monedas</dt><dd>' + nCoins() + '/' + NC + '</dd></div><div><dt>Tiempo</dt><dd>' + mmss(t) + '</dd></div></dl></div>';
       face($('#glBig')); save();
-      if (step === 0) talk('¡Llegaste al final! Viste las 4 webs y el Paulagotchi ya está contratado. Tiene hasta taza de café.', 'happy', function () { btn(go('Siguiente'), function () { step++; run(); }); });
+      if (step === 0) talk('¡Llegaste al final! Viste las ' + LVS.length + ' webs y el Paulagotchi ya está contratado. Tiene hasta taza de café.', 'happy', function () { btn(go('Siguiente'), function () { step++; run(); }); });
       else talk('Ahora te toca a ti. Si te gustó cómo trabaja Paula, escríbele. Contesta rápido.', 'happy', function () {
         var a = document.createElement('a'); a.className = 'gl-b'; a.href = 'mailto:mariaurbanoeu@gmail.com?subject=Vi%20tu%20portfolio'; a.innerHTML = go('Escribirle a Paula'); act.appendChild(a);
         var v = document.createElement('a'); v.className = 'gl-b ghost'; v.href = 'Paula-Urbano.vcf'; v.setAttribute('download', ''); v.textContent = 'Guardar su contacto'; act.appendChild(v);
