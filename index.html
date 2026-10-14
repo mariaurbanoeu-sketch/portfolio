@@ -19,7 +19,7 @@
 <meta property="og:type" content="website">
 <link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/pinyon.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=31">
+<link rel="stylesheet" href="css/site.css?v=33">
 <script>(function(d){d.classList.add('js');try{if(!sessionStorage.getItem('wf')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('wire');sessionStorage.setItem('wf','1')}}catch(e){}})(document.documentElement)</script>
 </head>
 <body>
@@ -77,10 +77,13 @@
         <p class="g-legend"><span>proyectos</span><span>jugar</span><span>hablar</span></p>
       </div>
     </div>
-    <div class="mode-pick" id="modePick" hidden>
-      <p class="mp-q">¿Jugamos?</p>
-      <p class="mp-d">Esta web también es un juego: explórala, prueba mis webs y haz crecer a tu Paulagotchi.</p>
-      <div class="mp-b"><button class="btn" type="button" data-mode-set="game">Modo juego</button><button class="btn ghost" type="button" data-mode-set="fast">Solo quiero ver tus webs</button></div>
+    <div class="mode-pick" id="modePick" role="group" aria-label="Elige cómo ver la web" hidden>
+      <p class="mp-q"><span>Selecciona modo</span></p>
+      <div class="mp-cards">
+        <button class="mp-card on" type="button" data-mode-set="game"><span class="mp-cur" aria-hidden="true"></span><canvas class="mp-cv" id="mpCv" width="32" height="32" aria-hidden="true"></canvas><b>Modo juego</b><small>Haz crecer a tu Paulagotchi</small><span class="mp-go">Start</span></button>
+        <button class="mp-card" type="button" data-mode-set="fast"><span class="mp-cur" aria-hidden="true"></span><canvas class="mp-cv" width="9" height="9" data-px="web" aria-hidden="true"></canvas><b>Modo rápido</b><small>Solo mis webs, sin juego</small><span class="mp-go">Ver</span></button>
+      </div>
+      <p class="mp-hint">← → para elegir · Enter para empezar</p>
     </div>
     <button class="shake g-only" id="gTilt" type="button" hidden><span class="shake-bugs" aria-hidden="true"><canvas width="8" height="7"></canvas><canvas width="8" height="7"></canvas><canvas width="8" height="7"></canvas></span><span class="shake-ph" aria-hidden="true"><canvas id="shakeCv" width="12" height="18"></canvas></span><span class="shake-t"><b id="shakeB">Hay bugs en esta web</b><small id="shakeS">Agita el teléfono para sacarlos</small><em id="shakeE">o toca aquí para jugar</em></span></button>
   </div>
@@ -676,6 +679,6 @@
   <div class="mv-stage"><button type="button" class="mv-nav" id="mvPrev" aria-label="Página anterior"><i class="ic ic-left"></i></button><img id="mvImg" alt=""><button type="button" class="mv-nav" id="mvNext" aria-label="Página siguiente"><i class="ic ic-right"></i></button></div>
 </div>
 
-<script src="js/site.js?v=30" defer></script>
+<script src="js/site.js?v=33" defer></script>
 </body>
 </html>

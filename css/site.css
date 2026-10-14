@@ -777,7 +777,7 @@ body[data-bg="milk"] .btn,body[data-bg="nails"] .btn,body[data-bg="nacar"] .btn{
   .bw-prog i{flex:1;height:3px;border-radius:2px;background:rgba(250,246,240,.2);overflow:hidden}
   .bw-prog b{display:block;height:100%;width:100%;background:#FAF6F0;transform:scaleX(0);transform-origin:left}
   .bw-prog i.done b{transform:none}
-  .bw-prog i.now b{animation:story 7s linear forwards}
+  .bw-prog i.now b{animation:story 4.5s linear forwards}
   .bw.hold .bw-prog i.now b{animation-play-state:paused}
   @keyframes story{to{transform:none}}
   .bw-win{touch-action:pan-y}
@@ -1176,3 +1176,38 @@ html:not(.m-game) .g-only{display:none!important}
 .ach-t{visibility:hidden;opacity:0;transition:transform .35s steps(4),opacity .2s,visibility 0s .35s}
 .ach-t.on{visibility:visible;opacity:1;transition:transform .35s steps(4),opacity .2s}
 .lvl{top:38%}
+
+/* Mis webs: una sola pantalla, las pestañas avanzan solas (también en computadora) */
+.bw{height:auto}
+.bw-stick{position:relative;top:auto;min-height:0;padding-top:clamp(4rem,8vw,6rem);padding-bottom:clamp(3rem,6vw,5rem)}
+.bw-prog{display:flex;gap:4px;padding:.55rem .6rem 0;background:#0e0909}
+.bw-prog i{flex:1;height:3px;border-radius:2px;background:rgba(250,246,240,.2);overflow:hidden}
+.bw-prog b{display:block;height:100%;width:100%;background:#FAF6F0;transform:scaleX(0);transform-origin:left}
+.bw-prog i.done b{transform:none}
+.bw-prog i.now b{animation:story 4.5s linear forwards}
+.bw.hold .bw-prog i.now b{animation-play-state:paused}
+@keyframes story{to{transform:none}}
+@media(min-width:900px){.bw-view{height:min(calc((min(100vw,var(--max)) - 17rem - 4rem) * .6),calc(100svh - var(--hd) - 13rem))}}
+
+/* selección de modo, como en una consola */
+.mode-pick{width:min(100%,27rem);padding:1.1rem 1rem 1rem;background:#140d0d}
+.mp-q{display:flex;justify-content:center;margin-bottom:.9rem}
+.mp-q span{font:700 .78rem/1 'Courier New',monospace;letter-spacing:.24em;text-transform:uppercase;color:#FAF6F0;padding:.35rem .6rem;background:#EBA9BD;color:#221616}
+.mp-cards{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.mp-card{position:relative;display:grid;justify-items:center;gap:.35rem;padding:1rem .6rem .9rem;border:0;background:#221616;color:#FAF6F0;cursor:pointer;box-shadow:0 -3px 0 0 #4a3434,0 3px 0 0 #4a3434,-3px 0 0 0 #4a3434,3px 0 0 0 #4a3434;margin:3px;transition:transform .15s steps(2)}
+.mp-card.on{box-shadow:0 -3px 0 0 #FFD23F,0 3px 0 0 #FFD23F,-3px 0 0 0 #FFD23F,3px 0 0 0 #FFD23F;transform:translateY(-3px)}
+.mp-card .mp-cv{width:56px;height:56px;image-rendering:pixelated;background:#c4c9aa;padding:4px;border-radius:6px}
+.mp-card:nth-child(2) .mp-cv{background:#3a2a2a;padding:12px}
+.mp-card b{margin-top:.3rem;font:800 1rem/1 var(--sans);text-transform:uppercase}
+.mp-card small{font:700 .6rem/1.35 'Courier New',monospace;text-transform:uppercase;color:#cdbfb2;text-align:center}
+.mp-go{margin-top:.35rem;font:700 .72rem/1 'Courier New',monospace;letter-spacing:.2em;text-transform:uppercase;color:#7a6a66}
+.mp-card.on .mp-go{color:#FFD23F;animation:blink .8s steps(2) infinite}
+.mp-card.on .mp-go::before{content:"▶ "}
+.mp-cur{position:absolute;left:50%;top:-1.15rem;width:12px;height:9px;margin-left:-6px;background:#FFD23F;clip-path:polygon(0 0,100% 0,50% 100%);opacity:0}
+.mp-card.on .mp-cur{opacity:1;animation:bob .6s steps(2) infinite}
+.mp-card.chosen{animation:chosen .6s steps(6)}
+@keyframes chosen{0%,33%,66%{background:#FFD23F;color:#221616}16%,50%,83%{background:#221616;color:#FAF6F0}}
+.mp-hint{margin-top:.9rem;text-align:center;font:700 .58rem/1 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;color:#7a6a66}
+.mode-pick.out{animation:mpout .4s steps(4) forwards}
+@keyframes mpout{to{opacity:0;transform:scale(.9)}}
+@media(hover:none){.mp-hint{display:none}}

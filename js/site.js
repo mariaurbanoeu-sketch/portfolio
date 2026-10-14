@@ -520,7 +520,7 @@
   var bw = $('.bw');
   if (bw) {
     var bwTabs = $$('.bw-tab', bw), bwV = $$('.bw-v', bw), bwP = $$('.bw-p', bw), bwUrl = $('#bwUrl'), bwLoad = $('.bw-load', bw);
-    var urls = bwUrl.dataset.urls.split('|'), bwCur = -1, bwVis = false, sticky = !reduce && !small.matches, tyT = null, prog = $$('.bw-prog i', bw);
+    var urls = bwUrl.dataset.urls.split('|'), bwCur = -1, bwVis = false, sticky = false, tyT = null, prog = $$('.bw-prog i', bw);
     $$('.bw-ic', bw).forEach(function (c) { drawIcon(c.getContext('2d'), c.dataset.icon, 1, 0, 1); });
     /* el texto se escribe letra por letra, como un diálogo de videojuego */
     var typeP = function (p) {
@@ -588,6 +588,8 @@
     /* historias: avanzan solas, se tocan los lados o se desliza */
     var go = function (d) { var n = bwCur + d; if (n < 0) n = 0; if (n > bwTabs.length - 1) n = 0; buzz(6); if (document.startViewTransition && !reduce) document.startViewTransition(function () { bwSet(n); }); else bwSet(n); };
     prog.forEach(function (p) { $('b', p).addEventListener('animationend', function () { if (!sticky) go(1); }); });
+    bw.addEventListener('mouseenter', function () { bw.classList.add('hold'); });
+    bw.addEventListener('mouseleave', function () { bw.classList.remove('hold'); });
     var view = $('.bw-view', bw), win = $('.bw-win', bw), sx = 0, sy = 0, st = 0, lock = null;
     win.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; st = Date.now(); lock = null; bw.classList.add('hold'); }, { passive: true });
     /* al deslizar de lado, la página no se mueve hacia abajo */
@@ -1167,7 +1169,25 @@
     };
     if (S.mode === 'game') root.classList.add('m-game');
     if (!S.mode) { var mp0 = $('#modePick'); if (mp0) mp0.hidden = false; if (g && g.status) setTimeout(function () { g.status.textContent = '¿jugamos?'; }, 1200); }
-    $$('[data-mode-set]').forEach(function (b) { b.addEventListener('click', function () { setMode(b.dataset.modeSet); }); });
+    /* elegir modo como en una consola: cursor, flechas y Enter */
+    var mpBox = $('#modePick'), mpCards = mpBox ? $$('.mp-card', mpBox) : [];
+    var mpCv = $('#mpCv'); if (mpCv) { var mc = mpCv.getContext('2d'); drawSprite(mc, 0, 0, 1, 'happy'); }
+    var mpSel = function (b) { mpCards.forEach(function (x) { x.classList.toggle('on', x === b); }); };
+    mpCards.forEach(function (b) {
+      b.addEventListener('mouseenter', function () { mpSel(b); });
+      b.addEventListener('focus', function () { mpSel(b); });
+      b.addEventListener('click', function () {
+        if (mpBox.dataset.busy) return; mpBox.dataset.busy = 1; mpSel(b); b.classList.add('chosen'); buzz([10, 40, 10]);
+        setTimeout(function () { mpBox.classList.add('out'); }, 550);
+        setTimeout(function () { setMode(b.dataset.modeSet); mpBox.classList.remove('out'); delete mpBox.dataset.busy; b.classList.remove('chosen'); }, 950);
+      });
+    });
+    addEventListener('keydown', function (e) {
+      if (!mpBox || mpBox.hidden || e.target.closest && e.target.closest('input,textarea')) return;
+      var r = mpBox.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return;
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { var i = mpCards.findIndex(function (x) { return x.classList.contains('on'); }); var n = mpCards[(i + (e.key === 'ArrowRight' ? 1 : -1) + mpCards.length) % mpCards.length]; mpSel(n); n.focus({ preventScroll: true }); e.preventDefault(); }
+      if (e.key === 'Enter' && document.activeElement && !document.activeElement.closest('.mp-card')) { var on = mpCards.filter(function (x) { return x.classList.contains('on'); })[0]; if (on) { on.click(); e.preventDefault(); } }
+    });
     var sw0 = $('#modeSwap'); if (sw0) sw0.addEventListener('click', function () { setMode(game() ? 'fast' : 'game'); });
     /* el mapa: etapa, barras, niveles y logros */
     if (hud) hud.addEventListener('click', function () {
