@@ -1256,6 +1256,7 @@
   (function () {
     var KEY = 'pg1', S = { mode: null, ach: {}, bugs: 0, flips: {}, coins: {}, lv: {}, t0: 0, t1: 0, hi: 0 };
     try { var sv = JSON.parse(localStorage.getItem(KEY) || 'null'); if (sv) for (var k in sv) S[k] = sv[k]; } catch (e) {}
+    try { S.mode = sessionStorage.getItem('pm'); } catch (e) { S.mode = null; }
     if (!S.lv) S.lv = {}; if (!S.coins || Array.isArray(S.coins)) S.coins = {};
     var save = function () { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
     var game = function () { return S.mode === 'game'; };
@@ -1493,7 +1494,7 @@
     });
 
     var setMode = function (m) {
-      S.mode = m; save(); root.classList.toggle('m-game', m === 'game'); root.classList.toggle('m-fast', m === 'fast');
+      S.mode = m; save(); try { sessionStorage.setItem('pm', m); } catch (e) {} root.classList.toggle('m-game', m === 'game'); root.classList.toggle('m-fast', m === 'fast');
       var mp = $('#modePick'); if (mp) mp.hidden = true;
       var sw = $('#modeSwap'); if (sw) sw.textContent = m === 'game' ? 'Cambiar a modo rápido (sin juego)' : 'Cambiar a modo juego';
       if (m === 'game') { buzz(14); openWorld(); }

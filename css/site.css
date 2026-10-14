@@ -1372,3 +1372,5 @@ html.gw-on .toast{display:none}
 @media(min-width:900px){.gw-ic{width:76px;height:76px}.gw-ic canvas{width:36px;height:36px}.gw-l{font-size:.9rem;padding:.4rem .6rem}.gw-l small{font-size:.62rem}.gw-g{width:64px;height:64px;margin:-86px 0 0 40px}.gw-n.now::before{font-size:.72rem;bottom:calc(100% + 16px)}.gw-box p,#glTxt{font-size:1.02rem}.gw-map{margin:1.6rem auto 1.2rem;width:calc(100% - 4rem);max-width:84rem}}
 html.gw-on .ach-t{top:calc(4.6rem + env(safe-area-inset-top,0px))}
 @media(max-width:760px){.gw-hm{display:none}.gw-back{min-height:2.6rem;padding:0 .8rem}}
+.ts-o{flex-direction:column;gap:.35rem;min-height:4.2rem}
+.ts-o small{font:700 .6rem/1 'Courier New',monospace;letter-spacing:.1em;text-transform:uppercase;opacity:.75}
