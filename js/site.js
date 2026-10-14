@@ -5,6 +5,7 @@
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
   var phone = matchMedia('(max-width: 760px)'), small = matchMedia('(max-width: 899px)');
+  var root = document.documentElement;
   /* vibración corta en Android (iPhone no la permite) */
   var buzz = function (ms) { try { if (navigator.vibrate) navigator.vibrate(ms || 8); } catch (e) {} };
   /* la barra del navegador toma el color de cada sección */
@@ -349,8 +350,64 @@
   });
 
 
+
+  /* ======================= intro: la web diseñándose en Figma, en pixel ======================= */
+  (function () {
+    var box = $('#intro'); if (!box || !root.classList.contains('intro-on')) return;
+    var cv = $('#introCv'), x = cv.getContext('2d'), step = $('#introStep');
+    var W = innerWidth > innerHeight ? 128 : 76, H = Math.round(W * innerHeight / innerWidth); cv.width = W; cv.height = H;
+    var land = W > H, fx = Math.round(W * (land ? .14 : .1)), fy = Math.round(H * (land ? .16 : .12)), fw = W - fx * 2, fh = H - fy - Math.round(H * (land ? .14 : .12));
+    var R = function (c, a, b, w, h) { x.fillStyle = c; x.fillRect(Math.round(a), Math.round(b), Math.max(1, Math.round(w)), Math.max(1, Math.round(h))); };
+    var O = function (c, a, b, w, h) { R(c, a, b, w, 1); R(c, a, b + h - 1, w, 1); R(c, a, b, 1, h); R(c, a + w - 1, b, 1, h); };
+    /* bloques de la portada: [x, y, w, h, color final] relativos al frame */
+    var B = land ? [[.07, .12, .44, .1, '#FAF6F0'], [.07, .25, .38, .1, '#FAF6F0'], [.07, .38, .3, .1, '#FAF6F0'], [.07, .52, .22, .06, '#EBA9BD'], [.07, .63, .36, .025, '#cdbfb2'], [.07, .68, .32, .025, '#cdbfb2'], [.07, .78, .16, .08, '#FAF6F0'], [.25, .78, .08, .08, '#3a2626'], [.64, .16, .26, .68, 'egg']]
+      : [[.08, .06, .7, .06, '#FAF6F0'], [.08, .14, .58, .06, '#FAF6F0'], [.08, .22, .46, .06, '#FAF6F0'], [.08, .3, .4, .035, '#EBA9BD'], [.08, .37, .8, .015, '#cdbfb2'], [.08, .4, .7, .015, '#cdbfb2'], [.08, .46, .42, .045, '#FAF6F0'], [.54, .46, .2, .045, '#3a2626'], [.22, .56, .56, .38, 'egg']];
+    var cur = [Math.round(W / 2), Math.round(H / 2)], t0 = performance.now(), done = false, DUR = 1750;
+    var cursor = function (a, b) { var C = ["X....", "XX...", "XPX..", "XPPX.", "XPPPX", "XPXX.", "X..X."]; C.forEach(function (r, y) { for (var i = 0; i < 5; i++) { if (r[i] === 'X') R('#ffffff', a + i, b + y, 1, 1); if (r[i] === 'P') R('#EBA9BD', a + i, b + y, 1, 1); } }); };
+    var frame = function (t) {
+      R('#1E1E1E', 0, 0, W, H);
+      for (var gy = 6; gy < H; gy += 6) for (var gx = 3; gx < W; gx += 6) R('#2c2c2c', gx, gy, 1, 1);
+      R('#2C2C2C', 0, 0, W, 4); R('#0D99FF', 2, 1, 2, 2); R('#B3B3B3', 6, 1, 10, 2);
+      var k = Math.min(1, Math.max(0, (t - 100) / 220)), w = fw * k, h = fh * Math.min(1, k * 1.3);
+      if (k <= 0) return;
+      var paint = Math.min(1, Math.max(0, (t - 1000) / 260));
+      R('#3a3a3a', fx, fy, w, h);
+      if (paint > 0) R('#221616', fx, fy, w, h * paint);
+      R('#B3B3B3', fx, fy - 3, Math.min(w, 16), 1);
+      var n = Math.floor(Math.max(0, t - 330) / 75);
+      for (var i = 0; i < B.length && i < n; i++) {
+        var b = B[i], bx = fx + b[0] * fw, by = fy + b[1] * fh, bw = b[2] * fw, bh = b[3] * fh, colored = paint > b[1] + .05;
+        if (b[4] === 'egg') {
+          var ew = Math.min(bw, bh * .8), ex = bx + (bw - ew) / 2;
+          R(colored ? '#5a2731' : '#555', ex, by, ew, bh); R(colored ? '#5a2731' : '#555', ex - 1, by + 2, ew + 2, bh - 4);
+          var sw = ew * .62, sh = Math.min(bh * .5, sw), sx = ex + (ew - sw) / 2, sy = by + bh * .2;
+          R(colored ? '#c4c9aa' : '#777', sx, sy, sw, sh);
+          if (t > 1250) { var sc = Math.max(1, Math.floor(Math.min(sw, sh) / 32)); var cvs = Math.round(32 * sc); var ox = Math.round(sx + (sw - cvs) / 2), oy = Math.round(sy + (sh - cvs) / 2); if (sc >= 1 && cvs <= sw + 1) drawSprite(x, ox, oy, sc, 'happy'); else R('#d69670', sx + sw * .35, sy + sh * .25, sw * .3, sh * .5); }
+          for (var q = 0; q < 3; q++) R(colored ? '#EBA9BD' : '#666', ex + ew * (.22 + q * .22), by + bh * .8, Math.max(2, ew * .1), Math.max(2, ew * .1));
+        } else R(colored ? b[4] : '#5a5a5a', bx, by, bw, bh);
+        if (i === n - 1 && t < 1000) { O('#0D99FF', bx - 1, by - 1, bw + 2, bh + 2); cur = [bx + bw, by + bh]; }
+      }
+      if (t < 1000 && k >= 1) O('#0D99FF', fx - 1, fy - 1, fw + 2, fh + 2);
+      cursor(cur[0], cur[1]);
+      step.textContent = t < 1000 ? 'wireframe' : t < 1250 ? 'color' : t < 1500 ? 'paulagotchi' : 'código';
+    };
+    var finish = function () {
+      if (done) return; done = true; box.classList.add('out');
+      setTimeout(function () { root.classList.remove('intro-on'); }, 260);
+    };
+    (function loop(now) {
+      if (done) return; var t = now - t0;
+      frame(t);
+      if (t > 1450) { var z = 1 + Math.pow((t - 1450) / 300, 2) * 2.4; cv.style.transform = 'scale(' + z + ')'; cv.style.transformOrigin = ((fx + fw / 2) / W * 100) + '% ' + ((fy + fh / 2) / H * 100) + '%'; }
+      if (t > DUR) { finish(); return; }
+      requestAnimationFrame(loop);
+    })(t0);
+    $('#introSkip').addEventListener('click', finish);
+    box.addEventListener('click', finish);
+    addEventListener('keydown', function () { if (root.classList.contains('intro-on')) finish(); }, { once: true });
+  })();
+
   /* ======================= portada: wireframe → diseño ======================= */
-  var root = document.documentElement;
   if (root.classList.contains('wire')) {
     var wf = $('.wf');
     setTimeout(function () {
@@ -1196,12 +1253,12 @@
 
   /* ======================= modo juego: tu Paulagotchi crece ======================= */
   (function () {
-    var KEY = 'pg1', S = { mode: null, st: [0, 0, 0], ach: {}, vis: {}, bugs: 0, flips: {} };
+    var KEY = 'pg1', S = { mode: null, st: [0, 0, 0], ach: {}, vis: {}, bugs: 0, flips: {}, coins: {} };
     try { var sv = JSON.parse(localStorage.getItem(KEY) || 'null'); if (sv) for (var k in sv) S[k] = sv[k]; } catch (e) {}
     var save = function () { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
     var STAGES = [['Paula estudiante', 0], ['Paula diseñadora web', 90], ['Paula contratada', 210]];
     var ACH = [['webs4', 'Probaste las 4 webs', 'Supera los 4 retos'], ['bugs20', 'Cazabugs', 'Atrapa 20 bugs en total'], ['desk', 'Curiosidad', 'Abre el escritorio o mantén presionada una web'], ['brands', 'Marquista', 'Dale la vuelta a las 3 marcas'],
-      ['music', 'Spotify sin sentido', 'Cambia de canción en el reproductor'], ['explorer', 'Exploradora', 'Visita todos los niveles'], ['end', 'Hasta el final', 'Llega a los créditos'], ['hired', '¡Contratada!', 'Haz evolucionar al Paulagotchi del todo']];
+      ['music', 'Spotify sin sentido', 'Cambia de canción en el reproductor'], ['coins', 'Monedera', 'Encuentra las 10 monedas'], ['explorer', 'Exploradora', 'Visita todos los niveles'], ['end', 'Hasta el final', 'Llega a los créditos'], ['hired', '¡Contratada!', 'Haz evolucionar al Paulagotchi del todo']];
     var LV = [['proyectos', 'Mundo 1', 'Mis webs'], ['nails', 'Nivel 1-1', 'Nails by MelyG'], ['kronox', 'Nivel 1-2', 'Kronox'], ['nacar', 'Nivel 1-3', 'Nácar'], ['amigos', 'Nivel 1-4', 'Entre Amigos'], ['creativos', 'Nivel 1-5', 'Portfolios'],
       ['figma', 'Nivel 2-1', 'Figma'], ['marcas', 'Nivel 2-2', 'Marcas'], ['sobre', 'Nivel 3-1', 'Sobre mí'], ['herramientas', 'Nivel 3-2', 'Herramientas'], ['contacto', 'Final', 'Créditos']];
     var WORK = { proyectos: 10, nails: 15, kronox: 15, nacar: 15, amigos: 15, creativos: 15, figma: 15 };
@@ -1214,12 +1271,21 @@
     var total = function () { return S.st[0] + S.st[1] + S.st[2]; };
     var stage = function () { var t = total(), s = 0; STAGES.forEach(function (x, i) { if (t >= x[1]) s = i; }); return s; };
     var game = function () { return S.mode === 'game'; };
+    var lastMis = null, winM = $('#winM'), wmT = null;
+    var missionDone = function (was, next) {
+      $('#wmT').textContent = was; $('#wmN').textContent = next; winM.classList.remove('on'); void winM.offsetWidth; winM.classList.add('on'); buzz([20, 50, 20]);
+      if (g) { g.mood = 'happy'; g.jump = 30; }
+      clearTimeout(wmT); wmT = setTimeout(function () { winM.classList.remove('on'); var h0 = $('#hud'); if (h0) { h0.classList.remove('flash'); void h0.offsetWidth; h0.classList.add('flash'); } }, 2200);
+    };
     var hud = $('#hud'), achT = $('#achT'), lvl = $('#lvl'), lastStage = stage(), seenLv = {}, lvT = null, achQ = [], achBusy = false;
     var paint = function () {
       if (!hud) return;
       $('#hudLv').textContent = 'NV ' + (stage() + 1); $('#hudStage').textContent = STAGES[stage()][0];
       var hc = $('#hudCv'); if (hc) { var hx = hc.getContext('2d'); hx.clearRect(0, 0, 32, 32); drawSprite(hx, 0, 0, 1, 'happy'); dress(hx, 0, 0, 1); }
       var mi = mission(); $('#hudMisT').textContent = mi[1];
+      var cn = Object.keys(S.coins || {}).length; $('#hudCoinN').textContent = cn + '/10';
+      if (game() && lastMis && lastMis !== mi[1]) missionDone(lastMis, mi[1]);
+      lastMis = mi[1];
       S.st.forEach(function (v, i) { $('#hb' + i).style.width = v + '%'; });
       $('#hudAch').textContent = Object.keys(S.ach).length + '/' + ACH.length;
       var sw = $('#modeSwap'); if (sw) sw.textContent = game() ? 'Cambiar a modo rápido (sin juego)' : 'Cambiar a modo juego';
@@ -1256,12 +1322,39 @@
       var mp = $('#modePick'); if (mp) mp.hidden = true; paint();
       if (m === 'game') {
         if (g.status) g.status.textContent = '¡explora y hazme crecer!'; g.mood = 'happy'; g.jump = 24; buzz(14);
-        toastMsg('Explora la web y prueba mis webs para hacerme crecer');
+        var co = $('#coach'); if (co) { co.hidden = false; root.classList.add('coach-on'); }
         if (hud) { hud.classList.remove('flash'); void hud.offsetWidth; hud.classList.add('flash'); }
       } else { toastMsg('Modo rápido: solo el portfolio'); if (g && g.status) g.status.textContent = '¿jugamos luego?'; }
     };
     if (S.mode === 'game') root.classList.add('m-game');
     if (S.mode === 'fast') root.classList.add('m-fast');
+    var coach = $('#coach');
+    var coachOff = function () { if (coach) coach.hidden = true; root.classList.remove('coach-on'); };
+    if (coach) {
+      $('#coachX').addEventListener('click', coachOff);
+      $('#coachGo').addEventListener('click', function () { coachOff(); var m = mission(); if (m[0] === 'bugs') openGame(); else goTo(m[0]); });
+      addEventListener('scroll', function () { if (!coach.hidden && scrollY > innerHeight * 1.2) coachOff(); }, { passive: true });
+    }
+    /* monedas: se recogen y vuelan a la barra */
+    var COIN = ["..XXXX..", ".XYYYYX.", "XYYWYYYX", "XYWYYYYX", "XYYYYYYX", "XYYYYYOX", ".XYYYOX.", "..XXXX.."], CC = { X: '#8a5a12', Y: '#FFD23F', W: '#fff7c2', O: '#e0a91f' };
+    $$('.coin canvas, .hud-coin canvas').forEach(function (cv) { var cx2 = cv.getContext('2d'); COIN.forEach(function (r, y) { for (var i = 0; i < 8; i++) if (CC[r[i]]) { cx2.fillStyle = CC[r[i]]; cx2.fillRect(i, y, 1, 1); } }); });
+    var paintCoins = function () { $$('.coin').forEach(function (c) { c.classList.toggle('got', !!(S.coins || {})[c.dataset.coin]); }); };
+    paintCoins();
+    $$('.coin').forEach(function (c) {
+      c.addEventListener('click', function (e) {
+        e.stopPropagation(); var k = c.dataset.coin; if (!S.coins) S.coins = {}; if (S.coins[k]) return;
+        S.coins[k] = 1; save(); buzz([8, 20, 8]);
+        var r = c.getBoundingClientRect(), hc = $('#hudCoin').offsetParent ? $('#hudCoin').getBoundingClientRect() : $('#hudAchB').getBoundingClientRect();
+        var f = document.createElement('canvas'); f.width = f.height = 8; f.className = 'coin-fly'; f.getContext('2d').drawImage($('canvas', c), 0, 0);
+        f.style.left = (r.left + 8) + 'px'; f.style.top = (r.top + 8) + 'px'; document.body.appendChild(f);
+        var pl = document.createElement('span'); pl.className = 'coin-plus'; pl.textContent = '+10'; pl.style.left = (r.left + 4) + 'px'; pl.style.top = r.top + 'px'; document.body.appendChild(pl);
+        requestAnimationFrame(function () { f.style.transform = 'translate(' + (hc.left - r.left - 8) + 'px,' + (hc.top - r.top - 8) + 'px) scale(.6)'; f.style.opacity = '0'; });
+        setTimeout(function () { f.remove(); pl.remove(); var hcE = $('#hudCoin'); hcE.classList.remove('pop'); void hcE.offsetWidth; hcE.classList.add('pop'); }, 800);
+        paintCoins(); add(0, 4); add(1, 4);
+        var n = Object.keys(S.coins).length; toastMsg('Moneda ' + n + ' de 10');
+        if (n >= 10) unlock('coins');
+      });
+    });
     var gl = $('#gLater'); if (gl) gl.addEventListener('click', function () { setMode('game'); });
     /* pantalla de inicio: primera visita */
     var ts = $('#ts');

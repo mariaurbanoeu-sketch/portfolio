@@ -1202,7 +1202,7 @@ html:not(.m-game) .g-only{display:none!important}
 .mp-card small{font:700 .6rem/1.35 'Courier New',monospace;text-transform:uppercase;color:#cdbfb2;text-align:center}
 .mp-go{margin-top:.35rem;font:700 .72rem/1 'Courier New',monospace;letter-spacing:.2em;text-transform:uppercase;color:#7a6a66}
 .mp-card.on .mp-go{color:#FFD23F;animation:blink .8s steps(2) infinite}
-.mp-card.on .mp-go::before{content:"▶ "}
+.mp-card.on .mp-go::before{content:"";display:inline-block;width:7px;height:9px;margin-right:.4rem;background:currentColor;clip-path:polygon(0 0,100% 50%,0 100%)}
 .mp-cur{position:absolute;left:50%;top:-1.15rem;width:12px;height:9px;margin-left:-6px;background:#FFD23F;clip-path:polygon(0 0,100% 0,50% 100%);opacity:0}
 .mp-card.on .mp-cur{opacity:1;animation:bob .6s steps(2) infinite}
 .mp-card.chosen{animation:chosen .6s steps(6)}
@@ -1283,3 +1283,56 @@ html:not(.m-fast) .f-only{display:none!important}
 .facts-mp .mp{max-width:none;margin:.6rem 4px 0}
 @media(min-width:900px){.facts-mp .mp{display:grid;grid-template-columns:1fr 1fr;column-gap:2.4rem;align-items:start;padding:1.4rem 1.6rem}.facts-mp .mp-list{grid-column:2;grid-row:1/span 4;margin:0;padding:0 0 0 2rem;border-top:0;border-left:1px solid #3a2a2a}}
 .facts .lcd-w{width:min(100%,19rem)}
+
+/* pantalla de inicio: flechita en pixel y centrado real */
+.ts-cur{width:10px;height:12px;background:currentColor;clip-path:polygon(0 0,0 100%,100% 50%)}
+html.ts-on .ts{height:100dvh;min-height:-webkit-fill-available;overflow:auto;align-content:center}
+.ts-o{display:flex;align-items:center;justify-content:center}
+/* intro: así se diseñó la web en Figma, en pixel y muy rápido */
+.intro{display:none}
+html.intro-on .intro{position:fixed;inset:0;z-index:700;display:block;background:#1E1E1E;transition:opacity .25s steps(3)}
+html.intro-on body{overflow:hidden}
+.intro canvas{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated}
+.intro-c{position:absolute;left:0;right:0;bottom:calc(1.4rem + env(safe-area-inset-bottom,0px));display:flex;justify-content:center;align-items:center;gap:1rem;font:700 .7rem/1 'Courier New',monospace;letter-spacing:.16em;text-transform:uppercase;color:#B3B3B3}
+.intro-c span::before{content:"";display:inline-block;width:8px;height:8px;margin-right:.5rem;background:#0D99FF}
+.intro-c button{min-height:2.4rem;padding:0 .8rem;border:1px solid #444;background:none;color:#B3B3B3;font:inherit;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+.intro.out{opacity:0}
+
+/* avisos debajo de la barra de juego */
+html.m-game .toast{top:calc(var(--hd) + var(--gh) + env(safe-area-inset-top,0px) + 1rem)}
+/* monedas */
+.coin{position:absolute;z-index:5;right:0;top:0;width:44px;height:44px;padding:8px;border:0;background:none;cursor:pointer;animation:coinbob 1.2s steps(2) infinite}
+.coin canvas{width:28px;height:28px;image-rendering:pixelated;animation:spin 1s steps(4) infinite}
+.coin.got{pointer-events:none;visibility:hidden}
+@keyframes spin{0%,100%{transform:scaleX(1)}25%{transform:scaleX(.5)}50%{transform:scaleX(.15)}75%{transform:scaleX(.5)}}
+@keyframes coinbob{50%{transform:translateY(-4px)}}
+.pj-hd,.nc-hd,.reel-top,.polaroid,.credits{position:relative}
+.polaroid .coin{right:-14px;top:-14px}
+.coin-fly{position:fixed;z-index:450;width:28px;height:28px;image-rendering:pixelated;pointer-events:none;transition:transform .7s cubic-bezier(.5,-0.4,.6,1),opacity .2s .6s}
+.coin-plus{position:fixed;z-index:450;font:800 1.1rem/1 'Courier New',monospace;color:#FFD23F;text-shadow:0 2px 0 #221616;pointer-events:none;animation:plus .8s steps(4) forwards}
+@keyframes plus{to{transform:translateY(-36px);opacity:0}}
+.hud-coin{display:flex;align-items:center;gap:.35rem}
+.hud-coin canvas{width:16px;height:16px;image-rendering:pixelated}
+.hud-coin.pop{animation:retowin .4s steps(4)}
+/* misión cumplida */
+.win-m{position:fixed;z-index:430;left:50%;top:50%;transform:translate(-50%,-50%) scale(.6);display:grid;justify-items:center;gap:.5rem;width:min(90vw,24rem);padding:1.6rem 1.4rem;background:#140d0d;color:#FAF6F0;text-align:center;box-shadow:0 -5px 0 0 #FFD23F,0 5px 0 0 #FFD23F,-5px 0 0 0 #FFD23F,5px 0 0 0 #FFD23F,0 30px 80px rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity .2s steps(2),transform .3s steps(3)}
+.win-m.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.wm-k{font:800 clamp(1.6rem,7vw,2.3rem)/1 var(--sans);text-transform:uppercase;color:#FFD23F}
+.wm-t{font:700 .8rem/1.3 'Courier New',monospace;text-transform:uppercase;color:#cdbfb2}
+.wm-p{font:800 2.4rem/1 'Courier New',monospace;color:#EBA9BD}
+.wm-n{font:700 .68rem/1.3 'Courier New',monospace;text-transform:uppercase;color:#7fd16b}
+.win-m i{position:absolute;left:50%;top:50%;width:8px;height:8px;background:#FFD23F;opacity:0}
+.win-m.on i{animation:burst .9s steps(5) forwards}
+.win-m i:nth-of-type(2n){background:#EBA9BD}
+.win-m.on i:nth-of-type(1){--dx:-150px;--dy:-90px}.win-m.on i:nth-of-type(2){--dx:150px;--dy:-90px}.win-m.on i:nth-of-type(3){--dx:-170px;--dy:30px}.win-m.on i:nth-of-type(4){--dx:170px;--dy:30px}
+.win-m.on i:nth-of-type(5){--dx:-90px;--dy:120px}.win-m.on i:nth-of-type(6){--dx:90px;--dy:120px}.win-m.on i:nth-of-type(7){--dx:0px;--dy:-140px}.win-m.on i:nth-of-type(8){--dx:0px;--dy:150px}
+@keyframes burst{0%{opacity:1;transform:translate(0,0)}100%{opacity:0;transform:translate(var(--dx),var(--dy))}}
+/* primer paso guiado */
+.coach{position:fixed;z-index:48;left:50%;top:calc(var(--hd) + var(--gh) + env(safe-area-inset-top,0px) + 1.2rem);transform:translateX(-50%);width:min(92vw,25rem);padding:1.1rem 1.2rem 1rem;background:#FAF6F0;color:#221616;box-shadow:0 -4px 0 0 #221616,0 4px 0 0 #221616,-4px 0 0 0 #221616,4px 0 0 0 #221616,0 24px 50px rgba(0,0,0,.45);animation:pop .4s steps(3)}
+.coach[hidden]{display:none}
+.coach::before{content:"";position:absolute;left:50%;top:-18px;margin-left:-8px;width:16px;height:12px;background:#221616;clip-path:polygon(50% 0,100% 100%,0 100%);animation:bob .6s steps(2) infinite}
+.coach p{font-size:.9rem;line-height:1.45}
+.coach .btn{margin-top:.9rem;width:100%;background:#221616;color:#FAF6F0;border-color:#221616}
+.coach .link{display:block;margin:.4rem auto 0;color:#5E4B45}
+html.coach-on .hud{box-shadow:0 3px 0 0 #FFD23F,0 0 0 9999px rgba(10,5,6,.45)}
+@media(max-width:760px){.hud-coin{display:none}}
