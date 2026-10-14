@@ -19,11 +19,24 @@
 <meta property="og:type" content="website">
 <link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/pinyon.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=36">
-<script>(function(d){d.classList.add('js');try{if(!sessionStorage.getItem('wf')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('wire');sessionStorage.setItem('wf','1')}}catch(e){}})(document.documentElement)</script>
+<link rel="stylesheet" href="css/site.css?v=39">
+<script>(function(d){d.classList.add('js');try{var pg=JSON.parse(localStorage.getItem('pg1')||'null');if(!pg||!pg.mode){d.classList.add('ts-on');return}d.classList.add(pg.mode==='game'?'m-game':'m-fast');if(!sessionStorage.getItem('wf')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('wire');sessionStorage.setItem('wf','1')}}catch(e){}})(document.documentElement)</script>
 </head>
 <body>
 <a class="skip" href="#main">Saltar al contenido</a>
+<div class="ts" id="ts" role="dialog" aria-modal="true" aria-labelledby="tsT">
+  <div class="ts-in">
+    <p class="ts-k">Paula Urbano · Diseñadora web</p>
+    <canvas id="tsCv" width="32" height="32" aria-hidden="true"></canvas>
+    <p class="ts-t" id="tsT">¿Jugamos?</p>
+    <p class="ts-d">Esta web también es un juego: explórala y haz crecer a tu Paulagotchi.</p>
+    <div class="ts-b">
+      <button type="button" class="ts-o on" data-ts="game"><span class="ts-cur" aria-hidden="true">▶</span>Modo juego</button>
+      <button type="button" class="ts-o" data-ts="fast"><span class="ts-cur" aria-hidden="true">▶</span>Ver mis webs directo</button>
+    </div>
+    <p class="ts-h">← → para elegir · Enter</p>
+  </div>
+</div>
 
 <header class="hd">
   <span class="hd-prog" aria-hidden="true"></span>
@@ -85,6 +98,7 @@
       </div>
       <p class="mp-hint">← → para elegir · Enter para empezar</p>
     </div>
+    <button class="g-later f-only" id="gLater" type="button">¿Jugamos luego? <span>Activar modo juego</span></button>
     <button class="shake g-only" id="gTilt" type="button" hidden><span class="shake-bugs" aria-hidden="true"><canvas width="8" height="7"></canvas><canvas width="8" height="7"></canvas><canvas width="8" height="7"></canvas></span><span class="shake-ph" aria-hidden="true"><canvas id="shakeCv" width="12" height="18"></canvas></span><span class="shake-t"><b id="shakeB">Hay bugs en esta web</b><small id="shakeS">Agita el teléfono para sacarlos</small><em id="shakeE">o toca aquí para jugar</em></span></button>
   </div>
 </section>
@@ -480,18 +494,19 @@
   <div class="facts">
     <p class="script small" data-reveal>3 cosas de mí</p>
     <ol>
-      <li data-reveal><figure class="lcd-w"><canvas class="lcd" data-scene="grass" width="64" height="36" aria-hidden="true"></canvas><figcaption>yo intentando caminar en césped</figcaption></figure><p><b>No puedo caminar sobre césped.</b></p></li>
-      <li data-reveal><figure class="lcd-w"><canvas class="lcd" data-scene="lemon" width="64" height="36" aria-hidden="true"></canvas><figcaption>helado de limón, como siempre</figcaption></figure><p><b>Siempre pido lo mismo en los restaurantes.</b> Un helado de limón. No soy de probar nada nuevo.</p></li>
-      <li data-reveal><figure class="lcd-w"><canvas class="lcd" data-scene="music" width="64" height="36" aria-hidden="true"></canvas><figcaption>mi Spotify, sin sentido</figcaption></figure><p><b>Escucho todo tipo de música.</b> Mi Spotify no tiene sentido. Prueba:</p>
-        <div class="mp" id="mp" aria-label="Algunas canciones que escucho">
-          <div class="mp-top"><span class="mp-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>Sonando · aleatorio total</span></div>
-          <p class="mp-now"><b id="mpT">Pink Matter</b><span id="mpA">Frank Ocean</span></p>
-          <div class="mp-bar" aria-hidden="true"><i id="mpBar"></i></div>
-          <div class="mp-ctl"><button type="button" id="mpPrev" aria-label="Canción anterior"><i class="ic ic-left"></i></button><a id="mpGo" href="#" target="_blank" rel="noopener">Escuchar en Spotify <i class="ic ic-out"></i></a><button type="button" id="mpNext" aria-label="Siguiente canción"><i class="ic ic-right"></i></button></div>
-          <ol class="mp-list" id="mpList"></ol>
-        </div>
-      </li>
+      <li data-reveal><figure class="lcd-w"><canvas class="lcd" data-scene="grass" width="48" height="28" aria-hidden="true"></canvas><figcaption>yo intentando caminar en césped</figcaption></figure><p><b>No puedo caminar sobre césped.</b></p></li>
+      <li data-reveal><figure class="lcd-w"><canvas class="lcd" data-scene="lemon" width="48" height="28" aria-hidden="true"></canvas><figcaption>helado de limón, como siempre</figcaption></figure><p><b>Siempre pido lo mismo en los restaurantes.</b> Un helado de limón. No soy de probar nada nuevo.</p></li>
+      <li data-reveal><figure class="lcd-w"><canvas class="lcd" data-scene="music" width="48" height="28" aria-hidden="true"></canvas><figcaption>mi Spotify, sin sentido</figcaption></figure><p><b>Escucho todo tipo de música.</b> Mi Spotify no tiene sentido.</p></li>
     </ol>
+    <div class="facts-mp" data-reveal><p class="script small">mi Spotify sin sentido</p>
+      <div class="mp" id="mp" aria-label="Algunas canciones que escucho">
+        <div class="mp-top"><span class="mp-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>Sonando · aleatorio total</span></div>
+        <p class="mp-now"><b id="mpT">Pink Matter</b><span id="mpA">Frank Ocean</span></p>
+        <div class="mp-bar" aria-hidden="true"><i id="mpBar"></i></div>
+        <div class="mp-ctl"><button type="button" id="mpPrev" aria-label="Canción anterior"><i class="ic ic-left"></i></button><a id="mpGo" href="#" target="_blank" rel="noopener">Escuchar en Spotify <i class="ic ic-out"></i></a><button type="button" id="mpNext" aria-label="Siguiente canción"><i class="ic ic-right"></i></button></div>
+        <ol class="mp-list" id="mpList"></ol>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -686,6 +701,6 @@
   <div class="mv-stage"><button type="button" class="mv-nav" id="mvPrev" aria-label="Página anterior"><i class="ic ic-left"></i></button><img id="mvImg" alt=""><button type="button" class="mv-nav" id="mvNext" aria-label="Página siguiente"><i class="ic ic-right"></i></button></div>
 </div>
 
-<script src="js/site.js?v=37" defer></script>
+<script src="js/site.js?v=39" defer></script>
 </body>
 </html>

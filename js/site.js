@@ -671,36 +671,35 @@
   var px = function (x, c, a, b, w, h) { x.fillStyle = c; x.fillRect(a, b, w || 1, h || 1); };
   var SCN = {
     grass: function (x, t) {
-      var cyc = t % 3600, gx = 38;
-      px(x, '#9aa07f', 0, 33, 64, 1);
-      for (var i = 0; i < 22; i++) { px(x, i % 3 ? '#5f8a3a' : '#7db04a', gx + i, 30 + (i % 2), 1, 3 - (i % 2)); px(x, '#5f8a3a', gx + i, 32, 1, 1); }
-      var px0, py = 18, fr = Math.floor(t / 160) % 2 ? 'a' : 'b';
-      if (cyc < 1800) px0 = 4 + Math.floor(cyc / 1800 * 26);
-      else if (cyc < 2300) { px0 = 30; fr = 'a'; px(x, '#c0392b', 35, 10, 2, 5); px(x, '#c0392b', 35, 16, 2, 1); px(x, '#5aa0d6', 28, 16, 1, 2); }
-      else { var k = (cyc - 2300) / 1300; px0 = 30 - Math.floor(k * 26); py = 18 - Math.round(Math.sin(Math.min(1, k * 2.4) * Math.PI) * 6); }
+      var cyc = t % 3600, gx = 31;
+      px(x, '#9aa07f', 0, 26, 48, 1);
+      for (var i = 0; i < 16; i++) { px(x, i % 3 ? '#5f8a3a' : '#7db04a', gx + i, 23 + (i % 2), 1, 3 - (i % 2)); }
+      var px0, py = 11, fr = Math.floor(t / 160) % 2 ? 'a' : 'b';
+      if (cyc < 1800) px0 = 1 + Math.floor(cyc / 1800 * 19);
+      else if (cyc < 2300) { px0 = 20; fr = 'a'; px(x, '#c0392b', 25, 2, 2, 5); px(x, '#c0392b', 25, 8, 2, 1); px(x, '#5aa0d6', 19, 9, 1, 2); }
+      else { var k = (cyc - 2300) / 1300; px0 = 20 - Math.floor(k * 19); py = 11 - Math.round(Math.sin(Math.min(1, k * 2.4) * Math.PI) * 5); }
       mini2(x, x, px0, py, fr, cyc >= 2300);
     },
     lemon: function (x, t) {
       var cyc = t % 4000, bites = Math.min(3, Math.floor(cyc / 900));
-      px(x, '#9aa07f', 0, 33, 64, 1);
-      mini2(x, x, 12, 18 - (Math.floor(t / 400) % 2), 'a');
-      /* cucurucho */
-      for (var r = 0; r < 7; r++) px(x, r % 2 ? '#c99a5b' : '#b5833f', 28 + Math.floor(r / 2), 24 + r, 5 - r * 2 / 3 | 0 || 1, 1);
+      px(x, '#9aa07f', 0, 26, 48, 1);
+      mini2(x, x, 9, 11 - (Math.floor(t / 400) % 2), 'a');
+      for (var r = 0; r < 6; r++) px(x, r % 2 ? '#c99a5b' : '#b5833f', 23 + (r >> 1), 17 + r, Math.max(1, 5 - r), 1);
       var sc = 3 - bites;
-      if (cyc > 3400) { if (Math.floor(t / 120) % 2) { px(x, '#f6ef7a', 27, 18, 7, 6); px(x, '#e3d43f', 27, 22, 7, 2); } }
-      else if (sc > 0) { px(x, '#f6ef7a', 27, 24 - sc * 2, 7, sc * 2); px(x, '#fffbd0', 28, 24 - sc * 2, 2, 1); px(x, '#e3d43f', 27, 23, 7, 1); }
-      x.fillStyle = '#3a3f2c'; x.font = '6px monospace'; x.fillText('x' + (999 + Math.floor(t / 4000) % 9), 40, 9);
-      px(x, '#e68082', 46, 16, 2, 2); px(x, '#e68082', 49, 16, 2, 2); px(x, '#e68082', 46, 18, 5, 2); px(x, '#e68082', 47, 20, 3, 1); px(x, '#e68082', 48, 21, 1, 1);
+      if (cyc > 3400) { if (Math.floor(t / 120) % 2) { px(x, '#f6ef7a', 22, 11, 7, 6); px(x, '#e3d43f', 22, 16, 7, 1); px(x, '#fffbd0', 23, 12, 2, 1); } }
+      else if (sc > 0) { px(x, '#f6ef7a', 22, 17 - sc * 2, 7, sc * 2); px(x, '#fffbd0', 23, 17 - sc * 2, 2, 1); px(x, '#e3d43f', 22, 16, 7, 1); }
+      var hb = Math.floor(t / 500) % 2;
+      px(x, '#e68082', 35, 6 - hb, 2, 2); px(x, '#e68082', 38, 6 - hb, 2, 2); px(x, '#e68082', 35, 8 - hb, 5, 2); px(x, '#e68082', 36, 10 - hb, 3, 1); px(x, '#e68082', 37, 11 - hb, 1, 1);
     },
     music: function (x, t) {
       var b = Math.floor(t / 300) % 2;
-      px(x, '#9aa07f', 0, 33, 64, 1);
-      mini2(x, x, 24, 18 + b, b ? 'a' : 'b');
-      px(x, '#eba9bd', 25, 17 + b, 10, 1); px(x, '#eba9bd', 24, 19 + b, 2, 3); px(x, '#eba9bd', 34, 19 + b, 2, 3);
+      px(x, '#9aa07f', 0, 26, 48, 1);
+      mini2(x, x, 18, 11 + b, b ? 'a' : 'b');
+      px(x, '#eba9bd', 19, 10 + b, 10, 1); px(x, '#eba9bd', 18, 12 + b, 2, 3); px(x, '#eba9bd', 28, 12 + b, 2, 3);
       var cols = ['#aa3a54', '#3a2e32', '#d4aa54', '#5aa0d6'];
       for (var n = 0; n < 4; n++) {
-        var p = ((t / 1600) + n / 4) % 1, nx = [8, 46, 14, 52][n], ny = 30 - Math.floor(p * 26);
-        if (p < .92) { px(x, cols[n], nx, ny, 2, 2); px(x, cols[n], nx + 1, ny - 4, 1, 4); px(x, cols[n], nx + 2, ny - 4, 2, 1); }
+        var p = ((t / 1600) + n / 4) % 1, nx = [4, 37, 9, 42][n], ny = 24 - Math.floor(p * 20);
+        if (p < .9) { px(x, cols[n], nx, ny, 2, 2); px(x, cols[n], nx + 1, ny - 4, 1, 4); px(x, cols[n], nx + 2, ny - 4, 2, 1); }
       }
     }
   };
@@ -710,7 +709,7 @@
     lcds.forEach(function (c) { lio.observe(c); c._x = c.getContext('2d'); });
     var lcdT = 0;
     (function lcdLoop(t) {
-      if (t - lcdT > 90) { lcdT = t; lcds.forEach(function (c) { if (!c._on && c._done) return; c._done = 1; c._x.clearRect(0, 0, 64, 36); SCN[c.dataset.scene](c._x, reduce ? 0 : t); }); }
+      if (t - lcdT > 90) { lcdT = t; lcds.forEach(function (c) { if (!c._on && c._done) return; c._done = 1; c._x.clearRect(0, 0, 48, 28); SCN[c.dataset.scene](c._x, reduce ? 0 : t); }); }
       if (!reduce) requestAnimationFrame(lcdLoop);
     })(0);
   }
@@ -1253,16 +1252,36 @@
       if (s === 2) { P('#FAF6F0', 26, 21, 5, 6); P('#FAF6F0', 31, 22, 1, 3); P('#eba9bd', 27, 23, 3, 2); P('#b9b0a8', 27, 18, 1, 2); P('#b9b0a8', 29, 17, 1, 3); }
     };
     var setMode = function (m) {
-      S.mode = m; save(); root.classList.toggle('m-game', m === 'game');
+      S.mode = m; save(); root.classList.toggle('m-game', m === 'game'); root.classList.toggle('m-fast', m === 'fast');
       var mp = $('#modePick'); if (mp) mp.hidden = true; paint();
       if (m === 'game') {
         if (g.status) g.status.textContent = '¡explora y hazme crecer!'; g.mood = 'happy'; g.jump = 24; buzz(14);
         toastMsg('Explora la web y prueba mis webs para hacerme crecer');
         if (hud) { hud.classList.remove('flash'); void hud.offsetWidth; hud.classList.add('flash'); }
-      } else toastMsg('Modo rápido: solo el portfolio');
+      } else { toastMsg('Modo rápido: solo el portfolio'); if (g && g.status) g.status.textContent = '¿jugamos luego?'; }
     };
     if (S.mode === 'game') root.classList.add('m-game');
-    if (!S.mode) { var mp0 = $('#modePick'); if (mp0) mp0.hidden = false; if (g && g.status) setTimeout(function () { g.status.textContent = '¿jugamos?'; }, 1200); }
+    if (S.mode === 'fast') root.classList.add('m-fast');
+    var gl = $('#gLater'); if (gl) gl.addEventListener('click', function () { setMode('game'); });
+    /* pantalla de inicio: primera visita */
+    var ts = $('#ts');
+    if (ts && root.classList.contains('ts-on')) {
+      var tc = $('#tsCv').getContext('2d'), tsT = 0, opts = $$('.ts-o', ts);
+      (function tsLoop(t) { if (!root.classList.contains('ts-on')) return; if (t - tsT > 400) { tsT = t; tc.clearRect(0, 0, 32, 32); drawSprite(tc, 0, 1 - (Math.floor(t / 400) % 2), 1, Math.floor(t / 400) % 7 === 0 ? 'blink' : 'happy'); } requestAnimationFrame(tsLoop); })(0);
+      var sel = function (b) { opts.forEach(function (o) { o.classList.toggle('on', o === b); }); };
+      var pick = function (b) {
+        if (ts.dataset.busy) return; ts.dataset.busy = 1; sel(b); b.classList.add('chosen'); buzz([10, 40, 10]);
+        setTimeout(function () { ts.classList.add('out'); }, 500);
+        setTimeout(function () { root.classList.remove('ts-on'); setMode(b.dataset.ts); }, 1200);
+      };
+      opts.forEach(function (b) { b.addEventListener('mouseenter', function () { sel(b); }); b.addEventListener('focus', function () { sel(b); }); b.addEventListener('click', function () { pick(b); }); });
+      addEventListener('keydown', function (e) {
+        if (!root.classList.contains('ts-on')) return;
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === 'ArrowDown') { var i = opts.findIndex(function (o) { return o.classList.contains('on'); }); var n = opts[(i + 1) % opts.length]; sel(n); n.focus(); e.preventDefault(); }
+        if (e.key === 'Enter') { var on = opts.filter(function (o) { return o.classList.contains('on'); })[0]; if (on) { pick(on); e.preventDefault(); } }
+      });
+      setTimeout(function () { opts[0].focus({ preventScroll: true }); }, 100);
+    }
     /* elegir modo como en una consola: cursor, flechas y Enter */
     var mpBox = $('#modePick'), mpCards = mpBox ? $$('.mp-card', mpBox) : [];
     var mpCv = $('#mpCv'); if (mpCv) { var mc = mpCv.getContext('2d'); drawSprite(mc, 0, 0, 1, 'happy'); }
