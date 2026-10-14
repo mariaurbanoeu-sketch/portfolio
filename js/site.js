@@ -804,7 +804,7 @@
     var v = lvVideo(f), W = +f.dataset.w; if (!v) return;
     var w = v.offsetWidth, h = v.offsetHeight; if (!w || !h) return;
     var k = w / W; f.style.left = v.offsetLeft + 'px'; f.style.top = v.offsetTop + 'px';
-    f.style.width = W + 'px'; f.style.height = (h / k) + 'px'; f.style.transform = 'scale(' + k + ')';
+    f.style.width = f.style.minWidth = f.style.maxWidth = W + 'px'; f.style.height = (h / k) + 'px'; f.style.transform = 'scale(' + k + ')'; f.setAttribute('scrolling', 'no');
     f.style.borderRadius = (parseFloat(getComputedStyle(v).borderTopLeftRadius) / k) + 'px';
   };
   var lvShown = function (f) { var bv = f.closest('.bw-v'); return !bv || bv.classList.contains('on'); };
@@ -1389,17 +1389,17 @@
       if (c === 5) return '¡Las 4 webs listas! Ahora vienen dos portfolios que hizo Paula. Toca el nivel 5: Jairo Azogue.';
       return '¡Bien! Ahora toca el nivel ' + c + ': ' + NODES[c].n + '.';
     };
-    var opener = null;
+    var opener = null, gwY = 0;
     var openWorld = function () {
       if (!gw.hidden) return; opener = document.activeElement;
-      gw.hidden = false; root.classList.add('gw-on'); document.body.style.overflow = 'hidden';
+      gw.hidden = false; gwY = scrollY; root.classList.add('gw-on'); document.body.style.top = -gwY + 'px';
       lvBox.hidden = true; $('#gwWin').hidden = true; map.parentNode.hidden = false;
       paintMap(); moveG(cur() > NODES.length - 1 ? NODES.length - 1 : (S.lv.fin ? NODES.length - 1 : cur() - 1), true);
       setTimeout(function () { mapSay.say(mapLine()); if (!S.lv.fin) { var c = cur(); setTimeout(function () { moveG(c); }, 300); } }, 250);
       var n = nodeEls[cur()]; if (n) setTimeout(function () { n.focus({ preventScroll: true }); }, 60);
     };
     var closeWorld = function () {
-      gw.hidden = true; root.classList.remove('gw-on'); document.body.style.overflow = '';
+      var wasOn = root.classList.contains('gw-on'); gw.hidden = true; root.classList.remove('gw-on'); document.body.style.top = ''; if (wasOn) scrollTo({ top: gwY, behavior: 'instant' });
       if (back) back.hidden = !game();
     };
     addEventListener('resize', function () { if (!gw.hidden) { place(); moveG(gAt, true); } });
@@ -1417,7 +1417,7 @@
       if (l.live) return horiz() ? '<figure class="gl-ph gl-br"><figcaption><i></i><i></i><i></i><span>' + l.url + '</span></figcaption><div class="gl-sc gl-live" data-w="1280"><iframe src="' + l.live + '" title="La web de ' + l.n + ' en vivo" tabindex="-1"></iframe></div></figure>' : '<figure class="gl-ph gl-live" data-w="390"><iframe src="' + l.live + '" title="La web de ' + l.n + ' en vivo" tabindex="-1"></iframe></figure>';
       if (l.d && horiz()) return '<figure class="gl-ph gl-br"><figcaption><i></i><i></i><i></i><span>' + l.url + '</span></figcaption><div class="gl-sc"><img src="' + l.d + '" alt="La web de ' + l.n + ' en el ordenador"></div></figure>'; return '<figure class="gl-ph"><img src="' + l.img + '" alt="La web de ' + l.n + ' en el celular" width="390" height="844"></figure>'; };
     /* la web en vivo cabe en el marco como si fuera su tamaño real */
-    var fitLive = function () { $$('.gl-live', stg).forEach(function (b) { var f = $('iframe', b), w = +b.dataset.w, k = b.clientWidth / w; f.style.width = w + 'px'; f.style.height = (b.clientHeight / k) + 'px'; f.style.transform = 'scale(' + k + ')'; }); };
+    var fitLive = function () { $$('.gl-live', stg).forEach(function (b) { var f = $('iframe', b), w = +b.dataset.w, k = b.clientWidth / w; f.style.width = f.style.minWidth = f.style.maxWidth = w + 'px'; f.style.height = (b.clientHeight / k) + 'px'; f.setAttribute('scrolling', 'no'); f.style.transform = 'scale(' + k + ')'; }); };
     addEventListener('resize', function () { if (L) fitLive(); });
     var talk = function (txt, mood, then) { face($('#glFace'), mood); act.innerHTML = ''; say.say(txt, function () { showAct(then); }); };
     var STEPS = 4;

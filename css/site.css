@@ -1248,7 +1248,9 @@ html.intro-on body{overflow:hidden}
 /* ============ modo juego: el mapa de Paula ============ */
 .gw{position:fixed;inset:0;z-index:300;display:grid;grid-template-rows:auto 1fr;height:100dvh;background:#1a1311;color:#FAF6F0;overflow:hidden}
 .gw[hidden]{display:none}
-html.gw-on body{overflow:hidden}
+html.gw-on,html.gw-on body{overflow:hidden;overscroll-behavior:none}
+html.gw-on body{position:fixed;left:0;right:0;width:100%}
+.gw{touch-action:none;overscroll-behavior:none}
 .gw-top{display:flex;align-items:center;gap:1rem;padding:calc(.5rem + env(safe-area-inset-top,0px)) max(1rem,env(safe-area-inset-right,0px)) .5rem max(1rem,env(safe-area-inset-left,0px));background:#140d0d;box-shadow:0 3px 0 0 #2e211e;position:relative;z-index:3}
 .gw-me{display:flex;align-items:center;gap:.6rem;flex:1;min-width:0}
 .gw-me canvas{width:36px;height:36px;image-rendering:pixelated;background:#c4c9aa;border-radius:6px}
@@ -1379,3 +1381,4 @@ html.gw-on .ach-t{top:calc(4.6rem + env(safe-area-inset-top,0px))}
 .gl-live iframe{position:absolute;left:0;top:0;border:0;background:transparent;transform-origin:0 0;pointer-events:none}
 .hero-tag{display:flex;align-items:center;gap:.6rem;margin-top:1.1rem;font:700 .72rem/1.4 'Courier New',monospace;letter-spacing:.14em;text-transform:uppercase;color:#EBA9BD;opacity:0;animation:fade .9s 1.3s forwards}
 .hero-tag i{flex:0 0 auto;width:8px;height:8px;background:#FFD23F;animation:blink 1s steps(2) infinite}
+iframe.lv,.gl-live iframe{flex:none}
