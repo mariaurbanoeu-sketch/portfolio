@@ -1252,38 +1252,38 @@
         hi: 'Mely tiene un estudio de manicura rusa. Diseñé su web en Figma y la programé.',
         why: 'Necesitaba que sus clientas se probaran colores y formas antes de reservar.',
         fact: 'Un detalle: la web se abre sola en español o en inglés, según el idioma del teléfono.',
-        c: [[22, 14], [74, 63]] },
+        c: [[20, 14]], ca: ['#662E3A', '#F3ECE8'], t: { m: [73, 48.5], d: [34, 78], l: 'Diseña tu manicura' } },
       { k: 'kronox', n: 'Kronox', ic: 'cam', who: 'Director de videoclips · Sevilla', img: 'img/kpanel-m.webp?v=2', d: 'img/kpanel-d.webp', url: 'panel · kronox',
         hi: 'Kronox hace videoclips. Su web tiene dos partes: la que ven sus clientes y un panel solo para él.',
         why: 'Con el panel cambia videos, fotos y precios sin depender de mí.',
         fact: 'Un detalle: para subir un video solo pega el enlace de YouTube y el título se pone solo.',
-        c: [[78, 22], [20, 78]] },
+        c: [[20, 78]], ca: ['#0B0B0A', '#e5322d'], t: { m: [73, 48], d: [92, 67], l: 'las flechas' } },
       { k: 'nacar', n: 'Nácar Estilismo', ic: 'bag', who: 'Tienda online · Sevilla', img: 'img/nacar-m.webp?v=2', d: 'img/nacar-d.webp', url: 'nacar estilismo',
         hi: 'Nácar es una tienda de ropa en Sevilla. Diseñé y programé su tema de Shopify desde cero.',
         why: 'Está en seis idiomas, y sigo subiendo yo los productos nuevos.',
         fact: 'Un detalle: la cesta se abre a un lado, así nadie pierde la página en la que estaba.',
-        c: [[70, 40], [26, 86]] },
+        c: [[26, 86]], ca: ['#EFE7DC', '#8c7a63'], t: { m: [50, 46], d: [50, 75], l: 'Ver colección' } },
       { k: 'amigos', n: 'Entre Amigos', ic: 'heart', who: 'Proyecto personal', img: 'img/ea-m.webp?v=2',
         hi: 'Después de los terremotos en Venezuela hice en una semana una app para organizar donaciones.',
         why: 'Funciona sin conexión, porque en una emergencia la señal falla.',
         fact: 'Un detalle: quien recibe la ayuda la confirma con un PIN, así quien donó sabe que llegó.',
-        c: [[18, 34], [80, 74]] },
+        c: [[80, 74]], ca: ['#0F1E3D', '#FFD23F'], t: { m: [50, 35], l: 'Necesito ayuda' } },
       { k: 'jairo', n: 'Jairo Azogue', ic: 'film', who: 'Director y editor de video', live: 'https://jairoazogue.com/', url: 'jairoazogue.com',
         hi: 'Jairo es director y editor de video. Le hice su web, y ya está en su propio dominio.',
         why: 'Su trabajo va ordenado por tipo de pieza, y sus herramientas salen como si fueran su escritorio.',
         fact: 'Un detalle: antes de diseñar miré qué busca la gente de su sector en un portfolio.',
-        c: [[80, 18], [24, 70]] },
+        c: [[80, 18]], ca: ['#141210', '#FF4B00'] },
       { k: 'cata', n: 'Catalina Silva', ic: 'cube', who: '3D y animación', live: 'https://catalinasilva.netlify.app/', url: 'catalinasilva.netlify.app',
         hi: 'Catalina hace 3D y animación.',
         why: 'Hicimos su web para que pudiera pedir prácticas en estudios de 3D.',
         fact: 'Un detalle: antes de diseñar miré qué buscan los estudios de 3D cuando revisan un portfolio.',
-        c: [[26, 24], [76, 80]] }
+        c: [[26, 24]], ca: ['#3d3d3d', '#f39a3a'] }
     ];
-    var NC = LVS.length * 2;
+    var NC = LVS.length;
     var ACH = [['webs4', 'Probaste todas las webs'], ['coins', 'Monedera: las ' + NC + ' monedas'], ['bugs20', 'Cazabugs'], ['desk', 'Curiosidad'], ['brands', 'Marquista'], ['music', 'Spotify sin sentido'], ['hired', '¡Contratada!']];
     var nDone = function () { return LVS.filter(function (l) { return S.lv[l.k]; }).length; };
     var stage = function () { return S.lv.fin ? 2 : nDone() >= 3 ? 1 : 0; };
-    var nCoins = function () { return Object.keys(S.coins).filter(function (c) { return c.indexOf('-') > 0; }).length; };
+    var nCoins = function () { return Object.keys(S.coins).filter(function (c) { return /-0$/.test(c); }).length; };
     var achT = $('#achT'), achQ = [], achBusy = false;
     var showAch = function () {
       if (achBusy || !achQ.length) return; achBusy = true;
@@ -1359,17 +1359,24 @@
       });
       $('#gwStage').textContent = STAGES[stage()];
       $('#gwProg').textContent = S.lv.fin ? '¡Juego completado!' : (c > LVS.length ? 'Nivel final' : 'Nivel ' + c + ' de ' + LVS.length);
-      $('#gwCoins').textContent = nCoins() + '/' + NC;
+      $('#gwCoins').textContent = nCoins() + '/' + NC; $('#gwPbF').style.width = (nDone() / LVS.length * 100) + '%';
       face($('#gwFace'));
       place();
     };
     var mapLine = function () {
       var c = cur();
       if (S.lv.fin) return '¡Lo lograste! Puedes repetir cualquier nivel, o ver el portfolio completo.';
-      if (c === 1) return '¡Hola! Soy el Paulagotchi. Cada parada del mapa es una web que hizo Paula. Toca el nivel 1 para empezar.';
-      if (c === NODES.length - 1) return '¡Probaste las ' + LVS.length + ' webs! Solo queda el final. Tócalo.';
-      if (c === 5) return '¡Las 4 webs listas! Ahora vienen dos portfolios que hizo Paula. Toca el nivel 5: Jairo Azogue.';
-      return '¡Bien! Ahora toca el nivel ' + c + ': ' + NODES[c].n + '.';
+      if (c === 1) return '¡Hola! Soy el Paulagotchi. Cada parada del mapa es una web que hizo Paula. Empezamos por la primera.';
+      if (c === NODES.length - 1) return '¡Probaste las ' + LVS.length + ' webs! Solo queda el final.';
+      if (c === 5) return '¡Las 4 webs listas! Ahora vienen dos portfolios que hizo Paula.';
+      return '¡Bien! Siguiente parada: ' + NODES[c].n + '.';
+    };
+    /* un solo botón que te lleva a lo siguiente */
+    var mapAct = function () {
+      var a = $('#gwMapAct'), c = cur(); a.innerHTML = ''; if (S.lv.fin) return;
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'gl-b';
+      b.innerHTML = '<span class="gl-cur" aria-hidden="true"></span>' + (c === NODES.length - 1 ? 'Ir al final' : 'Jugar nivel ' + c + ': ' + NODES[c].n);
+      b.addEventListener('click', function (e) { e.stopPropagation(); buzz(10); openLevel(c); }); a.appendChild(b);
     };
     var opener = null, gwY = 0;
     var openWorld = function () {
@@ -1377,7 +1384,10 @@
       gw.hidden = false; gwY = scrollY; root.classList.add('gw-on'); document.body.style.top = -gwY + 'px';
       lvBox.hidden = true; $('#gwWin').hidden = true; map.parentNode.hidden = false;
       paintMap(); moveG(cur() > NODES.length - 1 ? NODES.length - 1 : (S.lv.fin ? NODES.length - 1 : cur() - 1), true);
-      setTimeout(function () { mapSay.say(mapLine()); if (!S.lv.fin) { var c = cur(); setTimeout(function () { moveG(c); }, 300); } }, 250);
+      $('#gwMapAct').innerHTML = '';
+      setTimeout(function () { mapSay.say(mapLine(), mapAct); if (!S.lv.fin) { var c = cur(); setTimeout(function () { moveG(c); }, 300); } }, 250);
+      /* la primera vez el juego arranca solo: camina y entra al nivel 1 */
+      if (!S.t0 && cur() === 1) setTimeout(function () { if (!gw.hidden && lvBox.hidden && !S.t0) openLevel(1); }, 3200);
       var n = nodeEls[cur()]; if (n) setTimeout(function () { n.focus({ preventScroll: true }); }, 60);
     };
     var closeWorld = function () {
@@ -1402,13 +1412,17 @@
     var fitLive = function () { $$('.gl-live', stg).forEach(function (b) { var f = $('iframe', b), w = +b.dataset.w, k = b.clientWidth / w; f.style.width = f.style.minWidth = f.style.maxWidth = w + 'px'; f.style.height = (b.clientHeight / k) + 'px'; f.setAttribute('scrolling', 'no'); f.style.transform = 'scale(' + k + ')'; }); };
     addEventListener('resize', function () { if (L) fitLive(); });
     var talk = function (txt, mood, then) { face($('#glFace'), mood); act.innerHTML = ''; say.say(txt, function () { showAct(then); }); };
-    var STEPS = 4;
+    var STEPS = 4, hintT = null;
     var run = function () {
       setDots(step, L.fin ? 2 : STEPS);
       if (L.fin) return runFin();
       var l = L;
       if (step === 0) {
         stg.innerHTML = phoneHTML(l); stg.className = 'gl-stage'; fitLive();
+        if (!reduce && l.ca) {
+          var ci = document.createElement('span'); ci.className = 'gl-cartin'; ci.style.setProperty('--c', l.ca[0]); ci.style.setProperty('--a', l.ca[1]); ci.innerHTML = '<i>' + l.n + '</i>'; stg.appendChild(ci);
+          var fr = $('.gl-ph', stg); setTimeout(function () { if (fr) fr.classList.add('st'); buzz([6, 30, 6]); }, 520); setTimeout(function () { ci.remove(); if (fr) fr.classList.remove('st'); }, 900);
+        }
         talk(l.hi + ' ' + l.why, 'happy', function () { btn(go('Siguiente'), function () { step++; run(); }); });
       } else if (step === 1) {
         stg.className = 'gl-stage hunt';
@@ -1425,23 +1439,24 @@
             setTimeout(function () { pl.remove(); }, 800);
             $('#gwCoins').textContent = nCoins() + '/' + NC; var hc = $('.gw-coins'); hc.classList.remove('pop'); void hc.offsetWidth; hc.classList.add('pop');
             if (nCoins() >= NC) unlock('coins');
-            if (got >= need) { say.say('¡Las tienes! ' + nCoins() + ' de ' + NC + ' monedas.', function () { setTimeout(function () { step++; run(); }, 700); }); }
-            else say.say('¡Una! Te falta otra.');
+            clearTimeout(hintT); say.say('¡La tienes! Llevas ' + nCoins() + ' de ' + NC + ' monedas.', function () { setTimeout(function () { step++; run(); }, 700); });
           });
           ph.appendChild(b);
         });
         if (got >= need) { step++; run(); return; }
-        talk('Escondí ' + (need - got === 2 ? '2 monedas' : 'una moneda') + ' en su web. Tócalas para recogerlas.', 'happy', function () { btn('No las encuentro', function () { stg.classList.add('hint'); say.say('Mira bien: brillan un poco.'); }, 'gl-b ghost'); });
+        talk('Escondí una moneda en su web. ¡Encuéntrala y tócala!', 'happy', function () { btn('¿Dónde está?', function () { stg.classList.add('hint'); say.say('¡Ahí! Donde apunta la flecha.'); }, 'gl-b link'); });
+        clearTimeout(hintT); hintT = setTimeout(function () { if (L === l && step === 1) stg.classList.add('hint'); }, 4500);
       } else if (step === 2) {
         stg.className = 'gl-stage mis';
         $$('.gl-coin', stg).forEach(function (c) { c.remove(); });
-        var m = ENTER[l.k] && ENTER[l.k].m;
-        talk('Tu misión: ' + m, 'happy', function () {
+        var m = ENTER[l.k] && ENTER[l.k].m, tp = l.t && (horiz() && l.d ? l.t.d : l.t.m);
+        if (tp) { var tg = document.createElement('span'); tg.className = 'gl-tg'; tg.style.left = tp[0] + '%'; tg.style.top = tp[1] + '%'; tg.innerHTML = '<i></i><b>Empieza aquí: «' + l.t.l + '»</b>'; ($('.gl-sc', stg) || $('.gl-ph', stg)).appendChild(tg); if (tp[0] > 60) tg.classList.add('r'); else if (tp[0] < 40) tg.classList.add('l'); }
+        talk('Tu misión: ' + m + (tp ? ' Te marqué dónde empezar.' : ''), 'happy', function () {
           btn(go('Entrar en la web'), function () { openEnter(l.k, true); });
-          btn('Saltar misión', function () { step++; run(); }, 'gl-b ghost');
+          btn('Saltar misión', function () { step++; run(); }, 'gl-b link');
         });
       } else if (step === 3) {
-        stg.className = 'gl-stage';
+        stg.className = 'gl-stage'; $$('.gl-tg', stg).forEach(function (t) { t.remove(); });
         talk(l.fact, 'happy', function () { btn(go('Terminar nivel'), function () { win(); }); });
       }
     };
@@ -1452,7 +1467,7 @@
       map.parentNode.hidden = true; lvBox.hidden = false; lvBox.classList.remove('in'); void lvBox.offsetWidth; lvBox.classList.add('in');
       buzz(14); run();
     };
-    var backToMap = function () { stg.innerHTML = ''; lvBox.hidden = true; $('#gwWin').hidden = true; map.parentNode.hidden = false; L = null; paintMap(); mapSay.say(mapLine()); };
+    var backToMap = function () { stg.innerHTML = ''; lvBox.hidden = true; $('#gwWin').hidden = true; map.parentNode.hidden = false; L = null; paintMap(); $('#gwMapAct').innerHTML = ''; mapSay.say(mapLine(), mapAct); };
     $('#glBack').addEventListener('click', function () { buzz(8); backToMap(); moveG(Math.min(cur(), NODES.length - 1) - (S.lv.fin ? 0 : 1), true); setTimeout(function () { if (!S.lv.fin) moveG(cur()); }, 200); });
     $('.gl-box').addEventListener('click', function () { say.skip(); });
     /* ganaste el nivel */
@@ -1460,9 +1475,9 @@
       var was = stage(), idx = NODES.indexOf(L);
       S.lv[L.k] = 1; save();
       if (nDone() >= LVS.length) unlock('webs4');
-      var w = $('#gwWin'), coinsL = L.c ? L.c.filter(function (p, j) { return S.coins[L.k + '-' + j]; }).length : 0;
+      var w = $('#gwWin'), coinsL = S.coins[L.k + '-0'] ? 1 : 0;
       $('#gwWinK').textContent = 'Nivel ' + idx + ' completado';
-      $('#gwWinC').textContent = coinsL + ' / 2';
+      $('#gwWinC').textContent = coinsL + ' / 1';
       var ev = stage() > was; $('#gwWinE').hidden = !ev; if (ev) $('#gwWinE').textContent = '¡Tu Paulagotchi evolucionó! Ahora es ' + STAGES[stage()];
       face($('#gwWinCv')); lvBox.hidden = true; w.hidden = false; w.classList.remove('on'); void w.offsetWidth; w.classList.add('on'); buzz([20, 50, 20]);
       if (g) { g.mood = 'happy'; g.jump = 24; }

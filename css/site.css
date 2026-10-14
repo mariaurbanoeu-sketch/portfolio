@@ -1323,7 +1323,7 @@ canvas.coin-ic{width:18px;height:18px;image-rendering:pixelated}
 .gl-coin canvas{width:24px;height:24px;image-rendering:pixelated;animation:spin 1s steps(4) infinite}
 .gl-coin.got{animation:coingot .5s steps(4) forwards;pointer-events:none}
 @keyframes coingot{to{transform:translateY(-30px) scale(1.4);opacity:0}}
-.gl-stage.hint .gl-coin{outline:3px dashed #FFD23F;outline-offset:-4px}
+
 .gl-plus{position:absolute;z-index:3;margin:-30px 0 0 -10px}
 .gl-box{display:grid;grid-template-columns:48px 1fr;gap:.9rem;align-items:start}
 .gl-box > canvas{width:48px;height:48px;image-rendering:pixelated;background:#c4c9aa;border-radius:6px}
@@ -1500,3 +1500,22 @@ iframe.lv,.gl-live iframe{flex:none}
 .cart-fly{position:fixed;z-index:500;pointer-events:none;margin:0}
 @media(max-width:1000px){.cs-g{grid-template-columns:1fr}.cs-menu{grid-template-columns:1fr 1fr}.cs-l{order:2}.cs-h{display:none}}
 @media(max-width:760px){.cs{display:none!important}}
+/* modo juego: te lleva a lo siguiente */
+.gw-pb{display:block;width:9rem;height:6px;margin-top:.35rem;background:#3a2a2a}
+.gw-pb i{display:block;height:100%;width:0;background:#FFD23F;transition:width .6s steps(6)}
+#gwMapAct{margin-top:.6rem}
+#gwMapAct:empty{display:none}
+.gl-act .gl-b:first-child:not(.ghost):not(.link),#gwMapAct .gl-b{animation:btnglow 1s steps(2) infinite}
+@keyframes btnglow{50%{box-shadow:0 4px 0 0 #000,0 0 0 4px #FFD23F}}
+.gl-cartin{position:absolute;z-index:6;left:50%;top:0;width:4.4rem;height:5rem;margin-left:-2.2rem;background:linear-gradient(#77707a,#5d5560);clip-path:polygon(0 10%,10% 0,90% 0,100% 10%,100% 100%,0 100%);animation:cartdrop .6s steps(6) forwards}
+.gl-cartin i{position:absolute;left:12%;right:12%;top:18%;bottom:22%;display:grid;place-items:center;padding:2px;background:var(--c);box-shadow:inset 0 0 0 2px var(--a);font:800 .5rem/1.05 var(--sans);font-style:normal;text-transform:uppercase;text-align:center;color:var(--a)}
+@keyframes cartdrop{0%{transform:translateY(-120%)}60%{transform:translateY(10%)}100%{transform:translateY(40%);opacity:0}}
+.gl-ph.st::after{content:"";position:absolute;inset:0;z-index:5;background:repeating-linear-gradient(0deg,#d9d9d9 0 2px,#3a3a3a 2px 3px,#9a9a9a 3px 5px,#111 5px 6px);animation:tvst .1s steps(2) infinite}
+.gl-stage.hint .gl-coin{outline:3px solid #FFD23F;outline-offset:-2px}
+.gl-stage.hint .gl-coin::after{content:"";position:absolute;left:50%;bottom:100%;margin-left:-9px;width:18px;height:14px;background:#FFD23F;clip-path:polygon(0 0,100% 0,50% 100%);animation:bob .5s steps(2) infinite}
+.gl-tg{position:absolute;z-index:4;width:0;height:0;pointer-events:none}
+.gl-tg i{position:absolute;left:-18px;top:-18px;width:36px;height:36px;border:3px solid #FFD23F;border-radius:50%;animation:tgpulse 1s steps(3) infinite}
+.gl-tg b{position:absolute;left:0;top:24px;transform:translateX(-50%);padding:.3rem .45rem;background:#FFD23F;color:#221616;font:800 .6rem/1.2 'Courier New',monospace;text-transform:uppercase;white-space:nowrap}
+.gl-tg.r b{left:auto;right:-20px;transform:none}
+.gl-tg.l b{left:-20px;transform:none}
+@keyframes tgpulse{0%{transform:scale(.7);opacity:1}100%{transform:scale(1.4);opacity:.2}}

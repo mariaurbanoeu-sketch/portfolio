@@ -25,7 +25,7 @@
 <meta property="og:type" content="website">
 <link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/pinyon.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=50">
+<link rel="stylesheet" href="css/site.css?v=51">
 <script>(function(d){d.classList.add('js');try{if(!sessionStorage.getItem('intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('intro-on');sessionStorage.setItem('intro','1')}var m=sessionStorage.getItem('pm');if(!m){d.classList.add('ts-on');return}d.classList.add(m==='game'?'m-game':'m-fast')}catch(e){}})(document.documentElement)</script>
 </head>
 <body>
@@ -682,8 +682,8 @@
 
 <div class="gw" id="gw" role="dialog" aria-modal="true" aria-label="Modo juego: el mapa de Paula" hidden>
   <div class="gw-top">
-    <p class="gw-me"><canvas id="gwFace" width="32" height="32" aria-hidden="true"></canvas><span><b id="gwStage">Paula estudiante</b><small id="gwProg">Nivel 1 de 6</small></span></p>
-    <p class="gw-coins" aria-label="Monedas"><canvas class="coin-ic" width="8" height="8" aria-hidden="true"></canvas><span id="gwCoins">0/12</span></p>
+    <p class="gw-me"><canvas id="gwFace" width="32" height="32" aria-hidden="true"></canvas><span><b id="gwStage">Paula estudiante</b><small id="gwProg">Nivel 1 de 6</small><span class="gw-pb" aria-hidden="true"><i id="gwPbF"></i></span></span></p>
+    <p class="gw-coins" aria-label="Monedas"><canvas class="coin-ic" width="8" height="8" aria-hidden="true"></canvas><span id="gwCoins">0/6</span></p>
     <button class="gw-out" id="gwOut" type="button">Ver <span class="gw-hm">el </span>portfolio</button>
   </div>
   <div class="gw-world">
@@ -691,7 +691,7 @@
       <svg class="gw-path" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polyline id="gwPath" points=""/><polyline id="gwPathDone" points=""/></svg>
       <span class="gw-g" id="gwG" aria-hidden="true"><canvas width="32" height="32"></canvas></span>
     </div>
-    <div class="gw-box" id="gwMapBox"><p id="gwMapT" aria-live="polite"></p></div>
+    <div class="gw-box" id="gwMapBox"><p id="gwMapT" aria-live="polite"></p><div class="gl-act" id="gwMapAct"></div></div>
   </div>
   <div class="gw-lv" id="gwLv" hidden>
     <div class="gl-top"><button class="gl-back" id="glBack" type="button"><span class="gl-ar" aria-hidden="true"></span>Mapa</button><p class="gl-n"><span id="glN">Nivel 1</span><b id="glT"></b><small id="glW"></small></p><span class="gl-dots" id="glDots" aria-hidden="true"></span></div>
@@ -701,7 +701,7 @@
   <div class="gw-win" id="gwWin" hidden>
     <p class="gw-win-k" id="gwWinK">Nivel completado</p>
     <canvas id="gwWinCv" width="32" height="32" aria-hidden="true"></canvas>
-    <p class="gw-win-c"><canvas class="coin-ic" width="8" height="8" aria-hidden="true"></canvas><span id="gwWinC">2 / 2</span></p>
+    <p class="gw-win-c"><canvas class="coin-ic" width="8" height="8" aria-hidden="true"></canvas><span id="gwWinC">1 / 1</span></p>
     <p class="gw-win-e" id="gwWinE" hidden></p>
     <button class="gl-b" id="gwWinGo" type="button"><span class="gl-cur" aria-hidden="true"></span>Volver al mapa</button>
     <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
@@ -731,6 +731,6 @@
   <div class="mv-stage"><button type="button" class="mv-nav" id="mvPrev" aria-label="Página anterior"><i class="ic ic-left"></i></button><img id="mvImg" alt=""><button type="button" class="mv-nav" id="mvNext" aria-label="Página siguiente"><i class="ic ic-right"></i></button></div>
 </div>
 
-<script src="js/site.js?v=51" defer></script>
+<script src="js/site.js?v=52" defer></script>
 </body>
 </html>
