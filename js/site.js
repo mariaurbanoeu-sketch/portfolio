@@ -972,6 +972,7 @@
     mail: ["XXXXXXXXX","XX.....XX","X.X...X.X","X..X.X..X","X...X...X","X.......X","X.......X","XXXXXXXXX","........."],
     note: ["XXXXXXX..","X.....XX.","X.XXX..X.","X......X.","X.XXXX.X.","X......X.","X.XXX..X.","X......X.","XXXXXXXX."],
     doc: [".XXXXX...",".X...XX..",".X....XX.",".X.XX..X.",".X.....X.",".X.XXX.X.",".X.....X.",".X.XXX.X.",".XXXXXXX."],
+    lock: ["...XXX...","..X...X..","..X...X..",".XXXXXXX.",".XXXXXXX.",".XXX.XXX.",".XXX.XXX.",".XXXXXXX.","........."],
     trash: ["...XXX...","XXXXXXXXX",".........",".XXXXXXX.",".X.X.X.X.",".X.X.X.X.",".X.X.X.X.",".X.X.X.X.","..XXXXX.."]
   };
   function drawPx(c, name, col) { var x = c.getContext('2d'), m = PX9[name]; if (!m) return; x.clearRect(0, 0, 9, 9); x.fillStyle = col || '#EBA9BD'; m.forEach(function (r, y) { for (var i = 0; i < 9; i++) if (r[i] === 'X') x.fillRect(i, y, 1, 1); }); }
@@ -1251,65 +1252,51 @@
   if ('serviceWorker' in navigator && location.protocol === 'https:') addEventListener('load', function () { navigator.serviceWorker.register('/sw.js').catch(function () {}); });
 
 
-  /* ======================= modo juego: tu Paulagotchi crece ======================= */
+  /* ======================= modo juego: el mapa de Paula ======================= */
   (function () {
-    var KEY = 'pg1', S = { mode: null, st: [0, 0, 0], ach: {}, vis: {}, bugs: 0, flips: {}, coins: {} };
+    var KEY = 'pg1', S = { mode: null, ach: {}, bugs: 0, flips: {}, coins: {}, lv: {}, t0: 0, t1: 0, hi: 0 };
     try { var sv = JSON.parse(localStorage.getItem(KEY) || 'null'); if (sv) for (var k in sv) S[k] = sv[k]; } catch (e) {}
+    if (!S.lv) S.lv = {}; if (!S.coins || Array.isArray(S.coins)) S.coins = {};
     var save = function () { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
-    var STAGES = [['Paula estudiante', 0], ['Paula diseñadora web', 90], ['Paula contratada', 210]];
-    var ACH = [['webs4', 'Probaste las 4 webs', 'Supera los 4 retos'], ['bugs20', 'Cazabugs', 'Atrapa 20 bugs en total'], ['desk', 'Curiosidad', 'Abre el escritorio o mantén presionada una web'], ['brands', 'Marquista', 'Dale la vuelta a las 3 marcas'],
-      ['music', 'Spotify sin sentido', 'Cambia de canción en el reproductor'], ['coins', 'Monedera', 'Encuentra las 10 monedas'], ['explorer', 'Exploradora', 'Visita todos los niveles'], ['end', 'Hasta el final', 'Llega a los créditos'], ['hired', '¡Contratada!', 'Haz evolucionar al Paulagotchi del todo']];
-    var LV = [['proyectos', 'Mundo 1', 'Mis webs'], ['nails', 'Nivel 1-1', 'Nails by MelyG'], ['kronox', 'Nivel 1-2', 'Kronox'], ['nacar', 'Nivel 1-3', 'Nácar'], ['amigos', 'Nivel 1-4', 'Entre Amigos'], ['creativos', 'Nivel 1-5', 'Portfolios'],
-      ['figma', 'Nivel 2-1', 'Figma'], ['marcas', 'Nivel 2-2', 'Marcas'], ['sobre', 'Nivel 3-1', 'Sobre mí'], ['herramientas', 'Nivel 3-2', 'Herramientas'], ['contacto', 'Final', 'Créditos']];
-    var WORK = { proyectos: 10, nails: 15, kronox: 15, nacar: 15, amigos: 15, creativos: 15, figma: 15 };
-    var retosDone = function () { try { return JSON.parse(localStorage.getItem('retos') || '{}'); } catch (e) { return {}; } };
-    var MIS = [['nails', 'Prueba la web de Mely (reto 1)', function () { return retosDone().nails; }], ['kronox', 'Ordena los videoclips de Kronox', function () { return retosDone().kronox; }],
-      ['nacar', 'Llena la cesta de Nácar', function () { return retosDone().nacar; }], ['amigos', 'Publica una necesidad en Entre Amigos', function () { return retosDone().amigos; }],
-      ['bugs', 'Atrapa 20 bugs', function () { return S.ach.bugs20; }], ['marcas', 'Dale la vuelta a las 3 marcas', function () { return S.ach.brands; }],
-      ['contacto', 'Llega a los créditos', function () { return S.ach.end; }]];
-    var mission = function () { for (var i = 0; i < MIS.length; i++) if (!MIS[i][2]()) return MIS[i]; return ['contacto', '¡Partida completa! Escríbeme', null]; };
-    var total = function () { return S.st[0] + S.st[1] + S.st[2]; };
-    var stage = function () { var t = total(), s = 0; STAGES.forEach(function (x, i) { if (t >= x[1]) s = i; }); return s; };
     var game = function () { return S.mode === 'game'; };
-    var lastMis = null, winM = $('#winM'), wmT = null;
-    var missionDone = function (was, next) {
-      $('#wmT').textContent = was; $('#wmN').textContent = next; winM.classList.remove('on'); void winM.offsetWidth; winM.classList.add('on'); buzz([20, 50, 20]);
-      if (g) { g.mood = 'happy'; g.jump = 30; }
-      clearTimeout(wmT); wmT = setTimeout(function () { winM.classList.remove('on'); var h0 = $('#hud'); if (h0) { h0.classList.remove('flash'); void h0.offsetWidth; h0.classList.add('flash'); } }, 2200);
-    };
-    var hud = $('#hud'), achT = $('#achT'), lvl = $('#lvl'), lastStage = stage(), seenLv = {}, lvT = null, achQ = [], achBusy = false;
-    var paint = function () {
-      if (!hud) return;
-      $('#hudLv').textContent = 'NV ' + (stage() + 1); $('#hudStage').textContent = STAGES[stage()][0];
-      var hc = $('#hudCv'); if (hc) { var hx = hc.getContext('2d'); hx.clearRect(0, 0, 32, 32); drawSprite(hx, 0, 0, 1, 'happy'); dress(hx, 0, 0, 1); }
-      var mi = mission(); $('#hudMisT').textContent = mi[1];
-      var cn = Object.keys(S.coins || {}).length; $('#hudCoinN').textContent = cn + '/10';
-      if (game() && lastMis && lastMis !== mi[1]) missionDone(lastMis, mi[1]);
-      lastMis = mi[1];
-      S.st.forEach(function (v, i) { $('#hb' + i).style.width = v + '%'; });
-      $('#hudAch').textContent = Object.keys(S.ach).length + '/' + ACH.length;
-      var sw = $('#modeSwap'); if (sw) sw.textContent = game() ? 'Cambiar a modo rápido (sin juego)' : 'Cambiar a modo juego';
-    };
+    var STAGES = ['Paula estudiante', 'Paula diseñadora web', 'Paula contratada'];
+    /* los niveles: una web por parada y al final, contratarla */
+    var LVS = [
+      { k: 'nails', n: 'Nails by MelyG', ic: 'nail', who: 'Manicurista · Katy, Texas', img: 'img/nails-m.webp?v=2', d: 'img/nails-d.webp', url: 'nailsbymelyg.com',
+        hi: 'Mely tiene un estudio de manicura rusa. Diseñé su web en Figma y la programé.',
+        why: 'Necesitaba que sus clientas se probaran colores y formas antes de reservar.',
+        fact: 'Un detalle: la web se abre sola en español o en inglés, según el idioma del teléfono.',
+        c: [[22, 14], [74, 63]] },
+      { k: 'kronox', n: 'Kronox', ic: 'cam', who: 'Director de videoclips · Sevilla', img: 'img/kpanel-m.webp?v=2', d: 'img/kpanel-d.webp', url: 'panel · kronox',
+        hi: 'Kronox hace videoclips. Su web tiene dos partes: la que ven sus clientes y un panel solo para él.',
+        why: 'Con el panel cambia videos, fotos y precios sin depender de mí.',
+        fact: 'Un detalle: para subir un video solo pega el enlace de YouTube y el título se pone solo.',
+        c: [[78, 22], [20, 78]] },
+      { k: 'nacar', n: 'Nácar Estilismo', ic: 'bag', who: 'Tienda online · Sevilla', img: 'img/nacar-m.webp?v=2', d: 'img/nacar-d.webp', url: 'nacar estilismo',
+        hi: 'Nácar es una tienda de ropa en Sevilla. Diseñé y programé su tema de Shopify desde cero.',
+        why: 'Está en seis idiomas, y sigo subiendo yo los productos nuevos.',
+        fact: 'Un detalle: la cesta se abre a un lado, así nadie pierde la página en la que estaba.',
+        c: [[70, 40], [26, 86]] },
+      { k: 'amigos', n: 'Entre Amigos', ic: 'heart', who: 'Proyecto personal', img: 'img/ea-m.webp?v=2',
+        hi: 'Después de los terremotos en Venezuela hice en una semana una app para organizar donaciones.',
+        why: 'Funciona sin conexión, porque en una emergencia la señal falla.',
+        fact: 'Un detalle: quien recibe la ayuda la confirma con un PIN, así quien donó sabe que llegó.',
+        c: [[18, 34], [80, 74]] }
+    ];
+    var NC = LVS.length * 2;
+    var ACH = [['webs4', 'Probaste las 4 webs'], ['coins', 'Monedera: las ' + NC + ' monedas'], ['bugs20', 'Cazabugs'], ['desk', 'Curiosidad'], ['brands', 'Marquista'], ['music', 'Spotify sin sentido'], ['hired', '¡Contratada!']];
+    var nDone = function () { return LVS.filter(function (l) { return S.lv[l.k]; }).length; };
+    var stage = function () { return S.lv.fin ? 2 : nDone() >= 2 ? 1 : 0; };
+    var nCoins = function () { return Object.keys(S.coins).filter(function (c) { return c.indexOf('-') > 0; }).length; };
+    var achT = $('#achT'), achQ = [], achBusy = false;
     var showAch = function () {
       if (achBusy || !achQ.length) return; achBusy = true;
       $('#achTt').textContent = achQ.shift(); achT.classList.add('on'); buzz([10, 30, 10]);
-      setTimeout(function () { achT.classList.remove('on'); setTimeout(function () { achBusy = false; showAch(); }, 400); }, 2600);
+      setTimeout(function () { achT.classList.remove('on'); setTimeout(function () { achBusy = false; showAch(); }, 400); }, 2400);
     };
     var unlock = function (id) {
-      if (S.ach[id]) return; S.ach[id] = 1; save(); paint();
-      if (!game()) return;
+      if (S.ach[id]) return; S.ach[id] = 1; save(); if (!game()) return;
       var a = ACH.filter(function (x) { return x[0] === id; })[0]; if (a) { achQ.push(a[1]); showAch(); }
-      if (g) { g.mood = 'happy'; g.jump = 20; }
-    };
-    var add = function (i, v) {
-      S.st[i] = Math.min(100, S.st[i] + v); save(); paint();
-      var s = stage();
-      if (s > lastStage) { lastStage = s; if (game()) { toastMsg('¡Tu Paulagotchi evolucionó! Ahora es ' + STAGES[s][0]); if (g) { g.mood = 'happy'; g.jump = 30; if (g.status) g.status.textContent = '¡evolucioné!'; } } if (s === 2) unlock('hired'); }
-    };
-    var banner = function (k) {
-      var l = LV.filter(function (x) { return x[0] === k; })[0]; if (!l || seenLv[k] || !game()) return; seenLv[k] = 1;
-      $('#lvlN').textContent = l[1].toUpperCase(); $('#lvlT').textContent = l[2];
-      lvl.classList.add('on'); clearTimeout(lvT); lvT = setTimeout(function () { lvl.classList.remove('on'); }, 1700);
     };
     /* ropa según la etapa: birrete de estudiante, y taza de café al estar contratada */
     var dress = function (ctx, ox, oy, sc) {
@@ -1317,45 +1304,206 @@
       if (s === 0) { P('#1e1414', 8, 0, 16, 2); P('#1e1414', 12, 2, 8, 1); P('#e8bc50', 23, 1, 1, 4); P('#e8bc50', 22, 5, 2, 1); }
       if (s === 2) { P('#FAF6F0', 26, 21, 5, 6); P('#FAF6F0', 31, 22, 1, 3); P('#eba9bd', 27, 23, 3, 2); P('#b9b0a8', 27, 18, 1, 2); P('#b9b0a8', 29, 17, 1, 3); }
     };
+    var COIN = ["..XXXX..", ".XYYYYX.", "XYYWYYYX", "XYWYYYYX", "XYYYYYYX", "XYYYYYOX", ".XYYYOX.", "..XXXX.."], CC = { X: '#8a5a12', Y: '#FFD23F', W: '#fff7c2', O: '#e0a91f' };
+    var drawCoin = function (cv) { var x = cv.getContext('2d'); COIN.forEach(function (r, y) { for (var i = 0; i < 8; i++) if (CC[r[i]]) { x.fillStyle = CC[r[i]]; x.fillRect(i, y, 1, 1); } }); };
+    var face = function (cv, mood) { if (!cv) return; var x = cv.getContext('2d'); x.clearRect(0, 0, 32, 32); drawSprite(x, 0, 0, 1, mood || 'happy'); dress(x, 0, 0, 1); };
+
+    var gw = $('#gw'), map = $('#gwMap'), lvBox = $('#gwLv'), back = $('#gwBack');
+    if (!gw) return;
+    $$('canvas.coin-ic', gw).forEach(drawCoin);
+    /* texto que se escribe solo, como en los juegos; un toque lo completa */
+    var typer = function (el) {
+      var t = null, full = '';
+      var api = {
+        say: function (txt, cb) {
+          clearInterval(t); full = txt; var i = 0; el.textContent = ''; api.busy = true;
+          if (reduce) { el.textContent = txt; api.busy = false; if (cb) cb(); return; }
+          t = setInterval(function () { i += 2; el.textContent = full.slice(0, i); if (i >= full.length) { clearInterval(t); api.busy = false; if (cb) cb(); } }, 22);
+          api.cb = cb;
+        },
+        skip: function () { if (!api.busy) return false; clearInterval(t); el.textContent = full; api.busy = false; if (api.cb) api.cb(); return true; }
+      };
+      return api;
+    };
+
+    /* ---------- el mapa ---------- */
+    var NODES = [{ k: 'start', n: 'Inicio', ic: 'home' }].concat(LVS).concat([{ k: 'fin', n: 'Contrátame', ic: 'mail' }]);
+    var POS = { v: [[22, 88], [70, 74], [28, 58], [72, 43], [30, 28], [66, 13]], h: [[7, 72], [23, 34], [41, 70], [58, 32], [75, 68], [92, 30]] };
+    var nodeEls = [], mapSay = typer($('#gwMapT')), gwG = $('#gwG');
+    NODES.forEach(function (nd, i) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'gw-n' + (i === 0 ? ' start' : '') + (nd.k === 'fin' ? ' fin' : '');
+      b.dataset.i = i;
+      b.innerHTML = '<span class="gw-ic"><canvas width="9" height="9" aria-hidden="true"></canvas></span><span class="gw-l"><small>' + (i === 0 ? '' : nd.k === 'fin' ? 'Final' : 'Nivel ' + i) + '</small>' + nd.n + '</span>';
+      map.appendChild(b); nodeEls.push(b);
+      if (i > 0) b.addEventListener('click', function () { if (b.classList.contains('lock')) { buzz(30); b.classList.remove('no'); void b.offsetWidth; b.classList.add('no'); mapSay.say('Ese nivel todavía está cerrado. Primero termina el que parpadea.'); return; } openLevel(i); });
+    });
+    var cur = function () { for (var i = 0; i < LVS.length; i++) if (!S.lv[LVS[i].k]) return i + 1; return NODES.length - 1; };
+    var horiz = function () { return innerWidth > innerHeight && innerWidth >= 700; };
+    var place = function () {
+      var P = POS[horiz() ? 'h' : 'v'];
+      nodeEls.forEach(function (b, i) { b.style.left = P[i][0] + '%'; b.style.top = P[i][1] + '%'; });
+      $('#gwPath').setAttribute('points', P.map(function (p) { return p.join(','); }).join(' '));
+      var c = cur(), d = c - 1 + (S.lv.fin ? 1 : 0); $('#gwPathDone').setAttribute('points', P.slice(0, Math.max(1, d + 1)).map(function (p) { return p.join(','); }).join(' '));
+    };
+    var gAt = 0;
+    var moveG = function (i, instant) {
+      var P = POS[horiz() ? 'h' : 'v'][i]; gAt = i;
+      gwG.classList.toggle('walk', !instant); gwG.style.left = P[0] + '%'; gwG.style.top = P[1] + '%';
+      if (!instant) setTimeout(function () { gwG.classList.remove('walk'); }, 900);
+    };
+    var gwFrame = 0;
+    (function gLoop(t) { if (!gw.hidden && t - gwFrame > 380) { gwFrame = t; var x = $('canvas', gwG).getContext('2d'); x.clearRect(0, 0, 32, 32); var up = Math.floor(t / 380) % 2; drawSprite(x, 0, up, 1, gwG.classList.contains('walk') ? 'happy' : (Math.floor(t / 380) % 9 === 0 ? 'blink' : 'happy')); dress(x, 0, up, 1); } requestAnimationFrame(gLoop); })(0);
+    var paintMap = function () {
+      var c = cur();
+      nodeEls.forEach(function (b, i) {
+        var nd = NODES[i], ok = i === 0 || S.lv[nd.k], lock = i > c && !(nd.k === 'fin' && S.lv.fin);
+        b.classList.toggle('ok', !!ok && i > 0); b.classList.toggle('lock', lock); b.classList.toggle('now', i === c && !S.lv.fin);
+        b.setAttribute('aria-label', (i === 0 ? 'Inicio' : nd.n) + (lock ? ', cerrado' : ok ? ', completado' : i === c ? ', toca para jugar' : ''));
+        drawPx($('canvas', b), lock ? 'lock' : nd.ic, lock ? '#7a6a66' : ok && i > 0 ? '#221616' : '#EBA9BD');
+      });
+      $('#gwStage').textContent = STAGES[stage()];
+      $('#gwProg').textContent = S.lv.fin ? '¡Juego completado!' : (c > LVS.length ? 'Nivel final' : 'Nivel ' + c + ' de ' + LVS.length);
+      $('#gwCoins').textContent = nCoins() + '/' + NC;
+      face($('#gwFace'));
+      place();
+    };
+    var mapLine = function () {
+      var c = cur();
+      if (S.lv.fin) return '¡Lo lograste! Puedes repetir cualquier nivel, o ver el portfolio completo.';
+      if (c === 1) return '¡Hola! Soy el Paulagotchi. Cada parada del mapa es una web que hizo Paula. Toca el nivel 1 para empezar.';
+      if (c === NODES.length - 1) return '¡Probaste las 4 webs! Solo queda el final. Tócalo.';
+      return '¡Bien! Ahora toca el nivel ' + c + ': ' + NODES[c].n + '.';
+    };
+    var opener = null;
+    var openWorld = function () {
+      if (!gw.hidden) return; opener = document.activeElement;
+      gw.hidden = false; root.classList.add('gw-on'); document.body.style.overflow = 'hidden';
+      lvBox.hidden = true; $('#gwWin').hidden = true; map.parentNode.hidden = false;
+      paintMap(); moveG(cur() > NODES.length - 1 ? NODES.length - 1 : (S.lv.fin ? NODES.length - 1 : cur() - 1), true);
+      setTimeout(function () { mapSay.say(mapLine()); if (!S.lv.fin) { var c = cur(); setTimeout(function () { moveG(c); }, 300); } }, 250);
+      var n = nodeEls[cur()]; if (n) setTimeout(function () { n.focus({ preventScroll: true }); }, 60);
+    };
+    var closeWorld = function () {
+      gw.hidden = true; root.classList.remove('gw-on'); document.body.style.overflow = '';
+      if (back) back.hidden = !game();
+    };
+    addEventListener('resize', function () { if (!gw.hidden) { place(); moveG(gAt, true); } });
+    $('#gwOut').addEventListener('click', function () { closeWorld(); toastMsg('Para volver al juego, toca «Volver al mapa» abajo'); });
+    if (back) back.addEventListener('click', function () { buzz(10); openWorld(); });
+    $('#gwMapBox').addEventListener('click', function () { mapSay.skip(); });
+
+    /* ---------- dentro de un nivel ---------- */
+    var L = null, step = 0, say = typer($('#glTxt')), stg = $('#glStage'), act = $('#glAct'), dots = $('#glDots');
+    var btn = function (txt, fn, cls) { var b = document.createElement('button'); b.type = 'button'; b.className = cls || 'gl-b'; b.innerHTML = txt; b.addEventListener('click', function (e) { e.stopPropagation(); buzz(8); fn(); }); act.appendChild(b); return b; };
+    var go = function (txt) { return '<span class="gl-cur" aria-hidden="true"></span>' + txt; };
+    var showAct = function (fn) { act.innerHTML = ''; act.classList.remove('in'); fn(); void act.offsetWidth; act.classList.add('in'); var f = $('button', act); if (f && !small.matches) f.focus({ preventScroll: true }); };
+    var setDots = function (n, tot) { dots.innerHTML = ''; for (var i = 0; i < tot; i++) { var d = document.createElement('i'); if (i < n) d.className = 'f'; dots.appendChild(d); } };
+    var phoneHTML = function (l) { if (l.d && horiz()) return '<figure class="gl-ph gl-br"><figcaption><i></i><i></i><i></i><span>' + l.url + '</span></figcaption><div class="gl-sc"><img src="' + l.d + '" alt="La web de ' + l.n + ' en el ordenador"></div></figure>'; return '<figure class="gl-ph"><img src="' + l.img + '" alt="La web de ' + l.n + ' en el celular" width="390" height="844"></figure>'; };
+    var talk = function (txt, mood, then) { face($('#glFace'), mood); act.innerHTML = ''; say.say(txt, function () { showAct(then); }); };
+    var STEPS = 4;
+    var run = function () {
+      setDots(step, L.fin ? 2 : STEPS);
+      if (L.fin) return runFin();
+      var l = L;
+      if (step === 0) {
+        stg.innerHTML = phoneHTML(l); stg.className = 'gl-stage';
+        talk(l.hi + ' ' + l.why, 'happy', function () { btn(go('Siguiente'), function () { step++; run(); }); });
+      } else if (step === 1) {
+        stg.className = 'gl-stage hunt';
+        if (!$('.gl-ph', stg)) stg.innerHTML = phoneHTML(l); var ph = $('.gl-sc', stg) || $('.gl-ph', stg);
+        var got = 0, need = 0;
+        l.c.forEach(function (p, j) {
+          var id = l.k + '-' + j; need++;
+          if (S.coins[id]) { got++; return; }
+          var b = document.createElement('button'); b.type = 'button'; b.className = 'gl-coin'; b.style.left = p[0] + '%'; b.style.top = p[1] + '%'; b.setAttribute('aria-label', 'Moneda escondida');
+          b.innerHTML = '<canvas width="8" height="8" aria-hidden="true"></canvas>'; drawCoin($('canvas', b));
+          b.addEventListener('click', function (e) {
+            e.stopPropagation(); if (b.classList.contains('got')) return; b.classList.add('got'); S.coins[id] = 1; save(); got++; buzz([8, 20, 8]);
+            var pl = document.createElement('span'); pl.className = 'coin-plus gl-plus'; pl.textContent = '+1'; pl.style.left = p[0] + '%'; pl.style.top = p[1] + '%'; ph.appendChild(pl);
+            setTimeout(function () { pl.remove(); }, 800);
+            $('#gwCoins').textContent = nCoins() + '/' + NC; var hc = $('.gw-coins'); hc.classList.remove('pop'); void hc.offsetWidth; hc.classList.add('pop');
+            if (nCoins() >= NC) unlock('coins');
+            if (got >= need) { say.say('¡Las tienes! ' + nCoins() + ' de ' + NC + ' monedas.', function () { setTimeout(function () { step++; run(); }, 700); }); }
+            else say.say('¡Una! Te falta otra.');
+          });
+          ph.appendChild(b);
+        });
+        if (got >= need) { step++; run(); return; }
+        talk('Escondí ' + (need - got === 2 ? '2 monedas' : 'una moneda') + ' en su web. Tócalas para recogerlas.', 'happy', function () { btn('No las encuentro', function () { stg.classList.add('hint'); say.say('Mira bien: brillan un poco.'); }, 'gl-b ghost'); });
+      } else if (step === 2) {
+        stg.className = 'gl-stage mis';
+        $$('.gl-coin', stg).forEach(function (c) { c.remove(); });
+        var m = ENTER[l.k] && ENTER[l.k].m;
+        talk('Tu misión: ' + m, 'happy', function () {
+          btn(go('Entrar en la web'), function () { openEnter(l.k, true); });
+          btn('Saltar misión', function () { step++; run(); }, 'gl-b ghost');
+        });
+      } else if (step === 3) {
+        stg.className = 'gl-stage';
+        talk(l.fact, 'happy', function () { btn(go('Terminar nivel'), function () { win(); }); });
+      }
+    };
+    var openLevel = function (i) {
+      var nd = NODES[i]; L = nd.k === 'fin' ? { fin: true, n: 'Contrátame', k: 'fin' } : nd; step = 0;
+      if (!S.t0) { S.t0 = Date.now(); save(); }
+      $('#glN').textContent = L.fin ? 'Final' : 'Nivel ' + i; $('#glT').textContent = L.n; $('#glW').textContent = L.fin ? '' : L.who;
+      map.parentNode.hidden = true; lvBox.hidden = false; lvBox.classList.remove('in'); void lvBox.offsetWidth; lvBox.classList.add('in');
+      buzz(14); run();
+    };
+    var backToMap = function () { lvBox.hidden = true; $('#gwWin').hidden = true; map.parentNode.hidden = false; L = null; paintMap(); mapSay.say(mapLine()); };
+    $('#glBack').addEventListener('click', function () { buzz(8); backToMap(); moveG(Math.min(cur(), NODES.length - 1) - (S.lv.fin ? 0 : 1), true); setTimeout(function () { if (!S.lv.fin) moveG(cur()); }, 200); });
+    $('.gl-box').addEventListener('click', function () { say.skip(); });
+    /* ganaste el nivel */
+    var win = function () {
+      var was = stage(), idx = NODES.indexOf(L);
+      S.lv[L.k] = 1; save();
+      if (nDone() >= LVS.length) unlock('webs4');
+      var w = $('#gwWin'), coinsL = L.c ? L.c.filter(function (p, j) { return S.coins[L.k + '-' + j]; }).length : 0;
+      $('#gwWinK').textContent = 'Nivel ' + idx + ' completado';
+      $('#gwWinC').textContent = coinsL + ' / 2';
+      var ev = stage() > was; $('#gwWinE').hidden = !ev; if (ev) $('#gwWinE').textContent = '¡Tu Paulagotchi evolucionó! Ahora es ' + STAGES[stage()];
+      face($('#gwWinCv')); lvBox.hidden = true; w.hidden = false; w.classList.remove('on'); void w.offsetWidth; w.classList.add('on'); buzz([20, 50, 20]);
+      if (g) { g.mood = 'happy'; g.jump = 24; }
+      $('#gwWinGo').focus({ preventScroll: true });
+    };
+    $('#gwWinGo').addEventListener('click', function () {
+      buzz(10); var from = NODES.indexOf(L); backToMap(); moveG(from, true);
+      setTimeout(function () { moveG(cur()); }, 350);
+    });
+    /* el final: resumen y contratarla */
+    var mmss = function (ms) { var s = Math.round(ms / 1000); return Math.floor(s / 60) + ':' + ('0' + s % 60).slice(-2); };
+    var runFin = function () {
+      stg.className = 'gl-stage fin';
+      if (!S.t1) { S.t1 = Date.now(); }
+      if (!S.lv.fin) { S.lv.fin = 1; save(); unlock('hired'); }
+      var t = S.t1 - (S.t0 || S.t1);
+      stg.innerHTML = '<div class="gl-sum"><canvas id="glBig" width="32" height="32" aria-hidden="true"></canvas><p class="gl-st">' + STAGES[2] + '</p><dl><div><dt>Webs probadas</dt><dd>' + nDone() + '/' + LVS.length + '</dd></div><div><dt>Monedas</dt><dd>' + nCoins() + '/' + NC + '</dd></div><div><dt>Tiempo</dt><dd>' + mmss(t) + '</dd></div></dl></div>';
+      face($('#glBig')); save();
+      if (step === 0) talk('¡Llegaste al final! Viste las 4 webs y el Paulagotchi ya está contratado. Tiene hasta taza de café.', 'happy', function () { btn(go('Siguiente'), function () { step++; run(); }); });
+      else talk('Ahora te toca a ti. Si te gustó cómo trabaja Paula, escríbele. Contesta rápido.', 'happy', function () {
+        var a = document.createElement('a'); a.className = 'gl-b'; a.href = 'mailto:mariaurbanoeu@gmail.com?subject=Vi%20tu%20portfolio'; a.innerHTML = go('Escribirle a Paula'); act.appendChild(a);
+        var v = document.createElement('a'); v.className = 'gl-b ghost'; v.href = 'Paula-Urbano.vcf'; v.setAttribute('download', ''); v.textContent = 'Guardar su contacto'; act.appendChild(v);
+        btn('Ver el portfolio completo', function () { closeWorld(); goTo('proyectos'); }, 'gl-b ghost');
+        btn('Jugar otra vez', function () { S.lv = {}; S.coins = {}; S.t0 = 0; S.t1 = 0; save(); backToMap(); moveG(0, true); setTimeout(function () { moveG(1); }, 300); }, 'gl-b link');
+      });
+    };
+    addEventListener('keydown', function (e) {
+      if (gw.hidden || (ent && !ent.hidden)) return;
+      if (e.key === 'Escape') { if (!lvBox.hidden) $('#glBack').click(); else closeWorld(); }
+    });
+
     var setMode = function (m) {
       S.mode = m; save(); root.classList.toggle('m-game', m === 'game'); root.classList.toggle('m-fast', m === 'fast');
-      var mp = $('#modePick'); if (mp) mp.hidden = true; paint();
-      if (m === 'game') {
-        if (g.status) g.status.textContent = '¡explora y hazme crecer!'; g.mood = 'happy'; g.jump = 24; buzz(14);
-        var co = $('#coach'); if (co) { co.hidden = false; root.classList.add('coach-on'); }
-        if (hud) { hud.classList.remove('flash'); void hud.offsetWidth; hud.classList.add('flash'); }
-      } else { toastMsg('Modo rápido: solo el portfolio'); if (g && g.status) g.status.textContent = '¿jugamos luego?'; }
+      var mp = $('#modePick'); if (mp) mp.hidden = true;
+      var sw = $('#modeSwap'); if (sw) sw.textContent = m === 'game' ? 'Cambiar a modo rápido (sin juego)' : 'Cambiar a modo juego';
+      if (m === 'game') { buzz(14); openWorld(); }
+      else { closeWorld(); if (back) back.hidden = true; toastMsg('Modo rápido: solo el portfolio'); if (g && g.status) g.status.textContent = '¿jugamos luego?'; }
     };
-    if (S.mode === 'game') root.classList.add('m-game');
-    if (S.mode === 'fast') root.classList.add('m-fast');
-    var coach = $('#coach');
-    var coachOff = function () { if (coach) coach.hidden = true; root.classList.remove('coach-on'); };
-    if (coach) {
-      $('#coachX').addEventListener('click', coachOff);
-      $('#coachGo').addEventListener('click', function () { coachOff(); var m = mission(); if (m[0] === 'bugs') openGame(); else goTo(m[0]); });
-      addEventListener('scroll', function () { if (!coach.hidden && scrollY > innerHeight * 1.2) coachOff(); }, { passive: true });
-    }
-    /* monedas: se recogen y vuelan a la barra */
-    var COIN = ["..XXXX..", ".XYYYYX.", "XYYWYYYX", "XYWYYYYX", "XYYYYYYX", "XYYYYYOX", ".XYYYOX.", "..XXXX.."], CC = { X: '#8a5a12', Y: '#FFD23F', W: '#fff7c2', O: '#e0a91f' };
-    $$('.coin canvas, .hud-coin canvas').forEach(function (cv) { var cx2 = cv.getContext('2d'); COIN.forEach(function (r, y) { for (var i = 0; i < 8; i++) if (CC[r[i]]) { cx2.fillStyle = CC[r[i]]; cx2.fillRect(i, y, 1, 1); } }); });
-    var paintCoins = function () { $$('.coin').forEach(function (c) { c.classList.toggle('got', !!(S.coins || {})[c.dataset.coin]); }); };
-    paintCoins();
-    $$('.coin').forEach(function (c) {
-      c.addEventListener('click', function (e) {
-        e.stopPropagation(); var k = c.dataset.coin; if (!S.coins) S.coins = {}; if (S.coins[k]) return;
-        S.coins[k] = 1; save(); buzz([8, 20, 8]);
-        var r = c.getBoundingClientRect(), hc = $('#hudCoin').offsetParent ? $('#hudCoin').getBoundingClientRect() : $('#hudAchB').getBoundingClientRect();
-        var f = document.createElement('canvas'); f.width = f.height = 8; f.className = 'coin-fly'; f.getContext('2d').drawImage($('canvas', c), 0, 0);
-        f.style.left = (r.left + 8) + 'px'; f.style.top = (r.top + 8) + 'px'; document.body.appendChild(f);
-        var pl = document.createElement('span'); pl.className = 'coin-plus'; pl.textContent = '+10'; pl.style.left = (r.left + 4) + 'px'; pl.style.top = r.top + 'px'; document.body.appendChild(pl);
-        requestAnimationFrame(function () { f.style.transform = 'translate(' + (hc.left - r.left - 8) + 'px,' + (hc.top - r.top - 8) + 'px) scale(.6)'; f.style.opacity = '0'; });
-        setTimeout(function () { f.remove(); pl.remove(); var hcE = $('#hudCoin'); hcE.classList.remove('pop'); void hcE.offsetWidth; hcE.classList.add('pop'); }, 800);
-        paintCoins(); add(0, 4); add(1, 4);
-        var n = Object.keys(S.coins).length; toastMsg('Moneda ' + n + ' de 10');
-        if (n >= 10) unlock('coins');
-      });
-    });
+    var sw0 = $('#modeSwap'); if (sw0) { sw0.textContent = game() ? 'Cambiar a modo rápido (sin juego)' : 'Cambiar a modo juego'; sw0.addEventListener('click', function () { setMode(game() ? 'fast' : 'game'); }); }
     var gl = $('#gLater'); if (gl) gl.addEventListener('click', function () { setMode('game'); });
+    /* si vuelves en modo juego, entras directo al mapa (después de la intro) */
+    if (game() && !root.classList.contains('ts-on')) setTimeout(function () { if (!root.classList.contains('intro-on')) openWorld(); else { var iv = setInterval(function () { if (!root.classList.contains('intro-on')) { clearInterval(iv); openWorld(); } }, 120); } }, 60);
+
     /* pantalla de inicio: primera visita */
     var ts = $('#ts');
     if (ts && root.classList.contains('ts-on')) {
@@ -1375,42 +1523,6 @@
       });
       setTimeout(function () { opts[0].focus({ preventScroll: true }); }, 100);
     }
-    /* elegir modo como en una consola: cursor, flechas y Enter */
-    var mpBox = $('#modePick'), mpCards = mpBox ? $$('.mp-card', mpBox) : [];
-    var mpCv = $('#mpCv'); if (mpCv) { var mc = mpCv.getContext('2d'); drawSprite(mc, 0, 0, 1, 'happy'); }
-    var mpSel = function (b) { mpCards.forEach(function (x) { x.classList.toggle('on', x === b); }); };
-    mpCards.forEach(function (b) {
-      b.addEventListener('mouseenter', function () { mpSel(b); });
-      b.addEventListener('focus', function () { mpSel(b); });
-      b.addEventListener('click', function () {
-        if (mpBox.dataset.busy) return; mpBox.dataset.busy = 1; mpSel(b); b.classList.add('chosen'); buzz([10, 40, 10]);
-        setTimeout(function () { mpBox.classList.add('out'); }, 550);
-        setTimeout(function () { setMode(b.dataset.modeSet); mpBox.classList.remove('out'); delete mpBox.dataset.busy; b.classList.remove('chosen'); }, 950);
-      });
-    });
-    addEventListener('keydown', function (e) {
-      if (!mpBox || mpBox.hidden || e.target.closest && e.target.closest('input,textarea')) return;
-      var r = mpBox.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return;
-      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { var i = mpCards.findIndex(function (x) { return x.classList.contains('on'); }); var n = mpCards[(i + (e.key === 'ArrowRight' ? 1 : -1) + mpCards.length) % mpCards.length]; mpSel(n); n.focus({ preventScroll: true }); e.preventDefault(); }
-      if (e.key === 'Enter' && document.activeElement && !document.activeElement.closest('.mp-card')) { var on = mpCards.filter(function (x) { return x.classList.contains('on'); })[0]; if (on) { on.click(); e.preventDefault(); } }
-    });
-    var sw0 = $('#modeSwap'); if (sw0) sw0.addEventListener('click', function () { setMode(game() ? 'fast' : 'game'); });
-    /* el mapa: etapa, barras, niveles y logros */
-    var misB = $('#hudMis'); if (misB) misB.addEventListener('click', function () { var m = mission(); buzz(8); if (m[0] === 'bugs') openGame(); else goTo(m[0]); });
-    var achB = $('#hudAchB'); if (achB) achB.addEventListener('click', function () { $('#hudMap').click(); });
-    var hudMap = $('#hudMap'); if (hudMap) hudMap.addEventListener('click', function () {
-      var d = document.createElement('div'); d.className = 'gm';
-      var s = stage(), html = '<div class="gm-stage"><canvas width="32" height="32"></canvas><div><b>' + STAGES[s][0] + '</b><small>Nivel ' + (s + 1) + ' de 3' + (s < 2 ? ' · ' + (STAGES[s + 1][1] - total()) + ' puntos para evolucionar' : ' · ¡al máximo!') + '</small></div></div>';
-      html += '<div class="gm-bars">' + [['Felicidad', '#EBA9BD'], ['Energía', '#FFD23F'], ['Ganas de trabajar', '#7fd16b']].map(function (b, i) { return '<p><span>' + b[0] + '</span><i><b style="width:' + S.st[i] + '%;background:' + b[1] + '"></b></i></p>'; }).join('') + '</div>';
-      html += '<h4>Niveles</h4><ul class="gm-lv">' + LV.map(function (l) { return '<li><a href="#' + l[0] + '" data-lv="' + l[0] + '"' + (S.vis[l[0]] ? ' class="ok"' : '') + '>' + l[2] + '<span>' + l[1] + (S.vis[l[0]] ? ' · ✓' : '') + '</span></a></li>'; }).join('') + '</ul>';
-      html += '<h4>Logros ' + Object.keys(S.ach).length + '/' + ACH.length + '</h4><ul class="gm-ach">' + ACH.map(function (a) { var ok = S.ach[a[0]]; return '<li' + (ok ? ' class="ok"' : '') + '><b>' + (ok ? a[1] : '???') + '</b>' + a[2] + '</li>'; }).join('') + '</ul>';
-      html += '<p class="gm-sw"><button class="link" type="button" data-sw>Cambiar a modo rápido (sin juego)</button></p>';
-      d.innerHTML = html;
-      var c = $('canvas', d).getContext('2d'); drawSprite(c, 0, 0, 1, 'happy'); dress(c, 0, 0, 1);
-      $$('[data-lv]', d).forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); closeSheet(); setTimeout(function () { goTo(a.dataset.lv); }, 250); }); });
-      $('[data-sw]', d).addEventListener('click', function () { closeSheet(); setMode('fast'); });
-      openSheet('Tu partida', d);
-    });
     /* créditos con cuenta atrás de arcade */
     var cr = $('#credits'), crT = null;
     if (cr) {
@@ -1424,20 +1536,13 @@
     window.PG = {
       dress: dress,
       ev: function (type, v) {
-        if (type === 'visit') {
-          if (v && !S.vis[v] && LV.some(function (l) { return l[0] === v; })) { S.vis[v] = 1; save(); if (WORK[v]) add(2, WORK[v]); }
-          banner(v);
-          if (LV.every(function (l) { return S.vis[l[0]]; })) unlock('explorer');
-        }
-        if (type === 'reto') { paint(); add(0, 25); var n = 0; try { n = Object.keys(JSON.parse(localStorage.getItem('retos') || '{}')).length; } catch (e) {} if (n >= 4) unlock('webs4'); }
-        if (type === 'bugs') { S.bugs += v || 0; save(); add(1, Math.min(40, (v || 0) * 4)); if (S.bugs >= 20) unlock('bugs20'); }
-        if (type === 'desk') { add(1, 10); unlock('desk'); }
-        if (type === 'flip') { S.flips[v] = 1; save(); add(0, 5); if (Object.keys(S.flips).length >= 3) unlock('brands'); }
-        if (type === 'music') { add(0, 5); unlock('music'); }
-        if (type === 'end') { add(0, 10); unlock('end'); }
+        if (type === 'reto') { if (L && !L.fin && L.k === v && step === 2) { step++; setTimeout(run, 350); } }
+        if (type === 'bugs') { S.bugs += v || 0; save(); if (S.bugs >= 20) unlock('bugs20'); }
+        if (type === 'desk') unlock('desk');
+        if (type === 'flip') { S.flips[v] = 1; save(); if (Object.keys(S.flips).length >= 3) unlock('brands'); }
+        if (type === 'music') unlock('music');
       }
     };
-    paint();
   })();
 
   /* ---------- si te vas a otra pestaña ---------- */
