@@ -803,7 +803,7 @@
   var lvFit = function (f) {
     var v = lvVideo(f), W = +f.dataset.w; if (!v) return;
     var w = v.offsetWidth, h = v.offsetHeight; if (!w || !h) return;
-    var k = w / W; f.style.left = v.offsetLeft + 'px'; f.style.top = v.offsetTop + 'px';
+    var k = w / W, op = f.offsetParent || f.parentNode, r = v.getBoundingClientRect(), pr = op.getBoundingClientRect(); f.style.left = (r.left - pr.left - op.clientLeft) + 'px'; f.style.top = (r.top - pr.top - op.clientTop) + 'px';
     f.style.width = f.style.minWidth = f.style.maxWidth = W + 'px'; f.style.height = (h / k) + 'px'; f.style.transform = 'scale(' + k + ')'; f.setAttribute('scrolling', 'no');
     f.style.borderRadius = (parseFloat(getComputedStyle(v).borderTopLeftRadius) / k) + 'px';
   };
