@@ -51,7 +51,7 @@
   var postIO = new IntersectionObserver(function (es) {
     es.forEach(function (e) { if (e.isIntersecting) { var v = e.target; if (v.dataset.poster) { v.poster = v.dataset.poster; v.removeAttribute('data-poster'); } postIO.unobserve(v); } });
   }, { rootMargin: '900px 0px' });
-  $$('video[data-poster]').forEach(function (v) { if (!v.closest('.bw')) postIO.observe(v); });
+  $$('video[data-poster]').forEach(function (v) { if (!v.closest('.bw,.cs')) postIO.observe(v); });
   var FONTS = {
     nails: [['Nails Display', 'nails-display', 'normal'], ['Nails Display', 'nails-display-i', 'italic'], ['Nails Sans', 'nails-sans', 'normal']],
     nacar: [['Nacar Display', 'nacar-display', 'normal'], ['Nacar Display', 'nacar-display-i', 'italic'], ['Nacar Sans', 'nacar-sans', 'normal']],
@@ -70,7 +70,7 @@
   }
 
   /* ---------- videos: se cargan cerca y solo suenan (mudos) a la vista ---------- */
-  var vids = $$('video[data-src]').filter(function (v) { return !v.closest('.bw'); });
+  var vids = $$('video[data-src]').filter(function (v) { return !v.closest('.bw,.cs'); });
   function load(v) { if (!v.src) { v.src = v.dataset.src; v.load(); } }
   var vIO = new IntersectionObserver(function (es) {
     es.forEach(function (e) {
@@ -573,126 +573,59 @@
   }
 
 
-  /* ======================= mis webs: navegador con pestañas ======================= */
-  var bw = $('.bw');
-  if (bw) {
-    var bwTabs = $$('.bw-tab', bw), bwV = $$('.bw-v', bw), bwP = $$('.bw-p', bw), bwUrl = $('#bwUrl'), bwLoad = $('.bw-load', bw);
-    var urls = bwUrl.dataset.urls.split('|'), bwCur = -1, bwVis = false, sticky = false, tyT = null, prog = $$('.bw-prog i', bw);
-    $$('.bw-ic', bw).forEach(function (c) { drawIcon(c.getContext('2d'), c.dataset.icon, 1, 0, 1); });
-    /* el texto se escribe letra por letra, como un diálogo de videojuego */
-    var typeP = function (p) {
-      clearInterval(tyT);
-      $$('.ty-car', bw).forEach(function (c) { c.remove(); });
-      var els = $$('dd, .bw-note', p);
-      els.forEach(function (el) {
-        if (!el.dataset.t) el.dataset.t = el.textContent;
-        el.innerHTML = reduce ? '' : '<span class="ty-done"></span><span class="ty-rest"></span>';
-        if (reduce) el.textContent = el.dataset.t; else $('.ty-rest', el).textContent = el.dataset.t;
-      });
-      if (reduce) return;
-      var e = 0, ch = 0, car = document.createElement('span'); car.className = 'ty-car';
-      tyT = setInterval(function () {
-        var el = els[e]; if (!el) { clearInterval(tyT); car.remove(); return; }
-        var t = el.dataset.t, done = $('.ty-done', el), rest = $('.ty-rest', el);
-        ch = Math.min(t.length, ch + 2);
-        done.textContent = t.slice(0, ch); rest.textContent = t.slice(ch);
-        el.insertBefore(car, rest);
-        if (ch >= t.length) { e++; ch = 0; }
-      }, 16);
+  /* ======================= mis webs: cartuchos y una tele ======================= */
+  var cs = $('.cs');
+  if (cs) {
+    var carts = $$('.cart', cs), tvV = $$('.tv-v', cs), csP = $$('.cs-p', cs), tvUrl = $('#tvUrl'), tvUrls = tvUrl.dataset.urls.split('|');
+    var tvScr = $('#tvScr'), tvCart = $('#tvCart'), tvOsd = $('#tvOsd'), csCur = -1, csVis = false, csTy = null;
+    var CSE = ['nails', 'kronoxweb', 'nacar', 'amigos'], CSN = ['NAILS', 'KRONOX', 'NÁCAR', 'AMIGOS'];
+    $$('.bw-ic', cs).forEach(function (c) { drawIcon(c.getContext('2d'), c.dataset.icon, 1, 0, 1); });
+    /* la ficha se escribe letra por letra */
+    var csType = function (p) {
+      clearInterval(csTy); var els = $$('dd', p);
+      els.forEach(function (el) { if (!el.dataset.t) el.dataset.t = el.textContent; el.textContent = reduce ? el.dataset.t : ''; });
+      if (reduce) return; var e = 0, ch = 0;
+      csTy = setInterval(function () { var el = els[e]; if (!el) { clearInterval(csTy); return; } ch = Math.min(el.dataset.t.length, ch + 2); el.textContent = el.dataset.t.slice(0, ch); if (ch >= el.dataset.t.length) { e++; ch = 0; } }, 16);
     };
-    var BWK = ['nails', 'kronox', 'nacar', 'amigos'], BWE = ['nails', 'kronoxweb', 'nacar', 'amigos'];
-    var bwSet = function (i) {
-      if (i === bwCur) return; bwCur = i;
-      bwTabs.forEach(function (t, k) { t.setAttribute('aria-selected', String(k === i)); t.tabIndex = k === i ? 0 : -1; });
-      bwV.forEach(function (v, k) {
-        v.classList.toggle('on', k === i);
-        var vid = $('video', v);
-        if ((k === i || k === i + 1) && vid.dataset.poster) { vid.poster = vid.dataset.poster; vid.removeAttribute('data-poster'); }
-        if (k === i && bwVis) { load(vid); if (!reduce) { var pp = vid.play(); if (pp && pp.catch) pp.catch(function () {}); } }
-        else if (!vid.paused) vid.pause();
-      });
-      bwP.forEach(function (p, k) { p.classList.toggle('on', k === i); });
-      typeP(bwP[i]);
-      prog.forEach(function (p, k) { p.classList.toggle('done', k < i); p.classList.remove('now'); });
-      if (prog[i]) { void prog[i].offsetWidth; if (bwVis && !reduce) prog[i].classList.add('now'); }
-      bwUrl.textContent = urls[i]; bw.dataset.th = BWK[i]; bw.classList.remove('nav'); $('#bwNav').textContent = 'Navegar aquí';
-      if (window.lvRefresh) setTimeout(lvRefresh, 60);
-      bwLoad.classList.remove('go'); void bwLoad.offsetWidth; bwLoad.classList.add('go');
+    var csPlay = function () { var v = $('video', tvV[csCur]); if (!v) return; if (csVis) { load(v); if (!reduce) { var pp = v.play(); if (pp && pp.catch) pp.catch(function () {}); } } else v.pause(); };
+    var csShow = function (i) {
+      tvV.forEach(function (v, k) { v.classList.toggle('on', k === i); var vid = $('video', v); if (k !== i && !vid.paused) vid.pause(); if (k === i && vid.dataset.poster) { vid.poster = vid.dataset.poster; vid.removeAttribute('data-poster'); } });
+      csPlay(); if (window.lvRefresh) setTimeout(lvRefresh, 60);
     };
-    var bwScroll = function () {
-      if (!sticky) return;
-      var r = bw.getBoundingClientRect(), span = bw.offsetHeight - innerHeight;
-      var q = Math.min(.999, Math.max(0, -r.top / Math.max(1, span)));
-      bwSet(Math.floor(q * bwTabs.length));
+    var csSet = function (i, anim) {
+      if (i === csCur) return; var first = csCur < 0; csCur = i;
+      carts.forEach(function (c, k) { c.classList.toggle('on', k === i); c.setAttribute('aria-selected', String(k === i)); c.tabIndex = k === i ? 0 : -1; });
+      csP.forEach(function (p, k) { p.classList.toggle('on', k === i); }); csType(csP[i]);
+      tvUrl.textContent = tvUrls[i]; cs.classList.remove('nav'); $('#tvNav').textContent = 'Navegar aquí';
+      tvCart.style.setProperty('--c', carts[i].style.getPropertyValue('--c')); tvCart.style.setProperty('--a', carts[i].style.getPropertyValue('--a'));
+      tvOsd.textContent = 'CH 0' + (i + 1) + ' · ' + CSN[i];
+      if (first || !anim || reduce) { csShow(i); return; }
+      /* el cartucho vuela a la consola, entra y la tele se enciende con estática */
+      var from = $('.cart-b', carts[i]).getBoundingClientRect(), to = tvCart.getBoundingClientRect(), fly = $('.cart-b', carts[i]).cloneNode(true);
+      fly.className = 'cart-b cart-fly'; fly.style.cssText = 'left:' + from.left + 'px;top:' + from.top + 'px;width:' + from.width + 'px;height:' + from.height + 'px;--c:' + carts[i].style.getPropertyValue('--c') + ';--a:' + carts[i].style.getPropertyValue('--a');
+      document.body.appendChild(fly); buzz(10);
+      var dx = to.left + to.width / 2 - (from.left + from.width / 2), dy = to.top - from.top, k = to.width / from.width;
+      fly.animate([{ transform: 'translate(0,0) scale(1)' }, { transform: 'translate(' + dx + 'px,' + (dy - 60) + 'px) scale(' + k + ')', offset: .7 }, { transform: 'translate(' + dx + 'px,' + (dy + to.height * .2) + 'px) scale(' + k + ')' }], { duration: 520, easing: 'steps(8)' }).onfinish = function () {
+        fly.remove(); cs.classList.remove('ins'); void cs.offsetWidth; cs.classList.add('ins'); buzz([6, 30, 6]);
+        tvScr.classList.add('st'); setTimeout(function () { csShow(i); }, 180); setTimeout(function () { tvScr.classList.remove('st'); }, 420);
+      };
     };
-    new IntersectionObserver(function (es) {
-      bwVis = es[0].isIntersecting;
-      if (prog[bwCur]) prog[bwCur].classList.toggle('now', bwVis && !reduce && !sticky);
-      var vid = $('video', bwV[Math.max(0, bwCur)]);
-      if (bwVis) { load(vid); if (!reduce) { var pp = vid.play(); if (pp && pp.catch) pp.catch(function () {}); } } else vid.pause();
-    }, { rootMargin: '100px 0px' }).observe(bw);
-    bwTabs.forEach(function (t, i) {
-      t.addEventListener('click', function () {
-        if (!sticky) { bwSet(i); return; }
-        var top = bw.getBoundingClientRect().top + scrollY, span = bw.offsetHeight - innerHeight;
-        scrollTo({ top: top + span * (i + .5) / bwTabs.length, behavior: 'smooth' });
-      });
-      t.addEventListener('keydown', function (e) {
-        var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return;
-        var n = (i + d + bwTabs.length) % bwTabs.length; bwTabs[n].focus(); bwTabs[n].click();
+    carts.forEach(function (c, i) {
+      c.addEventListener('click', function () { csSet(i, true); });
+      c.addEventListener('keydown', function (e) {
+        var d = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowLeft' ? -1 : 0; if (!d) return;
+        e.preventDefault(); var n = (i + d + carts.length) % carts.length; carts[n].focus(); csSet(n, true);
       });
     });
-    addEventListener('scroll', function () { requestAnimationFrame(bwScroll); }, { passive: true });
-    bwSet(0); bwScroll();
-    /* historias: avanzan solas, se tocan los lados o se desliza */
-    var go = function (d) { var n = bwCur + d; if (n < 0) n = 0; if (n > bwTabs.length - 1) n = 0; buzz(6); if (document.startViewTransition && !reduce) document.startViewTransition(function () { bwSet(n); }); else bwSet(n); };
-    prog.forEach(function (p) { $('b', p).addEventListener('animationend', function () { if (!sticky) go(1); }); });
-    bw.addEventListener('mouseenter', function () { bw.classList.add('hold'); });
-    bw.addEventListener('mouseleave', function () { bw.classList.remove('hold'); });
-    var view = $('.bw-view', bw), win = $('.bw-win', bw), sx = 0, sy = 0, st = 0, lock = null;
-    win.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; st = Date.now(); lock = null; bw.classList.add('hold'); }, { passive: true });
-    /* al deslizar de lado, la página no se mueve hacia abajo */
-    win.addEventListener('touchmove', function (e) {
-      if (sticky) return;
-      var dx = e.touches[0].clientX - sx, dy = e.touches[0].clientY - sy;
-      if (lock === null && (Math.abs(dx) > 6 || Math.abs(dy) > 6)) lock = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
-      if (lock === 'x' && e.cancelable) e.preventDefault();
-    }, { passive: false });
-    win.addEventListener('touchend', function (e) {
-      bw.classList.remove('hold'); if (sticky) return;
-      if (lock === 'y') return;
-      var t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy;
-      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? 1 : -1);
-      else if (Math.abs(dx) < 10 && Math.abs(dy) < 10 && Date.now() - st < 350 && view.contains(e.target)) { var r = view.getBoundingClientRect(); if (t.clientX < r.left + r.width * .3) go(-1); else if (t.clientX > r.right - r.width * .3) go(1); }
-    }, { passive: true });
-    /* navegar la web dentro del navegador, o verla a pantalla completa */
-    $('#bwNav').addEventListener('click', function () {
-      var f = $('iframe.lv', bwV[bwCur]);
-      if (!f || !f.classList.contains('ok')) { openEnter(BWE[bwCur]); return; }
-      var on = bw.classList.toggle('nav'); this.textContent = on ? 'Dejar de navegar' : 'Navegar aquí'; bw.classList.toggle('hold', on); buzz(8);
+    new IntersectionObserver(function (es) { csVis = es[0].isIntersecting; if (csCur >= 0) csPlay(); }, { rootMargin: '100px 0px' }).observe(cs);
+    $('#tvNav').addEventListener('click', function () {
+      var f = $('iframe.lv', tvV[csCur]);
+      if (!f || !f.classList.contains('ok')) { openEnter(CSE[csCur]); return; }
+      var on = cs.classList.toggle('nav'); this.textContent = on ? 'Dejar de navegar' : 'Navegar aquí'; buzz(8);
     });
-    $('#bwFull').addEventListener('click', function () { openEnter(BWE[bwCur]); });
-    /* al pasar por una pestaña se ve una miniatura de esa web, como en Chrome */
-    var bwPvEl = $('#bwPv'), PVI = ['img/nails-d.webp', 'img/kpanel-d.webp', 'img/nacar-d.webp', 'img/ea-m.webp?v=2'];
-    bwTabs.forEach(function (t, i) {
-      t.addEventListener('mouseenter', function () {
-        if (i === bwCur || !fine.matches) return;
-        $('img', bwPvEl).src = PVI[i]; $('span', bwPvEl).textContent = urls[i]; bwPvEl.classList.toggle('m', i === 3);
-        var wr = $('.bw-win', bw).getBoundingClientRect(), tr = t.getBoundingClientRect();
-        bwPvEl.style.left = Math.min(wr.width - 260, Math.max(8, tr.left - wr.left)) + 'px'; bwPvEl.classList.add('on');
-      });
-      t.addEventListener('mouseleave', function () { bwPvEl.classList.remove('on'); });
-      t.addEventListener('click', function () { bwPvEl.classList.remove('on'); });
-    });
-    $('.bw-insp', bw).addEventListener('click', function () {
-      var p = bwP[bwCur].cloneNode(true); clearInterval(tyT);
-      $$('dd, .bw-note', bwP[bwCur]).forEach(function (el) { if (el.dataset.t) el.textContent = el.dataset.t; });
-      $$('dd, .bw-note', p).forEach(function (el) { if (el.dataset.t) el.textContent = el.dataset.t; });
-      $$('.bw-ic', p).forEach(function (c) { c.remove(); });
-      openSheet('Inspeccionar · ' + bwTabs[bwCur].textContent, p);
-    });
+    $('#tvFull').addEventListener('click', function () { openEnter(CSE[csCur]); });
+    csSet(0);
   }
-
 
   /* ======================= hoja que sube desde abajo ======================= */
   var sheet = $('#sheet'), sheetP = sheet && $('.sheet-p', sheet), sheetOpener = null;
@@ -828,7 +761,7 @@
     f.style.width = f.style.minWidth = f.style.maxWidth = W + 'px'; f.style.height = (h / k) + 'px'; f.style.transform = 'scale(' + k + ')'; f.setAttribute('scrolling', 'no');
     f.style.borderRadius = (parseFloat(getComputedStyle(v).borderTopLeftRadius) / k) + 'px';
   };
-  var lvShown = function (f) { var bv = f.closest('.bw-v'); return !bv || bv.classList.contains('on'); };
+  var lvShown = function (f) { var bv = f.closest('.bw-v,.tv-v'); return !bv || bv.classList.contains('on'); };
   var lvUnload = function (f) { f.classList.remove('ok'); f.removeAttribute('src'); f._t = 0; lvOn = lvOn.filter(function (x) { return x !== f; }); var v = lvVideo(f); if (v && v.src && !reduce && f._vis) { var pp = v.play(); if (pp && pp.catch) pp.catch(function () {}); } };
   var lvLoad = function (f) {
     if (f.getAttribute('src') || !lvShown(f)) return;
