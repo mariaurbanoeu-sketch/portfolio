@@ -32,6 +32,7 @@
       if (window.dockMark) dockMark(e.target);
       if (window.hereMark) hereMark(e.target);
       window.curSec = e.target.dataset.here || e.target.id;
+      if (window.PG) PG.ev('visit', window.curSec);
       if (window.autoSay) autoSay();
       if (e.target.dataset.icon) mini.icon = e.target.dataset.icon;
     } });
@@ -130,6 +131,7 @@
       fig.style.setProperty('--cur', fr.top < innerHeight * .3 && fr.bottom > innerHeight * .8 ? 1 : 0);
     }
     mini.el.classList.toggle('show', scrollY > innerHeight * .8);
+    var hudEl = $('#hud'); if (hudEl) hudEl.classList.toggle('show', scrollY > innerHeight * .8);
   }
   var ticking = false;
   addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; onScroll(); }); } }, { passive: true });
@@ -207,14 +209,14 @@
         var bounce = g.jump > 0 ? Math.round(Math.sin(g.jump / 8 * Math.PI) * 4) : (Math.floor(t / 480) % 2);
         if (g.jump > 0) g.jump--; else if (g.mood === 'happy') g.mood = 'idle';
         gx.clearRect(0, 0, 64, 64);
-        drawSprite(gx, 0, 4 - bounce, 2, mood);
+        drawSprite(gx, 0, 4 - bounce, 2, mood); if (window.PG) PG.dress(gx, 0, 4 - bounce, 2);
         /* teclas que brillan mientras programa */
         if (g.jump === 0) { gx.fillStyle = (Math.floor(t / 240) % 2) ? '#eba9bd' : '#d6dcc0'; gx.fillRect(22 + (Math.floor(t / 240) % 5) * 4, 56, 3, 2); }
         if (g.jump > 0) drawIcon(gx, 'heart', 44, 2, 2);
         else if (g.sleep || g.nap) { gx.fillStyle = '#3a2e32'; var zy = 10 - (Math.floor(t / 480) % 3) * 2; gx.fillRect(48, zy, 6, 2); gx.fillRect(52, zy + 2, 2, 2); gx.fillRect(50, zy + 4, 2, 2); gx.fillRect(48, zy + 6, 6, 2); }
         /* mini */
         mx.clearRect(0, 0, 32, 32);
-        drawSprite(mx, 0, 1 - (Math.floor(t / 480) % 2), 1, mood);
+        drawSprite(mx, 0, 1 - (Math.floor(t / 480) % 2), 1, mood); if (window.PG) PG.dress(mx, 0, 1 - (Math.floor(t / 480) % 2), 1);
         if (g.nap && g.jump === 0) { mx.fillStyle = '#3a2e32'; var zz = 2 - (Math.floor(t / 480) % 2); mx.fillRect(25, zz, 4, 1); mx.fillRect(27, zz + 1, 1, 1); mx.fillRect(26, zz + 2, 1, 1); mx.fillRect(25, zz + 3, 4, 1); }
         if (mini.icon) drawIcon(mx, mini.icon, 25, 1, 1);
       }
@@ -290,7 +292,7 @@
     var name = $('h3', b.parentNode).textContent;
     var set = function () { var on = b.getAttribute('aria-pressed') === 'true'; b.setAttribute('aria-label', (on ? 'Volver a la portada de ' : 'Dar la vuelta a la ficha de ') + name); };
     set();
-    b.addEventListener('click', function () { buzz(10); b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true')); set(); });
+    b.addEventListener('click', function () { buzz(10); b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true')); set(); if (window.PG) PG.ev('flip', name); });
   });
 
   /* ======================= sobre mí: yo en pixel y 3 iconos ======================= */
@@ -653,6 +655,7 @@
     /* si llegas al final, celebra */
     var ft = $('#contacto');
     if (ft) new IntersectionObserver(function (es) {
+      if (es[0].isIntersecting && window.PG) PG.ev('end');
       if (es[0].isIntersecting && !ended) { ended = true; g.mood = 'happy'; g.jump = 30; buzz([15, 40, 15]); toastMsg('¡Llegaste al final! El Paulagotchi está orgulloso :)'); }
     }, { threshold: .6 }).observe(ft);
   }
@@ -671,7 +674,7 @@
       mpT0 = performance.now();
     };
     $('#mpPrev').addEventListener('click', function () { buzz(6); playSong(si - 1); });
-    $('#mpNext').addEventListener('click', function () { buzz(6); playSong(si + 1); });
+    $('#mpNext').addEventListener('click', function () { buzz(6); playSong(si + 1); if (window.PG) PG.ev('music'); });
     playSong(0);
     new IntersectionObserver(function (es) { mpOn = es[0].isIntersecting; }).observe(mp);
     (function tickMp(t) {
@@ -710,7 +713,7 @@
           load(v); if (pv.getAttribute('src') !== v.src) pv.src = v.src;
           try { pv.currentTime = v.currentTime || 0; } catch (e) {}
           var pp = pv.play(); if (pp && pp.catch) pp.catch(function () {});
-          peek.classList.add('on'); buzz(12);
+          peek.classList.add('on'); buzz(12); if (window.PG) PG.ev('desk');
         }, 280);
       }, { passive: true });
       ['touchend', 'touchcancel', 'touchmove'].forEach(function (ev) { f.addEventListener(ev, close, { passive: true }); });
@@ -736,7 +739,7 @@
   /* aparecen solos al llegar a cada sección (una vez por sección) */
   var said = {}, lastSay = 0, autoT = null;
   window.autoSay = function () {
-    var k = window.curSec; if (!say || !k || said[k] || k === 'top' || !SAY[k]) return;
+    var k = window.curSec; if (!say || !k || said[k] || k === 'top' || !SAY[k] || !root.classList.contains('m-game')) return;
     clearTimeout(autoT);
     autoT = setTimeout(function () {
       if (window.curSec !== k || said[k]) return;
@@ -798,6 +801,7 @@
     $('#enterX').addEventListener('click', closeEnter);
     $('#enterDone').addEventListener('click', function () {
       var k = entKey; done[k] = 1; try { localStorage.setItem('retos', JSON.stringify(done)); } catch (e) {}
+      if (window.PG) PG.ev('reto', k);
       closeEnter(); var n = retoPaint(); buzz([12, 40, 12]);
       var card = $('.reto[data-reto="' + k + '"]'); if (card) { card.classList.remove('cheer'); void card.offsetWidth; card.classList.add('cheer'); }
       g.mood = 'happy'; g.jump = 24;
@@ -973,7 +977,7 @@
   var deskOpener = null, deskT = null, zTop = 5;
   function openDesk() {
     if (!desk) return;
-    deskOpener = document.activeElement; desk.hidden = false; desk.classList.remove('in'); void desk.offsetWidth; desk.classList.add('in');
+    deskOpener = document.activeElement; desk.hidden = false; if (window.PG) PG.ev('desk'); desk.classList.remove('in'); void desk.offsetWidth; desk.classList.add('in');
     document.body.style.overflow = 'hidden';
     $$('img[data-src]', desk).forEach(function (im) { if (im.closest('.win:not([hidden])') || im.closest('.dw-view')) { im.src = im.dataset.src; im.removeAttribute('data-src'); } });
     var fx = $('#deskFace').getContext('2d'), gx2 = $('#deskG').getContext('2d'), tick = 0;
@@ -1102,6 +1106,112 @@
   /* ======================= funciona sin conexión ======================= */
   if ('serviceWorker' in navigator && location.protocol === 'https:') addEventListener('load', function () { navigator.serviceWorker.register('/sw.js').catch(function () {}); });
 
+
+  /* ======================= modo juego: tu Paulagotchi crece ======================= */
+  (function () {
+    var KEY = 'pg1', S = { mode: null, st: [0, 0, 0], ach: {}, vis: {}, bugs: 0, flips: {} };
+    try { var sv = JSON.parse(localStorage.getItem(KEY) || 'null'); if (sv) for (var k in sv) S[k] = sv[k]; } catch (e) {}
+    var save = function () { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+    var STAGES = [['Paula estudiante', 0], ['Paula diseñadora web', 90], ['Paula contratada', 210]];
+    var ACH = [['webs4', 'Probaste las 4 webs', 'Supera los 4 retos'], ['bugs20', 'Cazabugs', 'Atrapa 20 bugs en total'], ['desk', 'Curiosidad', 'Abre el escritorio o mantén presionada una web'], ['brands', 'Marquista', 'Dale la vuelta a las 3 marcas'],
+      ['music', 'Spotify sin sentido', 'Cambia de canción en el reproductor'], ['explorer', 'Exploradora', 'Visita todos los niveles'], ['end', 'Hasta el final', 'Llega a los créditos'], ['hired', '¡Contratada!', 'Haz evolucionar al Paulagotchi del todo']];
+    var LV = [['proyectos', 'Mundo 1', 'Mis webs'], ['nails', 'Nivel 1-1', 'Nails by MelyG'], ['kronox', 'Nivel 1-2', 'Kronox'], ['nacar', 'Nivel 1-3', 'Nácar'], ['amigos', 'Nivel 1-4', 'Entre Amigos'], ['creativos', 'Nivel 1-5', 'Portfolios'],
+      ['figma', 'Nivel 2-1', 'Figma'], ['marcas', 'Nivel 2-2', 'Marcas'], ['sobre', 'Nivel 3-1', 'Sobre mí'], ['herramientas', 'Nivel 3-2', 'Herramientas'], ['contacto', 'Final', 'Créditos']];
+    var WORK = { proyectos: 10, nails: 15, kronox: 15, nacar: 15, amigos: 15, creativos: 15, figma: 15 };
+    var total = function () { return S.st[0] + S.st[1] + S.st[2]; };
+    var stage = function () { var t = total(), s = 0; STAGES.forEach(function (x, i) { if (t >= x[1]) s = i; }); return s; };
+    var game = function () { return S.mode === 'game'; };
+    var hud = $('#hud'), achT = $('#achT'), lvl = $('#lvl'), lastStage = stage(), seenLv = {}, lvT = null, achQ = [], achBusy = false;
+    var paint = function () {
+      if (!hud) return;
+      $('#hudLv').textContent = 'NV ' + (stage() + 1);
+      S.st.forEach(function (v, i) { $('#hb' + i).style.width = v + '%'; });
+      $('#hudAch').textContent = Object.keys(S.ach).length + '/' + ACH.length;
+      var sw = $('#modeSwap'); if (sw) sw.textContent = game() ? 'Cambiar a modo rápido (sin juego)' : 'Cambiar a modo juego';
+    };
+    var showAch = function () {
+      if (achBusy || !achQ.length) return; achBusy = true;
+      $('#achTt').textContent = achQ.shift(); achT.classList.add('on'); buzz([10, 30, 10]);
+      setTimeout(function () { achT.classList.remove('on'); setTimeout(function () { achBusy = false; showAch(); }, 400); }, 2600);
+    };
+    var unlock = function (id) {
+      if (S.ach[id]) return; S.ach[id] = 1; save(); paint();
+      if (!game()) return;
+      var a = ACH.filter(function (x) { return x[0] === id; })[0]; if (a) { achQ.push(a[1]); showAch(); }
+      if (g) { g.mood = 'happy'; g.jump = 20; }
+    };
+    var add = function (i, v) {
+      S.st[i] = Math.min(100, S.st[i] + v); save(); paint();
+      var s = stage();
+      if (s > lastStage) { lastStage = s; if (game()) { toastMsg('¡Tu Paulagotchi evolucionó! Ahora es ' + STAGES[s][0]); if (g) { g.mood = 'happy'; g.jump = 30; if (g.status) g.status.textContent = '¡evolucioné!'; } } if (s === 2) unlock('hired'); }
+    };
+    var banner = function (k) {
+      var l = LV.filter(function (x) { return x[0] === k; })[0]; if (!l || seenLv[k] || !game()) return; seenLv[k] = 1;
+      $('#lvlN').textContent = l[1].toUpperCase(); $('#lvlT').textContent = l[2];
+      lvl.classList.add('on'); clearTimeout(lvT); lvT = setTimeout(function () { lvl.classList.remove('on'); }, 1700);
+    };
+    /* ropa según la etapa: birrete de estudiante, y taza de café al estar contratada */
+    var dress = function (ctx, ox, oy, sc) {
+      if (!game()) return; var s = stage(), P = function (c, x, y, w, h) { ctx.fillStyle = c; ctx.fillRect(ox + x * sc, oy + y * sc, w * sc, h * sc); };
+      if (s === 0) { P('#1e1414', 8, 0, 16, 2); P('#1e1414', 12, 2, 8, 1); P('#e8bc50', 23, 1, 1, 4); P('#e8bc50', 22, 5, 2, 1); }
+      if (s === 2) { P('#FAF6F0', 26, 21, 5, 6); P('#FAF6F0', 31, 22, 1, 3); P('#eba9bd', 27, 23, 3, 2); P('#b9b0a8', 27, 18, 1, 2); P('#b9b0a8', 29, 17, 1, 3); }
+    };
+    var setMode = function (m) {
+      S.mode = m; save(); root.classList.toggle('m-game', m === 'game');
+      var mp = $('#modePick'); if (mp) mp.hidden = true; paint();
+      if (m === 'game') {
+        if (g.status) g.status.textContent = '¡explora y hazme crecer!'; g.mood = 'happy'; g.jump = 24; buzz(14);
+        toastMsg('Explora la web y prueba mis webs para hacerme crecer');
+        if (hud) { hud.classList.remove('flash'); void hud.offsetWidth; hud.classList.add('flash'); }
+      } else toastMsg('Modo rápido: solo el portfolio');
+    };
+    if (S.mode === 'game') root.classList.add('m-game');
+    if (!S.mode) { var mp0 = $('#modePick'); if (mp0) mp0.hidden = false; if (g && g.status) setTimeout(function () { g.status.textContent = '¿jugamos?'; }, 1200); }
+    $$('[data-mode-set]').forEach(function (b) { b.addEventListener('click', function () { setMode(b.dataset.modeSet); }); });
+    var sw0 = $('#modeSwap'); if (sw0) sw0.addEventListener('click', function () { setMode(game() ? 'fast' : 'game'); });
+    /* el mapa: etapa, barras, niveles y logros */
+    if (hud) hud.addEventListener('click', function () {
+      var d = document.createElement('div'); d.className = 'gm';
+      var s = stage(), html = '<div class="gm-stage"><canvas width="32" height="32"></canvas><div><b>' + STAGES[s][0] + '</b><small>Nivel ' + (s + 1) + ' de 3' + (s < 2 ? ' · ' + (STAGES[s + 1][1] - total()) + ' puntos para evolucionar' : ' · ¡al máximo!') + '</small></div></div>';
+      html += '<div class="gm-bars">' + [['Felicidad', '#EBA9BD'], ['Energía', '#FFD23F'], ['Ganas de trabajar', '#7fd16b']].map(function (b, i) { return '<p><span>' + b[0] + '</span><i><b style="width:' + S.st[i] + '%;background:' + b[1] + '"></b></i></p>'; }).join('') + '</div>';
+      html += '<h4>Niveles</h4><ul class="gm-lv">' + LV.map(function (l) { return '<li><a href="#' + l[0] + '" data-lv="' + l[0] + '"' + (S.vis[l[0]] ? ' class="ok"' : '') + '>' + l[2] + '<span>' + l[1] + (S.vis[l[0]] ? ' · ✓' : '') + '</span></a></li>'; }).join('') + '</ul>';
+      html += '<h4>Logros ' + Object.keys(S.ach).length + '/' + ACH.length + '</h4><ul class="gm-ach">' + ACH.map(function (a) { var ok = S.ach[a[0]]; return '<li' + (ok ? ' class="ok"' : '') + '><b>' + (ok ? a[1] : '???') + '</b>' + a[2] + '</li>'; }).join('') + '</ul>';
+      html += '<p class="gm-sw"><button class="link" type="button" data-sw>Cambiar a modo rápido (sin juego)</button></p>';
+      d.innerHTML = html;
+      var c = $('canvas', d).getContext('2d'); drawSprite(c, 0, 0, 1, 'happy'); dress(c, 0, 0, 1);
+      $$('[data-lv]', d).forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); closeSheet(); setTimeout(function () { goTo(a.dataset.lv); }, 250); }); });
+      $('[data-sw]', d).addEventListener('click', function () { closeSheet(); setMode('fast'); });
+      openSheet('Tu partida', d);
+    });
+    /* créditos con cuenta atrás de arcade */
+    var cr = $('#credits'), crT = null;
+    if (cr) {
+      new IntersectionObserver(function (es) {
+        if (!es[0].isIntersecting || crT || !game()) return;
+        var n = 10, el = $('#crN');
+        crT = setInterval(function () { n--; if (n >= 0) el.textContent = n; if (n < 0) { clearInterval(crT); $('.cr-c', cr).textContent = 'Game over… mentira, escríbeme igual :)'; } }, 1000);
+      }, { threshold: .5 }).observe(cr);
+      $('#crGo').addEventListener('click', function () { var t = $('#msgTxt'); if (t) { t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }); setTimeout(function () { t.focus({ preventScroll: true }); }, 450); } });
+    }
+    window.PG = {
+      dress: dress,
+      ev: function (type, v) {
+        if (type === 'visit') {
+          if (v && !S.vis[v] && LV.some(function (l) { return l[0] === v; })) { S.vis[v] = 1; save(); if (WORK[v]) add(2, WORK[v]); }
+          banner(v);
+          if (LV.every(function (l) { return S.vis[l[0]]; })) unlock('explorer');
+        }
+        if (type === 'reto') { add(0, 25); var n = 0; try { n = Object.keys(JSON.parse(localStorage.getItem('retos') || '{}')).length; } catch (e) {} if (n >= 4) unlock('webs4'); }
+        if (type === 'bugs') { S.bugs += v || 0; save(); add(1, Math.min(40, (v || 0) * 4)); if (S.bugs >= 20) unlock('bugs20'); }
+        if (type === 'desk') { add(1, 10); unlock('desk'); }
+        if (type === 'flip') { S.flips[v] = 1; save(); add(0, 5); if (Object.keys(S.flips).length >= 3) unlock('brands'); }
+        if (type === 'music') { add(0, 5); unlock('music'); }
+        if (type === 'end') { add(0, 10); unlock('end'); }
+      }
+    };
+    paint();
+  })();
+
   /* ---------- si te vas a otra pestaña ---------- */
   var title = document.title;
   var fav = $('link[rel=icon]'); new Image().src = 'favicon-sad.png';
@@ -1162,7 +1272,7 @@
     }
   }
   function end() {
-    var n = st.score; cancelAnimationFrame(st.raf); st = null;
+    var n = st.score; cancelAnimationFrame(st.raf); st = null; if (window.PG) PG.ev('bugs', n);
     $('#gEndTxt').textContent = n === 0 ? 'Ningún bug esta vez. ¿Otra?' : 'Arreglaste ' + n + (n === 1 ? ' bug' : ' bugs') + ' en 20 segundos. Imagínate lo que hago con tu web :)';
     $('#gEnd').hidden = false; $('#gAgain').focus();
   }

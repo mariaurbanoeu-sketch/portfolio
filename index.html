@@ -19,7 +19,7 @@
 <meta property="og:type" content="website">
 <link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/pinyon.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=28">
+<link rel="stylesheet" href="css/site.css?v=31">
 <script>(function(d){d.classList.add('js');try{if(!sessionStorage.getItem('wf')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('wire');sessionStorage.setItem('wf','1')}}catch(e){}})(document.documentElement)</script>
 </head>
 <body>
@@ -77,7 +77,12 @@
         <p class="g-legend"><span>proyectos</span><span>jugar</span><span>hablar</span></p>
       </div>
     </div>
-    <button class="shake" id="gTilt" type="button" hidden><span class="shake-bugs" aria-hidden="true"><canvas width="8" height="7"></canvas><canvas width="8" height="7"></canvas><canvas width="8" height="7"></canvas></span><span class="shake-ph" aria-hidden="true"><canvas id="shakeCv" width="12" height="18"></canvas></span><span class="shake-t"><b id="shakeB">Hay bugs en esta web</b><small id="shakeS">Agita el teléfono para sacarlos</small><em id="shakeE">o toca aquí para jugar</em></span></button>
+    <div class="mode-pick" id="modePick" hidden>
+      <p class="mp-q">¿Jugamos?</p>
+      <p class="mp-d">Esta web también es un juego: explórala, prueba mis webs y haz crecer a tu Paulagotchi.</p>
+      <div class="mp-b"><button class="btn" type="button" data-mode-set="game">Modo juego</button><button class="btn ghost" type="button" data-mode-set="fast">Solo quiero ver tus webs</button></div>
+    </div>
+    <button class="shake g-only" id="gTilt" type="button" hidden><span class="shake-bugs" aria-hidden="true"><canvas width="8" height="7"></canvas><canvas width="8" height="7"></canvas><canvas width="8" height="7"></canvas></span><span class="shake-ph" aria-hidden="true"><canvas id="shakeCv" width="12" height="18"></canvas></span><span class="shake-t"><b id="shakeB">Hay bugs en esta web</b><small id="shakeS">Agita el teléfono para sacarlos</small><em id="shakeE">o toca aquí para jugar</em></span></button>
   </div>
 </section>
 
@@ -109,7 +114,7 @@
   </article>
 </section>
 <div class="peek" id="peek" aria-hidden="true"><video muted playsinline loop></video></div>
-<div class="g-say" id="gSay" role="status" hidden><p id="gSayT"></p><button type="button" id="gSayPlay">Jugar a los bugs</button></div>
+<div class="g-say g-only" id="gSay" role="status" hidden><p id="gSayT"></p><button type="button" id="gSayPlay">Jugar a los bugs</button></div>
 
 <!-- ============ MIS WEBS · un navegador con pestañas ============ -->
 <section class="bw" id="proyectos" data-bg="wine" data-frame="Mis webs" aria-label="Mis webs">
@@ -149,7 +154,7 @@
     </header>
     <aside class="fi fi-nails" data-reveal aria-label="Ficha del proyecto"><p class="fi-t">Nails by <em>MelyG</em></p><p class="fi-s">Tono 01 · Colección 2026</p><dl><div><dt>Tipo</dt><dd>Web con reservas y gift cards</dd></div><div><dt>Qué hice</dt><dd>Diseño en Figma, UX/UI y desarrollo</dd></div><div><dt>Hecha con</dt><dd>Figma · HTML · CSS · JavaScript · GSAP · Square</dd></div><div><dt>Idiomas</dt><dd>Español e inglés</dd></div></dl><p class="fi-f">nailsbymelyg.com</p></aside>
     </div>
-    <div class="reto" data-reto="nails" data-reveal>
+    <div class="reto g-only" data-reto="nails" data-reveal>
       <div class="reto-l"><p class="reto-n">Reto 1 de 4</p><p class="reto-t">Diseña tu manicura</p><p class="reto-d">Entra en la web de Mely y prueba el simulador: elige color, forma y acabado como haría una clienta.</p></div>
       <div class="reto-r"><button class="btn reto-go" type="button" data-enter="nails" data-mode="reto">Empezar el reto</button><p class="reto-c"><span class="reto-bar" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="reto-cn">Webs probadas: 0/4</span></p></div>
     </div>
@@ -184,7 +189,7 @@
     </header>
     <aside class="fi fi-kx" data-reveal aria-label="Ficha del proyecto"><div class="clap" aria-hidden="true"><i></i></div><dl class="slate"><div><dt>Producción</dt><dd>Kronox</dd></div><div><dt>Rollo</dt><dd>Web + panel</dd></div><div><dt>Escena</dt><dd>UX/UI · Desarrollo</dd></div><div><dt>Toma</dt><dd>2026</dd></div><div class="w"><dt>Equipo</dt><dd>HTML · CSS · JavaScript · Firebase</dd></div><div><dt>Dirección</dt><dd>Kronox</dd></div><div><dt>Diseño y código</dt><dd>Paula Urbano</dd></div></dl></aside>
     </div>
-    <div class="reto" data-reto="kronox" data-reveal>
+    <div class="reto g-only" data-reto="kronox" data-reveal>
       <div class="reto-l"><p class="reto-n">Reto 2 de 4</p><p class="reto-t">Ordena sus videoclips</p><p class="reto-d">Entra en el panel de Kronox y cambia el orden de sus videos con las flechas. Es lo que él hace sin llamarme.</p></div>
       <div class="reto-r"><button class="btn reto-go" type="button" data-enter="kronox" data-mode="reto">Empezar el reto</button><p class="reto-c"><span class="reto-bar" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="reto-cn">Webs probadas: 0/4</span></p></div>
     </div>
@@ -218,7 +223,7 @@
     </header>
     <aside class="fi fi-nc" data-reveal aria-label="Ficha del proyecto"><p class="fi-brand">Nácar</p><dl><div><dt>Composición</dt><dd>100% Shopify · Liquid</dd></div><div><dt>Confección</dt><dd>Diseño y desarrollo del tema</dd></div><div><dt>Idiomas</dt><dd>Seis</dd></div><div><dt>Temporada</dt><dd>2026</dd></div></dl><p class="fi-care">Mantenimiento: sigo subiendo los productos nuevos.</p></aside>
     </div>
-    <div class="reto" data-reto="nacar" data-reveal>
+    <div class="reto g-only" data-reto="nacar" data-reveal>
       <div class="reto-l"><p class="reto-n">Reto 3 de 4</p><p class="reto-t">Llena la cesta</p><p class="reto-d">Entra en la tienda, añade una prenda y mira cómo la cesta se abre a un lado sin sacarte de donde estabas.</p></div>
       <div class="reto-r"><button class="btn reto-go" type="button" data-enter="nacar" data-mode="reto">Empezar el reto</button><p class="reto-c"><span class="reto-bar" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="reto-cn">Webs probadas: 0/4</span></p></div>
     </div>
@@ -246,7 +251,7 @@
     </header>
     <aside class="fi fi-ea" data-reveal aria-label="Ficha del proyecto"><div class="ship-top"><b>Envío</b><span>EAV · 2026</span></div><div class="ship-row"><span>De</span><b>Paula Urbano</b></div><div class="ship-row"><span>Para</span><b>Venezuela</b></div><dl class="ship-grid"><div><dt>Contenido</dt><dd>App web</dd></div><div><dt>Idiomas</dt><dd>7</dd></div><div><dt>Sin conexión</dt><dd>Sí</dd></div><div><dt>Fecha</dt><dd>2026</dd></div></dl><div class="ship-row"><span>Hecha con</span><b>Investigación · UX/UI · Desarrollo</b></div><div class="barcode" aria-hidden="true"></div><p class="stamp" aria-hidden="true">Urgente</p></aside>
     </div>
-    <div class="reto" data-reto="amigos" data-reveal>
+    <div class="reto g-only" data-reto="amigos" data-reveal>
       <div class="reto-l"><p class="reto-n">Reto 4 de 4</p><p class="reto-t">Publica una necesidad</p><p class="reto-d">Entra en la app, ve a «Necesidades» y publica una. Si un local cercano la tiene, sale el match.</p></div>
       <div class="reto-r"><button class="btn reto-go" type="button" data-enter="amigos" data-mode="reto">Empezar el reto</button><p class="reto-c"><span class="reto-bar" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="reto-cn">Webs probadas: 0/4</span></p></div>
     </div>
@@ -538,6 +543,12 @@
 
 <!-- ============ CONTACTO · mensaje desde el Paulagotchi ============ -->
 <footer class="ft" id="contacto" data-bg="olive" data-frame="Contacto">
+  <div class="credits g-only" id="credits">
+    <p class="cr-t">Fin del juego</p>
+    <div class="cr-roll"><p>Diseño · Paula Urbano</p><p>Código · Paula Urbano</p><p>Paulagotchi · Paula Urbano</p><p>Café · mucho</p><p>Gracias por jugar</p></div>
+    <p class="cr-c">¿Continuar? <b id="crN">10</b></p>
+    <button class="btn" type="button" id="crGo">Continuar: escríbeme <i class="ic ic-down"></i></button>
+  </div>
   <div class="ft-in">
     <div>
       <p class="script">¿hablamos?</p>
@@ -558,6 +569,7 @@
       <p class="msg-note">Se abre tu correo con el mensaje listo.</p>
     </form>
   </div>
+  <p class="ft-mode"><button type="button" class="link" id="modeSwap">Cambiar a modo juego</button></p>
   <p class="ft-note">Esta web pesa menos que una foto de tu celular. La diseñé y la programé yo.</p>
 </footer>
 
@@ -639,6 +651,10 @@
   <div class="sheet-p"><div class="sheet-h" aria-hidden="true"><i></i></div><p class="sheet-t" id="sheetT"></p><div class="sheet-c" id="sheetC"></div><button class="sheet-x" type="button" data-close>Cerrar</button></div>
 </div>
 
+<button class="hud g-only" id="hud" type="button" aria-label="Ver mapa de niveles y logros"><span class="hud-lv" id="hudLv">NV 1</span><span class="hud-bars" aria-hidden="true"><i><b id="hb0"></b></i><i><b id="hb1"></b></i><i><b id="hb2"></b></i></span><span class="hud-ach" id="hudAch">0/8</span></button>
+<div class="lvl" id="lvl" aria-hidden="true"><span id="lvlN"></span><b id="lvlT"></b></div>
+<div class="ach-t" id="achT" role="status" aria-live="polite"><canvas width="9" height="9" data-px="star" aria-hidden="true"></canvas><span><small>¡Logro desbloqueado!</small><b id="achTt"></b></span></div>
+
 <button class="mini-g" id="miniG" type="button" aria-label="Jugar con el Paulagotchi"><canvas id="miniCanvas" width="32" height="32" aria-hidden="true"></canvas></button>
 
 <!-- minijuego -->
@@ -660,6 +676,6 @@
   <div class="mv-stage"><button type="button" class="mv-nav" id="mvPrev" aria-label="Página anterior"><i class="ic ic-left"></i></button><img id="mvImg" alt=""><button type="button" class="mv-nav" id="mvNext" aria-label="Página siguiente"><i class="ic ic-right"></i></button></div>
 </div>
 
-<script src="js/site.js?v=29" defer></script>
+<script src="js/site.js?v=30" defer></script>
 </body>
 </html>
