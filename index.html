@@ -25,7 +25,7 @@
 <meta property="og:type" content="website">
 <link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/pinyon.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=51">
+<link rel="stylesheet" href="css/site.css?v=52">
 <script>(function(d){d.classList.add('js');try{if(!sessionStorage.getItem('intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('intro-on');sessionStorage.setItem('intro','1')}var m=sessionStorage.getItem('pm');if(!m){d.classList.add('ts-on');return}d.classList.add(m==='game'?'m-game':'m-fast')}catch(e){}})(document.documentElement)</script>
 </head>
 <body>
@@ -404,7 +404,7 @@
     </header>
   </div>
   <div class="fig-pin">
-    <div class="fig-track">
+    <div class="fig-track" tabindex="0" aria-label="Diseños en Figma. Usa las flechas para moverte">
       <figure class="fig-card tall"><figcaption>DTR / Home</figcaption><img src="img/figma/dtr-home.webp" alt="DTR, home de la tienda" loading="lazy" width="720" height="1044"></figure>
       <figure class="fig-card"><figcaption>DTR / Producto</figcaption><img src="img/figma/dtr-producto.webp" alt="DTR, ficha de producto" loading="lazy" width="1200" height="868"></figure>
       <figure class="fig-card"><figcaption>DTR / Carrito</figcaption><img src="img/figma/dtr-carrito.webp" alt="DTR, carrito" loading="lazy" width="1200" height="853"></figure>
@@ -414,7 +414,8 @@
       <figure class="fig-card phonecard"><figcaption>Estilo Vivo / App</figcaption><img src="img/figma/ev-inicio.webp" alt="Estilo Vivo, ofertas" loading="lazy" width="412" height="917"></figure>
       <figure class="fig-card phonecard"><figcaption>Estilo Vivo / Producto</figcaption><img src="img/figma/ev-producto.webp" alt="Estilo Vivo, producto" loading="lazy" width="412" height="917"></figure>
     </div>
-    <p class="fig-count" aria-hidden="true"><span>Desliza para ver más</span><span><b id="figN">1</b> / 8</span></p>
+    <button class="fig-nav prev" type="button" data-d="-1" aria-label="Diseño anterior"><span aria-hidden="true"></span></button><button class="fig-nav next" type="button" data-d="1" aria-label="Diseño siguiente"><span aria-hidden="true"></span></button>
+    <div class="fig-count"><span class="fig-hint">Desliza o arrastra para ver más</span><span class="fig-dots" id="figDots" aria-hidden="true"></span><span aria-live="polite"><b id="figN">1</b> / 8</span></div>
     <div class="cursor-p" aria-hidden="true"><svg viewBox="0 0 16 20"><path d="M1 1 L1 16 L5 12 L8 19 L11 18 L8 11 L14 11 Z"/></svg><span>Paula</span></div>
   </div>
   <div class="fig-in">
@@ -731,6 +732,6 @@
   <div class="mv-stage"><button type="button" class="mv-nav" id="mvPrev" aria-label="Página anterior"><i class="ic ic-left"></i></button><img id="mvImg" alt=""><button type="button" class="mv-nav" id="mvNext" aria-label="Página siguiente"><i class="ic ic-right"></i></button></div>
 </div>
 
-<script src="js/site.js?v=52" defer></script>
+<script src="js/site.js?v=53" defer></script>
 </body>
 </html>

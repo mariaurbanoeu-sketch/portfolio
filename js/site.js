@@ -102,23 +102,33 @@
     };
     split($('#loveTxt'));
   }
-  /* ---------- Figma en carrete horizontal (escritorio) ---------- */
-  var fig = $('.fig'), figPin = fig && $('.fig-pin', fig), figTrack = fig && $('.fig-track', fig);
-  var figDist = 0;
-  function setupFig() {
-    if (!fig) return;
-    var wide = innerWidth >= 900 && !reduce;
-    fig.classList.toggle('pinned', wide);
-    if (!wide) { figTrack.style.removeProperty('--fx'); return; }
-    figDist = Math.max(0, figTrack.scrollWidth - figPin.clientWidth);
-    fig.style.setProperty('--pin-h', (figDist + innerHeight * .9) + 'px');
+  /* ---------- Figma: carrete que se desliza con el dedo, se arrastra con el ratón o con las flechas ---------- */
+  var fig = $('.fig'), figTrack = fig && $('.fig-track', fig);
+  if (figTrack) {
+    var figCards = $$('.fig-card', figTrack), figN = $('#figN'), figDots = $('#figDots'), figPrev = $('.fig-nav.prev', fig), figNext = $('.fig-nav.next', fig), figCur = 0;
+    figCards.forEach(function (c, i) { var d = document.createElement('i'); d.addEventListener('click', function () { figGo(i); }); figDots.appendChild(d); });
+    var figAt = function () { var mid = figTrack.scrollLeft + figTrack.clientWidth / 2, best = 0, d = 1e9; figCards.forEach(function (c, i) { var dd = Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid); if (dd < d) { d = dd; best = i; } }); return best; };
+    var figPaint = function () {
+      figCur = figAt(); figN.textContent = figCur + 1;
+      $$('i', figDots).forEach(function (d, i) { d.classList.toggle('on', i === figCur); });
+      figPrev.disabled = figTrack.scrollLeft < 4; figNext.disabled = figTrack.scrollLeft > figTrack.scrollWidth - figTrack.clientWidth - 4;
+    };
+    var figGo = function (i) { i = Math.max(0, Math.min(figCards.length - 1, i)); var c = figCards[i]; figTrack.scrollTo({ left: c.offsetLeft + c.offsetWidth / 2 - figTrack.clientWidth / 2, behavior: reduce ? 'auto' : 'smooth' }); };
+    figTrack.addEventListener('scroll', function () { requestAnimationFrame(figPaint); }, { passive: true });
+    $$('.fig-nav', fig).forEach(function (b) { b.addEventListener('click', function () { buzz(6); figGo(figCur + +b.dataset.d); }); });
+    figTrack.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); figGo(figCur + (e.key === 'ArrowRight' ? 1 : -1)); } });
+    /* con el ratón se arrastra como en Figma */
+    var fdx = null, fsl = 0, fmoved = false;
+    figTrack.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse' || e.button !== 0) return; fdx = e.clientX; fsl = figTrack.scrollLeft; fmoved = false; figTrack.classList.add('drag'); });
+    addEventListener('pointermove', function (e) { if (fdx === null) return; var d = e.clientX - fdx; if (Math.abs(d) > 4) fmoved = true; figTrack.scrollLeft = fsl - d; });
+    addEventListener('pointerup', function () { if (fdx === null) return; fdx = null; figTrack.classList.remove('drag'); if (fmoved) figGo(figAt()); });
+    figTrack.addEventListener('click', function (e) { if (fmoved) { e.preventDefault(); e.stopPropagation(); fmoved = false; } }, true);
+    figTrack.addEventListener('dragstart', function (e) { e.preventDefault(); });
+    addEventListener('load', figPaint); addEventListener('resize', figPaint); figPaint();
+    $$('img', figTrack).forEach(function (im) { im.addEventListener('load', figPaint); });
+    /* al acercarse, se cargan todas para que el carrete mida bien */
+    new IntersectionObserver(function (es) { if (!es[0].isIntersecting) return; $$('img', figTrack).forEach(function (im) { im.loading = 'eager'; }); figPaint(); }, { rootMargin: '600px 0px' }).observe(figTrack);
   }
-  var figN = $('#figN');
-  if (figTrack && figN) figTrack.addEventListener('scroll', function () {
-    var cards = $$('.fig-card', figTrack), mid = figTrack.scrollLeft + figTrack.clientWidth / 2, best = 0, d = 1e9;
-    cards.forEach(function (c, i) { var dd = Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid); if (dd < d) { d = dd; best = i; } });
-    figN.textContent = best + 1;
-  }, { passive: true });
   function onScroll() {
     if (love && !reduce) {
       var r = love.getBoundingClientRect(), span = love.offsetHeight - innerHeight * .8;
@@ -126,18 +136,12 @@
       var lit = Math.round(p * 1.2 * words.length);
       words.forEach(function (w, i) { w.classList.toggle('on', i < lit); });
     }
-    if (fig && fig.classList.contains('pinned')) {
-      var fr = figPin.getBoundingClientRect(), total = figPin.offsetHeight - innerHeight * .9;
-      var q = Math.min(1, Math.max(0, -fr.top / Math.max(1, total)));
-      figTrack.style.setProperty('--fx', (q * figDist).toFixed(1));
-      fig.style.setProperty('--cur', fr.top < innerHeight * .3 && fr.bottom > innerHeight * .8 ? 1 : 0);
-    }
     mini.el.classList.toggle('show', scrollY > innerHeight * .8);
   }
   var ticking = false;
   addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; onScroll(); }); } }, { passive: true });
-  addEventListener('resize', function () { setupFig(); onScroll(); });
-  addEventListener('load', function () { setupFig(); onScroll(); });
+  addEventListener('resize', onScroll);
+  addEventListener('load', onScroll);
 
   /* ======================= Paulagotchi ======================= */
   var PAL = { H:'#34221c', h:'#80583a', c:'#b08054', y:'#deb67c', s:'#d69670', S:'#b87a5a', e:'#1e1212', b:'#e68082',
