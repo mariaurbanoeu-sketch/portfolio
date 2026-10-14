@@ -56,6 +56,7 @@
     nails: [['Nails Display', 'nails-display', 'normal'], ['Nails Display', 'nails-display-i', 'italic'], ['Nails Sans', 'nails-sans', 'normal']],
     nacar: [['Nacar Display', 'nacar-display', 'normal'], ['Nacar Display', 'nacar-display-i', 'italic'], ['Nacar Sans', 'nacar-sans', 'normal']],
     kronox: [['Kronox Display', 'kronox-display', 'normal']],
+    proyectos: [['Nails Display', 'nails-display', 'normal'], ['Kronox Display', 'kronox-display', 'normal'], ['Nacar Display', 'nacar-display', 'normal'], ['Amigos Display', 'amigos-display', 'normal']],
     amigos: [['Amigos Display', 'amigos-display', 'normal'], ['Amigos Sans', 'amigos-sans', 'normal']]
   };
   if (window.FontFace && document.fonts) {
@@ -599,6 +600,7 @@
         if (ch >= t.length) { e++; ch = 0; }
       }, 16);
     };
+    var BWK = ['nails', 'kronox', 'nacar', 'amigos'], BWE = ['nails', 'kronoxweb', 'nacar', 'amigos'];
     var bwSet = function (i) {
       if (i === bwCur) return; bwCur = i;
       bwTabs.forEach(function (t, k) { t.setAttribute('aria-selected', String(k === i)); t.tabIndex = k === i ? 0 : -1; });
@@ -613,7 +615,7 @@
       typeP(bwP[i]);
       prog.forEach(function (p, k) { p.classList.toggle('done', k < i); p.classList.remove('now'); });
       if (prog[i]) { void prog[i].offsetWidth; if (bwVis && !reduce) prog[i].classList.add('now'); }
-      bwUrl.textContent = urls[i];
+      bwUrl.textContent = urls[i]; bw.dataset.th = BWK[i]; bw.classList.remove('nav'); $('#bwNav').textContent = 'Navegar aquí';
       if (window.lvRefresh) setTimeout(lvRefresh, 60);
       bwLoad.classList.remove('go'); void bwLoad.offsetWidth; bwLoad.classList.add('go');
     };
@@ -663,6 +665,25 @@
       if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? 1 : -1);
       else if (Math.abs(dx) < 10 && Math.abs(dy) < 10 && Date.now() - st < 350 && view.contains(e.target)) { var r = view.getBoundingClientRect(); if (t.clientX < r.left + r.width * .3) go(-1); else if (t.clientX > r.right - r.width * .3) go(1); }
     }, { passive: true });
+    /* navegar la web dentro del navegador, o verla a pantalla completa */
+    $('#bwNav').addEventListener('click', function () {
+      var f = $('iframe.lv', bwV[bwCur]);
+      if (!f || !f.classList.contains('ok')) { openEnter(BWE[bwCur]); return; }
+      var on = bw.classList.toggle('nav'); this.textContent = on ? 'Dejar de navegar' : 'Navegar aquí'; bw.classList.toggle('hold', on); buzz(8);
+    });
+    $('#bwFull').addEventListener('click', function () { openEnter(BWE[bwCur]); });
+    /* al pasar por una pestaña se ve una miniatura de esa web, como en Chrome */
+    var bwPvEl = $('#bwPv'), PVI = ['img/nails-d.webp', 'img/kpanel-d.webp', 'img/nacar-d.webp', 'img/ea-m.webp?v=2'];
+    bwTabs.forEach(function (t, i) {
+      t.addEventListener('mouseenter', function () {
+        if (i === bwCur || !fine.matches) return;
+        $('img', bwPvEl).src = PVI[i]; $('span', bwPvEl).textContent = urls[i]; bwPvEl.classList.toggle('m', i === 3);
+        var wr = $('.bw-win', bw).getBoundingClientRect(), tr = t.getBoundingClientRect();
+        bwPvEl.style.left = Math.min(wr.width - 260, Math.max(8, tr.left - wr.left)) + 'px'; bwPvEl.classList.add('on');
+      });
+      t.addEventListener('mouseleave', function () { bwPvEl.classList.remove('on'); });
+      t.addEventListener('click', function () { bwPvEl.classList.remove('on'); });
+    });
     $('.bw-insp', bw).addEventListener('click', function () {
       var p = bwP[bwCur].cloneNode(true); clearInterval(tyT);
       $$('dd, .bw-note', bwP[bwCur]).forEach(function (el) { if (el.dataset.t) el.textContent = el.dataset.t; });
@@ -1046,14 +1067,18 @@
     var outline = function (el, b) { var r = el.getBoundingClientRect(); b.style.cssText = 'display:block;left:' + r.left + 'px;top:' + r.top + 'px;width:' + r.width + 'px;height:' + r.height + 'px'; return r; };
     /* el color exacto del pixel cuando es una imagen o un video de esta web */
     var cv = document.createElement('canvas'); cv.width = cv.height = 1; var pcx = cv.getContext('2d', { willReadFrequently: true });
+    var posters = {}, posterImg = function (u) { if (!posters[u]) { posters[u] = new Image(); posters[u].src = u; } return posters[u]; };
+    var EYE = 'EyeDropper' in window;
     var samplePx = function (el, x, y) {
       try {
-        var r = el.getBoundingClientRect(), nw = el.naturalWidth || el.videoWidth || el.width, nh = el.naturalHeight || el.videoHeight || el.height; if (!nw || !nh) return null;
+        var r = el.getBoundingClientRect(), src = el;
+        if (el.tagName === 'VIDEO' && !el.videoWidth && el.poster) { src = posterImg(el.poster); if (!src.naturalWidth) return null; }
+        var nw = src.naturalWidth || src.videoWidth || src.width, nh = src.naturalHeight || src.videoHeight || src.height; if (!nw || !nh) return null;
         var cs = getComputedStyle(el), fit = cs.objectFit, k = fit === 'contain' ? Math.min(r.width / nw, r.height / nh) : fit === 'cover' ? Math.max(r.width / nw, r.height / nh) : r.width / nw;
         var dw = nw * k, dh = nh * k, pos = cs.objectPosition.split(' ').map(function (p) { return parseFloat(p) / 100; });
         var ox = (r.width - dw) * (isNaN(pos[0]) ? .5 : pos[0]), oy = (r.height - dh) * (isNaN(pos[1]) ? .5 : pos[1]);
         var sx = (x - r.left - ox) / k, sy = (y - r.top - oy) / k; if (sx < 0 || sy < 0 || sx >= nw || sy >= nh) return null;
-        pcx.clearRect(0, 0, 1, 1); pcx.drawImage(el, sx, sy, 1, 1, 0, 0, 1, 1); var d = pcx.getImageData(0, 0, 1, 1).data;
+        pcx.clearRect(0, 0, 1, 1); pcx.drawImage(src, sx, sy, 1, 1, 0, 0, 1, 1); var d = pcx.getImageData(0, 0, 1, 1).data;
         return d[3] ? toHex('rgb(' + d[0] + ',' + d[1] + ',' + d[2] + ')') : null;
       } catch (e) { return null; }
     };
@@ -1082,9 +1107,17 @@
       hov = el;
       if (tool === 'pick') {
         var media = /^(IMG|VIDEO|CANVAS)$/.test(el.tagName), hex = media ? samplePx(el, pmx, pmy) : null, src = 'Fondo';
-        if (el.tagName === 'IFRAME') { chip.innerHTML = '<span>Web externa<small>no se puede leer su color</small></span>'; }
-        else { if (media && hex) src = 'Pixel'; else hex = bgOf(el); var te = textEl(el), th = te ? toHex(getComputedStyle(te).color) : null;
-          chip.innerHTML = '<i style="background:' + hex + '"></i><span>' + hex + '<small>' + src + (th ? ' · texto ' + th : '') + ' · clic para copiar</small></span>'; chip.dataset.hex = hex; }
+        chip.dataset.eye = '';
+        if (el.tagName === 'IFRAME') {
+          /* una web en vivo: Chrome y Edge tienen cuentagotas propio; si no, el color de su captura */
+          var under = $('video', el.parentNode), uh = under ? samplePx(under, pmx, pmy) : null;
+          if (EYE) { chip.dataset.eye = '1'; chip.dataset.hex = uh || ''; chip.innerHTML = (uh ? '<i style="background:' + uh + '"></i>' : '') + '<span>Web en vivo<small>clic para tomar su color exacto</small></span>'; }
+          else if (uh) { chip.dataset.hex = uh; chip.innerHTML = '<i style="background:' + uh + '"></i><span>' + uh + '<small>color de la web · clic para copiar</small></span>'; }
+          else { chip.dataset.hex = ''; chip.innerHTML = '<span>Web en vivo<small>pasa por otra parte para copiar un color</small></span>'; }
+        } else {
+          var te = textEl(el), th = te ? toHex(getComputedStyle(te).color) : null, onText = te && te === el && th;
+          if (onText) { hex = th; src = 'Letra'; } else if (media && hex) src = 'Imagen'; else hex = bgOf(el);
+          chip.innerHTML = '<i style="background:' + hex + '"></i><span>' + hex + '<small>' + src + ' · clic para copiar</small></span>'; chip.dataset.hex = hex; }
         chip.classList.add('show'); place(chip, pmx, pmy); tBox.style.display = 'none';
       } else if (tool === 'text') {
         var t = textEl(el); if (!t) { chip.classList.remove('show'); tBox.style.display = 'none'; return; }
@@ -1107,7 +1140,9 @@
     document.addEventListener('click', function (e) {
       if (tool === 'move' || safe(e.target)) return;
       e.preventDefault(); e.stopPropagation();
-      if (tool === 'pick' && chip.dataset.hex) { copy(chip.dataset.hex, '<i style="background:' + chip.dataset.hex + '"></i>Copiado ' + chip.dataset.hex); if (!guide.hidden && gStep === 1) { gStep = 2; guideSay('¡Copiado! ' + chip.dataset.hex + ' es un color de esta web. Así reviso cada detalle. Prueba también medir o ver la letra.', 'Entendido'); } }
+      if (tool === 'pick' && chip.dataset.eye && EYE) {
+        new window.EyeDropper().open().then(function (r) { var hx = r.sRGBHex.toUpperCase(); chip.dataset.hex = hx; copy(hx, '<i style="background:' + hx + '"></i>Copiado ' + hx); if (!guide.hidden && gStep === 1) { gStep = 2; guideSay('¡Copiado! ' + hx + ' es un color de esta web. Así reviso cada detalle. Prueba también medir o ver la letra.', 'Entendido'); } }).catch(function () {});
+      } else if (tool === 'pick' && chip.dataset.hex) { copy(chip.dataset.hex, '<i style="background:' + chip.dataset.hex + '"></i>Copiado ' + chip.dataset.hex); if (!guide.hidden && gStep === 1) { gStep = 2; guideSay('¡Copiado! ' + chip.dataset.hex + ' es un color de esta web. Así reviso cada detalle. Prueba también medir o ver la letra.', 'Entendido'); } }
       else if (tool === 'text' && chip.dataset.css) copy(chip.dataset.css, 'Estilo de texto copiado');
       else if (tool === 'measure') { ref = ref === e.target ? null : e.target; if (ref) outline(ref, refBox); else { refBox.style.display = 'none'; lines.innerHTML = ''; } hover(); }
       else if (tool === 'comment') {

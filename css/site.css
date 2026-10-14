@@ -1404,3 +1404,31 @@ iframe.lv,.gl-live iframe{flex:none}
 .tools-bar .tb-guide #tbGuideGo{padding:.5rem .8rem;border-radius:6px;background:#0D99FF;color:#fff}
 .tools-bar .tb-guide #tbGuideGo[hidden]{display:none}
 .tools-bar .tb-guide .tb-g-skip{color:#5E4B45;text-decoration:underline}
+/* Mis webs: cada pestaña viste la sección con los colores y la letra de esa web */
+.bw{transition:background-color .6s var(--ease),color .6s var(--ease)}
+.bw[data-th="nails"]{--bt-bg:#F3ECE8;--bt-fg:#4a2230;--bt-ac:#662E3A;--bt-f:'Nails Display',Georgia,serif;--bt-tt:none;--bt-ls:-.01em}
+.bw[data-th="kronox"]{--bt-bg:#0B0B0A;--bt-fg:#EDEAE4;--bt-ac:#e5322d;--bt-f:'Kronox Display',var(--sans);--bt-tt:uppercase;--bt-ls:.02em}
+.bw[data-th="nacar"]{--bt-bg:#EFE7DC;--bt-fg:#3a3128;--bt-ac:#8c7a63;--bt-f:'Nacar Display',Georgia,serif;--bt-tt:none;--bt-ls:0}
+.bw[data-th="amigos"]{--bt-bg:#0F1E3D;--bt-fg:#F2F4F8;--bt-ac:#FFD23F;--bt-f:'Amigos Display',var(--sans);--bt-tt:uppercase;--bt-ls:0}
+.bw[data-th]{background:var(--bt-bg);color:var(--bt-fg)}
+.bw[data-th] .bw-hd h2{font-family:var(--bt-f);text-transform:var(--bt-tt);letter-spacing:var(--bt-ls);font-weight:400;transition:color .6s}
+.bw[data-th] .bw-hd .script{color:var(--bt-ac)}
+.bw[data-th] .bw-win{border-color:transparent}
+.bw[data-th] .bw-load{background:var(--bt-ac)}
+/* navegar aquí y pantalla completa */
+.bw-act{position:absolute;z-index:4;right:.7rem;bottom:.7rem;display:flex;gap:.4rem}
+.bw-act button{min-height:2.3rem;padding:0 .85rem;border:0;border-radius:6px;background:rgba(10,6,6,.78);color:#fff;font:600 .7rem/1 var(--sans);letter-spacing:.04em;cursor:pointer;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.bw-act button:hover{background:#0D99FF}
+.bw.nav .bw-navb{background:#0D99FF}
+.bw.nav .bw-v.on iframe.lv.ok{pointer-events:auto}
+.bw.nav .bw-view{outline:3px solid #0D99FF;outline-offset:-3px}
+/* miniatura al pasar por una pestaña */
+.bw-win{position:relative}
+.bw-pv{position:absolute;z-index:6;top:3.4rem;width:250px;padding:6px;border-radius:8px;background:#2a1d1d;box-shadow:0 14px 30px rgba(0,0,0,.45);opacity:0;transform:translateY(-4px);transition:opacity .18s,transform .18s;pointer-events:none}
+.bw-pv.on{opacity:1;transform:none}
+.bw-pv img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;border-radius:4px;background:#140d0d}
+.bw-pv.m img{object-fit:contain;background:#0F1E3D}
+.bw-pv span{display:block;margin-top:5px;font:500 .66rem/1.2 var(--sans);color:#cdbfb2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* en computadora no cambia sola: tú eliges la pestaña */
+@media(min-width:900px) and (hover:hover) and (pointer:fine){.bw .bw-prog{display:none}}
+.bw[data-th] .bw-panel,.bw[data-th] .bw-insp{color:#FAF6F0}
