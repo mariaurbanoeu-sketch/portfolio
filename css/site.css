@@ -1554,3 +1554,44 @@ iframe.lv,.gl-live iframe{flex:none}
 .eg.min .eg-lcd canvas{width:30px;height:30px}
 .eg.min #egT{display:none}
 .eg.min small{margin:0}
+
+/* ============ WordPress: lo rellenas aquí, sale aquí ============ */
+.wpx .script{color:var(--pink)}
+.wpx-tabs{display:flex;flex-wrap:wrap;gap:.5rem;margin:2.2rem 0 1.2rem}
+.wpx-tabs button{display:grid;gap:.15rem;min-height:2.9rem;padding:.5rem .9rem;border:1px solid rgba(250,246,240,.25);border-radius:6px;background:none;color:inherit;text-align:left;cursor:pointer;font:inherit}
+.wpx-tabs b{font:700 .78rem/1.1 var(--sans)}
+.wpx-tabs span{font-size:.7rem;color:var(--soft)}
+.wpx-tabs button[aria-selected="true"]{background:var(--ivory);color:var(--wine);border-color:var(--ivory)}
+.wpx-tabs button[aria-selected="true"] span{color:#5E4B45}
+.wpx-g{display:grid;grid-template-columns:1.25fr 1fr;gap:1.2rem;align-items:start}
+.wpx-web{margin:0;border-radius:10px;overflow:hidden;background:#1d1d1d;box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.wpx-web figcaption{display:flex;align-items:center;gap:.35rem;height:2.1rem;padding:0 .8rem;font:500 .7rem/1 var(--sans);color:#bdbdbd}
+.wpx-web figcaption i{width:.5rem;height:.5rem;border-radius:50%;background:#4a4a4a}
+.wpx-web figcaption span{margin-left:.6rem;padding:.3rem .7rem;border-radius:12px;background:#101010;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wpx-vp{position:relative;aspect-ratio:16/11;overflow:hidden;background:#fff}
+.wpx-pg{position:relative;transition:transform .6s var(--ease)}
+.wpx-pg img{display:block;width:100%;height:auto}
+.wpx-hl{position:absolute;border:3px solid #FFD23F;border-radius:6px;box-shadow:0 0 0 9999px rgba(20,12,12,.32);pointer-events:none;transition:left .4s var(--ease),top .4s var(--ease),width .4s var(--ease),height .4s var(--ease),opacity .3s}
+.wpx-hl.go{animation:wpxpulse .9s steps(3)}
+@keyframes wpxpulse{0%{border-color:#fff}100%{border-color:#FFD23F}}
+.wpx-hl b{position:absolute;left:-3px;bottom:100%;margin-bottom:4px;padding:.25rem .45rem;background:#FFD23F;color:#221616;font:700 .64rem/1 var(--sans);white-space:nowrap;border-radius:3px}
+/* el panel, dibujado como el de WordPress */
+.wpx-adm{display:grid;grid-template-columns:8.6rem 1fr;min-height:100%;border-radius:10px;overflow:hidden;background:#f0f0f1;color:#1d2327;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.wpx-side{display:flex;flex-direction:column;padding:.6rem 0;background:#1d2327}
+.wpx-side span{padding:.42rem .8rem;font-size:.74rem;color:#c3c4c7}
+.wpx-side span[data-new]{color:#fff;font-weight:600}
+.wpx-side span.on{background:#2271b1;color:#fff}
+.wpx-main{padding:1rem 1rem 1.2rem;min-width:0}
+.wpx-t{font-size:1.05rem;font-weight:600;margin-bottom:.8rem}
+.wpx-main fieldset{margin:0 0 .9rem;padding:.7rem .75rem .5rem;border:1px solid #c3c4c7;background:#fff}
+.wpx-main legend{padding:0 .3rem;font-size:.72rem;font-weight:600}
+.wpx-fld{display:grid;gap:.3rem;width:100%;padding:.45rem .4rem;margin-bottom:.15rem;border:0;border-radius:4px;background:none;text-align:left;font:inherit;color:inherit;cursor:pointer;transition:background .2s}
+.wpx-fld:hover,.wpx-fld.on{background:#fff8d6}
+.wpx-fld.on{box-shadow:inset 3px 0 0 #FFD23F}
+.wpx-l{font-size:.72rem;font-weight:600}
+.wpx-in{display:block;padding:.35rem .5rem;border:1px solid #8c8f94;border-radius:3px;font-size:.74rem;color:#2c3338;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:#fff}
+.wpx-img{display:block;width:3.4rem;height:2.4rem;border:1px dashed #8c8f94;border-radius:3px;background:#f6f7f7}
+.wpx-sw{display:block;width:2.2rem;height:1.15rem;border-radius:1rem;background:#2271b1;position:relative}
+.wpx-sw::after{content:"";position:absolute;right:.15rem;top:.15rem;width:.85rem;height:.85rem;border-radius:50%;background:#fff}
+.wpx-note{margin-top:1.2rem;font:700 .66rem/1.5 'Courier New',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
+@media(max-width:899px){.wpx-g{grid-template-columns:1fr}.wpx-adm{grid-template-columns:1fr}.wpx-side{flex-direction:row;overflow-x:auto;padding:0;scrollbar-width:none}.wpx-side span{white-space:nowrap}.wpx-vp{aspect-ratio:4/3}}

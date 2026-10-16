@@ -631,6 +631,53 @@
     csSet(0);
   }
 
+  /* ======================= WordPress: lo rellenas aquí, sale aquí ======================= */
+  var wpx = $('.wpx');
+  if (wpx) {
+    var WPV = {
+      qs: { img: 'img/wp/robotika-qs.webp', h: 1918, url: 'robotika.local/quienes-somos', t: 'Editar página: Quiénes somos', on: 'Páginas', menu: ['Robots', 'Equipo'],
+        g: [['Bloques de contenido · se repiten', [['titulo', 'Título', 'Nuestra historia', [4.69, 19.74, 42.97, 2.29]], ['texto', 'Texto', 'RobotiKa nació en 2018 en un pequeño garaje de Madrid…', [4.69, 19.74, 42.97, 13.48]], ['imagen', 'Imagen', '', [52.34, 18.64, 42.97, 15.67]], ['invertido', 'Imagen a la izquierda', 'sí', [4.69, 37.9, 90.63, 15.67]]]],
+          ['Equipo · tipo de contenido propio', [['nombre', 'Nombre', 'Carlos Ruiz', [6.25, 94.29, 17.77, 1.2]], ['cargo', 'Cargo', 'CEO y Cofundador', [10.39, 95.94, 9.5, .67]], ['foto', 'Foto', '', [10.45, 88.02, 9.38, 5.37]]]]] },
+      ct: { img: 'img/wp/robotika-ct.webp', h: 1212, url: 'robotika.local/contacto', t: 'Editar página: Contacto', on: 'Páginas', menu: ['Robots', 'Equipo'],
+        g: [['Datos de contacto', [['dir', 'Dirección', 'Calle de la Innovación 42, Madrid', [4.69, 43.07, 42.97, 3.66]], ['tel', 'Teléfono y horario', '+34 912 345 678', [4.69, 48.5, 42.97, 5.38]], ['mail', 'Correos', 'hola@robotika.es', [4.69, 55.66, 42.97, 5.38]], ['hor', 'Horario de visitas', 'Martes y jueves, 10:00 a 14:00', [4.69, 62.81, 42.97, 5.38]], ['map', 'Mapa (Google Maps)', 'google.com/maps/embed…', [4.69, 71.03, 42.97, 21.88]], ['cf7', 'Formulario (Contact Form 7)', 'ID del formulario', [52.34, 30.18, 42.97, 62.73]]]]] },
+      nf: { img: 'img/wp/nerflis.webp', h: 536, url: 'nerflis.local/pelicula/spider-man', t: 'Editar película', on: 'Películas', menu: ['Películas'],
+        g: [['Película · tipo de contenido propio', [['tit', 'Título', 'Spider-Man: Cruzando el Multiverso', [20.25, 20.51, 28.92, 11.11]], ['dir', 'Director', 'Joaquim Dos Santos', [20.25, 37.61, 8.92, 4.79]], ['act', 'Actores principales', 'Shameik Moore, Hailee Steinfeld…', [20.25, 44.44, 34.75, 7.86]], ['ano', 'Año', '2023', [20.25, 53.85, 3.92, 5.64]], ['sin', 'Sinopsis', 'Miles Morales se une a Gwen Stacy…', [20.25, 60.68, 33.92, 9.91]], ['pos', 'Imagen destacada (póster)', '', [2.75, 25.3, 15.25, 46.84]]]]] }
+    };
+    var wpxPg = $('#wpxPg'), wpxImg = $('#wpxImg'), wpxHl = $('#wpxHl'), wpxF = $('#wpxF'), wpxVp = $('.wpx-vp', wpx), wpxCur = null, wpxAuto = null, wpxTouched = false, wpxIn = false;
+    var wpxShow = function (b) {
+      $$('.wpx-fld', wpxF).forEach(function (x) { x.classList.toggle('on', x === b); });
+      var r = JSON.parse(b.dataset.hs), pw = wpxVp.clientWidth, ph = pw * WPV[wpxCur].h / 1100, vh = wpxVp.clientHeight;
+      wpxHl.style.cssText = 'left:' + r[0] + '%;top:' + r[1] + '%;width:' + r[2] + '%;height:' + r[3] + '%';
+      $('b', wpxHl).textContent = $('.wpx-l', b).textContent; wpxHl.classList.remove('go'); void wpxHl.offsetWidth; wpxHl.classList.add('go');
+      var cy = (r[1] + r[3] / 2) / 100 * ph, y = Math.max(0, Math.min(ph - vh, cy - vh / 2));
+      wpxPg.style.transform = 'translateY(' + (-y) + 'px)';
+    };
+    var wpxSet = function (k) {
+      wpxCur = k; var v = WPV[k];
+      $$('.wpx-tabs button', wpx).forEach(function (t) { t.setAttribute('aria-selected', String(t.dataset.v === k)); });
+      wpxImg.src = v.img; wpxImg.height = v.h; $('#wpxUrl').textContent = v.url; $('#wpxT').textContent = v.t;
+      wpxPg.style.transform = ''; wpxHl.style.cssText = 'opacity:0';
+      wpxVp.style.aspectRatio = v.h / 1100 < .69 ? '1100 / ' + v.h : '';
+      $('#wpxSide').innerHTML = ['Escritorio', 'Entradas', 'Medios', 'Páginas'].concat(v.menu).concat(['Apariencia', 'Plugins', 'Ajustes']).map(function (m) { return '<span' + (m === v.on ? ' class="on"' : '') + (v.menu.indexOf(m) >= 0 ? ' data-new' : '') + '>' + m + '</span>'; }).join('');
+      wpxF.innerHTML = v.g.map(function (g) { return '<fieldset><legend>' + g[0] + '</legend>' + g[1].map(function (f) {
+        var val = f[2] === 'sí' ? '<i class="wpx-sw" aria-hidden="true"></i>' : f[2] ? '<span class="wpx-in">' + f[2] + '</span>' : '<span class="wpx-img" aria-hidden="true"></span>';
+        return '<button type="button" class="wpx-fld" data-hs="' + JSON.stringify(f[3]) + '"><span class="wpx-l">' + f[1] + '</span>' + val + '</button>'; }).join('') + '</fieldset>'; }).join('');
+      $$('.wpx-fld', wpxF).forEach(function (b) {
+        var go = function () { wpxTouched = true; clearInterval(wpxAuto); wpxShow(b); };
+        b.addEventListener('mouseenter', go); b.addEventListener('focus', go); b.addEventListener('click', go);
+      });
+    };
+    $$('.wpx-tabs button', wpx).forEach(function (t) { t.addEventListener('click', function () { buzz(6); wpxSet(t.dataset.v); wpxStart(); }); });
+    /* mientras nadie toca nada, se enseña solo campo por campo */
+    var wpxStart = function () {
+      clearInterval(wpxAuto); if (wpxTouched || reduce || !wpxIn) return; var i = 0;
+      var step = function () { var fs = $$('.wpx-fld', wpxF); if (!fs.length) return; wpxShow(fs[i % fs.length]); i++; };
+      step(); wpxAuto = setInterval(step, 2400);
+    };
+    new IntersectionObserver(function (es) { wpxIn = es[0].isIntersecting; if (wpxIn) wpxStart(); else clearInterval(wpxAuto); }, { threshold: .35 }).observe(wpx);
+    wpxSet('qs');
+  }
+
   /* ======================= hoja que sube desde abajo ======================= */
   var sheet = $('#sheet'), sheetP = sheet && $('.sheet-p', sheet), sheetOpener = null;
   function openSheet(title, node) {
@@ -991,7 +1038,7 @@
   /* ======================= celular: la cabecera dice dónde estás ======================= */
   var here = $('#here');
   if (here) {
-    var SEC = [['top', 'Inicio', 'home'], ['proyectos', 'Mis webs', 'web'], ['nails', 'Nails by MelyG', 'nail', 1], ['kronox', 'Kronox', 'cam', 1], ['nacar', 'Nácar', 'bag', 1], ['amigos', 'Entre Amigos', 'heart', 1], ['creativos', 'Portfolios', 'film', 1], ['figma', 'Figma', 'pen'], ['marcas', 'Marcas', 'star'], ['sobre', 'Sobre mí', 'me'], ['herramientas', 'Herramientas', 'tool'], ['contacto', 'Escríbeme', 'mail']];
+    var SEC = [['top', 'Inicio', 'home'], ['proyectos', 'Mis webs', 'web'], ['nails', 'Nails by MelyG', 'nail', 1], ['kronox', 'Kronox', 'cam', 1], ['nacar', 'Nácar', 'bag', 1], ['amigos', 'Entre Amigos', 'heart', 1], ['wordpress', 'WordPress', 'web'], ['creativos', 'Portfolios', 'film', 1], ['figma', 'Figma', 'pen'], ['marcas', 'Marcas', 'star'], ['sobre', 'Sobre mí', 'me'], ['herramientas', 'Herramientas', 'tool'], ['contacto', 'Escríbeme', 'mail']];
     var hereC = $('canvas', here), hereT = $('#hereT'), hereId = 'top';
     drawPx(hereC, 'home');
     window.hereMark = function (el) {
