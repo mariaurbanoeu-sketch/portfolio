@@ -6,6 +6,12 @@
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
   var phone = matchMedia('(max-width: 760px)'), small = matchMedia('(max-width: 899px)');
   var root = document.documentElement;
+  /* idioma: el diccionario (js/en.js) solo se carga en inglés */
+  var T = window.T || function (s) { return s; };
+  $$('[data-lang]').forEach(function (b) {
+    var en = root.lang === 'en'; b.textContent = en ? 'ES' : 'EN'; b.setAttribute('lang', en ? 'es' : 'en'); b.setAttribute('aria-label', en ? 'Ver en español' : 'View in English');
+    b.addEventListener('click', function () { try { localStorage.setItem('lang', en ? 'es' : 'en'); } catch (e) {} if (/lang=/.test(location.search)) location.replace(location.pathname + location.hash); else location.reload(); });
+  });
   /* vibración corta en Android (iPhone no la permite) */
   var buzz = function (ms) { try { if (navigator.vibrate) navigator.vibrate(ms || 8); } catch (e) {} };
   /* la barra del navegador toma el color de cada sección */
@@ -323,7 +329,7 @@
       mcx.clearRect(0, 0, 32, 32); drawSprite(mcx, 0, 0, 1, 'happy');
       mc.classList.remove('hop'); void mc.offsetWidth; mc.classList.add('hop');
       $('#msgSay').textContent = '¡gracias! abriendo tu correo…';
-      setTimeout(function () { location.href = 'mailto:mariaurbanoeu@gmail.com?subject=' + encodeURIComponent('Hola Paula') + '&body=' + encodeURIComponent(txt); }, 700);
+      setTimeout(function () { location.href = 'mailto:mariaurbanoeu@gmail.com?subject=' + encodeURIComponent(T('Hola Paula')) + '&body=' + encodeURIComponent(txt); }, 700);
     });
   }
 
@@ -875,7 +881,7 @@
     top: '¡Hola! Soy Paula, en pixel.', proyectos: 'Desliza: cada web es una pantalla.', nails: 'Mely tiene un simulador de manicura. Pruébalo.',
     kronox: 'Él cambia su web solo, sin llamarme.', nacar: 'Seis idiomas. Sí, seis.', amigos: 'Esta la hice en una semana.',
     creativos: 'Mis favoritos, la verdad.', figma: 'Aquí todavía no hay código.', marcas: 'Toca las fichas y dales la vuelta.',
-    sobre: 'Por favor, no me hagas caminar por el césped.', herramientas: 'Claude: dominio total.', contacto: '¡Escríbeme!'
+    sobre: 'Por favor, no me hagas caminar por el césped.', herramientas: 'Figma para diseñar, código para que funcione.', contacto: '¡Escríbeme!'
   };
   var say = $('#gSay'), sayT = null;
   function sayHi() {
@@ -1188,7 +1194,7 @@
       e.preventDefault(); var txt = $('textarea', cform).value.trim(); if (!txt || !cmtAt) return;
       var dot = document.createElement('i'); dot.className = 'cmt-dot'; dot.style.left = cmtAt.x + 'px'; dot.style.top = cmtAt.y + 'px'; document.body.appendChild(dot);
       cform.hidden = true; toast('Abriendo tu correo…');
-      location.href = 'mailto:mariaurbanoeu@gmail.com?subject=' + encodeURIComponent('Comentario en tu portfolio: ' + cmtAt.sec) + '&body=' + encodeURIComponent(txt + '\n\n— Sobre: «' + cmtAt.sec + '»' + (cmtAt.what ? ' (' + cmtAt.what + ')' : ''));
+      location.href = 'mailto:mariaurbanoeu@gmail.com?subject=' + encodeURIComponent(T('Comentario en tu portfolio: ') + cmtAt.sec) + '&body=' + encodeURIComponent(txt + '\n\n— Sobre: «' + cmtAt.sec + '»' + (cmtAt.what ? ' (' + cmtAt.what + ')' : ''));
     });
     addEventListener('keydown', function (e) {
       var t = e.target; if (e.metaKey || e.ctrlKey || e.altKey || (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable))) return;
@@ -1259,7 +1265,7 @@
       });
     });
     $$('[data-goto]', desk).forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); var id = a.dataset.goto; closeDesk(); setTimeout(function () { $('#' + id).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); }, 60); }); });
-    $('.dw-mail', desk).addEventListener('submit', function (e) { e.preventDefault(); var t = $('textarea', e.target).value.trim(); if (!t) return; location.href = 'mailto:mariaurbanoeu@gmail.com?subject=' + encodeURIComponent('Hola Paula') + '&body=' + encodeURIComponent(t); });
+    $('.dw-mail', desk).addEventListener('submit', function (e) { e.preventDefault(); var t = $('textarea', e.target).value.trim(); if (!t) return; location.href = 'mailto:mariaurbanoeu@gmail.com?subject=' + encodeURIComponent(T('Hola Paula')) + '&body=' + encodeURIComponent(t); });
   }
 
   /* ======================= barra de abajo (celular) ======================= */
@@ -1327,10 +1333,10 @@
   var shareBtn = $('#shareBtn');
   if (shareBtn) shareBtn.addEventListener('click', function () {
     buzz(8);
-    var data = { title: 'Paula Urbano · Diseñadora web', text: 'Diseña y programa webs con mucho cariño por los detalles.', url: 'https://paulaurbanog.com/' };
+    var en = root.lang === 'en', data = { title: T('Paula Urbano · Diseñadora y desarrolladora web'), text: T('Diseña y programa webs que sus clientes pueden gestionar solos.'), url: 'https://paulaurbanog.com/' + (en ? 'en/' : '') };
     if (navigator.share) { navigator.share(data).catch(function () {}); return; }
     var done = function () { shareBtn.firstChild.textContent = '¡Link copiado! '; setTimeout(function () { shareBtn.firstChild.textContent = 'Compartir mi portfolio '; }, 2200); };
-    if (navigator.clipboard) navigator.clipboard.writeText(data.url).then(done).catch(function () {}); else prompt('Copia el link:', data.url);
+    if (navigator.clipboard) navigator.clipboard.writeText(data.url).then(done).catch(function () {}); else prompt(T('Copia el link:'), data.url);
   });
 
   /* ======================= funciona sin conexión ======================= */
@@ -1412,7 +1418,7 @@
       var t = null, full = '';
       var api = {
         say: function (txt, cb) {
-          clearInterval(t); full = txt; var i = 0; el.textContent = ''; api.busy = true;
+          clearInterval(t); full = txt = T(txt); var i = 0; el.textContent = ''; api.busy = true;
           if (reduce) { el.textContent = txt; api.busy = false; if (cb) cb(); return; }
           t = setInterval(function () { i += 2; el.textContent = full.slice(0, i); if (i >= full.length) { clearInterval(t); api.busy = false; if (cb) cb(); } }, 22);
           api.cb = cb;
@@ -1687,7 +1693,7 @@
   /* ---------- si te vas a otra pestaña ---------- */
   var title = document.title;
   var fav = $('link[rel=icon]'); new Image().src = 'favicon-sad.png';
-  document.addEventListener('visibilitychange', function () { document.title = document.hidden ? 'vuelve :(' : title; if (fav) fav.href = document.hidden ? 'favicon-sad.png' : 'favicon.png'; });
+  document.addEventListener('visibilitychange', function () { document.title = document.hidden ? T('vuelve :(') : title; if (fav) fav.href = document.hidden ? 'favicon-sad.png' : 'favicon.png'; });
 
   /* ======================= minijuego: atrapa los bugs ======================= */
   var game = $('#game'), gc = $('#gameCanvas'), gctx = gc && gc.getContext('2d');

@@ -13,6 +13,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Paula">
 <link rel="canonical" href="https://paulaurbanog.com/">
+<link rel="alternate" hreflang="en" href="https://paulaurbanog.com/en/">
 <meta property="og:title" content="Paula Urbano · Diseñadora y desarrolladora web">
 <meta property="og:description" content="Diseño y programo webs que mis clientes pueden gestionar solos. Valencia, España.">
 <meta property="og:image" content="https://paulaurbanog.com/og.png">
@@ -25,15 +26,15 @@
 <meta property="og:type" content="website">
 <link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/pinyon.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=56">
-<script>(function(d){d.classList.add('js');try{if(!sessionStorage.getItem('intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('intro-on');sessionStorage.setItem('intro','1')}var m=sessionStorage.getItem('pm');if(!m){d.classList.add('ts-on');return}d.classList.add(m==='game'?'m-game':'m-fast')}catch(e){}})(document.documentElement)</script>
+<link rel="stylesheet" href="css/site.css?v=57">
+<script>(function(d){d.classList.add('js');try{var q=location.search.match(/[?&]lang=(en|es)/);if(q)localStorage.setItem('lang',q[1]);var L=localStorage.getItem('lang')||(navigator.languages&&navigator.languages[0])||navigator.language||'es';if(!/^(es|ca|gl|eu)/i.test(L)){d.lang='en';d.classList.add('en','en-wait');setTimeout(function(){d.classList.remove('en-wait')},3000);document.write('<script src="js/en.js?v=1"><\/script>')}}catch(e){}try{if(!sessionStorage.getItem('intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('intro-on');sessionStorage.setItem('intro','1')}var m=sessionStorage.getItem('pm');if(!m){d.classList.add('ts-on');return}d.classList.add(m==='game'?'m-game':'m-fast')}catch(e){}})(document.documentElement)</script>
 </head>
 <body>
 <a class="skip" href="#main">Saltar al contenido</a>
 <div class="intro" id="intro" aria-hidden="true"><canvas id="introCv"></canvas><p class="intro-c"><span id="introStep">wireframe</span><button type="button" id="introSkip">Saltar</button></p></div>
 <div class="ts" id="ts" role="dialog" aria-modal="true" aria-labelledby="tsT">
   <div class="ts-in">
-    <p class="ts-k">Paula Urbano · Diseñadora web</p>
+    <p class="ts-k">Paula Urbano · Diseñadora y desarrolladora web</p><button type="button" class="lang-b ts-lang" data-lang data-nt>EN</button>
     <canvas id="tsCv" width="32" height="32" aria-hidden="true"></canvas>
     <p class="ts-t" id="tsT">Hola, soy Paula</p>
     <p class="ts-d">Mira mi portfolio o recórrelo jugando. Si no eliges, entras al portfolio en 5 segundos.</p>
@@ -57,6 +58,7 @@
     <a href="#contacto" class="hd-cta">Escríbeme</a>
   </nav>
   <button class="hd-insp" id="insp" type="button" aria-pressed="false"><span class="sw" aria-hidden="true"></span><b class="long">Ver cómo está hecho</b><b class="short">Guías</b></button>
+  <button class="lang-b hd-lang" type="button" data-lang data-nt>EN</button>
   <button class="hd-here" id="here" type="button" aria-haspopup="dialog" aria-label="Secciones"><canvas width="9" height="9" aria-hidden="true"></canvas><span id="hereT">Inicio</span><i aria-hidden="true"></i></button>
   <button class="hd-menu" type="button" aria-expanded="false" aria-controls="nav"><span></span><span></span><b>Menú</b></button>
 </header>
@@ -70,7 +72,7 @@
     <div class="wf-img"><em>Paulagotchi · canvas 64 × 64</em></div>
   </div>
   <div class="hero-txt">
-    <h1 class="hero-h"><span class="ln"><span>Diseñadora y</span></span> <span class="ln"><span>desarrolladora</span></span> <span class="ln"><span>web</span></span></h1>
+    <h1 class="hero-h"><span class="ln"><span data-en="Web">Diseñadora y</span></span> <span class="ln"><span data-en="designer &amp;">desarrolladora</span></span> <span class="ln"><span data-en="developer">web</span></span></h1>
     <p class="hero-lead">Diseño y programo webs que mis clientes pueden gestionar solos.</p>
     <div class="ctas">
       <a class="btn" href="#proyectos">Ver proyectos <i class="ic ic-down"></i></a>
@@ -759,6 +761,6 @@
   <div class="mv-stage"><button type="button" class="mv-nav" id="mvPrev" aria-label="Página anterior"><i class="ic ic-left"></i></button><img id="mvImg" alt=""><button type="button" class="mv-nav" id="mvNext" aria-label="Página siguiente"><i class="ic ic-right"></i></button></div>
 </div>
 
-<script src="js/site.js?v=57" defer></script>
+<script src="js/site.js?v=58" defer></script>
 </body>
 </html>

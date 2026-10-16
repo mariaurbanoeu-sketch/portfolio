@@ -1603,3 +1603,14 @@ iframe.lv,.gl-live iframe{flex:none}
 .ts-bar i{display:block;height:100%;background:#FFD23F;transform:scaleX(0);transform-origin:left}
 .ts.hold .ts-bar{opacity:0}
 .ts-in{cursor:default}
+
+/* idioma */
+.en-wait body{visibility:hidden}
+.lang-b{display:inline-flex;align-items:center;justify-content:center;min-width:2.75rem;min-height:2.75rem;padding:0 .2rem;background:none;border:0;color:inherit;font:700 .72rem/1 'Courier New',monospace;letter-spacing:.12em;cursor:pointer}
+.lang-b::before{content:"";width:.42rem;height:.42rem;margin-right:.35rem;background:#EBA9BD}
+.lang-b:hover,.lang-b:focus-visible{color:#EBA9BD}
+.hd-lang{order:9;margin-left:.25rem}
+.ts-lang{position:fixed;top:calc(.6rem + env(safe-area-inset-top,0px));right:.8rem;color:#cdbfb2}
+.en .reto.done .reto-n::after{content:" · cleared"}
+.en .gw-n.now::before{content:"Tap here"}
+.en .gl-live::before{content:"Loading the website…"}
