@@ -37,9 +37,9 @@ pages = []
 # 1 portada
 pages.append('''<section class="pg cover" id="p1">
 <p class="k">Portfolio · 2026</p>
-<div class="cv-l"><h1>Paula<br>Urbano</h1><p class="script">diseñadora web</p>
-<p class="cv-d">Diseño webs en Figma y las programo yo, para que funcionen de verdad.</p>
-<p class="press"><span class="tri"></span>Busco prácticas · Valencia · desde enero</p></div>
+<div class="cv-l"><h1>Paula<br>Urbano</h1><p class="script">diseñadora y desarrolladora web</p>
+<p class="cv-d">Diseño y programo webs que mis clientes pueden gestionar solos.</p>
+<p class="press"><span class="tri"></span>Webs que mis clientes gestionan solos</p></div>
 <div class="cv-r"><div class="egg"><div class="lcd-scr"><canvas data-g="happy" width="32" height="32"></canvas></div><div class="egg-b"><i></i><i></i><i></i></div></div><p class="egg-n">Paulagotchi</p></div>
 <footer class="cv-f"><a href="%s">paulaurbanog.com</a><a href="mailto:%s">%s</a><a href="%s">LinkedIn · Paula Urbano</a><span>Valencia, España</span></footer>
 </section>''' % (WEB, MAIL, MAIL, LI))

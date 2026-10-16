@@ -196,7 +196,7 @@
   function refresh() {
     var n = now(), clk = $('#gClock');
     if (clk) clk.innerHTML = '<span>valencia</span><span>' + n.clock + '</span>';
-    STATUS = [n.txt, 'prácticas: enero', 'ama: figma y ux/ui'];
+    STATUS = [n.txt, 'diseño + código', 'ama: figma y ux/ui'];
     g.sleep = n.sleep;
     $('.g-screen').classList.toggle('zz', n.sleep);
   }
@@ -1639,6 +1639,17 @@
         if (e.key === 'Enter') { var on = opts.filter(function (o) { return o.classList.contains('on'); })[0]; if (on) { pick(on); e.preventDefault(); } }
       });
       setTimeout(function () { opts[0].focus({ preventScroll: true }); }, 100);
+      /* si nadie elige en 5 segundos, entra al portfolio normal */
+      var tsBar = $('#tsBar'), tsLeft = 5000, tsLast = 0, tsStop = false;
+      (function tsTick(t) {
+        if (!root.classList.contains('ts-on') || ts.dataset.busy || tsStop) return;
+        if (!root.classList.contains('intro-on') && !document.hidden) { if (tsLast) tsLeft -= t - tsLast; tsLast = t; } else tsLast = 0;
+        tsBar.style.transform = 'scaleX(' + Math.max(0, 1 - tsLeft / 5000) + ')';
+        if (tsLeft <= 0) { pick(opts[0]); return; }
+        requestAnimationFrame(tsTick);
+      })(0);
+      addEventListener('keydown', function (e) { if (!root.classList.contains('ts-on')) return; if (e.key === 'Escape') pick(opts[0]); else if (/Arrow|Tab/.test(e.key)) { tsStop = true; ts.classList.add('hold'); } });
+      ts.addEventListener('click', function (e) { if (!e.target.closest('.ts-o')) pick(opts[0]); });
     }
     /* créditos con cuenta atrás de arcade */
     var cr = $('#credits'), crT = null;
@@ -1646,7 +1657,7 @@
       new IntersectionObserver(function (es) {
         if (!es[0].isIntersecting || crT || !game()) return;
         var n = 10, el = $('#crN');
-        crT = setInterval(function () { n--; if (n >= 0) el.textContent = n; if (n < 0) { clearInterval(crT); $('.cr-c', cr).textContent = 'Game over… mentira, escríbeme igual :)'; } }, 1000);
+        crT = setInterval(function () { n--; if (n >= 0) el.textContent = n; if (n < 0) { clearInterval(crT); $('.cr-c', cr).textContent = 'Fin de la partida. ¿Hablamos?'; } }, 1000);
       }, { threshold: .5 }).observe(cr);
       $('#crGo').addEventListener('click', function () { var t = $('#msgTxt'); if (t) { t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }); setTimeout(function () { t.focus({ preventScroll: true }); }, 450); } });
     }
@@ -1661,6 +1672,17 @@
       }
     };
   })();
+
+  /* ---------- lo que pesa esta visita, medido de verdad ---------- */
+  addEventListener('load', function () {
+    setTimeout(function () {
+      var el = $('#ftKb'); if (!el || !performance.getEntriesByType) return;
+      var n = performance.getEntriesByType('navigation')[0], tot = n ? n.transferSize || 0 : 0;
+      performance.getEntriesByType('resource').forEach(function (r) { tot += r.transferSize || 0; });
+      var kb = Math.round(tot / 1024);
+      if (kb > 20 && kb < 2048) el.textContent = 'Al entrar, esta web ha cargado ' + kb + ' KB: menos que una foto de tu celular. ';
+    }, 1500);
+  });
 
   /* ---------- si te vas a otra pestaña ---------- */
   var title = document.title;

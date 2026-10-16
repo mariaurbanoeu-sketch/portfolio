@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Paula Urbano · Diseñadora web</title>
-<meta name="description" content="Paula Urbano, diseñadora web en Valencia. Diseño en Figma, pienso la experiencia (UX/UI) y programo webs que funcionan.">
+<title>Paula Urbano · Diseñadora y desarrolladora web</title>
+<meta name="description" content="Paula Urbano, diseñadora y desarrolladora web en Valencia. Diseño y programo webs que mis clientes pueden gestionar solos.">
 <meta name="theme-color" content="#221616">
 <link rel="icon" href="favicon.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -13,19 +13,19 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Paula">
 <link rel="canonical" href="https://paulaurbanog.com/">
-<meta property="og:title" content="Paula Urbano · Diseñadora web">
-<meta property="og:description" content="Diseño en Figma y programo webs que funcionan. Busco prácticas en Valencia desde enero, con convenio de la universidad.">
+<meta property="og:title" content="Paula Urbano · Diseñadora y desarrolladora web">
+<meta property="og:description" content="Diseño y programo webs que mis clientes pueden gestionar solos. Valencia, España.">
 <meta property="og:image" content="https://paulaurbanog.com/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="627">
-<meta property="og:image:alt" content="Paula Urbano, diseñadora web. Busco prácticas en Valencia desde enero.">
+<meta property="og:image:alt" content="Paula Urbano, diseñadora y desarrolladora web.">
 <meta property="og:locale" content="es_ES">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:url" content="https://paulaurbanog.com/">
 <meta property="og:type" content="website">
 <link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/pinyon.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=55">
+<link rel="stylesheet" href="css/site.css?v=56">
 <script>(function(d){d.classList.add('js');try{if(!sessionStorage.getItem('intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('intro-on');sessionStorage.setItem('intro','1')}var m=sessionStorage.getItem('pm');if(!m){d.classList.add('ts-on');return}d.classList.add(m==='game'?'m-game':'m-fast')}catch(e){}})(document.documentElement)</script>
 </head>
 <body>
@@ -35,12 +35,13 @@
   <div class="ts-in">
     <p class="ts-k">Paula Urbano · Diseñadora web</p>
     <canvas id="tsCv" width="32" height="32" aria-hidden="true"></canvas>
-    <p class="ts-t" id="tsT">¿Ver o jugar?</p>
-    <p class="ts-d">Puedes ver mi portfolio normal o recorrerlo jugando. Tú eliges.</p>
+    <p class="ts-t" id="tsT">Hola, soy Paula</p>
+    <p class="ts-d">Mira mi portfolio o recórrelo jugando. Si no eliges, entras al portfolio en 5 segundos.</p>
     <div class="ts-b">
-      <button type="button" class="ts-o on" data-ts="game"><span class="ts-cur" aria-hidden="true"></span>Jugar<small>Un mapa con 6 niveles · unos 4 min</small></button>
-      <button type="button" class="ts-o" data-ts="fast"><span class="ts-cur" aria-hidden="true"></span>Ver<small>El portfolio normal, directo</small></button>
+      <button type="button" class="ts-o on" data-ts="fast"><span class="ts-cur" aria-hidden="true"></span>Ver portfolio<small>La versión normal, directa</small></button>
+      <button type="button" class="ts-o ts-sec" data-ts="game"><span class="ts-cur" aria-hidden="true"></span>Modo juego<small>Un mapa con 6 niveles · unos 4 min</small></button>
     </div>
+    <div class="ts-bar" aria-hidden="true"><i id="tsBar"></i></div>
     <p class="ts-h">← → para elegir · Enter</p>
   </div>
 </div>
@@ -69,10 +70,8 @@
     <div class="wf-img"><em>Paulagotchi · canvas 64 × 64</em></div>
   </div>
   <div class="hero-txt">
-    <h1 class="hero-h"><span class="ln"><span>¿Buscas a alguien</span></span> <span class="ln"><span>que diseñe</span></span> <span class="ln"><span>y programe?</span></span></h1>
-    <p class="script hero-me">esa soy yo</p>
-    <p class="hero-lead">Soy Paula :). Diseño y programo webs con mucho cariño por los detalles. Quédate un rato.</p>
-    <p class="hero-tag"><i aria-hidden="true"></i>Busco prácticas en Valencia · desde enero · con convenio de la uni</p>
+    <h1 class="hero-h"><span class="ln"><span>Diseñadora y</span></span> <span class="ln"><span>desarrolladora</span></span> <span class="ln"><span>web</span></span></h1>
+    <p class="hero-lead">Diseño y programo webs que mis clientes pueden gestionar solos.</p>
     <div class="ctas">
       <a class="btn" href="#proyectos">Ver proyectos <i class="ic ic-down"></i></a>
       <a class="btn ghost" href="Paula-Urbano-CV.pdf" download>CV <i class="ic ic-down"></i></a>
@@ -88,7 +87,7 @@
         <div class="g-screen">
           <p class="g-clock" id="gClock" aria-hidden="true"></p>
           <canvas id="gCanvas" width="64" height="64" aria-hidden="true"></canvas>
-          <p class="g-status" id="gStatus" aria-live="polite">prácticas: enero</p>
+          <p class="g-status" id="gStatus" aria-live="polite">diseño + código</p>
         </div>
         <div class="g-btns">
           <button type="button" data-g="a" aria-label="A: ver proyectos"><span>A</span></button>
@@ -582,7 +581,7 @@
     <p class="tg-h"><span>Y también</span><span class="tg-n">04</span></p>
     <ul class="tgrid">
       <li class="tl"><canvas class="tl-ic" width="16" height="16" data-tool="CP" data-c="#9A6BFF" aria-hidden="true"></canvas><b>Copilot</b><span>Me ayuda a escribir y revisar código más rápido, sin perder el control.</span></li>
-      <li class="tl"><canvas class="tl-ic" width="16" height="16" data-tool="CL" data-c="#D97757" aria-hidden="true"></canvas><b>Claude</b><span>Dominio total.</span></li>
+      <li class="tl"><canvas class="tl-ic" width="16" height="16" data-tool="CL" data-c="#D97757" aria-hidden="true"></canvas><b>Claude</b><span>Asistente de código: me ayuda a programar y revisar.</span></li>
       <li class="tl"><canvas class="tl-ic" width="16" height="16" data-tool="GP" data-c="#10A37F" aria-hidden="true"></canvas><b>ChatGPT</b><span>Para pensar ideas en voz alta.</span></li>
       <li class="tl"><canvas class="tl-ic" width="16" height="16" data-tool="GE" data-c="#4C8DF6" aria-hidden="true"></canvas><b>Gemini</b><span>Otra opinión cuando la necesito.</span></li>
     </ul>
@@ -599,7 +598,7 @@
 <footer class="ft" id="contacto" data-bg="olive" data-frame="Contacto">
   <div class="credits g-only" id="credits">
     <p class="cr-t">Fin del juego</p>
-    <div class="cr-roll"><p>Diseño · Paula Urbano</p><p>Código · Paula Urbano</p><p>Paulagotchi · Paula Urbano</p><p>Café · mucho</p><p>Gracias por jugar</p></div>
+    <div class="cr-roll"><p>Diseño · Paula Urbano</p><p>Código · Paula Urbano</p><p>Paulagotchi · Paula Urbano</p><p>Gracias por jugar</p></div>
     <p class="cr-c">¿Continuar? <b id="crN">10</b></p>
     <button class="btn" type="button" id="crGo">Continuar: escríbeme <i class="ic ic-down"></i></button>
   </div>
@@ -624,7 +623,7 @@
     </form>
   </div>
   <p class="ft-mode"><button type="button" class="link" id="modeSwap">Cambiar a modo juego</button></p>
-  <p class="ft-note">Esta web pesa menos que una foto de tu celular. La diseñé y la programé yo.</p>
+  <p class="ft-note"><span id="ftKb"></span>La diseñé y la programé yo.</p>
 </footer>
 
 <!-- mini Paulagotchi que acompaña al bajar -->
@@ -760,6 +759,6 @@
   <div class="mv-stage"><button type="button" class="mv-nav" id="mvPrev" aria-label="Página anterior"><i class="ic ic-left"></i></button><img id="mvImg" alt=""><button type="button" class="mv-nav" id="mvNext" aria-label="Página siguiente"><i class="ic ic-right"></i></button></div>
 </div>
 
-<script src="js/site.js?v=56" defer></script>
+<script src="js/site.js?v=57" defer></script>
 </body>
 </html>
