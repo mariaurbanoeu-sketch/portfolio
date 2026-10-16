@@ -701,6 +701,7 @@
     [].forEach.call(document.querySelectorAll('[data-en]'), function (el) { el.textContent = el.getAttribute('data-en'); });
     /* el CV en inglés */
     [].forEach.call(document.querySelectorAll('a[href$="Paula-Urbano-CV.pdf"]'), function (a) { a.href = 'Paula-Urbano-CV-EN.pdf'; });
+    [].forEach.call(document.querySelectorAll('a[href$="Paula-Urbano-Portfolio.pdf"]'), function (a) { a.href = 'Paula-Urbano-Portfolio-EN.pdf'; });
     walk(document.body);
     new MutationObserver(function (ms) {
       ms.forEach(function (m) {
