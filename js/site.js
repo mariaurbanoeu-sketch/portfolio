@@ -854,6 +854,7 @@
         var cl = src.cloneNode(true); cl.removeAttribute('id');
         $$('video,iframe,.pins', cl).forEach(function (x) { x.remove(); });
         $$('[id]', cl).forEach(function (x) { x.removeAttribute('id'); });
+        $$('canvas[data-px]', cl).forEach(function (c) { drawPx(c, c.dataset.px); });
         buzz(8); openSheet($('.reel-h', b.closest('.reel')).textContent, cl);
       });
     });
@@ -1585,6 +1586,9 @@
       $('#gwWinK').textContent = 'Nivel ' + idx + ' completado';
       $('#gwWinC').textContent = coinsL + ' / 1';
       var ev = stage() > was; $('#gwWinE').hidden = !ev; if (ev) $('#gwWinE').textContent = '¡Tu Paulagotchi evolucionó! Ahora es ' + STAGES[stage()];
+      /* las reseñas de verdad se desbloquean al pasar su nivel */
+      var REV = { nails: ['Superó todas mis expectativas. Un trabajo de 10/10.', 'Mely G. · Nails by MelyG'], cata: ['Un portfolio que de verdad me representa. La recomiendo sin dudarlo.', 'Catalina Silva · 3D y animación'] }, rv = REV[L.k];
+      $('#gwWinR').hidden = !rv; if (rv) { $('#gwWinRq').textContent = rv[0]; $('#gwWinRn').textContent = rv[1]; }
       face($('#gwWinCv')); lvBox.hidden = true; w.hidden = false; w.classList.remove('on'); void w.offsetWidth; w.classList.add('on'); buzz([20, 50, 20]);
       if (g) { g.mood = 'happy'; g.jump = 24; }
       $('#gwWinGo').focus({ preventScroll: true });
