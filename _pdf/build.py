@@ -30,9 +30,9 @@ pages = []
 pages.append('''<section class="pg cover" id="p1"><p class="k">Portfolio · 2026</p>
 <div class="cv-g"><div><h1>Paula<br>Urbano</h1><p class="sc">diseñadora y desarrolladora web</p>
 <p class="cv-d">Diseño y programo webs que mis clientes pueden gestionar solos.</p></div>
-<div class="cv-col">%s%s%s</div></div>
+<div class="cv-col">%s%s</div></div>
 <footer class="cv-f"><a href="%s">paulaurbanog.com</a><a href="mailto:%s">%s</a><a href="%s">LinkedIn · Paula Urbano</a><span>Valencia, España</span></footer></section>''' % (
-    br('../img/nacar-d.webp', 'nacar estilismo', 'b1'), br('../img/nails-d.webp', 'nailsbymelyg.com', 'b3'), ph('../img/nails-m.webp'),
+    br('../img/nails-d.webp', 'nailsbymelyg.com'), ph('../img/nails-m.webp'),
     WEB, MAIL, MAIL, LI))
 
 # 2 · sobre mí + índice
@@ -53,6 +53,7 @@ def pa(n, cls, num, kind, title, who, intro, rows, right, url, urltxt):
     return '''<section class="pg %s" id="p%d"><div class="pa-g"><div class="pa-l"><p class="k">%s · %s</p><h2 class="pa-t">%s</h2><p class="pa-w">%s</p><p class="pa-i">%s</p>%s%s</div>%s</div>%s</section>''' % (
         cls, n, num, kind, title, who, intro, meta(rows), go(url, 'Verla en vivo', urltxt), right, ft(n))
 def pb(n, cls, name, feats):
+    feats = [x for x in feats if 'class="ph' not in x[0]][:1] + [x for x in feats if 'class="ph' in x[0]] + [x for x in feats if 'class="ph' not in x[0]][1:]
     f = ''
     for i, (shot, t, d) in enumerate(feats):
         f += '<figure><div class="shot">%s</div><figcaption><em>%d</em><b>%s</b><span>%s</span></figcaption></figure>' % (shot, i + 1, t, d)

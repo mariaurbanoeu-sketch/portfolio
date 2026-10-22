@@ -40,7 +40,7 @@ a{color:inherit;text-decoration:none}
 .cv-d{max-width:100mm;margin-top:8mm;font-size:12pt;line-height:1.5;color:#e2d6cb}
 .cv-col{position:relative;height:148mm}
 .cv-col .br{position:absolute;width:112mm}
-.cv-col .b1{right:0;top:4mm;width:112mm}.cv-col .b3{left:0;bottom:10mm;width:128mm}
+
 .cv-col .ph{position:absolute;right:0;bottom:0;width:34mm;height:74mm}
 .cv-f{display:flex;gap:9mm;padding-top:5mm;border-top:.5pt solid #4a3a36;font:600 8pt/1 var(--sans);color:#e2d6cb}
 .cv-f a{color:var(--pink)}.cv-f span{margin-left:auto}
@@ -78,10 +78,10 @@ a{color:inherit;text-decoration:none}
 .fx .shot{height:104mm;display:flex;align-items:center;justify-content:center;margin-bottom:5mm}
 .fx .shot .br{width:100%}
 .fx .shot .ph{height:100%;aspect-ratio:390/844}
-.fx figcaption{display:grid;grid-template-columns:9mm 1fr;gap:1.2mm 2mm}
-.fx figcaption em{grid-row:1/3;font:400 19pt/1 var(--serif);font-style:normal;opacity:.4}
-.fx figcaption b{font:800 10pt/1.25 var(--sans)}
-.fx figcaption span{font-size:8.3pt;line-height:1.5;opacity:.85}
+.fx>figure>figcaption{display:grid;grid-template-columns:9mm 1fr;gap:1.2mm 2mm}
+.fx>figure>figcaption em{grid-row:1/3;font:400 19pt/1 var(--serif);font-style:normal;opacity:.4}
+.fx>figure>figcaption b{font:800 10pt/1.25 var(--sans)}
+.fx>figure>figcaption span{font-size:8.3pt;line-height:1.5;opacity:.85}
 /* colores de cada cliente */
 .nails{background:#F3ECE8;color:#4a2230}.nails .pa-t{font-family:'NailsD',serif}.nails .pa-t i{font-family:'NailsDI',serif;font-style:normal}
 .kronox{background:#0B0B0A;color:#EDEAE4}.kronox .pa-t{font-family:'KronoxD',sans-serif;text-transform:uppercase;font-size:46pt}
@@ -92,10 +92,10 @@ a{color:inherit;text-decoration:none}
 .ea figcaption{margin-top:3mm;font-size:7pt;line-height:1.4;opacity:.92}
 .ea figcaption b{display:block;font-size:7.4pt;margin-bottom:.6mm;color:#FFD23F}
 /* secciones extra */
-.sh{display:grid;grid-template-columns:auto 1fr;align-items:end;column-gap:10mm;margin-bottom:7mm}
-.sh .sc{grid-column:1/3;font:400 24pt/1.1 'Pinyon Script',cursive;color:#b06a82}
-.sh h2{font:800 25pt/1 var(--sans);text-transform:uppercase}
-.sh p{justify-self:end;text-align:right;max-width:115mm;font-size:9pt;opacity:.8}
+.sh{display:grid;grid-template-columns:1fr 1fr;align-items:end;column-gap:10mm;margin-bottom:7mm;padding-bottom:4mm;border-bottom:.5pt solid currentColor}
+.sh .sc{grid-column:1;font:400 22pt/1.1 'Pinyon Script',cursive;color:#b06a82;margin-bottom:-1mm}
+.sh h2{grid-column:1;font:800 25pt/1 var(--sans);text-transform:uppercase}
+.sh p:not(.sc){grid-column:2;grid-row:1/3;align-self:end;justify-self:end;text-align:right;max-width:115mm;font-size:9pt;opacity:.8}
 .g3{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:8mm;min-height:0}
 .g3 article{display:flex;flex-direction:column;min-height:0}
 .g3 h3{font:800 12.5pt/1.1 var(--sans);text-transform:uppercase;margin:1.6mm 0 1.6mm}
@@ -168,8 +168,14 @@ a{color:inherit;text-decoration:none}
 .am-h{display:grid;grid-template-columns:auto 1fr 74mm;gap:10mm;align-items:start}
 .am-h .pa-t{margin-top:3mm}
 .am-m{display:flex;flex-direction:column;gap:4mm}.am-m .go{margin-top:0}
-.amigos .ea{flex:1;min-height:0;grid-template-columns:repeat(5,40mm);justify-content:space-between;align-self:stretch}
-.amigos .ea .ph{width:40mm;height:auto}
+.amigos .ea{flex:1;min-height:0;grid-template-columns:repeat(5,47mm);justify-content:space-between;align-self:stretch;align-content:center}
+.amigos .ea .ph{width:47mm;height:auto}
+.g3 .br img{aspect-ratio:16/10;object-fit:cover;object-position:top}
+.g3 .v2 .br img{aspect-ratio:16/10}
+.pb-h{align-items:center}
+.cv-col{display:flex;align-items:center;height:auto}
+.cv-col .br{position:relative;width:100%;margin-right:14mm}
+.cv-col .ph{right:0;bottom:-12mm}
 </style></head><body>
 <!--PAGES-->
 <script>
