@@ -113,7 +113,7 @@ pages.append('''<section class="pg" id="p10"><div class="sh"><p class="sc">tambi
 # 11 · portfolios para creativos
 def cr(vis, role, nm, txt, url, ut):
     return '<article>%s<p class="k">%s</p><h3>%s</h3><p>%s</p>%s</article>' % (vis, role, nm, txt, go(url, 'Verla en vivo', ut))
-cat = '<div class="cat">%s<span>Escanea el código para verla en vivo</span></div>' % qr('https://catalinasilva.netlify.app/', '#141210')
+cat = br('shots/cata.png', 'catalinasilva.netlify.app')
 pages.append('''<section class="pg dark" id="p11"><div class="sh"><p class="sc">mis favoritos</p><h2>Portfolios para creativos</h2><p>Webs para tres personas que también crean. Antes de diseñar, miré qué busca cada uno en su sector: tres estilos totalmente distintos.</p></div>
 <div class="g3">%s%s%s</div>%s</section>''' % (
     cr(br('../img/jairo.webp', 'jairoazogue.com'), 'Director y editor de video', 'Jairo Azogue', 'Su trabajo ordenado por tipo de pieza y sus herramientas presentadas como su escritorio. Ya está en su propio dominio.', 'https://jairoazogue.com/', 'jairoazogue.com'),
