@@ -20,7 +20,7 @@ def qr(url, col='#221616'):
 WEB = 'https://paulaurbanog.com/' + ('en/' if EN else '')
 MAIL = 'mariaurbanoeu@gmail.com'
 LI = 'https://www.linkedin.com/in/paula-urbano-436619332'
-TOTAL = 13
+TOTAL = 14
 NLV = 6   # niveles con moneda: 4 webs + 2 portfolios, como en la web
 STAGES = [t('Paula estudiante', 'Paula the student'), t('Paula diseñadora web', 'Paula the web designer'), t('Paula contratada', 'Paula, hired')]
 COIN = '<canvas data-coin width="8" height="8"></canvas>'
@@ -42,11 +42,25 @@ def lt0(lvl, title, who):
 def dlg(txt, who='Paulagotchi'):
     return '<div class="dlg"><canvas data-g="happy" width="32" height="32"></canvas><p><span class="who">%s</span>%s</p></div>' % (who, txt)
 
-def card(meta, ups, url, urltxt):
+def card(meta, ups, url, urltxt, extra=''):
     mt = ''.join('<div><dt>%s</dt><dd>%s</dd></div>' % m for m in meta)
     up = ''.join('<li><span><strong>%s</strong>%s</span></li>' % u for u in ups)
-    return '<aside class="card"><p class="k">%s</p><dl>%s</dl><ul class="pu"><li class="pu-h">%s</li>%s</ul><a class="qrb" href="%s">%s<span>%s<b>%s</b></span></a></aside>' % (
-        t('Ficha del cartucho', 'Cartridge stats'), mt, t('Lo que pensé', 'What I planned'), up, url, qr(url), t('Escanéalo y juégala en vivo', 'Scan it and play it live'), urltxt)
+    return '<aside class="card"><p class="k">%s</p><dl>%s</dl><ul class="pu"><li class="pu-h">%s</li>%s</ul>%s<a class="qrb" href="%s">%s<span>%s<b>%s</b></span></a></aside>' % (
+        t('Ficha del cartucho', 'Cartridge stats'), mt, t('Lo que pensé', 'What I planned'), up, extra, url, qr(url), t('Escanéalo y juégala en vivo', 'Scan it and play it live'), urltxt)
+
+JS = open('../js/en.js').read()
+DEN = {k.replace("\\'", "'"): v.replace("\\'", "'") for k, v in re.findall(r"^\s*'((?:[^'\\]|\\.)*)': '((?:[^'\\]|\\.)*)',?$", JS, re.M)}
+DEN.update(dict(re.findall(r'^\s*"([^"]*)": "([^"]*)",?$', JS, re.M)))
+def tr(es): return DEN.get(es, es) if EN else es
+# las reseñas, tal cual están en la web
+RV = []
+for m in re.finditer(r'<figure class="rv[^"]*"[^>]*>(.*?)</figure>', open('../index.html').read(), re.S):
+    b = m.group(1)
+    RV.append({'ic': re.search(r'data-px="(\w+)"', b).group(1), 'n': re.search(r'<b>([^<]+)</b>', b).group(1), 'w': re.search(r'<small>([^<]+)</small>', b).group(1),
+               'q': re.search(r'<blockquote><p>(.*?)</p>', b).group(1), 'full': re.findall(r'<p>(.*?)</p>', b.split('<details')[1])})
+STARS = '<span class="st5"><i></i><i></i><i></i><i></i><i></i></span>'
+def mini(r, q):
+    return '<div class="rvm">%s<p>«%s»</p><small>%s · %s</small></div>' % (STARS, tr(q), r['n'], t('Reseña real', 'Real review'))
 
 pages = []
 # 1 · pantalla de inicio
@@ -89,7 +103,7 @@ pages.append('''<section class="pg" id="p2">%s%s
 
 # 3 · mapa
 NODES = [('Nails by MelyG', 'nail', 4, 1), ('Kronox', 'cam', 5, 2), ('Nácar Estilismo', 'bag', 6, 3), ('Entre Amigos', 'heart', 7, 4), ('WordPress', 'web', 8, 0),
-         ('Portfolios', 'film', 9, 5), ('Figma', 'pen', 10, 0), (t('Marcas', 'Brands'), 'star', 11, 0), (t('Herramientas', 'Tools'), 'tool', 12, 0), (t('Contrátame', 'Hire me'), 'mail', 13, -1)]
+         ('Portfolios', 'film', 9, 5), ('Figma', 'pen', 10, 0), (t('Marcas', 'Brands'), 'star', 11, 0), (t('Herramientas', 'Tools'), 'tool', 12, 0), (t('Contrátame', 'Hire me'), 'mail', 14, -1)]
 POS = [(6, 74), (16, 30), (26, 74), (36, 30), (46, 74), (56, 30), (66, 74), (76, 30), (86, 74), (94, 30)]
 nodes = ''
 for i, (nm, ic, pg, lv) in enumerate(NODES):
@@ -104,13 +118,13 @@ pages.append('''<section class="pg" id="p3">%s%s
           'Each stop on the map is a website Paula made. On her website you can actually play it: you open each site, find the hidden coin and complete a mission.'))))
 
 # 4-6 · niveles
-def level(n, lv, name, who, img_d, img_m, tg, coin, ups, meta, url, urltxt, say):
+def level(n, lv, name, who, img_d, img_m, tg, coin, ups, meta, url, urltxt, say, extra=''):
     tgt = '<span class="tg" style="left:%s%%;top:%s%%"><b>%s</b><i></i></span>' % tg
     st = ('<figure class="br"><figcaption><i></i><i></i><i></i><span>%s</span></figcaption><div class="sc"><img src="%s" alt="">%s<span class="coin" style="left:%s%%;top:%s%%">%s</span></div></figure><figure class="phm over%s"><img src="%s" alt=""></figure>' % (
         urltxt, img_d, tgt, coin[0], coin[1], COIN, ' l' if lv == 2 else '', img_m))
     return '''<section class="pg" id="p%d">%s%s<div class="lv"><div class="stage"><p class="got">%s %s</p>%s</div>%s</div>%s</section>''' % (
         n, hud(n, 1 if lv > 3 else 0, t('Nivel %d de 6', 'Level %d of 6') % lv, lv, int(lv / 6 * 100)), lt(t('Nivel %d', 'Level %d') % lv, name, who, (lv, 4)),
-        COIN, t('Moneda conseguida', 'Coin collected'), st, card(meta, ups, url, urltxt), dlg(say))
+        COIN, t('Moneda conseguida', 'Coin collected'), st, card(meta, ups, url, urltxt, extra), dlg(say))
 
 pages.append(level(4, 1, 'Nails by MelyG', t('Manicurista · Katy, Texas', 'Nail artist · Katy, Texas'), '../img/nails-d.webp', '../img/nails-m.webp?v=2',
     (34, 74, t('Empieza aquí', 'Start here')), (20, 14),
@@ -121,7 +135,7 @@ pages.append(level(4, 1, 'Nails by MelyG', t('Manicurista · Katy, Texas', 'Nail
      (t('Hecha con', 'Made with'), 'Figma · HTML · CSS · JavaScript · GSAP · Square'), (t('Idiomas', 'Languages'), t('Español e inglés', 'Spanish and English'))],
     'https://nailsbymelyg.com/', 'nailsbymelyg.com',
     t('<b>Misión:</b> entra en la web de Mely y prueba el simulador como haría una clienta. Mely tiene un estudio de manicura rusa: diseñé su web en Figma y la programé para que sus clientas se prueben colores y formas antes de reservar.',
-      '<b>Mission:</b> open Mely’s website and try the simulator like a client would. Mely runs a Russian manicure studio: I designed her website in Figma and built it so her clients can try on colors and shapes before booking.')))
+      '<b>Mission:</b> open Mely’s website and try the simulator like a client would. Mely runs a Russian manicure studio: I designed her website in Figma and built it so her clients can try on colors and shapes before booking.'), mini(RV[0], 'Superó todas mis expectativas. Un trabajo de 10/10.')))
 pages.append(level(5, 2, 'Kronox', t('Director de videoclips · Sevilla', 'Music video director · Seville'), '../img/kpanel-d.webp', '../img/kpanel-m.webp?v=2',
     (92, 64, t('Las flechas', 'The arrows')), (20, 78),
     [(t('Sin malentendidos.', 'No misunderstandings.'), t(' Antes de escribirle, el cliente acepta las condiciones del rodaje.', ' Before messaging him, clients accept the shoot terms.')),
@@ -181,14 +195,14 @@ pages.append('''<section class="pg" id="p8">%s%s<div class="wp">
           'Themes Paula coded from scratch at university. Whoever runs the site fills in the dashboard and the page updates itself: the «Title» field marked in yellow is the heading marked on the page.'))))
 
 # 9 · portfolios para creativos
-def it(img, k, nm, txt, url, ut):
-    return '<div class="it"><div class="v" style="aspect-ratio:16/10">%s</div><p class="k">%s</p><h3>%s</h3><p>%s</p><a class="qrb" href="%s">%s<span>%s<b>%s</b></span></a></div>' % (img, k, nm, txt, url, qr(url), t('Escanéalo', 'Scan it'), ut)
+def it(img, k, nm, txt, url, ut, extra=''):
+    return '<div class="it"><div class="v" style="aspect-ratio:16/10">%s</div><p class="k">%s</p><h3>%s</h3><p>%s</p>' % (img, k, nm, txt) + extra + '<a class="qrb" href="%s">%s<span>%s<b>%s</b></span></a></div>' % (url, qr(url), t('Escanéalo', 'Scan it'), ut)
 cube = '<div class="b3"><span>catalina_silva.blend</span><canvas data-cube width="24" height="24"></canvas><small></small></div>'
 pages.append('''<section class="pg" id="p9">%s%s<div class="room">%s%s%s</div>%s</section>''' % (
     hud(9, 1, t('Niveles 5 y 6', 'Levels 5 and 6'), 6, 100), lt(t('Niveles 5 y 6', 'Levels 5 and 6'), t('Portfolios para creativos', 'Portfolios for creatives'), t('Mis favoritos · 3 portfolios', 'My favorites · 3 portfolios'), (6, 6)),
     it('<img src="../img/jairo.webp" alt="">', t('Nivel 5 · Director y editor de video', 'Level 5 · Video director and editor'), 'Jairo Azogue', t('Su trabajo ordenado por tipo de pieza y sus herramientas como si fueran su escritorio. Ya está en su propio dominio.', 'His work sorted by type of piece, and his tools laid out like his desk. It’s already on his own domain.'), 'https://jairoazogue.com/', 'jairoazogue.com'),
     it('<img src="../img/zk-d.webp" alt="">', t('Extra · Videoclips', 'Extra · Music videos'), 'ZogueKidd', t('Usa la misma base que la web de Kronox, con una estética totalmente distinta.', 'Built on the same base as the Kronox website, with a completely different look.'), 'https://zoguekidd.netlify.app/', 'zoguekidd.netlify.app'),
-    it(cube, t('Nivel 6 · 3D y animación', 'Level 6 · 3D and animation'), 'Catalina Silva', t('La hicimos para que pudiera pedir prácticas en estudios de 3D.', 'We made it so she could apply for internships at 3D studios.'), 'https://catalinasilva.netlify.app/', 'catalinasilva.netlify.app'),
+    it(cube, t('Nivel 6 · 3D y animación', 'Level 6 · 3D and animation'), 'Catalina Silva', t('La hicimos para que pudiera pedir prácticas en estudios de 3D.', 'We made it so she could apply for internships at 3D studios.'), 'https://catalinasilva.netlify.app/', 'catalinasilva.netlify.app', mini(RV[1], 'Un portfolio que de verdad me representa. La recomiendo sin dudarlo.')),
     dlg(t('Webs para tres personas que también crean. Antes de diseñar, Paula miró qué busca cada uno en su sector. Fíjate: tres estilos totalmente distintos.',
           'Websites for three people who also make things. Before designing, Paula looked at what each of their industries looks for. Notice: three completely different styles.'))))
 
@@ -231,14 +245,22 @@ tg = ''.join('<div class="it"><p class="k">%s · %02d</p><ul>%s</ul></div>' % (g
 pages.append('''<section class="pg" id="p12">%s%s<div class="inv">%s</div><div style="height:8mm"></div></section>''' % (
     hud(12, 1, t('Inventario', 'Inventory'), 6, 100), lt(t('Inventario', 'Inventory'), t('Herramientas', 'Tools'), t('Lo que uso para diseñar y para programar', 'What I use to design and to code')), tg))
 
-# 13 · final
-pages.append('''<section class="pg" id="p13">%s%s
+# 13 · récords: lo que dicen mis clientas
+hs = ''.join('<tr><td>%s</td><td>%s</td><td>%s</td></tr>' % (r['n'].upper(), tr(r['w']), STARS) for r in RV)
+rvb = ''.join('<div class="rvb"><div class="rvb-h"><canvas data-px="%s" data-c="#EBA9BD" width="9" height="9"></canvas><span><b>%s</b><small>%s</small></span>%s</div><p class="rvb-q">«%s»</p>%s%s</div>' % (
+    r['ic'], r['n'], tr(r['w']), STARS, tr(r['q']), ''.join('<p>%s</p>' % tr(x) for x in r['full']), '<small class="rvb-tr">%s</small>' % t('', 'Translated from Spanish.')) for r in RV)
+pages.append('''<section class="pg" id="p13">%s%s<div class="rec"><table class="hs"><thead><tr><th>%s</th><th>%s</th><th>%s</th></tr></thead><tbody>%s</tbody></table><div class="rvg">%s</div></div></section>''' % (
+    hud(13, 2, t('Récords', 'High scores'), 6, 100), lt0(t('Récords', 'High scores'), t('Lo que dicen mis clientas', 'What my clients say'), t('Reseñas reales, tal cual me las escribieron', 'Real reviews, just as they wrote them')),
+    t('Jugadora', 'Player'), t('Proyecto', 'Project'), t('Puntuación', 'Score'), hs, rvb))
+
+# 14 · final
+pages.append('''<section class="pg" id="p14">%s%s
 <div class="fin-g"><div class="sum"><canvas data-g="hired" width="32" height="32"></canvas><p class="st">%s</p><dl><div><dt>%s</dt><dd>6/6</dd></div><div><dt>%s</dt><dd>6/6</dd></div><div><dt>%s</dt><dd>%s</dd></div></dl></div>
 <div><p class="cont">%s</p><p class="fin-d">%s</p>
 <ul class="ct"><li><span>%s</span><a href="mailto:%s">%s</a></li><li><span>Web</span><a href="%s">paulaurbanog.com</a></li><li><span>LinkedIn</span><a href="%s">linkedin.com/in/paula-urbano-436619332</a></li><li><span>%s</span><b>%s</b></li></ul>
 <div class="fin-q"><a href="%s">%s</a><span>%s</span></div></div></div>
 <p class="credits">%s · Paula Urbano &nbsp; %s · Paula Urbano &nbsp; Paulagotchi · Paula Urbano &nbsp; %s</p></section>''' % (
-    hud(13, 2, t('¡Juego completado!', 'Game complete!'), 6, 100), lt0(t('Fin del juego', 'Game over'), t('¡Contratada!', 'Hired!'), t('Nivel final', 'Final level')),
+    hud(14, 2, t('¡Juego completado!', 'Game complete!'), 6, 100), lt0(t('Fin del juego', 'Game over'), t('¡Contratada!', 'Hired!'), t('Nivel final', 'Final level')),
     STAGES[2], t('Webs probadas', 'Websites tried'), t('Monedas', 'Coins'), t('Taza de café', 'Coffee mug'), t('Sí', 'Yes'),
     t('¿Continuar?', 'Continue?'), t('Si te gustó cómo trabajo, escríbeme. Contesto rápido.', 'If you liked how I work, write to me. I reply fast.'),
     t('Correo', 'Email'), MAIL, MAIL, WEB, LI, t('Ciudad', 'City'), t('Valencia, España', 'Valencia, Spain'), WEB, qr(WEB), t('Escanéalo para ver mi portfolio en vivo<br>y jugar con el Paulagotchi', 'Scan to see my portfolio live<br>and play with the Paulagotchi'),
