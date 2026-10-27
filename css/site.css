@@ -1717,3 +1717,12 @@ html:not(.scrolled) .tb-open{opacity:0;pointer-events:none;transform:translate(-
 .g-legend span{font-size:.8rem;letter-spacing:0}
 .g-later{font-size:1rem;letter-spacing:.02em}.g-later span{font-size:.86rem}
 .hero-proof a::before{width:1.3em;height:1.14em}
+/* aviso para bajar, en pixel */
+.hero-down{gap:.6rem;font:400 .9rem/1 var(--px);letter-spacing:.04em;text-transform:lowercase;color:#cdbfb2}
+.hero-down i{width:4px;height:44px;background:repeating-linear-gradient(#4a3a36 0 4px,transparent 4px 8px);overflow:visible}
+.hero-down i::after{left:0;top:0;width:4px;height:4px;background:var(--pink);animation:pxdrop 1.6s steps(6,end) infinite}
+.hero-down i::before{content:"";position:absolute;left:50%;top:calc(100% + 6px);width:12px;height:8px;transform:translateX(-50%);background:var(--pink);clip-path:polygon(0 0,33.3% 0,33.3% 25%,66.6% 25%,66.6% 0,100% 0,100% 50%,83.3% 50%,83.3% 75%,66.6% 75%,66.6% 100%,33.3% 100%,33.3% 75%,16.6% 75%,16.6% 50%,0 50%)}
+@keyframes pxdrop{0%{top:0;opacity:1}100%{top:44px;opacity:1}}
+.hero-down:hover{color:var(--pink)}
+@media (prefers-reduced-motion:reduce){.hero-down i::after{animation:none;top:16px}}
+.hero-down{bottom:1rem;padding-bottom:16px}
