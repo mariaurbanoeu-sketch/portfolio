@@ -1848,3 +1848,8 @@ html.tb-seen:not(.m-game) .tb-open{opacity:0;pointer-events:none;transform:trans
 .pj-meta .lh b{font:600 1.35rem/1 var(--sans0);letter-spacing:-.01em}
 /* cada reel con su propio fondo, para que el título se lea aunque el fondo general aún no haya cambiado */
 @media(max-width:760px){.reel-nails{background:#F3ECE8;--ink:#3A1A21;--soft:#7A5A5F;--accent:#662E3A;color:var(--ink)}.reel-kronox{background:#0B0B0A;--ink:#EDE6DA;--soft:#8F877C;--accent:#EDE6DA;color:var(--ink)}.reel-nacar{background:#EFE7DC;--ink:#2B231C;--soft:#6E6257;--accent:#6E5139;color:var(--ink)}.reel-amigos{background:#0F1E3D;--ink:#F4F1EA;--soft:#A9B3C7;--accent:#FFD23F;color:var(--ink)}}
+/* qué era del cliente y qué hice yo */
+.pj-own{margin-top:1rem;display:grid;grid-template-columns:auto 1fr;gap:.35rem 1.2rem;max-width:52ch;font-size:.9rem;line-height:1.5}
+.pj-own span{display:contents}
+.pj-own b{font:600 .66rem/1.9 var(--sans0);letter-spacing:.18em;text-transform:uppercase;opacity:.6;white-space:nowrap}
+.pj-own span:last-child b{opacity:1;color:var(--accent,currentColor)}
