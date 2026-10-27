@@ -708,6 +708,25 @@
       new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) load(); else unload(); }); }, { rootMargin: '60% 0px' }).observe(stg);
       new IntersectionObserver(function (es) { es.forEach(function (e) { vis = e.isIntersecting; if (e.intersectionRatio >= .6) demo(); }); }, { threshold: [0, .6] }).observe(stg);
     } else load();
+    /* detalles: al pasar por una nota, se ilumina esa parte de la web (la busca dentro de la web real) */
+    var notes = $$('.dv-notes li', dv), hl = null;
+    var spot = function (li) {
+      notes.forEach(function (o) { o.classList.toggle('on', o === li); });
+      if (!hl) { hl = document.createElement('span'); hl.className = 'dv-hl'; fr.appendChild(hl); }
+      var el = null; try { el = li && loaded && ifr.contentDocument && ifr.contentDocument.querySelector(li.dataset.sel); } catch (e) {}
+      var r = el && el.getBoundingClientRect(), k = fw / vw, p = 6;
+      if (!r || !r.width || !r.height) { hl.classList.remove('on'); return; }
+      hl.style.left = (r.left * k - p) + 'px'; hl.style.top = (r.top * k - p) + 'px';
+      hl.style.width = (r.width * k + p * 2) + 'px'; hl.style.height = (r.height * k + p * 2) + 'px';
+      hl.classList.add('on');
+    };
+    notes.forEach(function (li) {
+      li.addEventListener('mouseenter', function () { spot(li); });
+      li.addEventListener('focus', function () { spot(li); });
+      li.addEventListener('click', function () { spot(li); });
+      li.addEventListener('mouseleave', function () { spot(null); });
+      li.addEventListener('blur', function () { spot(null); });
+    });
     var t = target(mode); setPoster(); paint(t[0], t[1], vw);
     tabs.forEach(function (b) { if (b.dataset.d === mode && now) now.innerHTML = b.querySelector('svg').outerHTML + '<span>' + b.querySelector('span').innerHTML + '</span>'; });
     addEventListener('resize', function () { cancelAnimationFrame(anim); var t = target(mode); paint(t[0], t[1], DVW[mode][0]); });
@@ -1067,7 +1086,7 @@
 
   /* ======================= retos y "entrar en la web" ======================= */
   var ENTER = {
-    nails: { n: 'Nails by MelyG', u: 'https://nailsbymelyg.com/', r: 'https://nailsbymelyg.com/#estudio', m: 'Toca «Diseña tu manicura» y prueba colores, formas y acabados.' },
+    nails: { n: 'Nails by MelyG', u: 'https://nailsbymelyg.com/?vista=portfolio', r: 'https://nailsbymelyg.com/?vista=portfolio#estudio', m: 'Toca «Diseña tu manicura» y prueba colores, formas y acabados.' },
     kronoxweb: { n: 'Kronox', u: 'https://kronoxprod.netlify.app/' },
     kronox: { n: 'el panel de Kronox', u: 'demos/kronox-panel.html', m: 'En «Vídeos», usa las flechas para cambiar el orden de sus videoclips.' },
     nacar: { n: 'Nácar Estilismo', u: 'demos/nacar.html', m: 'Abre una prenda, añádela a la cesta y mira cómo se abre a un lado.' },
@@ -1935,7 +1954,7 @@
 
   /* ======================= visor de manuales ======================= */
   var mv = $('#mv'), mvImg = $('#mvImg'), man = null, mvOpener = null;
-  function page(i) { return 'img/manual/' + man.k + '/p' + String(i + 1).padStart(2, '0') + '.webp'; }
+  function page(i) { return 'img/identidad/' + man.k + '/p' + String(i + 1).padStart(2, '0') + '.webp'; }
   function show(i) {
     man.i = (i + man.n) % man.n; mvImg.src = page(man.i); mvImg.alt = man.name + ', página ' + (man.i + 1);
     $('#mvCount').textContent = (man.i + 1) + ' / ' + man.n;

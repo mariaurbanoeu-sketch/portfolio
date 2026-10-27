@@ -1805,3 +1805,16 @@ html[lang="en"] .dv-frame::before{content:"loading the real website"}
 .dv-stage{padding:10px 0}
 .dv-bar{margin-bottom:.4rem}
 .b3-card .b3-shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
+/* detalles debajo de la web: se leen sin tocar nada y al pasar el ratón iluminan su sitio */
+.dv-nk{margin-top:1.6rem;font:600 .66rem/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;opacity:.6}
+.dv-nk span{letter-spacing:.04em;text-transform:none;font-weight:500}
+.dv-notes{list-style:none;margin:1rem 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.6rem}
+.dv-notes li{padding-top:.9rem;border-top:1px solid color-mix(in srgb,currentColor 22%,transparent);cursor:default;outline:0;transition:border-color .25s}
+.dv-notes li.on,.dv-notes li:focus-visible{border-color:var(--pink)}
+.dv-notes b{display:block;font:600 1rem/1.3 var(--sans)}
+.dv-notes span{display:block;margin-top:.35rem;font-size:.88rem;line-height:1.5;opacity:.72}
+.dv-hl{position:absolute;z-index:3;pointer-events:none;border:2px solid var(--pink);border-radius:6px;box-shadow:0 0 0 200vmax rgba(0,0,0,.38);opacity:0;transition:opacity .25s,left .3s var(--ease),top .3s var(--ease),width .3s var(--ease),height .3s var(--ease)}
+.dv-hl.on{opacity:1}
+.dv-nopins .dv-nk,.dv-nopins .dv-notes{display:none}
+@media(max-width:899px){.dv-notes{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.dv-hl{transition:opacity .2s}}

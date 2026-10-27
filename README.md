@@ -5,4 +5,4 @@ Se publica sola en https://paulaurbanog.com con GitHub Pages al hacer push a `ma
 
 - `video/` y `img/`: grabaciones y capturas reales de las webs (MP4 y WebP).
 - `demos/`: copias navegables del panel de Kronox, la tienda de Nácar y la app de Entre Amigos.
-- `img/manual/`: páginas de los manuales de marca.
+- `img/identidad/`: páginas de los manuales de marca.
