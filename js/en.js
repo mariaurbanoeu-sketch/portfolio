@@ -152,7 +152,7 @@
     'Para subir un video solo pega el enlace de YouTube. El título se pone solo.': 'To add a video he just pastes the YouTube link. The title fills itself in.',
     'Con las flechas cambia el orden en que salen sus videos en la web.': 'The arrows change the order his videos appear on the site.',
     'Toca «Web pública» para ver su web en vivo. Lo demás es el panel que usa él para cambiarla.': 'Tap «Public site» to see his website live. The rest is the panel he uses to update it.',
-    'Antes de escribirle por WhatsApp, el cliente acepta las condiciones del rodaje. Así no hay malentendidos.': 'Before messaging him on WhatsApp, clients accept the shoot terms. No misunderstandings.',
+    'Antes de escribirle por Instagram o WhatsApp, el cliente acepta las condiciones del rodaje. Así no hay malentendidos.': 'Before messaging him on Instagram or WhatsApp, clients accept the shoot terms. No misunderstandings.',
     'Él sube videos, cambia precios y aprueba reseñas desde el panel. También desde el celular.': 'He uploads videos, changes prices and approves reviews from the panel. From his phone too.',
     'Entrar en su panel': 'Open his panel',
 
@@ -606,7 +606,7 @@
     "Colores": "Colors",
     "Tipografías": "Typefaces",
     "Darle a sus clientas una experiencia única que la diferenciara de la competencia: diseñar sus uñas y también su gift card, algo que en Estados Unidos se usa muchísimo.": "Giving her clients a unique experience that set her apart from the competition: designing their nails and their own gift card, something hugely popular in the US.",
-    "Reunir todos sus videoclips en un solo sitio, que la gente lea reseñas y entre en confianza, que conozca las condiciones antes de escribirle y que él no dependa de mí.": "Bringing all his music videos together in one place, letting people read reviews and feel confident, showing the terms before they message him, and making him independent from me.",
+    "Reunir todos sus videoclips en un solo sitio, que la gente lea reseñas y entre en confianza, que conozca las condiciones antes de escribirle por Instagram o WhatsApp y que él no dependa de mí.": "Bringing all his music videos together in one place, letting people read reviews and feel confident, showing the terms before they message him on Instagram or WhatsApp, and making him independent from me.",
     "Una web que venda a través de Shopify y que sea llamativa e intuitiva.": "A website that sells through Shopify and is eye-catching and intuitive.",
     "En plena emergencia: que cargara rápido, que resolviera de verdad el problema y que todo estuviera muy bien organizado.": "In the middle of an emergency: loading fast, truly solving the problem and keeping everything really well organized.",
     "Reservar cita": "Book an appointment",
