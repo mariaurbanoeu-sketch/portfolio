@@ -1854,3 +1854,11 @@ html.tb-seen:not(.m-game) .tb-open{opacity:0;pointer-events:none;transform:trans
 .pj-own b{font:600 .66rem/1.9 var(--sans0);letter-spacing:.18em;text-transform:uppercase;opacity:.6;white-space:nowrap}
 .pj-own span:last-child b{opacity:1;color:var(--accent,currentColor)}
 .pj-meta .own-me dt{opacity:1;color:var(--accent,currentColor)}
+/* calidad dentro de la tira del sistema */
+.sys{display:flex;flex-wrap:wrap;align-items:flex-end;gap:1.4rem 3rem}.sys-k{flex-basis:100%}.sys-b{margin-left:auto}
+.sys-q .lh-q{margin:0;display:grid;gap:.45rem}
+.sys-q dt{font:500 .68rem/1 var(--sans0);letter-spacing:.04em;opacity:.65;order:2}
+.sys-q dd{margin:0;display:flex;gap:1rem}
+.sys-q .lh span{display:grid;gap:.2rem;font-size:.68rem;opacity:.85}
+.sys-q .lh b{font:600 1.35rem/1 var(--sans0)}
+@media(max-width:899px){.sys-b{margin-left:0}}
