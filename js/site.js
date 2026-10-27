@@ -643,6 +643,59 @@
     addEventListener('resize', fit);
   });
 
+  /* ======================= los títulos entran de pixel a nítido (como los logos: de diseño a código) ======================= */
+  var pxTitles = $$('main h2');
+  if (pxTitles.length && 'IntersectionObserver' in window && !reduce && document.fonts) {
+    /* cada palabra, con su letra, su color y su sitio exacto */
+    var pxWords = function (h) {
+      var out = [], hr = h.getBoundingClientRect(), walk = document.createTreeWalker(h, NodeFilter.SHOW_TEXT), n;
+      while ((n = walk.nextNode())) {
+        var el = n.parentElement, cs = getComputedStyle(el), up = cs.textTransform === 'uppercase', re = /\S+/g, m;
+        if (cs.display === 'none' || cs.visibility === 'hidden') continue;
+        while ((m = re.exec(n.data))) {
+          var r = document.createRange(); r.setStart(n, m.index); r.setEnd(n, m.index + m[0].length);
+          var b = r.getBoundingClientRect(); if (!b.width) continue;
+          out.push({ t: up ? m[0].toUpperCase() : m[0], x: b.left - hr.left, y: b.top - hr.top, h: b.height, font: cs.fontStyle + ' ' + cs.fontWeight + ' ' + cs.fontSize + ' ' + cs.fontFamily, ls: cs.letterSpacing, c: cs.color, st: cs.fontStretch });
+        }
+      }
+      return out;
+    };
+    var pxIn = function (h) {
+      h.classList.remove('px-wait');
+      var words = pxWords(h); if (!words.length) return;
+      h.classList.add('px-on');
+      var W = h.offsetWidth, H = h.offsetHeight, dpr = Math.min(2, devicePixelRatio || 1);
+      var full = document.createElement('canvas'); full.width = W * dpr; full.height = H * dpr;
+      var fx = full.getContext('2d'); fx.scale(dpr, dpr); fx.textBaseline = 'middle';
+      words.forEach(function (w) { fx.font = w.font; try { fx.letterSpacing = w.ls === 'normal' ? '0px' : w.ls; fx.fontStretch = w.st === '100%' ? 'normal' : w.st; } catch (e) {} fx.fillStyle = w.c; fx.fillText(w.t, w.x, w.y + w.h / 2); });
+      var cv = document.createElement('canvas'); cv.className = 'px-h'; cv.width = W; cv.height = H; cv.setAttribute('aria-hidden', 'true');
+      var cx = cv.getContext('2d'), small = document.createElement('canvas'), sx = small.getContext('2d');
+      if (getComputedStyle(h).position === 'static') h.style.position = 'relative';
+      h.appendChild(cv); h.classList.add('px-on'); h.classList.remove('px-wait');
+      var steps = [18, 12, 8, 5, 3], i = 0;
+      (function step() {
+        if (i < steps.length) {
+          var s = steps[i++], w = Math.max(1, Math.round(W / s)), hh = Math.max(1, Math.round(H / s));
+          small.width = w; small.height = hh; sx.imageSmoothingEnabled = true; sx.drawImage(full, 0, 0, w, hh);
+          cx.clearRect(0, 0, W, H); cx.imageSmoothingEnabled = false; cx.drawImage(small, 0, 0, W, H);
+          setTimeout(step, 90);
+        } else { h.classList.remove('px-on'); cv.classList.add('out'); setTimeout(function () { cv.remove(); }, 400); }
+      })();
+    };
+    document.fonts.ready.then(function () {
+      var go = function (h) { if (h._px) return; h._px = 1; pxIO.unobserve(h); setTimeout(function () { pxIn(h); }, 200); };
+      var pxIO = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          var h = e.target;
+          if (e.intersectionRatio >= .6) go(h);
+          else if (e.isIntersecting && !h._pt) h._pt = setTimeout(function () { go(h); }, 1200);
+        });
+      }, { threshold: [0, .6] });
+      /* solo los que se ven y aún no han llegado; los escondidos (por el modo) se quedan como están */
+      pxTitles.forEach(function (h) { if (h.offsetParent && h.getBoundingClientRect().top > innerHeight) { h.classList.add('px-wait'); pxIO.observe(h); } });
+    });
+  }
+
   /* ======================= la web en computadora, tablet o celular (la de verdad, adaptándose en vivo) ======================= */
   var DVW = { pc: [1280, 800], tab: [820, 1180], cel: [390, 844] }, dvSeen = false;
   try { dvSeen = !!localStorage.getItem('dvSeen'); } catch (e) {}
