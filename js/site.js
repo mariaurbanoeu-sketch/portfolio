@@ -644,7 +644,8 @@
   });
 
   /* ======================= los títulos entran de pixel a nítido (como los logos: de diseño a código) ======================= */
-  var pxTitles = $$('main h2');
+  /* solo los títulos grandes de sección; los nombres de los proyectos van con la letra de cada web, sin efecto */
+  var pxTitles = $$('main h2').filter(function (h) { return !h.closest('.pj-case'); });
   if (pxTitles.length && 'IntersectionObserver' in window && !reduce && document.fonts) {
     /* cada palabra, con su letra, su color y su sitio exacto */
     var pxWords = function (h) {
