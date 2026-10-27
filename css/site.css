@@ -1862,3 +1862,12 @@ html.tb-seen:not(.m-game) .tb-open{opacity:0;pointer-events:none;transform:trans
 .sys-q .lh span{display:grid;gap:.2rem;font-size:.68rem;opacity:.85}
 .sys-q .lh b{font:600 1.35rem/1 var(--sans0)}
 @media(max-width:899px){.sys-b{margin-left:0}}
+/* Lighthouse: tres círculos que se llenan hasta su nota */
+.lh-g{display:flex;gap:1.1rem;margin:.3rem 0 0}
+.lh-r{position:relative;display:grid;justify-items:center;gap:.35rem;width:3.4rem;text-align:center}
+.lh-r svg{width:3rem;height:3rem;transform:rotate(-90deg)}
+.lh-r circle{fill:none;stroke-width:2.6;stroke:color-mix(in srgb,currentColor 16%,transparent)}
+.lh-r .lh-f{stroke:#0CCE6B;stroke-linecap:round}
+.lh-r b{position:absolute;top:0;left:0;right:0;height:3rem;display:grid;place-items:center;font:600 .95rem/1 var(--sans0);font-variant-numeric:tabular-nums}
+.lh-r small{font:500 .62rem/1.2 var(--sans0);opacity:.75}
+.js .lh-r .lh-f{stroke-dasharray:100;stroke-dashoffset:100}

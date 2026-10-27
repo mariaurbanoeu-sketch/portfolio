@@ -652,6 +652,7 @@
     "Tienda de ropa en Sevilla, con Shopify y en seis idiomas.": "Clothing store in Seville, built on Shopify, in six languages.",
     "UX/UI y tema de Shopify": "UX/UI and Shopify theme",
     "App para organizar ayuda tras los terremotos en Venezuela. Funciona sin señal.": "App to organize aid after the earthquakes in Venezuela. Works offline.",
+    "Calidad · Lighthouse": "Quality · Lighthouse",
     "Leer completa": "Read the full review",
     "Traducida del español.": "Translated from Spanish.",
     "Reseña desbloqueada": "Review unlocked",
@@ -748,6 +749,7 @@
   };
   /* lo que lleva números o nombres dentro */
   var R = [
+    [/^Accesibilidad (\d+) · Buenas prácticas (\d+) · SEO (\d+)$/, 'Accessibility $1 · Best practices $2 · SEO $3'],
     [/^Nivel (\d+)$/, 'Level $1'],
     [/^Nivel (\d+) de (\d+)$/, 'Level $1 of $2'],
     [/^Nivel (\d+) completado$/, 'Level $1 complete'],

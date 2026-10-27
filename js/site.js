@@ -643,6 +643,30 @@
     addEventListener('resize', fit);
   });
 
+  /* ======================= Lighthouse: los círculos se llenan y la nota sube al verlos ======================= */
+  var lhs = $$('.lh-g');
+  if (lhs.length) {
+    var lhRun = function (g) {
+      $$('.lh-r', g).forEach(function (r, i) {
+        var v = +r.dataset.v, b = $('b', r), f = $('.lh-f', r), C = 2 * Math.PI * 15.9;
+        f.style.strokeDasharray = C; f.style.strokeDashoffset = C;
+        if (reduce) { f.style.strokeDashoffset = C * (1 - v / 100); b.textContent = v; return; }
+        var t0 = null, D = 1300, delay = i * 160;
+        b.textContent = '0';
+        (function step(t) {
+          if (t0 === null) t0 = t + delay;
+          var p = Math.max(0, Math.min(1, (t - t0) / D)), e = 1 - Math.pow(1 - p, 3);
+          f.style.strokeDashoffset = C * (1 - e * v / 100); b.textContent = Math.round(e * v);
+          if (p < 1) requestAnimationFrame(step);
+        })(performance.now());
+      });
+    };
+    if ('IntersectionObserver' in window) {
+      var lhIO = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { lhIO.unobserve(e.target); lhRun(e.target); } }); }, { threshold: .6 });
+      lhs.forEach(function (g) { lhIO.observe(g); });
+    } else lhs.forEach(lhRun);
+  }
+
   /* ======================= la web en computadora, tablet o celular (la de verdad, adaptándose en vivo) ======================= */
   var DVW = { pc: [1280, 800], tab: [820, 1180], cel: [390, 844] }, dvSeen = false;
   try { dvSeen = !!localStorage.getItem('dvSeen'); } catch (e) {}
