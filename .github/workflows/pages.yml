@@ -40,6 +40,15 @@ jobs:
           npx --yes csso-cli@4.0.2 css/site.css -o _site/css/site.css || cp css/site.css _site/css/site.css
           npx --yes terser@5.31.6 sw.js -c -m -o _site/sw.js || cp sw.js _site/sw.js
 
+      - name: Versión nueva en cada publicación (nadie se queda con lo viejo)
+        run: |
+          V="${GITHUB_SHA::8}"
+          sed -i "s/pu-dev/pu-$V/" _site/sw.js
+          for f in _site/index.html _site/en/index.html; do
+            [ -f "$f" ] && sed -i -E "s#(site\.css|site\.js|en\.js)\?v=[0-9a-z]+#\1?v=$V#g" "$f"
+          done
+          grep -q "pu-$V" _site/sw.js
+
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:

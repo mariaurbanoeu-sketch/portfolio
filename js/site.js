@@ -1514,7 +1514,7 @@
   });
 
   /* ======================= funciona sin conexión ======================= */
-  if ('serviceWorker' in navigator && location.protocol === 'https:') addEventListener('load', function () { navigator.serviceWorker.register('/sw.js').catch(function () {}); });
+  if ('serviceWorker' in navigator && location.protocol === 'https:') addEventListener('load', function () { navigator.serviceWorker.register('/sw.js', { updateViaCache: 'none' }).then(function (reg) { reg.update(); }).catch(function () {}); });
 
 
   /* ======================= modo juego: el mapa de Paula ======================= */
