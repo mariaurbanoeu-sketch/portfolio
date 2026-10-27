@@ -1871,3 +1871,14 @@ html.tb-seen:not(.m-game) .tb-open{opacity:0;pointer-events:none;transform:trans
 .lh-r b{position:absolute;top:0;left:0;right:0;height:3rem;display:grid;place-items:center;font:600 .95rem/1 var(--sans0);font-variant-numeric:tabular-nums}
 .lh-r small{font:500 .62rem/1.2 var(--sans0);opacity:.75}
 .js .lh-r .lh-f{stroke-dasharray:100;stroke-dashoffset:100}
+/* Lighthouse cuadrado con la ficha y en el rosa de la web */
+.lh-g{display:grid;grid-template-columns:repeat(3,max-content);gap:1.4rem;justify-content:start;margin:.45rem 0 0}
+.lh-r{width:auto;justify-items:start;text-align:left;gap:.4rem}
+.lh-r svg{width:2.8rem;height:2.8rem}
+.lh-r b{right:auto;width:2.8rem;height:2.8rem}
+.lh-r small{white-space:nowrap}
+.lh-r .lh-f{stroke:var(--pink)}
+.lh-g{grid-template-columns:repeat(3,6.2rem);gap:.6rem}
+.lh-r svg,.lh-r b{width:3.3rem;height:3.3rem}
+.lh-r b{left:0;right:auto;display:flex;align-items:center;justify-content:center;font-size:.82rem;letter-spacing:-.01em}
+.lh-r small{width:3.3rem;display:flex;justify-content:center;overflow:visible}
