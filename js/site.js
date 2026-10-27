@@ -660,7 +660,7 @@
       mn.addEventListener('keydown', function (e) { if (e.key === 'Escape') { menu(false); tog.focus(); } });
     }
     /* tamaño del marco: lo más grande que quepa en el ancho del visor y en la pantalla, con la proporción de cada aparato */
-    var target = function (m) { var d = DVW[m], h = Math.min(innerHeight * .74, stg.clientWidth * d[1] / d[0]); return [h * d[0] / d[1], h]; };
+    var target = function (m) { var d = DVW[m], W = stg.clientWidth; if (m === 'pc') return [W, W * d[1] / d[0]]; var h = Math.min(innerHeight * .74, W * d[1] / d[0]); return [h * d[0] / d[1], h]; };
     var paint = function (w, h, v) {
       var k = w / v; fw = w; fh = h; vw = v;
       fr.style.width = w + 'px'; fr.style.height = h + 'px';
