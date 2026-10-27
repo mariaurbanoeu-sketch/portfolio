@@ -1,6 +1,6 @@
 /* Paula Urbano · funciona sin conexión una vez visitada */
-var C = 'pu-v22';
-var CORE = ['/', '/index.html', '/css/site.css', '/js/site.js', '/fonts/montserrat.woff2', '/fonts/pinyon.woff2', '/fonts/bodoni.woff2', '/favicon.png', '/favicon-sad.png'];
+var C = 'pu-v23';
+var CORE = ['/', '/index.html', '/css/site.css', '/js/site.js', '/fonts/montserrat.woff2', '/fonts/pixel-400.woff2', '/fonts/pixel-700.woff2', '/favicon.png', '/favicon-sad.png'];
 self.addEventListener('install', function (e) { e.waitUntil(caches.open(C).then(function (c) { return c.addAll(CORE); }).then(function () { return self.skipWaiting(); })); });
 self.addEventListener('activate', function (e) {
   e.waitUntil(caches.keys().then(function (ks) { return Promise.all(ks.filter(function (k) { return k !== C; }).map(function (k) { return caches.delete(k); })); }).then(function () { return self.clients.claim(); }));
