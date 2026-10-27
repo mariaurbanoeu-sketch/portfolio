@@ -1554,7 +1554,7 @@
         why: 'Está en seis idiomas, y sigo subiendo yo los productos nuevos.',
         fact: 'Un detalle: la cesta se abre a un lado, así nadie pierde la página en la que estaba.',
         c: [[26, 86]], ca: ['#EFE7DC', '#8c7a63'], t: { m: [50, 46], d: [50, 75], l: 'Ver colección' } },
-      { k: 'amigos', n: 'Entre Amigos', ic: 'heart', who: 'Proyecto personal', img: 'img/ea-m.webp?v=2',
+      { k: 'amigos', n: 'Entre Amigos', ic: 'heart', who: 'Para un grupo de amigos', img: 'img/ea-m.webp?v=2',
         hi: 'Después de los terremotos en Venezuela hice en una semana una app para organizar donaciones.',
         why: 'Funciona sin conexión, porque en una emergencia la señal falla.',
         fact: 'Un detalle: quien recibe la ayuda la confirma con un PIN, así quien donó sabe que llegó.',
