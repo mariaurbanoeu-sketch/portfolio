@@ -643,10 +643,10 @@
     addEventListener('resize', fit);
   });
 
-  /* ======================= los títulos entran de pixel a nítido (como los logos: de diseño a código) ======================= */
-  /* solo los títulos grandes de sección; los nombres de los proyectos van con la letra de cada web, sin efecto */
-  var pxTitles = $$('main h2').filter(function (h) { return !h.closest('.pj-case'); });
-  if (pxTitles.length && 'IntersectionObserver' in window && !reduce && document.fonts) {
+  /* ======================= el título principal entra de pixel a nítido (como los logos: de diseño a código) ======================= */
+  var heroH = $('.hero-h');
+  var heroDone = function () { if (heroH) heroH.classList.add('px-done'); };
+  if (heroH && !reduce && document.fonts) {
     /* cada palabra, con su letra, su color y su sitio exacto */
     var pxWords = function (h) {
       var out = [], hr = h.getBoundingClientRect(), walk = document.createTreeWalker(h, NodeFilter.SHOW_TEXT), n;
@@ -661,9 +661,9 @@
       }
       return out;
     };
-    var pxIn = function (h) {
+    var pxIn = function (h, done) {
       h.classList.remove('px-wait');
-      var words = pxWords(h); if (!words.length) return;
+      var words = pxWords(h); if (!words.length) { if (done) done(); return; }
       h.classList.add('px-on');
       var W = h.offsetWidth, H = h.offsetHeight, dpr = Math.min(2, devicePixelRatio || 1);
       var full = document.createElement('canvas'); full.width = W * dpr; full.height = H * dpr;
@@ -680,22 +680,11 @@
           small.width = w; small.height = hh; sx.imageSmoothingEnabled = true; sx.drawImage(full, 0, 0, w, hh);
           cx.clearRect(0, 0, W, H); cx.imageSmoothingEnabled = false; cx.drawImage(small, 0, 0, W, H);
           setTimeout(step, 90);
-        } else { h.classList.remove('px-on'); cv.classList.add('out'); setTimeout(function () { cv.remove(); }, 400); }
+        } else { h.classList.remove('px-on'); if (done) done(); cv.classList.add('out'); setTimeout(function () { cv.remove(); }, 400); }
       })();
     };
-    document.fonts.ready.then(function () {
-      var go = function (h) { if (h._px) return; h._px = 1; pxIO.unobserve(h); setTimeout(function () { pxIn(h); }, 200); };
-      var pxIO = new IntersectionObserver(function (es) {
-        es.forEach(function (e) {
-          var h = e.target;
-          if (e.intersectionRatio >= .6) go(h);
-          else if (e.isIntersecting && !h._pt) h._pt = setTimeout(function () { go(h); }, 1200);
-        });
-      }, { threshold: [0, .6] });
-      /* solo los que se ven y aún no han llegado; los escondidos (por el modo) se quedan como están */
-      pxTitles.forEach(function (h) { if (h.offsetParent && h.getBoundingClientRect().top > innerHeight) { h.classList.add('px-wait'); pxIO.observe(h); } });
-    });
-  }
+    document.fonts.ready.then(function () { setTimeout(function () { pxIn(heroH, heroDone); }, 150); });
+  } else heroDone();
 
   /* ======================= la web en computadora, tablet o celular (la de verdad, adaptándose en vivo) ======================= */
   var DVW = { pc: [1280, 800], tab: [820, 1180], cel: [390, 844] }, dvSeen = false;

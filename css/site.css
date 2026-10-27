@@ -1828,6 +1828,11 @@ html:not(.m-game) #sobre .facts{display:none}
 html:not(.m-game) .mini-g{display:none!important}
 html.tb-seen:not(.m-game) .tb-open{opacity:0;pointer-events:none;transform:translate(-50%,1rem)}
 /* títulos: de pixel a nítido al entrar */
-h2.px-on,h2.px-on *,h2.px-wait,h2.px-wait *{color:transparent!important;-webkit-text-fill-color:transparent}
+.px-on,.px-on *{color:transparent!important;-webkit-text-fill-color:transparent}
+/* el título de la portada espera escondido a que entre pixelado (si algo falla, aparece solo a los 3 s) */
+.js .hero-h .ln>span{animation:none;transform:none}
+.js .hero-h:not(.px-done) .ln>span{opacity:0;animation:pxfb 0s 3s forwards}
+@keyframes pxfb{to{opacity:1}}
+.hero-h{position:relative}
 .px-h{position:absolute;left:0;top:0;pointer-events:none;image-rendering:pixelated;transition:opacity .35s}
 .px-h.out{opacity:0}
