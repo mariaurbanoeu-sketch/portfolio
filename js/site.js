@@ -651,6 +651,14 @@
     var fr = $('.dv-frame', dv), stg = $('.dv-stage', dv), ifr = $('iframe', fr), poster = $('.dv-poster', fr), tabs = $$('.dv-tabs button', dv);
     var mode = dv.dataset.mode, vw = DVW[mode][0], fw = 0, fh = 0, anim = 0, vis = false, loaded = false, demoT = [];
     var src = fr.dataset.src, pcP = fr.dataset.pc, celP = fr.dataset.cel;
+    /* el menú plegable: Ver en ▾ */
+    var mn = $('.dv-menu', dv), tog = $('.dv-tog', dv), now = $('.dv-now', dv);
+    var menu = function (o) { if (!mn) return; mn.classList.toggle('open', o); tog.setAttribute('aria-expanded', String(o)); };
+    if (tog) {
+      tog.addEventListener('click', function (e) { e.stopPropagation(); menu(!mn.classList.contains('open')); });
+      document.addEventListener('click', function (e) { if (!mn.contains(e.target)) menu(false); });
+      mn.addEventListener('keydown', function (e) { if (e.key === 'Escape') { menu(false); tog.focus(); } });
+    }
     /* tamaño del marco: lo más grande que quepa en el ancho del visor y en la pantalla, con la proporción de cada aparato */
     var target = function (m) { var d = DVW[m], h = Math.min(innerHeight * .74, stg.clientWidth * d[1] / d[0]); return [h * d[0] / d[1], h]; };
     var paint = function (w, h, v) {
@@ -662,7 +670,8 @@
     var go = function (m, user) {
       if (user) { demoT.forEach(clearTimeout); demoT = []; dvMark(); }
       mode = m; dv.dataset.mode = m;
-      tabs.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.d === m)); });
+      tabs.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.d === m)); if (b.dataset.d === m && now) now.innerHTML = b.querySelector('svg').outerHTML + '<span>' + b.querySelector('span').innerHTML + '</span>'; });
+      menu(false);
       $$('.pin[aria-expanded="true"]', fr).forEach(function (p) { p.click(); });
       setPoster();
       var t1 = target(m), w0 = fw || t1[0], h0 = fh || t1[1], v0 = vw, v1 = DVW[m][0], t0 = performance.now(), D = reduce ? 0 : 750;
@@ -700,15 +709,9 @@
       new IntersectionObserver(function (es) { es.forEach(function (e) { vis = e.isIntersecting; if (e.intersectionRatio >= .6) demo(); }); }, { threshold: [0, .6] }).observe(stg);
     } else load();
     var t = target(mode); setPoster(); paint(t[0], t[1], vw);
+    tabs.forEach(function (b) { if (b.dataset.d === mode && now) now.innerHTML = b.querySelector('svg').outerHTML + '<span>' + b.querySelector('span').innerHTML + '</span>'; });
     addEventListener('resize', function () { cancelAnimationFrame(anim); var t = target(mode); paint(t[0], t[1], DVW[mode][0]); });
   });
-
-  /* ======================= Entre Amigos: el camino de una ayuda, como un flujo de pantallas ======================= */
-  var eaf = $('.ea-flow');
-  if (eaf) {
-    if (!('IntersectionObserver' in window) || reduce) eaf.classList.add('go');
-    else { var eafIO = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { eaf.classList.add('go'); eafIO.disconnect(); } }, { threshold: .3 }); eafIO.observe(eaf); }
-  }
 
   /* ======================= Entre Amigos: el camino paso a paso ======================= */
   var ea = $('.ea-route');

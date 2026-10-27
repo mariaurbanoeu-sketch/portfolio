@@ -1779,57 +1779,26 @@ html{font-size:max(100%,min(calc(100vw / 90),calc(100vh / 56.25)))}
 .dv:not([data-mode="pc"]) .pins,.dv.dv-nopins .pins{display:none}
 .sheet-c .dv{display:none!important}
 @media (prefers-reduced-motion:reduce){.dv-cur{animation:none}.dv-frame{transition:none}}
-/* Entre Amigos: el camino de una ayuda, en una fila debajo del visor */
-@media(min-width:900px){
-  .amigos .ea-grid{grid-template-columns:1fr;margin-top:3.5rem}
-  .amigos .ea-route{padding:0}
-  .amigos .ea-route ol{grid-template-columns:repeat(5,1fr);gap:1.6rem;padding:2.2rem 0 0}
-  .amigos .ea-route ol::before{left:0;right:0;top:.55rem;bottom:auto;border-left:0;border-top:2px dotted rgba(244,241,234,.3)}
-  .amigos .ea-route ol::after{left:0;right:0;top:.5rem;bottom:auto;width:auto;height:2px;transform:scaleX(var(--p,0));transform-origin:left}
-  .amigos .ea-route li::before{left:0;top:-2.2rem}
-  .amigos .ea-route li b{font-size:1.15rem}
-  .amigos .ea-route li span{font-size:.92rem}
-  .amigos .ea-box{display:none}
-}
 .dv-frame::before{content:"cargando la web real";position:absolute;inset:0;display:grid;place-items:center;font:400 .9rem/1 var(--px);text-transform:lowercase;opacity:.55;animation:blink 1s steps(2) infinite}
 .dv-frame.ok::before,.dv-frame:has(.dv-poster:not([hidden]))::before{content:none}
 html[lang="en"] .dv-frame::before{content:"loading the real website"}
-/* ======== Entre Amigos: texto y visor lado a lado, y el camino como flujo de pantallas ======== */
-.ea-top .pj-top{grid-template-columns:1fr!important;gap:1.8rem}
-.ea-top .pj-meta{align-self:start}
-.ea-top .pj-actions{margin-top:2rem}
-@media(min-width:900px){
-  .ea-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:4rem;align-items:start}
-  .ea-top .dv{margin-top:0;position:sticky;top:calc(var(--hd) + 1.5rem)}
-  .ea-top .dv-bar{justify-content:flex-end}
-  .ea-top .dv-hint{flex-basis:100%;justify-content:flex-end}
-  .ea-top .pj-meta{padding:1.2rem 0 0;border-left:0;border-top:1px solid color-mix(in srgb,currentColor 22%,transparent);grid-template-columns:1fr 1fr}
-}
-.ea-flow{margin-top:clamp(4.5rem,9vw,7rem);font-family:'Amigos Sans',var(--sans)}
-.ea-flow .ea-route-t{margin-bottom:2.2rem}
-.ea-flow ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2.6rem}
-.ea-flow li{position:relative}
-.ea-sc{position:relative}
-.ea-scf{border-radius:18px;border:5px solid #07101f;overflow:hidden;aspect-ratio:390/844;background:#07101f;box-shadow:0 24px 40px -24px rgba(0,0,0,.8)}
-.ea-scf img{display:block;width:100%;height:100%;object-fit:cover}
-/* la flecha punteada que une una pantalla con la siguiente */
-.ea-flow li:not(:last-child) .ea-sc::after{content:"";position:absolute;left:calc(100% + .5rem);top:50%;width:calc(2.6rem - 1rem);border-top:2px dotted #FFD23F;transform-origin:left}
-.ea-flow li:not(:last-child) .ea-sc::before{content:"";position:absolute;left:calc(100% + 2.6rem - .55rem);top:calc(50% - 4px);width:6px;height:10px;background:#FFD23F;clip-path:polygon(0 0,100% 50%,0 100%)}
-.ea-fn{margin-top:1.1rem;font:600 .72rem/1 var(--sans);letter-spacing:.16em;color:#FFD23F}
-.ea-flow li:last-child .ea-fn{color:#E5383B}
-.ea-flow b{display:block;margin-top:.5rem;font:600 1.08rem/1.25 'Amigos Display',var(--sans);color:var(--ink)}
-.ea-flow span{display:block;margin-top:.35rem;font-size:.9rem;line-height:1.5;color:var(--soft)}
-/* entran una tras otra, siguiendo el camino */
-.js .ea-flow li{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:calc(var(--i) * .16s)}
-.js .ea-flow li .ea-sc::after,.js .ea-flow li .ea-sc::before{transform:scaleX(0);transition:transform .45s var(--ease);transition-delay:calc(var(--i) * .16s + .35s)}
-.js .ea-flow.go li{opacity:1;transform:none}
-.js .ea-flow.go li .ea-sc::after,.js .ea-flow.go li .ea-sc::before{transform:none}
-@media(max-width:899px){.ea-flow ol{grid-template-columns:repeat(5,11rem);overflow-x:auto;padding-bottom:1rem}}
-@media (prefers-reduced-motion:reduce){.js .ea-flow li,.js .ea-flow li .ea-sc::after,.js .ea-flow li .ea-sc::before{opacity:1;transform:none;transition:none}}
-/* en la hoja del celular: solo los pasos, en lista */
-.sheet-c .ea-flow ol{grid-template-columns:1fr;gap:1.2rem;overflow:visible}
-.sheet-c .ea-flow .ea-sc{display:none}
-.sheet-c .ea-flow li{opacity:1!important;transform:none!important}
-.sheet-c .ea-flow b{color:var(--ivory)}
-.sheet-c .ea-flow span{color:#cdbfb2}
-.sheet-c .ea-flow{margin-top:2rem}
+/* el visor: un menú plegable discreto en vez de tres botones */
+.dv-bar{justify-content:flex-end}
+.dv-menu{position:relative;margin-left:auto}
+.dv-tog{display:flex;align-items:center;gap:.55rem;min-height:2.75rem;padding:0 .9rem;background:none;border:1px solid color-mix(in srgb,currentColor 26%,transparent);color:inherit;font:600 .78rem/1 var(--sans);cursor:pointer;transition:border-color .2s}
+.dv-tog:hover,.dv-menu.open .dv-tog{border-color:currentColor}
+.dv-k{font-weight:500;opacity:.6}
+.dv-now{display:flex;align-items:center;gap:.45rem}
+.dv-now svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round}
+.dv-car{width:7px;height:7px;margin:-3px 0 0 .2rem;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);transition:transform .25s var(--ease)}
+.dv-menu.open .dv-car{transform:translateY(3px) rotate(-135deg)}
+.dv-menu .dv-tabs{position:absolute;right:0;top:calc(100% + 6px);z-index:6;margin:0;display:flex;flex-direction:column;min-width:100%;background:var(--bg);box-shadow:0 18px 40px -20px rgba(0,0,0,.5);opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .2s,transform .25s var(--ease),visibility 0s .25s}
+.dv-menu.open .dv-tabs{opacity:1;visibility:visible;transform:none;transition:opacity .2s,transform .25s var(--ease)}
+.dv-menu .dv-tabs button{justify-content:flex-start;white-space:nowrap}
+.dv-menu .dv-tabs button+button{border-left:0;border-top:1px solid color-mix(in srgb,currentColor 18%,transparent)}
+.dv-menu .dv-tabs small{margin-left:auto;padding-left:1rem}
+/* reseña de Cata: plegada, se despliega si alguien la quiere leer */
+.rv.rv-mini{max-width:26rem;padding:.8rem 1rem .4rem}
+.rv.rv-mini .rv-h{margin-bottom:.1rem}
+.rv.rv-mini .rv-more{margin-top:0}
+.rv.rv-mini .rv-more div{max-height:22rem;overflow:auto}
