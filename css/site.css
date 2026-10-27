@@ -1882,3 +1882,8 @@ html.tb-seen:not(.m-game) .tb-open{opacity:0;pointer-events:none;transform:trans
 .lh-r svg,.lh-r b{width:3.3rem;height:3.3rem}
 .lh-r b{left:0;right:auto;display:flex;align-items:center;justify-content:center;font-size:.82rem;letter-spacing:-.01em}
 .lh-r small{width:3.3rem;display:flex;justify-content:center;overflow:visible}
+/* simétrico: tres columnas iguales, círculo y etiqueta centrados en cada una, y el grupo empieza en el borde del texto */
+.lh-g{grid-template-columns:repeat(3,6rem);gap:0}
+.lh-r{justify-items:center;width:100%}
+.lh-r b{left:50%;transform:translateX(-50%)}
+.lh-r small{width:auto}
