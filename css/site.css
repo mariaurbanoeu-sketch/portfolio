@@ -1804,3 +1804,4 @@ html[lang="en"] .dv-frame::before{content:"loading the real website"}
 .rv.rv-mini .rv-more div{max-height:22rem;overflow:auto}
 .dv-stage{padding:10px 0}
 .dv-bar{margin-bottom:.4rem}
+.b3-card .b3-shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
