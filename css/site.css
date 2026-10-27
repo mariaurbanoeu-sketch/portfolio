@@ -1827,15 +1827,6 @@ html:not(.m-game) #sobre .facts{display:none}
 /* lo que flota: el Paulagotchi de la esquina solo en el modo juego; el aviso de Figma, solo la primera vez */
 html:not(.m-game) .mini-g{display:none!important}
 html.tb-seen:not(.m-game) .tb-open{opacity:0;pointer-events:none;transform:translate(-50%,1rem)}
-/* títulos: de pixel a nítido al entrar */
-.px-on,.px-on *{color:transparent!important;-webkit-text-fill-color:transparent}
-/* el título de la portada espera escondido a que entre pixelado (si algo falla, aparece solo a los 3 s) */
-.js .hero-h .ln>span{animation:none;transform:none}
-.js .hero-h:not(.px-done) .ln>span{opacity:0;animation:pxfb 0s 3s forwards}
-@keyframes pxfb{to{opacity:1}}
-.hero-h{position:relative}
-.px-h{position:absolute;left:0;top:0;pointer-events:none;image-rendering:pixelated;transition:opacity .35s}
-.px-h.out{opacity:0}
 /* el reto de cada proyecto, en una línea */
 .pj-reto{margin-top:1.1rem;max-width:46ch;padding-left:.9rem;border-left:2px solid var(--pink);font-size:.98rem;line-height:1.55}
 .pj-reto b{display:block;margin-bottom:.2rem;font:600 .66rem/1 var(--sans0);letter-spacing:.18em;text-transform:uppercase;opacity:.6}
