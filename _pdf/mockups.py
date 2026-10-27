@@ -30,8 +30,33 @@ body{width:1300px;background:transparent}
 .row{gap:44px;align-items:center;padding:50px 0 70px}
 .row .ph{width:300px}
 .row5{gap:22px;padding:40px 0 60px}.row5 .ph{width:236px;padding:9px;border-radius:40px}.row5 .ph::before{border-radius:37px}.row5 .ph .s{border-radius:32px}.row5 .ph .di{width:64px;height:18px;top:19px}
+
+/* tablet */
+.tab{position:relative;width:400px;aspect-ratio:820/1180;padding:16px;border-radius:34px;background:linear-gradient(135deg,#5a5c61,#1c1d20 30%,#3b3d41 60%,#151618);filter:drop-shadow(0 34px 34px rgba(0,0,0,.24)) drop-shadow(0 8px 10px rgba(0,0,0,.18))}
+.tab::before{content:"";position:absolute;inset:3px;border-radius:31px;background:#050505}
+.tab .s{position:relative;width:100%;height:100%;border-radius:18px;overflow:hidden;background:#fff}
+.tab .s img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.tab .cam{position:absolute;left:50%;top:7px;width:6px;height:6px;transform:translateX(-50%);border-radius:50%;background:#1d2533;z-index:3}
+/* trío: portátil al centro, tablet detrás a la izquierda y celular delante a la derecha */
+.trio{height:760px;padding:0}
+.trio .lap{position:absolute;left:190px;bottom:70px;width:960px}
+.trio .tab{position:absolute;left:40px;bottom:46px;width:330px;z-index:2}
+.trio .ph{position:absolute;right:60px;bottom:46px;width:200px;z-index:3}
+/* pantallas flotando en perspectiva */
+.float{height:760px;padding:0;perspective:2600px;overflow:hidden}
+.float .iso{position:absolute;left:50%;top:50%;width:1000px;height:620px;transform:translate(-50%,-50%) rotateX(50deg) rotateZ(-32deg);transform-style:preserve-3d}
+.float .card{position:absolute;width:600px;aspect-ratio:16/10;border-radius:12px;overflow:hidden;background:#000;box-shadow:0 0 0 1px rgba(255,255,255,.06),-30px 50px 60px rgba(0,0,0,.35)}
+.float .card img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.float .c1{left:0;top:0;transform:translateZ(0)}
+.float .c2{left:220px;top:180px;transform:translateZ(70px)}
+.float .c3{left:440px;top:360px;transform:translateZ(140px)}
+/* tablet + celulares */
+.tabrow{gap:50px;align-items:flex-end;padding:40px 0 60px}
+.tabrow .tab{width:420px}.tabrow .ph{width:240px}
 '''
 def lap(img): return '<div class="lap"><div class="lid"><div class="scr"><img src="../%s"></div></div><div class="base"></div></div>' % img
+def tab(img): return '<div class="tab"><div class="s"><img src="../%s"></div><div class="cam"></div></div>' % img
+def fl(*imgs): return '<div class="iso">%s</div>' % ''.join('<div class="card c%d"><img src="../%s"></div>' % (i + 1, im) for i, im in enumerate(imgs))
 def ph(img): return '<div class="ph"><i class="a"></i><i class="b"></i><i class="c"></i><div class="s"><img src="../%s"></div><div class="di"></div></div>' % img
 S = {
  'nails-1': ('duo', lap(H+'nails-d-hero.png') + ph(H+'nails-m-hero.png')),
@@ -55,6 +80,23 @@ S = {
  'cata-3': ('one', lap(H+'cata-d-identidad.png')),
  'figma-1': ('one', lap('../img/figma/dtr-producto.webp')),
  'figma-2': ('row', ph('../img/figma/ev-inicio.webp') + ph('../img/figma/ev-producto.webp')),
+ 'nails-5': ('trio', lap(H+'nails-d-hero.png') + tab(H+'nails-t-hero.png') + ph(H+'nails-m-hero.png')),
+ 'nails-6': ('float', fl(H+'nails-d-cursos.png', H+'nails-d-tecnica.png', H+'nails-d-visitanos.png')),
+ 'kronox-6': ('trio', lap(H+'kronox-d-hero.png') + tab(H+'kronox-t-hero.png') + ph(H+'kronox-m-hero.png')),
+ 'kronox-7': ('float', fl(H+'kronox-d-videoclips.png', H+'kronox-d-rodaje.png', H+'kronox-d-contacto.png')),
+ 'nacar-3': ('trio', lap(H+'nacar-d-hero.png') + tab(H+'nacar-t-hero.png') + ph(H+'nacar-m-hero.png')),
+ 'nacar-4': ('float', fl('shots/nacar-nov.png', 'shots/nacar-prod.png', 'shots/nacar-cart.png')),
+ 'nacar-5': ('row', ph(H+'nacar-m-hero.png') + ph(H+'nacar-m-prod.png') + ph('shots/nacar-m-cart.png')),
+ 'amigos-2': ('tabrow', tab(H+'amigos-t-hero.png') + ph('../img/ea/s2.webp') + ph('../img/ea/s5.webp')),
+ 'jairo-3': ('trio', lap(H+'jairo-d-hero.png') + tab(H+'jairo-t-hero.png') + ph(H+'jairo-m-hero.png')),
+ 'jairo-4': ('float', fl(H+'jairo-d-herramientas.png', H+'jairo-d-videoclips.png', H+'jairo-d-3d.png')),
+ 'cata-4': ('trio', lap(H+'cata-d-hero.png') + tab(H+'cata-t-hero.png') + ph(H+'cata-m-hero.png')),
+ 'cata-5': ('float', fl(H+'cata-d-sobre.png', H+'cata-d-personal.png', H+'cata-d-video-web.png')),
+ 'zk-2': ('trio', lap(H+'zk-d-hero.png') + tab(H+'zk-t-hero.png') + ph(H+'zk-m-hero.png')),
+ 'zk-3': ('float', fl(H+'zk-d-servicios.png', H+'zk-d-trabajos.png', H+'zk-d-hero.png')),
+ 'wp-2': ('duo', lap('img/wp_nerflis.jpg') + ph('img/wp_robotika-qs.jpg')),
+ 'wp-3': ('one', lap('img/wp_nerflis.jpg')),
+ 'figma-3': ('float', fl('../img/figma/dtr-producto.webp', '../img/figma/cold-home.webp', '../img/figma/cold-shop.webp')),
 }
 only = os.environ.get('ONLY')
 html = '<!doctype html><html><head><meta charset="utf-8"><style>%s</style></head><body>%s</body></html>' % (CSS, ''.join(
