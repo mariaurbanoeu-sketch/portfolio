@@ -298,6 +298,85 @@
     b3.addEventListener('pointerleave', function () { obj.style.animation = ''; obj.style.removeProperty('--tx'); });
   }
 
+  /* ======================= logos de marca: de pixel a vector, cada uno con su gesto ======================= */
+  var lgs = $$('.lg-b');
+  if (lgs.length && !reduce && window.fetch) {
+    var SPRING = 'cubic-bezier(.34,1.56,.64,1)', SOFT = 'cubic-bezier(.22,1,.36,1)';
+    var STEAM = '<svg class="vapor" viewBox="0 0 60 50" aria-hidden="true"><path d="M15 48c-6-8 6-12 0-22"/><path d="M30 48c-6-8 6-12 0-22"/><path d="M45 48c-6-8 6-12 0-22"/></svg>';
+    var part = function (b) { return b.dataset.logo === 'vora' ? $('#sol', b) : b.dataset.logo === 'nidoo' ? $('#simbolo', b) : $('.hoja', b); };
+    /* el vapor del café sube en tres hilos */
+    var puff = function (b) { $$('.vapor path', b).forEach(function (p, i) { p.animate([{ opacity: 0, transform: 'translateY(14px)' }, { opacity: .85, offset: .35 }, { opacity: 0, transform: 'translateY(-22px)' }], { duration: 1500, delay: i * 140, easing: 'ease-out' }); }); };
+    /* el sol de Vora sale como un amanecer: un barrido de izquierda a derecha */
+    var sunrise = function (b) {
+      var sol = $('#sol', b), svg = $('svg', b); if (!sol || !svg) return;
+      var ns = 'http://www.w3.org/2000/svg', cp = document.createElementNS(ns, 'clipPath'), pa = document.createElementNS(ns, 'path');
+      cp.setAttribute('id', 'vsweep'); cp.setAttribute('clipPathUnits', 'objectBoundingBox'); cp.appendChild(pa);
+      var defs = $('defs', svg) || svg.insertBefore(document.createElementNS(ns, 'defs'), svg.firstChild); defs.appendChild(cp);
+      sol.setAttribute('clip-path', 'url(#vsweep)');
+      var t0 = 0, D = 1100;
+      (function f(t) { if (!t0) t0 = t; var k = Math.min(1, (t - t0) / D), e = 1 - Math.pow(1 - k, 3), a = Math.PI * (1 - e), pts = ['.5 1.05'];
+        for (var x = Math.PI; x >= a - 1e-6; x -= Math.PI / 36) pts.push((.5 + Math.cos(x) * 1.3).toFixed(3) + ' ' + (1.05 - Math.sin(x) * 1.3).toFixed(3));
+        pts.push((.5 + Math.cos(a) * 1.3).toFixed(3) + ' ' + (1.05 - Math.sin(a) * 1.3).toFixed(3));
+        pa.setAttribute('d', 'M' + pts.join('L') + 'Z');
+        if (k < 1) requestAnimationFrame(f); else sol.removeAttribute('clip-path'); })(performance.now());
+    };
+    var intro = function (b) {
+      var k = b.dataset.logo, p = part(b);
+      b._v.animate([{ transform: 'scale(.96)', filter: 'blur(3px)' }, { transform: 'scale(1)', filter: 'blur(0)' }], { duration: 650, easing: SOFT });
+      if (k === 'vora') sunrise(b);
+      if (k === 'cafe') { puff(b); p.animate([{ transform: 'rotate(0)' }, { transform: 'rotate(-9deg)' }, { transform: 'rotate(5deg)' }, { transform: 'rotate(0)' }], { duration: 1300, easing: SOFT }); }
+      if (k === 'nidoo') p.animate([{ transform: 'rotate(-180deg) scale(.85)' }, { transform: 'rotate(0) scale(1)' }], { duration: 1200, easing: SPRING });
+    };
+    /* pixel a vector: el SVG se dibuja cada vez con más resolución */
+    var pixelIn = function (b, svgText) {
+      var cv = document.createElement('canvas'); b.appendChild(cv); b.classList.add('px');
+      var r = b._v.getBoundingClientRect(), dpr = Math.min(2, devicePixelRatio || 1); cv.width = Math.max(2, Math.round(r.width * dpr)); cv.height = Math.max(2, Math.round(r.height * dpr));
+      var x = cv.getContext('2d'), im = new Image(), tmp = document.createElement('canvas');
+      im.onload = function () {
+        var steps = [3, 5, 8, 13, 21, 34, 55], i = 0;
+        (function step() {
+          if (i >= steps.length) { b.classList.remove('px'); intro(b); setTimeout(function () { cv.remove(); }, 300); return; }
+          var w = Math.max(2, Math.round(cv.width * steps[i] / 100)), h = Math.max(2, Math.round(cv.height * steps[i] / 100)); tmp.width = w; tmp.height = h;
+          var t = tmp.getContext('2d'); t.clearRect(0, 0, w, h); t.drawImage(im, 0, 0, w, h);
+          x.clearRect(0, 0, cv.width, cv.height); x.imageSmoothingEnabled = false; x.drawImage(tmp, 0, 0, cv.width, cv.height);
+          i++; setTimeout(step, 85 - i * 5);
+        })();
+      };
+      im.onerror = function () { b.classList.remove('px'); cv.remove(); };
+      im.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgText);
+    };
+    var lgLoad = function (b) {
+      var img = $('img', b); if (!img || b._v) return;
+      fetch(img.getAttribute('src')).then(function (r) { return r.text(); }).then(function (t) {
+        var v = document.createElement('div'); v.className = 'lg-v';
+        v.innerHTML = b.dataset.logo === 'cafe' ? '<div class="hoja">' + t + '</div><div class="resto">' + t + '</div>' + STEAM : t;
+        $$('svg', v).forEach(function (s) { s.removeAttribute('width'); s.removeAttribute('height'); s.setAttribute('aria-hidden', 'true'); });
+        b.replaceChild(v, img); b._v = v; pixelIn(b, t);
+      }).catch(function () {});
+    };
+    var lgIO = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { lgIO.unobserve(e.target); lgLoad(e.target); } }); }, { threshold: .55 });
+    lgs.forEach(function (b) { lgIO.observe(b); });
+    /* con el ratón encima, cada marca hace su gesto */
+    if (matchMedia('(hover:hover) and (pointer:fine)').matches) lgs.forEach(function (b) {
+      var card = b.closest('.card-in'), loop = null, spin = 0;
+      card.addEventListener('mouseenter', function () {
+        var p = b._v && part(b); if (!p) return; var k = b.dataset.logo;
+        if (k === 'vora') loop = p.animate([{ transform: 'rotate(0) scale(1)' }, { transform: 'rotate(-5deg) scale(1.07)' }, { transform: 'rotate(5deg) scale(1.07)' }, { transform: 'rotate(0) scale(1)' }], { duration: 2600, iterations: Infinity, easing: 'ease-in-out' });
+        if (k === 'cafe') { puff(b); loop = p.animate([{ transform: 'rotate(0)' }, { transform: 'rotate(-8deg) translateY(-2%)' }, { transform: 'rotate(4deg)' }, { transform: 'rotate(0)' }], { duration: 1800, iterations: Infinity, easing: 'ease-in-out' }); b._puff = setInterval(function () { puff(b); }, 1800); }
+        if (k === 'nidoo') { p.animate([{ transform: 'rotate(' + spin + 'deg)' }, { transform: 'rotate(' + (spin + 180) + 'deg)' }], { duration: 1000, easing: SPRING, fill: 'forwards' }); spin += 180; }
+      });
+      card.addEventListener('mouseleave', function () { if (loop) { loop.cancel(); loop = null; } clearInterval(b._puff); });
+    });
+    /* en el celular siguen la inclinación del teléfono */
+    if (matchMedia('(pointer:coarse)').matches && window.DeviceOrientationEvent) {
+      var tg = 0, cur = 0, lgRaf = 0;
+      var lgTick = function () { cur += (tg - cur) * .12; lgs.forEach(function (b) { var p = b._v && part(b); if (!p || !b.getClientRects().length) return; var k = b.dataset.logo;
+          p.style.transform = 'rotate(' + (k === 'vora' ? cur * .35 : k === 'cafe' ? cur * .45 : cur * .9).toFixed(2) + 'deg)'; });
+        lgRaf = Math.abs(tg - cur) > .05 ? requestAnimationFrame(lgTick) : 0; };
+      addEventListener('deviceorientation', function (e) { if (e.gamma == null) return; tg = Math.max(-25, Math.min(25, e.gamma)); if (!lgRaf) lgRaf = requestAnimationFrame(lgTick); }, { passive: true });
+    }
+  }
+
   /* ======================= fichas de marca que se voltean ======================= */
   $$('.card-in').forEach(function (b) {
     var name = $('h3', b.parentNode).textContent;

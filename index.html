@@ -26,7 +26,7 @@
 <meta property="og:type" content="website">
 <link rel="preload" href="fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/pinyon.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css?v=58">
+<link rel="stylesheet" href="css/site.css?v=59">
 <script>(function(d){d.classList.add('js');try{var q=location.search.match(/[?&]lang=(en|es)/);if(q)localStorage.setItem('lang',q[1]);var L=localStorage.getItem('lang')||(navigator.languages&&navigator.languages[0])||navigator.language||'es';if(!/^(es|ca|gl|eu)/i.test(L)){d.lang='en';d.classList.add('en','en-wait');setTimeout(function(){d.classList.remove('en-wait')},3000);document.write('<script src="js/en.js?v=4"><\/script>')}}catch(e){}try{if(!sessionStorage.getItem('intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('intro-on');sessionStorage.setItem('intro','1')}var m=sessionStorage.getItem('pm');if(!m){d.classList.add('ts-on');return}d.classList.add(m==='game'?'m-game':'m-fast')}catch(e){}})(document.documentElement)</script>
 </head>
 <body>
@@ -345,7 +345,7 @@
   </div>
   <div class="pj-in">
     <!-- Jairo: dentro de un editor de video -->
-    <article class="app-row" data-reveal>
+    <article class="app-row cr-jairo" data-reveal>
       <div class="app-txt">
         <p class="take-n">01 · Editor de video</p>
         <h3>Jairo Azogue</h3>
@@ -373,7 +373,7 @@
     </article>
 
     <!-- ZogueKidd: en la pantalla de una cámara -->
-    <article class="app-row rev" data-reveal>
+    <article class="app-row rev cr-zk" data-reveal>
       <div class="app-txt">
         <p class="take-n">02 · Cámara</p>
         <h3>ZogueKidd</h3>
@@ -397,7 +397,7 @@
     </article>
 
     <!-- Catalina: en un visor 3D -->
-    <article class="app-row" data-reveal>
+    <article class="app-row cr-cata" data-reveal>
       <div class="app-txt">
         <p class="take-n">03 · Visor 3D</p>
         <h3>Catalina Silva</h3>
@@ -475,7 +475,7 @@
     <article class="card" data-reveal>
       <button class="card-in" type="button" aria-pressed="false">
         <span class="face front" style="--bc:#AB4729">
-          <img src="img/brand-vora.webp" alt="Logotipo de Vora Beach Club" loading="lazy" width="1000" height="708">
+          <span class="lg-b" data-logo="vora" role="img" aria-label="Logotipo de Vora Beach Club"><img src="img/logos/vora.svg" alt="" loading="lazy" width="566" height="388"></span>
           <span class="c-meta"><span class="c-sw"><i style="--s:#8B8635"><small>Oliva</small></i><i style="--s:#D06222"><small>Teja</small></i><i style="--s:#EAC892"><small>Arena</small></i></span><span class="c-type">Moret · Brandon Grotesque</span></span>
           <span class="c-flip">Dar la vuelta</span>
         </span>
@@ -491,7 +491,7 @@
     <article class="card" data-reveal>
       <button class="card-in" type="button" aria-pressed="false">
         <span class="face front light" style="--bc:#FBE9D6">
-          <img class="mult" src="img/cafe-logo.webp" alt="Logotipo de Café del Sur" loading="lazy" width="350" height="340">
+          <span class="lg-b" data-logo="cafe" role="img" aria-label="Logotipo de Café del Sur"><img src="img/logos/cafe.svg" alt="" loading="lazy" width="602" height="682"></span>
           <span class="c-meta"><span class="c-sw"><i style="--s:#E63837"><small>Rojo</small></i><i style="--s:#FBE9D6"><small>Crema</small></i></span><span class="c-type">ITC Avant Garde · Brandon</span></span>
           <span class="c-flip">Dar la vuelta</span>
         </span>
@@ -507,7 +507,7 @@
     <article class="card" data-reveal>
       <button class="card-in" type="button" aria-pressed="false">
         <span class="face front" style="--bc:#2D1B7F">
-          <img src="img/brand-nidoo.webp" alt="Logotipo de Nidoo" loading="lazy" width="1000" height="708">
+          <span class="lg-b" data-logo="nidoo" role="img" aria-label="Logotipo de Nidoo"><img src="img/logos/nidoo.svg" alt="" loading="lazy" width="862" height="236"></span>
           <span class="c-meta"><span class="c-sw"><i style="--s:#2D1B7F"><small>Índigo</small></i><i style="--s:#FF4B00"><small>Naranja</small></i><i style="--s:#191A1A"><small>Negro</small></i><i style="--s:#E6E6E6"><small>Gris</small></i></span><span class="c-type">Articulat CF · Tenon</span></span>
           <span class="c-flip">Dar la vuelta</span>
         </span>
@@ -772,6 +772,6 @@
   <div class="mv-stage"><button type="button" class="mv-nav" id="mvPrev" aria-label="Página anterior"><i class="ic ic-left"></i></button><img id="mvImg" alt=""><button type="button" class="mv-nav" id="mvNext" aria-label="Página siguiente"><i class="ic ic-right"></i></button></div>
 </div>
 
-<script src="js/site.js?v=59" defer></script>
+<script src="js/site.js?v=60" defer></script>
 </body>
 </html>
