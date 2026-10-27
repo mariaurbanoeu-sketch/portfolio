@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Paula Urbano · Portfolio</title>
+<style>
+@font-face{font-family:'Montserrat';src:url(../fonts/montserrat.woff2) format('woff2');font-weight:100 900}
+@page{size:26.6666667in 15in;margin:0}
+:root{--wine:#221616;--plum:#381A17;--ivory:#FAF6F0;--milk:#E8D9C9;--pink:#EBA9BD}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#555}
+body{font:400 17px/1.55 'Montserrat',Arial,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.pg{--bg:var(--ivory);--ink:var(--wine);position:relative;width:1920px;height:1080px;overflow:hidden;page-break-after:always;background:var(--bg);color:var(--ink)}
+.num{position:absolute;right:64px;bottom:44px;font:500 13px/1 'Montserrat';letter-spacing:.14em;opacity:.45}
+img{display:block}
+
+/* flechas pixel en rosa, como las del ejemplo */
+.chev{display:inline-flex;gap:6px}
+.chev i{width:26px;height:40px;background:var(--pink);clip-path:polygon(0 0,25% 0,25% 12.5%,50% 12.5%,50% 25%,75% 25%,75% 37.5%,100% 37.5%,100% 62.5%,75% 62.5%,75% 75%,50% 75%,50% 87.5%,25% 87.5%,25% 100%,0 100%,0 75%,25% 75%,25% 62.5%,50% 62.5%,50% 37.5%,25% 37.5%,25% 25%,0 25%)}
+
+/* portada */
+.cover .cv{position:absolute;left:520px;top:330px}
+.cv-n{font:500 30px/1.15 'Montserrat';color:var(--plum);text-align:right;width:220px}
+.cv-r{display:block;width:30px;height:3px;background:var(--pink);margin:22px 0 10px 190px}
+.cover h1{font:600 190px/.95 'Montserrat';letter-spacing:-.035em;color:var(--wine);margin-left:200px}
+.cover .chev{margin:34px 0 0 980px}
+
+/* sobre mí + CV */
+.ab{position:absolute;inset:120px 140px 120px 140px;display:grid;grid-template-columns:620px 1fr;gap:150px}
+.ab h2,.ab h3{font:600 44px/1 'Montserrat';letter-spacing:-.02em;margin-bottom:34px}
+.ab h3{font-size:30px;padding-bottom:18px;border-bottom:2px solid var(--wine)}
+.ab-l p{font-size:19px;line-height:1.65;margin-bottom:18px;max-width:560px}
+.av{margin-top:30px;display:flex;align-items:flex-end;gap:24px}
+.av img{width:250px;height:250px;image-rendering:pixelated;background:#c4c9aa;border:10px solid #fff;box-shadow:0 0 0 1px rgba(34,22,22,.12)}
+.av figcaption{font:500 14px/1 'Montserrat';opacity:.6}
+.ab-l .chev{position:absolute;left:300px;bottom:0}
+.cvg{display:grid;grid-template-columns:1fr 1fr;gap:34px 60px}
+.cvg dt{font:600 13px/1 'Montserrat';letter-spacing:.16em;text-transform:uppercase;color:var(--plum);margin-bottom:10px}
+.cvg dd{font:500 16px/1.55 'Montserrat'}
+
+/* índice */
+.ix{position:absolute;left:150px;right:150px;top:150px;display:grid;grid-template-columns:repeat(4,1fr);gap:60px}
+.th{position:relative;height:520px;overflow:hidden;background:#3a2626}
+.th img{width:100%;height:100%;object-fit:cover}
+.th::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(34,22,22,.75),rgba(34,22,22,0) 45%)}
+.th b{position:absolute;z-index:1;left:22px;bottom:12px;font:500 92px/1 'Montserrat';letter-spacing:-.04em;color:var(--ivory)}
+.tc{margin-top:24px;font:600 19px/1 'Montserrat';color:var(--pink)}
+.tile ul{list-style:none;margin-top:14px}
+.tile li{font:500 15px/1.75 'Montserrat';opacity:.8}
+.sig{position:absolute;right:150px;bottom:80px;text-align:right;font:500 16px/1.2 'Montserrat';opacity:.75}
+.sig b{display:block;font:600 34px/1 'Montserrat';color:var(--pink);opacity:1}
+
+/* proyecto: texto a la izquierda, imagen de 1300 px a la derecha */
+.pa{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1300px;align-items:center}
+.pa-t{align-self:start;padding:110px 50px 0 90px}
+.pa-t h2{font:500 46px/1.05 'Montserrat';letter-spacing:-.02em}
+.cat{margin-top:16px;font:600 14px/1.4 'Montserrat'}
+.rule{display:block;width:44px;height:3px;background:var(--pink);margin:20px 0 22px}
+.desc{font-size:17px;line-height:1.6}
+.rows{margin-top:36px;display:grid;gap:20px}
+.rows dt{font:600 12px/1 'Montserrat';letter-spacing:.16em;text-transform:uppercase;opacity:.6;margin-bottom:7px}
+.rows dd{font:500 15px/1.5 'Montserrat'}
+.rows dl:first-child dt{color:var(--pink);opacity:1}
+.pa-i{width:1300px;padding-right:60px}
+.pa-i img{width:100%;max-height:900px;object-fit:contain}
+.pa-i img[src$='.svg']{width:auto;height:620px;margin:0 auto}
+.pa-i figcaption,.pb figcaption{margin-top:14px;font:500 13px/1.4 'Montserrat';opacity:.6}
+
+/* página de imágenes */
+.pb{position:absolute;inset:90px 90px 110px;display:grid;gap:50px;align-items:center}
+.pb.n1{grid-template-columns:1300px;justify-content:center}
+.pb.n2{grid-template-columns:1fr 1fr}
+.pb img{width:100%;max-height:780px;object-fit:contain}
+
+/* contraportada */
+.bk{position:absolute;left:760px;top:330px;display:grid;grid-template-columns:240px auto;grid-template-rows:auto auto;column-gap:40px}
+.blk{grid-row:1/3;width:240px;height:340px;background:var(--pink)}
+.bk .chev{align-self:end}
+.bk-t{align-self:end}
+.bk-n{font:600 34px/1.1 'Montserrat';color:var(--pink);margin-bottom:18px}
+.bk-t p{font:500 16px/1.7 'Montserrat'}
+/* hueco para la foto */
+.ph-me{margin-top:34px;width:300px;height:380px;overflow:hidden;background:var(--milk)}
+.ph-me img{width:100%;height:100%;object-fit:cover}
+.ph-me.empty{display:grid;place-items:center;border:2px dashed rgba(34,22,22,.25);background:transparent}
+.ph-me.empty span{font:500 14px/1 'Montserrat';letter-spacing:.12em;text-transform:uppercase;opacity:.5}
+.ab-l .chev{left:340px}
+/* tres imágenes */
+.pb.n3{grid-template-columns:1fr 1fr 1fr;gap:36px}
+.pb.n3 img{max-height:820px}
+/* contraportada más legible */
+.bk-n{font-size:46px}
+.bk-t p{font-size:19px}
+</style></head><body>
+<!--PAGES-->
+</body></html>
