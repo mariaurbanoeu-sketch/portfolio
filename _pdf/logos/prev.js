@@ -1,0 +1,1 @@
+const {chromium}=require(process.env.PW);(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1200,height:300}});await p.goto('file://'+process.cwd()+'/prev.html');await p.waitForTimeout(500);await p.screenshot({path:'/tmp/claude-0/-home-user-nailsbymelyg/d580ef57-8d16-5e2e-8c40-f0960e90b459/scratchpad/logos.png'});await b.close()})();
