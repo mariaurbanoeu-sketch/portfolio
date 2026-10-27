@@ -1794,3 +1794,42 @@ html{font-size:max(100%,min(calc(100vw / 90),calc(100vh / 56.25)))}
 .dv-frame::before{content:"cargando la web real";position:absolute;inset:0;display:grid;place-items:center;font:400 .9rem/1 var(--px);text-transform:lowercase;opacity:.55;animation:blink 1s steps(2) infinite}
 .dv-frame.ok::before,.dv-frame:has(.dv-poster:not([hidden]))::before{content:none}
 html[lang="en"] .dv-frame::before{content:"loading the real website"}
+/* ======== Entre Amigos: texto y visor lado a lado, y el camino como flujo de pantallas ======== */
+.ea-top .pj-top{grid-template-columns:1fr!important;gap:1.8rem}
+.ea-top .pj-meta{align-self:start}
+.ea-top .pj-actions{margin-top:2rem}
+@media(min-width:900px){
+  .ea-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:4rem;align-items:start}
+  .ea-top .dv{margin-top:0;position:sticky;top:calc(var(--hd) + 1.5rem)}
+  .ea-top .dv-bar{justify-content:flex-end}
+  .ea-top .dv-hint{flex-basis:100%;justify-content:flex-end}
+  .ea-top .pj-meta{padding:1.2rem 0 0;border-left:0;border-top:1px solid color-mix(in srgb,currentColor 22%,transparent);grid-template-columns:1fr 1fr}
+}
+.ea-flow{margin-top:clamp(4.5rem,9vw,7rem);font-family:'Amigos Sans',var(--sans)}
+.ea-flow .ea-route-t{margin-bottom:2.2rem}
+.ea-flow ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2.6rem}
+.ea-flow li{position:relative}
+.ea-sc{position:relative}
+.ea-scf{border-radius:18px;border:5px solid #07101f;overflow:hidden;aspect-ratio:390/844;background:#07101f;box-shadow:0 24px 40px -24px rgba(0,0,0,.8)}
+.ea-scf img{display:block;width:100%;height:100%;object-fit:cover}
+/* la flecha punteada que une una pantalla con la siguiente */
+.ea-flow li:not(:last-child) .ea-sc::after{content:"";position:absolute;left:calc(100% + .5rem);top:50%;width:calc(2.6rem - 1rem);border-top:2px dotted #FFD23F;transform-origin:left}
+.ea-flow li:not(:last-child) .ea-sc::before{content:"";position:absolute;left:calc(100% + 2.6rem - .55rem);top:calc(50% - 4px);width:6px;height:10px;background:#FFD23F;clip-path:polygon(0 0,100% 50%,0 100%)}
+.ea-fn{margin-top:1.1rem;font:600 .72rem/1 var(--sans);letter-spacing:.16em;color:#FFD23F}
+.ea-flow li:last-child .ea-fn{color:#E5383B}
+.ea-flow b{display:block;margin-top:.5rem;font:600 1.08rem/1.25 'Amigos Display',var(--sans);color:var(--ink)}
+.ea-flow span{display:block;margin-top:.35rem;font-size:.9rem;line-height:1.5;color:var(--soft)}
+/* entran una tras otra, siguiendo el camino */
+.js .ea-flow li{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:calc(var(--i) * .16s)}
+.js .ea-flow li .ea-sc::after,.js .ea-flow li .ea-sc::before{transform:scaleX(0);transition:transform .45s var(--ease);transition-delay:calc(var(--i) * .16s + .35s)}
+.js .ea-flow.go li{opacity:1;transform:none}
+.js .ea-flow.go li .ea-sc::after,.js .ea-flow.go li .ea-sc::before{transform:none}
+@media(max-width:899px){.ea-flow ol{grid-template-columns:repeat(5,11rem);overflow-x:auto;padding-bottom:1rem}}
+@media (prefers-reduced-motion:reduce){.js .ea-flow li,.js .ea-flow li .ea-sc::after,.js .ea-flow li .ea-sc::before{opacity:1;transform:none;transition:none}}
+/* en la hoja del celular: solo los pasos, en lista */
+.sheet-c .ea-flow ol{grid-template-columns:1fr;gap:1.2rem;overflow:visible}
+.sheet-c .ea-flow .ea-sc{display:none}
+.sheet-c .ea-flow li{opacity:1!important;transform:none!important}
+.sheet-c .ea-flow b{color:var(--ivory)}
+.sheet-c .ea-flow span{color:#cdbfb2}
+.sheet-c .ea-flow{margin-top:2rem}
