@@ -1819,10 +1819,6 @@ html[lang="en"] .dv-frame::before{content:"loading the real website"}
 @media(max-width:899px){.dv-notes{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.dv-hl{transition:opacity .2s}}
 /* ======== modo rápido sobrio: lo mismo, más tranquilo. El modo juego conserva todo ======== */
-/* títulos de sección en mayúscula y minúscula, con peso medio */
-html:not(.m-game) :is(#wordpress,#creativos,#figma,#marcas,#sobre,#contacto) :is(.pj-hd,header,.ft-in) > h2,
-html:not(.m-game) #contacto h2{font:500 clamp(2.3rem,5.6vw,4.2rem)/1.04 var(--sans0)!important;text-transform:none!important;letter-spacing:-.025em!important}
-html:not(.m-game) #figma h2 .fig-tag{display:none}
 /* «Mis webs» (la tele) y los separadores de corazones, solo en el modo juego: los 4 casos ya enseñan esas webs */
 html:not(.m-game) #proyectos{padding:0;min-height:0;border:0}
 html:not(.m-game) #proyectos > *,html:not(.m-game) .px-sep{display:none!important}
