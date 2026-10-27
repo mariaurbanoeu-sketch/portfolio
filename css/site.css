@@ -1836,3 +1836,22 @@ html.tb-seen:not(.m-game) .tb-open{opacity:0;pointer-events:none;transform:trans
 .hero-h{position:relative}
 .px-h{position:absolute;left:0;top:0;pointer-events:none;image-rendering:pixelated;transition:opacity .35s}
 .px-h.out{opacity:0}
+/* el reto de cada proyecto, en una línea */
+.pj-reto{margin-top:1.1rem;max-width:46ch;padding-left:.9rem;border-left:2px solid var(--pink);font-size:.98rem;line-height:1.55}
+.pj-reto b{display:block;margin-bottom:.2rem;font:600 .66rem/1 var(--sans0);letter-spacing:.18em;text-transform:uppercase;opacity:.6}
+/* el sistema de cada web: sus colores, sus letras y su botón */
+.sys{margin-top:2.4rem;display:grid;grid-template-columns:auto auto 1fr;gap:1.4rem 3rem;align-items:end;padding-top:1.2rem;border-top:1px solid color-mix(in srgb,currentColor 18%,transparent)}
+.sys-k{grid-column:1/-1;font:600 .66rem/1 var(--sans0);letter-spacing:.18em;text-transform:uppercase;opacity:.6}
+.sys ul{list-style:none;margin:0;padding:0;display:flex;gap:.9rem}
+.sys li,.sys-b{display:grid;gap:.45rem;justify-items:start}
+.sys-c i{display:block;width:2.6rem;height:2.6rem;border-radius:4px;box-shadow:inset 0 0 0 1px color-mix(in srgb,currentColor 16%,transparent)}
+.sys small{font:500 .68rem/1 var(--sans0);letter-spacing:.04em;opacity:.65}
+.sys-t b{font-size:2.3rem;line-height:1;font-weight:400}
+.sys-b{justify-self:end}
+.sys-btn{display:inline-flex;align-items:center;min-height:2.6rem;padding:0 1.2rem;font-size:.72rem;font-weight:600;cursor:default}
+@media(max-width:899px){.sys{grid-template-columns:1fr;gap:1.2rem}.sys-b{justify-self:start}}
+.sheet-c .sys{display:none}
+/* calidad medida con Lighthouse */
+.pj-meta .lh{display:flex;gap:1.1rem;flex-wrap:wrap}
+.pj-meta .lh span{display:grid;gap:.2rem;font-size:.72rem;opacity:.85}
+.pj-meta .lh b{font:600 1.35rem/1 var(--sans0);letter-spacing:-.01em}
