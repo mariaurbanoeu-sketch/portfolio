@@ -627,6 +627,7 @@
     "estructura de la tienda, diseño de la interfaz, tema de Shopify en seis idiomas y subida de productos": "store structure, interface design, Shopify theme in six languages and product uploads",
     "un grupo de amigos organizado en Instagram, con su logo, tipografía y colores": "a group of friends organized on Instagram, with their own logo, typeface and colors",
     "investigación, estructura, experiencia, diseño de la interfaz y código de la app": "research, structure, experience, interface design and code for the app",
+    "Para un grupo de amigos": "For a group of friends",
     "Leer completa": "Read the full review",
     "Traducida del español.": "Translated from Spanish.",
     "Reseña desbloqueada": "Review unlocked",

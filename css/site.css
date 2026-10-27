@@ -1853,3 +1853,4 @@ html.tb-seen:not(.m-game) .tb-open{opacity:0;pointer-events:none;transform:trans
 .pj-own span{display:contents}
 .pj-own b{font:600 .66rem/1.9 var(--sans0);letter-spacing:.18em;text-transform:uppercase;opacity:.6;white-space:nowrap}
 .pj-own span:last-child b{opacity:1;color:var(--accent,currentColor)}
+.pj-meta .own-me dt{opacity:1;color:var(--accent,currentColor)}
