@@ -628,6 +628,7 @@
     "un grupo de amigos organizado en Instagram, con su logo, tipografía y colores": "a group of friends organized on Instagram, with their own logo, typeface and colors",
     "investigación, estructura, experiencia, diseño de la interfaz y código de la app": "research, structure, experience, interface design and code for the app",
     "Para un grupo de amigos": "For a group of friends",
+    "Un grupo de amigos": "A group of friends",
     "Leer completa": "Read the full review",
     "Traducida del español.": "Translated from Spanish.",
     "Reseña desbloqueada": "Review unlocked",
