@@ -6,6 +6,9 @@
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
   var phone = matchMedia('(max-width: 760px)'), small = matchMedia('(max-width: 899px)');
   var root = document.documentElement;
+  /* el aviso de las herramientas no aparece hasta que bajas */
+  var onScrolled = function () { root.classList.toggle('scrolled', scrollY > innerHeight * .5); };
+  addEventListener('scroll', onScrolled, { passive: true }); onScrolled();
   /* idioma: el diccionario (js/en.js) solo se carga en inglés */
   var T = window.T || function (s) { return s; };
   $$('[data-lang]').forEach(function (b) {

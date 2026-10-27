@@ -557,6 +557,8 @@
 
     /* reseñas */
     "Un trabajo de 10/10": "A 10/10 job",
+    "Webs en línea": "Live websites",
+    "Bajar a los proyectos": "Scroll down to the projects",
     "Leer completa": "Read the full review",
     "Traducida del español.": "Translated from Spanish.",
     "Reseña desbloqueada": "Review unlocked",
