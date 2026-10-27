@@ -641,6 +641,69 @@
     addEventListener('resize', fit);
   });
 
+  /* ======================= la web en computadora, tablet o celular (la de verdad, adaptándose en vivo) ======================= */
+  var DVW = { pc: [1280, 800], tab: [820, 1180], cel: [390, 844] }, dvSeen = false;
+  try { dvSeen = !!localStorage.getItem('dvSeen'); } catch (e) {}
+  if (dvSeen) root.classList.add('dv-seen');
+  var dvMark = function () { if (dvSeen) return; dvSeen = true; root.classList.add('dv-seen'); try { localStorage.setItem('dvSeen', '1'); } catch (e) {} };
+  var dvDemoDone = false;
+  $$('.dv').forEach(function (dv) {
+    var fr = $('.dv-frame', dv), stg = $('.dv-stage', dv), ifr = $('iframe', fr), poster = $('.dv-poster', fr), tabs = $$('.dv-tabs button', dv);
+    var mode = dv.dataset.mode, vw = DVW[mode][0], fw = 0, anim = 0, vis = false, loaded = false, demoT = [];
+    var src = fr.dataset.src, pcP = fr.dataset.pc, celP = fr.dataset.cel;
+    /* tamaño del marco: la computadora llena el ancho; tablet y celular, de pie y a la misma altura */
+    var H = function () { return Math.min(stg.clientWidth * DVW.pc[1] / DVW.pc[0], innerHeight * .74); };
+    var target = function (m) { var h = H(); return m === 'pc' ? Math.min(stg.clientWidth, h * DVW.pc[0] / DVW.pc[1]) : h * DVW[m][0] / DVW[m][1]; };
+    var paint = function (w, v) {
+      var h = H(), k = w / v; fw = w; vw = v;
+      fr.style.width = w + 'px'; fr.style.height = h + 'px';
+      ifr.style.width = v + 'px'; ifr.style.height = (h / k) + 'px'; ifr.style.transform = 'scale(' + k + ')';
+    };
+    var setPoster = function () { var p = mode === 'cel' ? celP : mode === 'pc' ? pcP : ''; poster.hidden = !p || loaded; if (p && poster.getAttribute('src') !== p) poster.src = p; };
+    var go = function (m, user) {
+      if (user) { demoT.forEach(clearTimeout); demoT = []; dvMark(); }
+      mode = m; dv.dataset.mode = m;
+      tabs.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.d === m)); });
+      $$('.pin[aria-expanded="true"]', fr).forEach(function (p) { p.click(); });
+      setPoster();
+      var w0 = fw || target(m), v0 = vw, w1 = target(m), v1 = DVW[m][0], t0 = performance.now(), D = reduce ? 0 : 750;
+      cancelAnimationFrame(anim);
+      (function step(t) {
+        var p = D ? Math.min(1, (t - t0) / D) : 1, e = p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+        paint(w0 + (w1 - w0) * e, Math.round(v0 + (v1 - v0) * e));
+        if (p < 1) anim = requestAnimationFrame(step);
+      })(t0);
+    };
+    tabs.forEach(function (b) { b.addEventListener('click', function () { buzz(8); go(b.dataset.d, true); }); });
+    /* Kronox: su web o su panel */
+    $$('.dv-src button', dv).forEach(function (b, i, all) {
+      b.addEventListener('click', function () {
+        buzz(8); dvMark(); all.forEach(function (o) { o.setAttribute('aria-pressed', String(o === b)); });
+        src = b.dataset.src; pcP = b.dataset.pc; celP = b.dataset.cel; ifr.title = b.dataset.title;
+        dv.classList.toggle('dv-nopins', b !== all[all.length - 1]);
+        loaded = false; fr.classList.remove('ok'); setPoster(); load();
+      });
+    });
+    var load = function () { if (ifr.dataset.u === src) return; ifr.dataset.u = src; loaded = false; fr.classList.remove('ok'); ifr.src = src; };
+    ifr.addEventListener('load', function () { if (!ifr.getAttribute('src') || ifr.src === 'about:blank') return; loaded = true; fr.classList.add('ok'); setPoster(); if (dv._wantDemo && vis) { dv._wantDemo = false; setTimeout(demo, 400); } });
+    var unload = function () { if (!ifr.dataset.u) return; ifr.dataset.u = ''; ifr.removeAttribute('src'); loaded = false; fr.classList.remove('ok'); setPoster(); };
+    /* la primera vez, el visor se enseña solo una vez: tablet, celular y vuelta */
+    var demo = function () {
+      if (dvDemoDone || dvSeen || reduce) return;
+      if (!loaded) { dv._wantDemo = true; return; }
+      dvDemoDone = true;
+      var seq = mode === 'cel' ? ['tab', 'pc', 'cel'] : ['tab', 'cel', mode];
+      seq.forEach(function (m, i) { demoT.push(setTimeout(function () { if (vis) go(m); }, 900 + i * 1700)); });
+      demoT.push(setTimeout(dvMark, 900 + seq.length * 1700));
+    };
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) load(); else unload(); }); }, { rootMargin: '60% 0px' }).observe(stg);
+      new IntersectionObserver(function (es) { es.forEach(function (e) { vis = e.isIntersecting; if (e.intersectionRatio >= .6) demo(); }); }, { threshold: [0, .6] }).observe(stg);
+    } else load();
+    setPoster(); paint(target(mode), vw);
+    addEventListener('resize', function () { cancelAnimationFrame(anim); paint(target(mode), DVW[mode][0]); });
+  });
+
   /* ======================= Entre Amigos: el camino paso a paso ======================= */
   var ea = $('.ea-route');
   if (ea) {

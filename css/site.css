@@ -1751,3 +1751,46 @@ html{font-size:max(100%,min(calc(100vw / 90),calc(100vh / 56.25)))}
 .pj-in{max-width:calc(var(--max) - 2 * var(--gut))}
 @media(max-width:760px){.gw-rs{width:2.4rem;padding:0;font-size:0;color:transparent;text-decoration:none;box-shadow:inset 0 0 0 1px #4a3a36;position:relative}.gw-rs::after{content:"";position:absolute;inset:0;margin:auto;width:18px;height:14px;background:#cdbfb2;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 7' shape-rendering='crispEdges'%3E%3Crect x='2' y='0' width='1' height='1'/%3E%3Crect x='3' y='0' width='1' height='1'/%3E%3Crect x='4' y='0' width='1' height='1'/%3E%3Crect x='6' y='0' width='1' height='1'/%3E%3Crect x='1' y='1' width='1' height='1'/%3E%3Crect x='5' y='1' width='1' height='1'/%3E%3Crect x='6' y='1' width='1' height='1'/%3E%3Crect x='0' y='2' width='1' height='1'/%3E%3Crect x='4' y='2' width='1' height='1'/%3E%3Crect x='5' y='2' width='1' height='1'/%3E%3Crect x='6' y='2' width='1' height='1'/%3E%3Crect x='0' y='3' width='1' height='1'/%3E%3Crect x='0' y='4' width='1' height='1'/%3E%3Crect x='8' y='4' width='1' height='1'/%3E%3Crect x='1' y='5' width='1' height='1'/%3E%3Crect x='7' y='5' width='1' height='1'/%3E%3Crect x='2' y='6' width='1' height='1'/%3E%3Crect x='3' y='6' width='1' height='1'/%3E%3Crect x='4' y='6' width='1' height='1'/%3E%3Crect x='5' y='6' width='1' height='1'/%3E%3Crect x='6' y='6' width='1' height='1'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 7' shape-rendering='crispEdges'%3E%3Crect x='2' y='0' width='1' height='1'/%3E%3Crect x='3' y='0' width='1' height='1'/%3E%3Crect x='4' y='0' width='1' height='1'/%3E%3Crect x='6' y='0' width='1' height='1'/%3E%3Crect x='1' y='1' width='1' height='1'/%3E%3Crect x='5' y='1' width='1' height='1'/%3E%3Crect x='6' y='1' width='1' height='1'/%3E%3Crect x='0' y='2' width='1' height='1'/%3E%3Crect x='4' y='2' width='1' height='1'/%3E%3Crect x='5' y='2' width='1' height='1'/%3E%3Crect x='6' y='2' width='1' height='1'/%3E%3Crect x='0' y='3' width='1' height='1'/%3E%3Crect x='0' y='4' width='1' height='1'/%3E%3Crect x='8' y='4' width='1' height='1'/%3E%3Crect x='1' y='5' width='1' height='1'/%3E%3Crect x='7' y='5' width='1' height='1'/%3E%3Crect x='2' y='6' width='1' height='1'/%3E%3Crect x='3' y='6' width='1' height='1'/%3E%3Crect x='4' y='6' width='1' height='1'/%3E%3Crect x='5' y='6' width='1' height='1'/%3E%3Crect x='6' y='6' width='1' height='1'/%3E%3C/svg%3E") center/contain no-repeat}}
 @media(max-width:760px){.gw-top{gap:.6rem}}
+/* ======== visor de pantallas: computadora, tablet y celular (igual en los 4 proyectos) ======== */
+.dv{margin-top:2.6rem}
+.dv-bar{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.2rem;margin-bottom:1rem}
+.dv-tabs,.dv-src{display:inline-flex;border:1px solid color-mix(in srgb,currentColor 28%,transparent)}
+.dv-tabs{margin-left:auto}
+.dv-tabs button,.dv-src button{display:flex;align-items:center;gap:.5rem;min-height:2.75rem;padding:0 1rem;background:none;border:0;color:inherit;font:600 .78rem/1 var(--sans);letter-spacing:.02em;cursor:pointer;opacity:.72;transition:opacity .2s,background-color .25s,color .25s}
+.dv-tabs button+button,.dv-src button+button{border-left:1px solid color-mix(in srgb,currentColor 28%,transparent)}
+.dv-tabs button:hover,.dv-src button:hover{opacity:1}
+.dv-tabs svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round}
+.dv-tabs small{font-weight:500;font-size:.66rem;opacity:.6}
+.dv-tabs button[aria-pressed="true"],.dv-src button[aria-pressed="true"]{background:var(--ink);color:var(--bg);opacity:1}
+.dv-hint{display:flex;align-items:center;gap:.6rem;margin-left:auto;font:500 .82rem/1.3 var(--sans);opacity:.8}
+.dv-hint+.dv-tabs{margin-left:0}
+.dv-cur{width:15px;height:12px;background:var(--pink);clip-path:polygon(0 33.3%,60% 33.3%,60% 0,73.3% 0,73.3% 16.7%,86.7% 16.7%,86.7% 33.3%,100% 33.3%,100% 66.7%,86.7% 66.7%,86.7% 83.3%,73.3% 83.3%,73.3% 100%,60% 100%,60% 66.7%,0 66.7%);animation:dvnudge 1s steps(2) infinite}
+@keyframes dvnudge{50%{translate:3px 0}}
+.dv-seen .dv-hint{display:none}
+.dv-seen .dv-tabs{margin-left:auto}
+.dv-stage{display:flex;justify-content:center;align-items:center;padding:10px}
+.dv-frame{position:relative;flex:0 0 auto;overflow:hidden;border-radius:6px;background:color-mix(in srgb,currentColor 7%,transparent);box-shadow:0 0 0 1px color-mix(in srgb,currentColor 18%,transparent),0 30px 60px -32px rgba(0,0,0,.5);transition:border-radius .6s var(--ease),box-shadow .6s var(--ease)}
+.dv[data-mode="tab"] .dv-frame{border-radius:18px;box-shadow:0 0 0 8px #120c0c,0 30px 60px -32px rgba(0,0,0,.6)}
+.dv[data-mode="cel"] .dv-frame{border-radius:30px;box-shadow:0 0 0 8px #120c0c,0 30px 60px -32px rgba(0,0,0,.6)}
+.dv-frame iframe{position:absolute;left:0;top:0;border:0;transform-origin:0 0;pointer-events:none;opacity:0;transition:opacity .4s;background:#fff}
+.dv-frame.ok iframe{opacity:1}
+.dv-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
+.dv-poster[hidden]{display:none}
+.dv:not([data-mode="pc"]) .pins,.dv.dv-nopins .pins{display:none}
+.sheet-c .dv{display:none!important}
+@media (prefers-reduced-motion:reduce){.dv-cur{animation:none}.dv-frame{transition:none}}
+/* Entre Amigos: el camino de una ayuda, en una fila debajo del visor */
+@media(min-width:900px){
+  .amigos .ea-grid{grid-template-columns:1fr;margin-top:3.5rem}
+  .amigos .ea-route{padding:0}
+  .amigos .ea-route ol{grid-template-columns:repeat(5,1fr);gap:1.6rem;padding:2.2rem 0 0}
+  .amigos .ea-route ol::before{left:0;right:0;top:.55rem;bottom:auto;border-left:0;border-top:2px dotted rgba(244,241,234,.3)}
+  .amigos .ea-route ol::after{left:0;right:0;top:.5rem;bottom:auto;width:auto;height:2px;transform:scaleX(var(--p,0));transform-origin:left}
+  .amigos .ea-route li::before{left:0;top:-2.2rem}
+  .amigos .ea-route li b{font-size:1.15rem}
+  .amigos .ea-route li span{font-size:.92rem}
+  .amigos .ea-box{display:none}
+}
+.dv-frame::before{content:"cargando la web real";position:absolute;inset:0;display:grid;place-items:center;font:400 .9rem/1 var(--px);text-transform:lowercase;opacity:.55;animation:blink 1s steps(2) infinite}
+.dv-frame.ok::before,.dv-frame:has(.dv-poster:not([hidden]))::before{content:none}
+html[lang="en"] .dv-frame::before{content:"loading the real website"}
