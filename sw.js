@@ -1,5 +1,5 @@
 /* Paula Urbano · funciona sin conexión una vez visitada */
-var C = 'pu-v23';
+var C = 'pu-v24';
 var CORE = ['/', '/index.html', '/css/site.css', '/js/site.js', '/fonts/montserrat.woff2', '/fonts/pixel-400.woff2', '/fonts/pixel-700.woff2', '/favicon.png', '/favicon-sad.png'];
 self.addEventListener('install', function (e) { e.waitUntil(caches.open(C).then(function (c) { return c.addAll(CORE); }).then(function () { return self.skipWaiting(); })); });
 self.addEventListener('activate', function (e) {
