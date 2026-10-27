@@ -37,8 +37,10 @@
   /* ---------- color de fondo según la sección ---------- */
   var bgIO = new IntersectionObserver(function (es) {
     es.forEach(function (e) { if (e.isIntersecting) {
-      document.body.dataset.bg = e.target.dataset.bg;
-      if (metaTheme && THEME[e.target.dataset.bg]) metaTheme.content = THEME[e.target.dataset.bg];
+      /* en el modo rápido, lo que no es un proyecto usa el fondo base; el modo juego conserva sus colores */
+      var bg = !root.classList.contains('m-game') && e.target.dataset.bgSobrio || e.target.dataset.bg;
+      document.body.dataset.bg = bg;
+      if (metaTheme && THEME[bg]) metaTheme.content = THEME[bg];
       if (window.dockMark) dockMark(e.target);
       if (window.hereMark) hereMark(e.target);
       window.curSec = e.target.dataset.here || e.target.id;
@@ -899,7 +901,7 @@
     var ft = $('#contacto');
     if (ft) new IntersectionObserver(function (es) {
       if (es[0].isIntersecting && window.PG) PG.ev('end');
-      if (es[0].isIntersecting && !ended) { ended = true; g.mood = 'happy'; g.jump = 30; buzz([15, 40, 15]); toastMsg('¡Llegaste al final! El Paulagotchi está orgulloso :)'); }
+      if (es[0].isIntersecting && !ended) { ended = true; g.mood = 'happy'; g.jump = 30; buzz([15, 40, 15]); if (root.classList.contains('m-game')) toastMsg('¡Llegaste al final! El Paulagotchi está orgulloso :)'); }
     }, { threshold: .6 }).observe(ft);
   }
 
@@ -1253,6 +1255,15 @@
     var tbOpen = $('#tbOpen'), guide = $('#tbGuide'), gT = $('#tbGuideT'), gGo = $('#tbGuideGo'), gStep = 0, gDone = false;
     try { gDone = !!localStorage.getItem('tbg'); } catch (e) {}
     tbOpen.hidden = false;
+    /* el aviso «Toca la web como en Figma» sale solo la primera vez en el modo rápido */
+    try { if (localStorage.getItem('tbSeen')) root.classList.add('tb-seen'); } catch (e) {}
+    if (!root.classList.contains('tb-seen')) {
+      var tbT = setInterval(function () {
+        if (!root.classList.contains('scrolled')) return;
+        clearInterval(tbT);
+        setTimeout(function () { root.classList.add('tb-seen'); try { localStorage.setItem('tbSeen', '1'); } catch (e) {} }, 9000);
+      }, 500);
+    }
     var chip = $('#toolChip'), tBox = $('#toolBox'), refBox = $('#toolRef'), lines = $('#toolLines'), cform = $('#toolCmt');
     var tool = 'move', ref = null, hov = null, pmx = 0, pmy = 0, cmtAt = null;
     /* una mini guía la primera vez: probar el cuentagotas */
