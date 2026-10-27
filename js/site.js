@@ -1549,7 +1549,7 @@
       $('#gwStage').textContent = STAGES[stage()];
       $('#gwProg').textContent = S.lv.fin ? '¡Juego completado!' : (c > LVS.length ? 'Nivel final' : 'Nivel ' + c + ' de ' + LVS.length);
       $('#gwCoins').textContent = nCoins() + '/' + NC; $('#gwPbF').style.width = (nDone() / LVS.length * 100) + '%';
-      face($('#gwFace'));
+      face($('#gwFace')); if (rs) rs.hidden = !nDone() && !S.lv.fin;
       place();
     };
     var mapLine = function () {
@@ -1574,11 +1574,24 @@
       lvBox.hidden = true; $('#gwWin').hidden = true; map.parentNode.hidden = false;
       paintMap(); moveG(cur() > NODES.length - 1 ? NODES.length - 1 : (S.lv.fin ? NODES.length - 1 : cur() - 1), true);
       $('#gwMapAct').innerHTML = '';
-      setTimeout(function () { mapSay.say(mapLine(), mapAct); if (!S.lv.fin) { var c = cur(); setTimeout(function () { moveG(c); }, 300); } }, 250);
+      setTimeout(function () { if (nDone() && !S.lv.fin) askRestart(true); else mapGo(); }, 250);
       /* la primera vez el juego arranca solo: camina y entra al nivel 1 */
       if (!S.t0 && cur() === 1) setTimeout(function () { if (!gw.hidden && lvBox.hidden && !S.t0) openLevel(1); }, 3200);
       var n = nodeEls[cur()]; if (n) setTimeout(function () { n.focus({ preventScroll: true }); }, 60);
     };
+    /* partida guardada: seguir donde lo dejaste o empezar de nuevo */
+    var mapGo = function () { mapSay.say(mapLine(), mapAct); if (!S.lv.fin) { var c = cur(); setTimeout(function () { moveG(c); }, 300); } };
+    var restart = function () { S.lv = {}; S.coins = {}; S.t0 = 0; S.t1 = 0; save(); paintMap(); moveG(0, true); mapGo(); };
+    var askRestart = function (saved) {
+      var a = $('#gwMapAct'), c = cur(); a.innerHTML = '';
+      var mk = function (txt, fn, cls) { var b = document.createElement('button'); b.type = 'button'; b.className = cls; b.innerHTML = txt; b.addEventListener('click', function (e) { e.stopPropagation(); buzz(10); fn(); }); a.appendChild(b); return b; };
+      mapSay.say(saved ? 'Tienes una partida guardada: ibas por el ' + (c > LVS.length ? 'nivel final' : 'nivel ' + c + ' de ' + LVS.length) + '.' : '¿Empezar de cero? Se borra tu avance del mapa.', function () {
+        var f = mk('<span class="gl-cur" aria-hidden="true"></span>' + (saved ? 'Seguir donde lo dejé' : 'No, seguir jugando'), mapGo, 'gl-b');
+        mk('Empezar de nuevo', restart, 'gl-b link');
+        if (!small.matches) f.focus({ preventScroll: true });
+      });
+    };
+    var rs = $('#gwRs'); if (rs) rs.addEventListener('click', function () { buzz(10); if (!lvBox.hidden || !$('#gwWin').hidden) backToMap(); askRestart(false); });
     var closeWorld = function () {
       var wasOn = root.classList.contains('gw-on'); gw.hidden = true; root.classList.remove('gw-on'); document.body.style.top = ''; if (wasOn) scrollTo({ top: gwY, behavior: 'instant' });
       if (back) back.hidden = !game();
