@@ -101,6 +101,37 @@ a{color:inherit;text-decoration:none}
 .pa-t{padding-top:150px}
 .pa-t h2{font-size:52px}
 .desc{font-size:19px;max-width:420px}
-</style></head><body>
+
+/* ===== como el ejemplo: texto pequeño arriba a la izquierda, imágenes de borde a borde ===== */
+.pa{display:grid;grid-template-columns:600px 1fr;align-items:stretch}
+.pa-t{padding:70px 60px 0 70px;align-self:start}
+.pa-t h2{font:400 34px/1.15 'Montserrat';letter-spacing:-.01em}
+.cat{margin-top:10px;font:600 12px/1.4 'Montserrat'}
+.rule{width:28px;height:2px;margin:16px 0}
+.desc{font-size:14px;line-height:1.6;max-width:400px}
+.rows{margin-top:26px;gap:14px}
+.rows dt{font-size:10px}
+.rows dd{font-size:13px}
+.rows dl:first-child dt{color:inherit;opacity:.6}
+.go{margin-top:30px;gap:16px}
+.go .qr{width:64px;height:64px}
+.go span{font-size:10px}.go b{font-size:13px}
+.tl{position:relative;margin:0;overflow:hidden}
+.tl img{position:absolute;inset:0;width:100%;height:100%}
+.tl.cv img{object-fit:cover}
+.tl.ct img{object-fit:contain;padding:6%}
+.tl figcaption{position:absolute;left:24px;bottom:18px;font:500 11px/1.3 'Montserrat';opacity:.6;margin:0;width:auto}
+.tl.cv figcaption{color:#fff;opacity:.85;text-shadow:0 1px 6px rgba(0,0,0,.45)}
+.pa .pa-i{width:auto;padding:0;height:1080px}
+.pa .pa-i img{max-height:none}
+.pb{inset:0;gap:8px}
+.pb.n1{grid-template-columns:1fr}
+.pb.n2{grid-template-columns:1fr 1fr}
+.pb.n3{grid-template-columns:1.2fr 1fr 1fr;gap:8px}
+.pb .tl{height:1080px}
+.pb img,.pb.n3 .tl img,.pb.n2 .tl img{max-height:none}
+.num{display:none}
+</style>
+</head><body>
 <!--PAGES-->
 </body></html>

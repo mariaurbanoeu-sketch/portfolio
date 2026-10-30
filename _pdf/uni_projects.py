@@ -9,19 +9,34 @@ def qr(url):
 def link(url, txt):
     return '<a class="go" href="%s">%s<span>Ver en vivo<b>%s</b></span></a>' % (url, qr(url), txt)
 
+def tint(bg, ink, k=.06):
+    h = lambda c: [int(c.lstrip('#')[i:i + 2], 16) for i in (0, 2, 4)]
+    x, y = h(bg), h(ink)
+    return '#%02x%02x%02x' % tuple(round(x[i] + (y[i] - x[i]) * k) for i in range(3))
+
+def tile(src, bg, ink, cap='', cls=''):
+    t = tint(bg, ink)
+    cover = src.startswith('uni/id/')
+    if cover:
+        from PIL import Image as _I
+        w, h = _I.open(src).size
+        if w / h > 1.55 and 'p01' not in src and 'p11' not in src and 'p02' not in src or 'vora-p03' in src or 'cafe-p02' in src or 'nidoo-p07' in src or 'nidoo-p01' in src: cover = False
+    im = flat(src, bg if cover else t)
+    c = '<figcaption>%s</figcaption>' % cap if cap else ''
+    return '<figure class="tl %s %s" style="background:%s"><img src="%s" alt="">%s</figure>' % ('cv' if cover else 'ct', cls, t, im, c)
+
 def proj(name, cat, desc, rows, img, bg, ink, url=None, dark=False):
-    r = ''.join('<dl><dt>%s</dt><dd>%s</dd></dl>' % x for x in rows)
+    r = ''.join('<dl><dt>%s</dt><dd>%s</dd></dl>' % x for x in rows if x[0] in ('Mi trabajo', 'Técnicas'))
     g = link(url, url.split('//')[1].rstrip('/')) if url else ''
-    html = ('<div class="pa"><div class="pa-t"><h2>%s</h2><p class="cat">%s</p><i class="rule"></i><p class="desc">%s</p><div class="rows">%s</div>%s</div>'
-            '<figure class="pa-i"><img src="%s" alt=""></figure></div>') % (name, cat, desc, r, g, flat(img, bg))
+    html = ('<div class="pa"><div class="pa-t"><h2>%s</h2><p class="cat">%s</p><i class="rule"></i><p class="desc">%s</p><div class="rows">%s</div>%s</div>%s</div>'
+            ) % (name, cat, desc, r, g, tile(img, bg, ink, '', 'pa-i'))
     page(html, 'proj' + (' dark' if dark else ''), bg, ink)
 
 def full(img, cap, bg, ink, dark=False):
-    page('<figure class="fu"><img src="%s" alt=""><figcaption>%s</figcaption></figure>' % (flat(img, bg, 1300), cap), 'proj' + (' dark' if dark else ''), bg, ink)
+    page('<div class="pb n1">%s</div>' % tile(img, bg, ink, cap), 'proj' + (' dark' if dark else ''), bg, ink)
 
 def imgs(items, bg, ink, dark=False):
-    f = ''.join('<figure><img src="%s" alt=""><figcaption>%s</figcaption></figure>' % (flat(a, bg), b) for a, b in items)
-    page('<div class="pb n%d">%s</div>' % (len(items), f), 'proj' + (' dark' if dark else ''), bg, ink)
+    page('<div class="pb n%d">%s</div>' % (len(items), ''.join(tile(a, bg, ink, b) for a, b in items)), 'proj' + (' dark' if dark else ''), bg, ink)
 
 # WEB
 B = '#F3ECE8', '#3A1A21'
