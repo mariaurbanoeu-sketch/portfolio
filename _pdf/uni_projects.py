@@ -69,14 +69,15 @@ B = '#0B0B0A', '#EDE6DA'
 proj('Kronox', 'Diseño web / Panel de administración / Desarrollo', 'Videos, reseñas y condiciones en un sitio. Y un panel para gestionarla solo.',
      [('Mi trabajo', 'UX/UI y código'), ('Técnicas', 'JavaScript · Firebase')],
      'mock/kronox-6.png', *B, 'https://kronoxprod.netlify.app/', True)
-imgs([('mock/kronox-4.png', 'El panel.'), ('mock/kronox-2.png', 'Tarifas y condiciones.')], *B, True)
+full('mock/kronox-4.png', 'El panel: él cambia videos, fotos, tarifas y reseñas.', *B, True)
+full('mock/kronox-2.png', 'Tarifas y condiciones claras antes de escribirle.', *B, True)
 imgs([('mock/kronox-3.png', 'En rodaje.'), ('mock/kronox-5.png', 'Opiniones.')], *B, True)
 
 B = '#EFE7DC', '#2B231C'
 proj('Nácar Estilismo', 'Tienda online / Tema de Shopify / Desarrollo', 'Tienda de ropa en Sevilla. Seis idiomas.',
      [('Mi trabajo', 'UX/UI y tema de Shopify'), ('Técnicas', 'Shopify · Liquid')],
      'mock/nacar-3.png', *B)
-imgs([('mock/nacar-5.png', 'La compra en el celular.'), ('mock/nacar-2.png', 'Selector de idioma.')], *B)
+full('mock/nacar-5.png', 'La compra en el celular: producto, cesta y pedido.', *B)
 
 B = '#0F1E3D', '#F4F1EA'
 proj('Entre Amigos por Venezuela', 'App web / Investigación / UX/UI', 'Ayuda organizada tras los terremotos. Ligera para conexiones malas.',
@@ -89,7 +90,7 @@ B = '#141210', '#EDE3D3'
 proj('Jairo Azogue', 'Diseño web / Portfolio', 'Director y editor de video. Su trabajo, como su escritorio.',
      [('Mi trabajo', 'UX/UI y código')], 'mock/jairo-3.png', *B, 'https://jairoazogue.com/', True)
 full('mock/jairo-5.png', 'Sus herramientas, presentadas como su escritorio.', *B, True)
-imgs([('mock/jairo-6.png', 'Videoclips por tipo de pieza.'), ('mock/jairo-7.png', '3D y CGI.')], *B, True)
+full('mock/jairo-6.png', 'Videoclips por tipo de pieza.', *B, True)
 full('mock/jairo-2.png', 'La pieza destacada, a pantalla completa.', *B, True)
 
 B = '#F6E7EA', '#2A1714'
@@ -114,12 +115,11 @@ full('shots/hd/wp-ct-0.png', 'Robotika · Contacto. En amarillo: el campo del pa
 full('shots/hd/wp-ct-2.png', 'Cada dato de contacto se cambia desde el panel, sin tocar código.', *B, True)
 full('shots/hd/wp-nf-2.png', 'Al rellenar la ficha, la página de la película se monta sola.', *B, True)
 B = '#1E1E1E', '#FFFFFF'
-proj('Figma', 'UX/UI / Prototipos / Universidad', 'DTR, Coldculture y Estilo Vivo, con su prototipo navegable.',
+proj('Figma', 'UX/UI / Prototipos / Universidad', 'DTR y Coldculture, con su prototipo navegable.',
      [('Técnicas', 'Componentes · variantes · prototipo')], 'mock/dtr-1.png', *B, None, True)
 imgs([('mock/dtr-2.png', 'DTR · ficha de producto.'), ('mock/dtr-3.png', 'DTR · inicio de sesión.')], *B, True)
 full('mock/dtr-4.png', 'DTR · carrito y resumen del pedido.', *B, True)
 imgs([('mock/cold-1.png', 'Coldculture · rediseño de la tienda de una marca que ya existe.'), ('mock/cold-2.png', 'Coldculture · colección.')], *B, True)
-full('mock/figma-2.png', 'Estilo Vivo · tarjetas, valoraciones y botones con estados.', *B, True)
 
 B = '#FDF1E4', '#2B1A22'
 proj('Chía', 'App / UX/UI / Universidad', 'Cuidas a tu perrita cumpliendo tus propios hábitos: agua, paseo, comida y estudio.',

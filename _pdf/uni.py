@@ -69,7 +69,7 @@ page('''<div class="ab">
       <dl><dt>Contacto</dt><dd>%s<br>%s<br>Valencia, España</dd></dl>
       <dl><dt>Hago</dt><dd>Diseño UX/UI<br>Desarrollo web</dd></dl>
       <dl><dt>Estudios</dt><dd>Multimedia y Artes Digitales<br>UCV · último año</dd></dl>
-      <dl><dt>Experiencia</dt><dd>Webs para clientes reales<br>desde 2025</dd></dl>
+      <dl class="xp"><dt>Experiencia</dt><dd><span><b>Diseño y desarrollo web</b>Webs para clientes reales<em>2025 – hoy</em></span><span><b>Contenido y copy · Nails by MelyG</b>Estrategia, guiones y copy para redes<em>sept. 2026 – hoy</em></span><span><b>Copy y guiones · Alfredo's Pasta</b>Reels y carruseles para Instagram y TikTok<em>nov. 2024 – ene. 2025</em></span></dd></dl>
       <dl><dt>Idiomas</dt><dd>Español<br>Inglés</dd></dl>
       <dl><dt>Busco</dt><dd>Prácticas desde enero,<br>con convenio</dd></dl>
       <dl><dt>Diseño</dt><dd>Figma · Illustrator · Photoshop<br>InDesign · Affinity · Canva</dd></dl>
