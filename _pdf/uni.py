@@ -17,6 +17,10 @@ def flat(src, bg, w=1300):
         im = Image.open(src).convert('RGBA')
         if im.width > w: im = im.resize((w, round(im.height * w / im.width)), Image.LANCZOS)
         if src.endswith('.png') and src.startswith('mock/'):
+            # fuera el aire transparente de alrededor: el aparato llena su recuadro
+            bb = im.split()[3].point(lambda v: 255 if v > 40 else 0).getbbox()
+            if bb:
+                m = 30; im = im.crop((max(0, bb[0] - m), max(0, bb[1] - m), min(im.width, bb[2] + m), min(im.height, bb[3] + m)))
             import numpy as np
             a = np.asarray(im).astype(float); h, w = a.shape[:2]; e = 70
             fx = np.clip(np.minimum(np.arange(w), w - 1 - np.arange(w)) / e, 0, 1)
@@ -77,7 +81,7 @@ page('''<div class="ab">
 IX = [('01', 'Web', 'mock/nails-1.png', ['Nails by MelyG', 'Kronox', 'Nácar Estilismo', 'Entre Amigos']),
       ('02', 'Portfolios', 'mock/jairo-1.png', ['Jairo Azogue', 'Catalina Silva', 'ZogueKidd']),
       ('03', 'Universidad', 'mock/figma-1.png', ['WordPress', 'Figma']),
-      ('04', 'Branding', 'uni/id/vora-p03.png', ['Vora', 'Café del Sur', 'Nidoo'])]
+      ('04', 'Branding', 'uni/hi/vora-21-0.jpg', ['Vora', 'Café del Sur', 'Nidoo'])]
 tiles = ''.join('<div class="tile"><div class="th"><img src="%s" alt=""><b>%s</b></div><p class="tc">%s</p><ul>%s</ul></div>' % (flat(img, '#3a2626', 900), n, c, ''.join('<li>/ %s</li>' % x for x in xs)) for n, c, img, xs in IX)
 page('<div class="ix">%s</div><p class="sig">Paula Urbano<b>Portfolio</b></p>' % tiles, 'index', '#221616', '#FAF6F0')
 
