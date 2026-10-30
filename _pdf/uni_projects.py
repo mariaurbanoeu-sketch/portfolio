@@ -40,6 +40,7 @@ def tile(src, bg, ink, cap='', cls='', tbg=None):
 def proj(name, cat, desc, rows, img, bg, ink, url=None, dark=False, tbg=None):
     r = ''.join('<dl><dt>%s</dt><dd>%s</dd></dl>' % x for x in rows if x[0] in ('Mi trabajo', 'Técnicas'))
     g = link(url, url.split('//')[1].rstrip('/')) if url else ''
+    tbg = tbg or bg
     html = ('<div class="pa"><div class="pa-t"><h2>%s</h2><p class="cat">%s</p><i class="rule"></i><p class="desc">%s</p><div class="rows">%s</div>%s</div>%s</div>'
             ) % (name, cat, desc, r, g, tile(img, bg, ink, '', 'pa-i', tbg))
     page(html, 'proj' + (' dark' if dark else ''), bg, ink)
@@ -101,15 +102,16 @@ full('mock/cata-3.png', 'Identidad visual.', *B)
 B = '#111111', '#EDE6DA'
 proj('ZogueKidd', 'Diseño web / Portfolio', 'Videoclips. La base de Kronox con otra estética.',
      [('Mi trabajo', 'UX/UI y código')], 'mock/zk-2.png', *B, 'https://zoguekidd.netlify.app/', True)
-full('mock/zk-5.png', 'Trabajos.', *B, True)
+full('mock/zk-6.png', 'Videoclips: cada pieza con su portada y su dirección.', *B, True)
+full('mock/zk-7.png', 'Quién soy.', *B, True)
+full('mock/zk-8.png', 'Qué hago.', *B, True)
 
 # ---------------- UNIVERSIDAD ----------------
 B = '#36321F', '#FAF6F0'
 proj('WordPress', 'Tema propio / PHP / Universidad', 'El panel se rellena y la web se actualiza sola.',
-     [('Técnicas', 'PHP · ACF')], 'mock/wp-3.png', *B, None, True)
+     [('Técnicas', 'PHP · ACF')], 'shots/hd/wp-nf-0.png', *B, None, True)
 full('shots/hd/wp-ct-0.png', 'Robotika · Contacto. En amarillo: el campo del panel y dónde aparece en la web.', *B, True)
 full('shots/hd/wp-ct-2.png', 'Cada dato de contacto se cambia desde el panel, sin tocar código.', *B, True)
-full('shots/hd/wp-nf-0.png', 'Nerflis · tipo de contenido propio «Película»: título, director, actores, año, sinopsis y póster.', *B, True)
 full('shots/hd/wp-nf-2.png', 'Al rellenar la ficha, la página de la película se monta sola.', *B, True)
 B = '#1E1E1E', '#FFFFFF'
 proj('Figma', 'UX/UI / Prototipos / Universidad', 'DTR, Coldculture y Estilo Vivo, con su prototipo navegable.',
@@ -154,25 +156,49 @@ imgs([('uni/hi/nidoo-34-0.jpg', 'Tarjetas.'), ('uni/hi/nidoo-36-0.jpg', 'Carpeta
 full('uni/hi/nidoo-38-0.jpg', 'Credenciales.', *B, True)
 
 # ---------------- COPY ----------------
+B = '#F3ECE8', '#3A1A21'
+page("""<div class="cp1">
+<div class="cp-l"><h2>Nails by MelyG · contenido</h2><p class="cat">Estrategia de redes / Copy / Guion</p><i class="rule"></i>
+<div class="rows"><dl><dt>Reto</dt><dd>Destacar entre las cuentas de manicura rusa de Houston, que publican mucho y casi solo en inglés.</dd></dl>
+<dl><dt>Insight</dt><dd>Lo que engancha es ver el proceso, oír su voz en español y comprobar que la uña crece sana.</dd></dl>
+<dl><dt>Mi trabajo</dt><dd>Investigación, plan semanal, guiones, copy, edición y publicación</dd></dl>
+<dl><dt>Fecha</dt><dd>Desde septiembre de 2026, en curso</dd></dl></div></div>
+<div class="cp-hero"><p class="cp-k">La idea</p><blockquote>La diferencia no es publicar más, es qué se enseña.</blockquote></div>
+</div>""", 'proj', *B)
+page("""<div class="cp2"><div class="cp2-h"><p class="cp-k">Estrategia · semana 1</p><h3>Un objetivo para cada publicación</h3></div>
+<table class="scr"><thead><tr><th>Día</th><th>Pieza</th><th>Para qué</th></tr></thead><tbody>
+<tr><td>Martes</td><td>Video del proceso con el torno, solo manos.</td><td>Para que la descubran.</td></tr>
+<tr><td>Jueves</td><td>Seis fotos y una nota de voz para presentarse.</td><td>Para que confíen.</td></tr>
+<tr><td>Sábado</td><td>«Mitos de uñas»: ella desmonta un mito, en español.</td><td>Para que la vean como la experta.</td></tr>
+<tr><td>Cada día</td><td>Stories cortas del día a día.</td><td>Para seguir cerca.</td></tr>
+</tbody></table></div>""", 'proj', *B)
+full('mock/ng-fan.png', 'La pieza: una guía por semana con todo lo que tiene que grabar y los textos ya escritos.', *B)
+full('mock/ng-two.png', 'Dónde va el teléfono en cada toma, y el guion de «Mitos de uñas» frase a frase.', *B)
+
 B = '#F4EEE6', '#2A1714'
-COPY = """<div class="cp">
-<div class="cp-l"><h2>Alfredo's Pasta</h2><p class="cat">Copywriting / Guion de reels / Redes sociales</p><i class="rule"></i>
-<p class="desc">Trabajo real, enero de 2024. Guiones de reels y carruseles para un restaurante de pasta.</p>
-<div class="rows"><dl><dt>Mi trabajo</dt><dd>Ideas, guion y copy</dd></dl></div></div>
-<div class="cp-r">
-<article><p class="cp-k">Reel 1</p><h3>«Pasta con helado. Lo intentamos y… ¡mira lo que pasó!»</h3>
-<dl class="cp-d"><dt>Objetivo</dt><dd>Darse a conocer, crear interacción y sorprender.</dd><dt>Formato</dt><dd>Cámara POV, cuatro secuencias, 20 s.</dd></dl>
-<ol class="cp-s">
-<li><b>01 · Gancho</b><span>3 s</span><p>La cámara se acerca al mostrador. «¿Quién dijo que pasta y helado no pueden ser una pareja perfecta?»</p></li>
-<li><b>02 · Desarrollo</b><span>5 s</span><p>Pasta caliente y una bola de helado que se derrite encima. «Primero, pasta caliente y cremosa… luego, helado de oreo.»</p></li>
-<li><b>03 · Sorpresa</b><span>7 s</span><p>Giro alrededor del plato. «Lo intentamos y… no creerás lo increíble que sabe.»</p></li>
-<li><b>04 · Llamada</b><span>5 s</span><p>«¿Te atreves a probarlo? Te dejo el nombre y la dirección en la descripción.»</p></li>
-</ol></article>
-<article><p class="cp-k">Carrusel 1</p><h3>«No es un helado, es una tradición en frío.»</h3>
-<ol class="cp-s">
-<li><b>01</b><p>Tarrina sobre fondo negro, iluminada por una luz cálida de farola. Texto arriba a la derecha.</p></li>
-<li><b>02</b><p>Close-up de la textura cremosa, fondo oscuro difuminado.</p></li>
-<li><b>03</b><p>Una mano sostiene la tarrina bajo la luz cálida, ambiente urbano. «Convierte el frío en tu tradición.»</p></li>
-</ol></article>
-</div></div>"""
-page(COPY, 'proj', *B)
+page("""<div class="cp1">
+<div class="cp-l"><h2>Alfredo's Pasta</h2><p class="cat">Copywriting / Guion / Redes sociales</p><i class="rule"></i>
+<p class="desc">Restaurante de pasta. Copy y guiones para Instagram y TikTok, de noviembre de 2024 a enero de 2025.</p>
+<div class="rows"><dl><dt>Reto</dt><dd>Darse a conocer con contenido que la gente quisiera comentar.</dd></dl>
+<dl><dt>Insight</dt><dd>Lo inesperado se comenta: combinaciones que nadie espera, contadas en primera persona.</dd></dl>
+<dl><dt>Mi trabajo</dt><dd>Concepto, guion, titulares y copy</dd></dl>
+<dl><dt>Fecha</dt><dd>Noviembre de 2024 – enero de 2025</dd></dl></div></div>
+<div class="cp-hero"><p class="cp-k">La idea · titular</p><blockquote>No es un helado, es una tradición en frío.</blockquote></div>
+</div>""", 'proj', *B)
+
+page("""<div class="cp2"><div class="cp2-h"><p class="cp-k">Reel · guion</p><h3>Pasta con helado. Lo intentamos y… ¡mira lo que pasó!</h3>
+<p class="cp-sub">Cámara en primera persona · 20 segundos · para crear comentarios</p></div>
+<table class="scr"><thead><tr><th>Tiempo</th><th>Imagen</th><th>Voz en off</th></tr></thead><tbody>
+<tr><td>0–3 s<b>Gancho</b></td><td>La cámara se acerca al mostrador donde se preparan los ingredientes.</td><td>«¿Quién dijo que pasta y helado no pueden ser una pareja perfecta?»</td></tr>
+<tr><td>3–8 s<b>Desarrollo</b></td><td>Se sirve la pasta caliente; encima, una bola de helado que se derrite despacio.</td><td>«Primero, pasta caliente y cremosa… luego, helado frío de oreo. ¿Qué locura es esta?»</td></tr>
+<tr><td>8–15 s<b>Sorpresa</b></td><td>Giro alrededor del plato terminado para enseñar la textura.</td><td>«Lo intentamos y… no creerás lo increíble que sabe.»</td></tr>
+<tr><td>15–20 s<b>Llamada</b></td><td>El plato en la mesa, junto a otro helado.</td><td>«¿Te atreves a probarlo? Te dejo el nombre y la dirección en la descripción.»</td></tr>
+</tbody></table></div>""", 'proj', *B)
+
+page("""<div class="cp3"><div class="cp2-h"><p class="cp-k">Carrusel · tres imágenes</p><h3>Convierte el frío en tu tradición</h3>
+<p class="cp-sub">Maqueta del copy: dónde va cada texto sobre la foto que pedí al equipo.</p></div>
+<div class="ig">
+<figure><div class="sq s1"><span class="tr">No es un helado,<br>es una tradición en frío.</span></div><figcaption><b>01</b> Tarrina sobre fondo negro, con la luz cálida de una farola a la izquierda. Texto arriba a la derecha.</figcaption></figure>
+<figure><div class="sq s2"></div><figcaption><b>02</b> Close-up de la textura cremosa, fondo oscuro difuminado. Sin texto: manda el producto.</figcaption></figure>
+<figure><div class="sq s3"><span class="bc">Convierte el frío<br>en tu tradición.</span></div><figcaption><b>03</b> Una mano sostiene la tarrina bajo la luz cálida, ambiente de calle. Texto centrado abajo.</figcaption></figure>
+</div></div>""", 'proj', *B)

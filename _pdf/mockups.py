@@ -53,10 +53,19 @@ body{width:1300px;background:transparent}
 /* tablet + celulares */
 .tabrow{gap:50px;align-items:flex-end;padding:40px 0 60px}
 .tabrow .tab{width:420px}.tabrow .ph{width:240px}
+
+/* Android: bordes finos, esquinas menos redondas y cámara perforada */
+.and{position:relative;width:250px;aspect-ratio:412/917;padding:8px;border-radius:34px;background:linear-gradient(135deg,#3a3c40,#16171a 40%,#2c2e32);filter:drop-shadow(0 30px 30px rgba(0,0,0,.25)) drop-shadow(0 8px 10px rgba(0,0,0,.2))}
+.and .s{position:relative;width:100%;height:100%;border-radius:27px;overflow:hidden;background:#fff}
+.and .s img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.and .cam{position:absolute;left:50%;top:15px;width:11px;height:11px;transform:translateX(-50%);border-radius:50%;background:#050505;box-shadow:0 0 0 2px #1a1a1a;z-index:3}
+.and i{position:absolute;right:-3px;top:20%;width:3px;height:9%;border-radius:0 2px 2px 0;background:#2a2b2e}
+.row .and{width:300px}
 '''
 def lap(img): return '<div class="lap"><div class="lid"><div class="scr"><img src="../%s"></div></div><div class="base"></div></div>' % img
 def tab(img): return '<div class="tab"><div class="s"><img src="../%s"></div><div class="cam"></div></div>' % img
 def fl(*imgs): return '<div class="iso">%s</div>' % ''.join('<div class="card c%d"><img src="../%s"></div>' % (i + 1, im) for i, im in enumerate(imgs))
+def andr(img): return '<div class="and"><i></i><div class="s"><img src="../%s"></div><div class="cam"></div></div>' % img
 def ph(img): return '<div class="ph"><i class="a"></i><i class="b"></i><i class="c"></i><div class="s"><img src="../%s"></div><div class="di"></div></div>' % img
 S = {
  'nails-1': ('duo', lap(H+'nails-d-hero.png') + ph(H+'nails-m-hero.png')),
@@ -115,8 +124,11 @@ S = {
  'dtr-4': ('one', lap('../img/figma/dtr-carrito.webp')),
  'cold-1': ('one', lap('../img/figma/cold-home.webp')),
  'cold-2': ('one', lap('../img/figma/cold-shop.webp')),
- 'chia-1': ('row', ph('uni/chia/bienvenida.png') + ph('uni/chia/inicio.png') + ph('uni/chia/habitos.png')),
- 'chia-2': ('row', ph('uni/chia/paseo.png') + ph('uni/chia/armario.png')),
+ 'chia-1': ('row', andr('uni/chia/bienvenida.png') + andr('uni/chia/inicio.png') + andr('uni/chia/habitos.png')),
+ 'chia-2': ('row', andr('uni/chia/paseo.png') + andr('uni/chia/armario.png')),
+ 'zk-6': ('one', lap(H+'zk-a-grid.png')),
+ 'zk-7': ('one', lap(H+'zk-a-quien.png')),
+ 'zk-8': ('one', lap(H+'zk-a-hago.png')),
  'wp-3': ('one', lap('img/wp_nerflis.jpg')),
  'figma-3': ('float', fl('../img/figma/dtr-producto.webp', '../img/figma/cold-home.webp', '../img/figma/cold-shop.webp')),
 }

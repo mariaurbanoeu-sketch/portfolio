@@ -82,7 +82,7 @@ page('''<div class="ab">
 IX = [('01', 'Web', ['Nails by MelyG', 'Kronox', 'Nácar Estilismo', 'Entre Amigos']),
       ('02', 'Portfolios', ['Jairo Azogue', 'Catalina Silva', 'ZogueKidd']),
       ('03', 'Universidad', ['WordPress', 'Figma', 'Chía', 'Storyboard']),
-      ('04', 'Branding y copy', ['Vora', 'Café del Sur', 'Nidoo', "Alfredo's Pasta"])]
+      ('04', 'Branding y copy', ['Vora', 'Café del Sur', 'Nidoo', 'Nails by MelyG · contenido', "Alfredo's Pasta"])]
 tiles = ''.join('<div class="tile"><b class="tn">%s</b><p class="tc">%s</p><ul>%s</ul></div>' % (n, c, ''.join('<li>/ %s</li>' % x for x in xs)) for n, c, xs in IX)
 page('<div class="ix">%s</div><p class="sig">Paula Urbano<b>Portfolio</b></p>' % tiles, 'index', '#221616', '#FAF6F0')
 
