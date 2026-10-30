@@ -195,10 +195,3 @@ page("""<div class="cp2"><div class="cp2-h"><p class="cp-k">Reel · guion</p><h3
 <tr><td>15–20 s<b>Llamada</b></td><td>El plato en la mesa, junto a otro helado.</td><td>«¿Te atreves a probarlo? Te dejo el nombre y la dirección en la descripción.»</td></tr>
 </tbody></table></div>""", 'proj', *B)
 
-page("""<div class="cp3"><div class="cp2-h"><p class="cp-k">Carrusel · tres imágenes</p><h3>Convierte el frío en tu tradición</h3>
-<p class="cp-sub">Maqueta del copy: dónde va cada texto sobre la foto que pedí al equipo.</p></div>
-<div class="ig">
-<figure><div class="sq s1"><span class="tr">No es un helado,<br>es una tradición en frío.</span></div><figcaption><b>01</b> Tarrina sobre fondo negro, con la luz cálida de una farola a la izquierda. Texto arriba a la derecha.</figcaption></figure>
-<figure><div class="sq s2"></div><figcaption><b>02</b> Close-up de la textura cremosa, fondo oscuro difuminado. Sin texto: manda el producto.</figcaption></figure>
-<figure><div class="sq s3"><span class="bc">Convierte el frío<br>en tu tradición.</span></div><figcaption><b>03</b> Una mano sostiene la tarrina bajo la luz cálida, ambiente de calle. Texto centrado abajo.</figcaption></figure>
-</div></div>""", 'proj', *B)
