@@ -55,8 +55,10 @@ B = '#F3ECE8', '#3A1A21'
 proj('Nails by MelyG', 'Diseño web / UX/UI / Desarrollo', 'Las clientas diseñan sus uñas y su gift card antes de reservar.',
      [('Mi trabajo', 'UX/UI y código'), ('Técnicas', 'Figma · JavaScript · GSAP · Square')],
      'mock/nails-5.png', *B, 'https://nailsbymelyg.com/')
-full('mock/nails-2.png', 'Simulador: color, forma y acabado.', *B)
-imgs([('mock/nails-3.png', 'Gift card y simulador en el celular.'), ('mock/nails-4.png', 'Trabajos reales para inspirarse.')], *B)
+full('mock/nails-7.png', 'Simulador: la clienta elige color, forma y acabado antes de reservar.', *B)
+full('mock/nails-8.png', 'Gift card: se diseña en la web y se envía por WhatsApp.', *B)
+imgs([('mock/nails-3.png', 'Todo pensado primero para el celular.'), ('mock/nails-4.png', 'Trabajos reales para inspirarse.')], *B)
+imgs([('mock/nails-9.png', 'Cursos de manicura rusa.'), ('mock/nails-1.png', 'En inglés o en español, según el teléfono.')], *B)
 
 B = '#0B0B0A', '#EDE6DA'
 proj('Kronox', 'Diseño web / Panel de administración / Desarrollo', 'Videos, reseñas y condiciones en un sitio. Y un panel para gestionarla solo.',
@@ -81,25 +83,37 @@ full('mock/amigos-1.png', 'Publicar, match, comprar, llevar, confirmar con PIN.'
 B = '#141210', '#EDE3D3'
 proj('Jairo Azogue', 'Diseño web / Portfolio', 'Director y editor de video. Su trabajo, como su escritorio.',
      [('Mi trabajo', 'UX/UI y código')], 'mock/jairo-3.png', *B, 'https://jairoazogue.com/', True)
-full('mock/jairo-2.png', 'Cada pieza, a pantalla completa.', *B, True)
+full('mock/jairo-5.png', 'Sus herramientas, presentadas como su escritorio.', *B, True)
+imgs([('mock/jairo-6.png', 'Videoclips por tipo de pieza.'), ('mock/jairo-7.png', '3D y CGI.')], *B, True)
+full('mock/jairo-2.png', 'La pieza destacada, a pantalla completa.', *B, True)
 
 B = '#F6E7EA', '#2A1714'
 proj('Catalina Silva', 'Diseño web / Portfolio', '3D y animación. Se lee como una hoja de animación: escenas, planos y fotogramas.',
      [('Mi trabajo', 'UX/UI y código')], 'mock/cata-4.png', *B, 'https://catalinasilva.netlify.app/')
-imgs([('mock/cata-2.png', 'Animación.'), ('mock/cata-3.png', 'Identidad visual.')], *B)
+imgs([('mock/cata-6.png', 'Sobre mí: su personaje, de boceto a final.'), ('mock/cata-2.png', 'Animación: cada trabajo es una escena.')], *B)
+imgs([('mock/cata-7.png', 'Personal: hecho a mano, como un cuaderno.'), ('mock/cata-3.png', 'Identidad visual.')], *B)
+full('mock/cata-8.png', '3D: el modelo, dentro de la propia web.', *B)
 
 B = '#111111', '#EDE6DA'
 proj('ZogueKidd', 'Diseño web / Portfolio', 'Videoclips. La base de Kronox con otra estética.',
      [('Mi trabajo', 'UX/UI y código')], 'mock/zk-2.png', *B, 'https://zoguekidd.netlify.app/', True)
+full('mock/zk-5.png', 'Trabajos.', *B, True)
 
 # ---------------- UNIVERSIDAD ----------------
 B = '#36321F', '#FAF6F0'
 proj('WordPress', 'Tema propio / PHP / Universidad', 'El panel se rellena y la web se actualiza sola.',
      [('Técnicas', 'PHP · ACF')], 'mock/wp-3.png', *B, None, True)
+full('shots/hd/wp-ct-0.png', 'Robotika · Contacto. En amarillo: el campo del panel y dónde aparece en la web.', *B, True)
+full('shots/hd/wp-ct-2.png', 'Cada dato de contacto se cambia desde el panel, sin tocar código.', *B, True)
+full('shots/hd/wp-nf-0.png', 'Nerflis · tipo de contenido propio «Película»: título, director, actores, año, sinopsis y póster.', *B, True)
+full('shots/hd/wp-nf-2.png', 'Al rellenar la ficha, la página de la película se monta sola.', *B, True)
 B = '#1E1E1E', '#FFFFFF'
 proj('Figma', 'UX/UI / Prototipos / Universidad', 'DTR, Coldculture y Estilo Vivo, con su prototipo navegable.',
-     [('Técnicas', 'Componentes · variantes · prototipo')], 'mock/figma-1.png', *B, None, True)
-full('mock/figma-2.png', 'Estilo Vivo.', *B, True)
+     [('Técnicas', 'Componentes · variantes · prototipo')], 'mock/dtr-1.png', *B, None, True)
+imgs([('mock/dtr-2.png', 'DTR · ficha de producto.'), ('mock/dtr-3.png', 'DTR · inicio de sesión.')], *B, True)
+full('mock/dtr-4.png', 'DTR · carrito y resumen del pedido.', *B, True)
+imgs([('mock/cold-1.png', 'Coldculture · rediseño de la tienda de una marca que ya existe.'), ('mock/cold-2.png', 'Coldculture · colección.')], *B, True)
+full('mock/figma-2.png', 'Estilo Vivo · tarjetas, valoraciones y botones con estados.', *B, True)
 
 # ---------------- BRANDING ----------------
 B = '#F1E6D6', '#3A1D12'
@@ -114,8 +128,9 @@ imgs([('uni/hi/vora-27-0.jpg', 'Delantal.', '#FFFFFF'), ('uni/hi/vora-29-0.jpg',
 B = '#FBE9D6', '#5A1A18'
 proj('Café del Sur', 'Rediseño de marca / Packaging', 'De café anticuado a café de especialidad.',
      [('Técnicas', 'Illustrator · Photoshop')], '../img/logos/cafe.svg', *B, tbg='#FBE9D6')
-imgs([('uni/hi/cafe-34-0.jpg', 'Packaging.'), ('uni/hi/cafe-35-0.jpg', 'Lata.')], *B)
-imgs([('uni/hi/cafe-33-1.jpg', 'Vasos para llevar.'), ('uni/hi/cafe-36-0.jpg', 'Delantal.')], *B)
+T = tint(*B)
+imgs([('uni/hi/cafe-34-0.jpg', 'Packaging.', T), ('uni/hi/cafe-35-0.jpg', 'Lata.', T)], *B)
+imgs([('uni/hi/cafe-33-1.jpg', 'Vasos para llevar.', T), ('uni/hi/cafe-36-0.jpg', 'Delantal.', T)], *B)
 
 B = '#2D1B7F', '#F2F0FA'
 proj('Nidoo', 'Branding / Identidad digital', 'Estudio de diseño digital.',
