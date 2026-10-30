@@ -115,6 +115,8 @@ S = {
  'dtr-4': ('one', lap('../img/figma/dtr-carrito.webp')),
  'cold-1': ('one', lap('../img/figma/cold-home.webp')),
  'cold-2': ('one', lap('../img/figma/cold-shop.webp')),
+ 'chia-1': ('row', ph('uni/chia/bienvenida.png') + ph('uni/chia/inicio.png') + ph('uni/chia/habitos.png')),
+ 'chia-2': ('row', ph('uni/chia/paseo.png') + ph('uni/chia/armario.png')),
  'wp-3': ('one', lap('img/wp_nerflis.jpg')),
  'figma-3': ('float', fl('../img/figma/dtr-producto.webp', '../img/figma/cold-home.webp', '../img/figma/cold-shop.webp')),
 }
@@ -122,7 +124,7 @@ only = os.environ.get('ONLY')
 html = '<!doctype html><html><head><meta charset="utf-8"><style>%s</style></head><body>%s</body></html>' % (CSS, ''.join(
     '<div class="sc %s" id="%s">%s</div>' % (c, k, b) for k, (c, b) in S.items() if not only or k.startswith(only)))
 open('mock/scenes.html', 'w').write(html)
-js = '''const {chromium}=require(process.env.PW);(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1300,height:900}});
+js = '''const {chromium}=require(process.env.PW);(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1300,height:900},deviceScaleFactor:2});
 await p.goto('http://localhost:8794/_pdf/mock/scenes.html',{waitUntil:'networkidle'});await p.waitForTimeout(500);
 for(const id of await p.evaluate(()=>[...document.querySelectorAll('.sc')].map(e=>e.id))){const missing=await p.evaluate(i=>[...document.querySelectorAll('#'+i+' img')].filter(m=>!m.naturalWidth).map(m=>m.getAttribute('src')),id);if(missing.length)console.log('FALTA',id,missing);
 await (await p.$('#'+id)).screenshot({path:'mock/'+id+'.png',omitBackground:true});}await b.close()})();'''
@@ -132,5 +134,5 @@ from PIL import Image
 for k in S:
     f = 'mock/%s.png' % k
     if os.path.exists(f):
-        im = Image.open(f); assert im.width == 1300, (k, im.size); im.save(f, dpi=(72, 72), optimize=True)
+        im = Image.open(f); assert im.width == 2600, (k, im.size); im.save(f, dpi=(72, 72), optimize=True)
 print('ok')

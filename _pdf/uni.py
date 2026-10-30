@@ -11,6 +11,7 @@ LI = 'linkedin.com/in/paula-urbano-436619332'
 from PIL import Image
 os.makedirs('uni/flat', exist_ok=True)
 def flat(src, bg, w=1300):
+    if src.startswith('mock/'): w = 2200
     if src.endswith('.svg'): return src
     out = 'uni/flat/%s-%s.jpg' % (os.path.splitext(os.path.basename(src))[0], bg.strip('#').lower())
     if not os.path.exists(out) and not os.path.exists(out[:-4] + '.png'):
@@ -28,7 +29,7 @@ def flat(src, bg, w=1300):
             al = a[..., 3]; al[al < 14] = 0; al *= np.minimum.outer(fy, fx); a[..., 3] = al
             im = Image.fromarray(a.astype('uint8'), 'RGBA')
         base = Image.new('RGBA', im.size, bg); base.alpha_composite(im)
-        (base.convert('RGB').save(out[:-4] + '.png', optimize=True, dpi=(72, 72)) if src.startswith('mock/') else base.convert('RGB').save(out, quality=88, optimize=True, progressive=True, dpi=(72, 72)))
+        base.convert('RGB').save(out, quality=90, subsampling=0, optimize=True, progressive=True, dpi=(72, 72))
     return out if os.path.exists(out) else out[:-4] + '.png'
 
 pages = []
@@ -78,11 +79,11 @@ page('''<div class="ab">
 </div>''' % (FOTO, chev(), MAIL, WEB), 'about')
 
 # 3 · índice
-IX = [('01', 'Web', 'mock/nails-1.png', ['Nails by MelyG', 'Kronox', 'Nácar Estilismo', 'Entre Amigos']),
-      ('02', 'Portfolios', 'mock/jairo-1.png', ['Jairo Azogue', 'Catalina Silva', 'ZogueKidd']),
-      ('03', 'Universidad', 'mock/figma-1.png', ['WordPress', 'Figma']),
-      ('04', 'Branding', 'uni/hi/vora-21-0.jpg', ['Vora', 'Café del Sur', 'Nidoo'])]
-tiles = ''.join('<div class="tile"><div class="th"><img src="%s" alt=""><b>%s</b></div><p class="tc">%s</p><ul>%s</ul></div>' % (flat(img, '#3a2626', 900), n, c, ''.join('<li>/ %s</li>' % x for x in xs)) for n, c, img, xs in IX)
+IX = [('01', 'Web', ['Nails by MelyG', 'Kronox', 'Nácar Estilismo', 'Entre Amigos']),
+      ('02', 'Portfolios', ['Jairo Azogue', 'Catalina Silva', 'ZogueKidd']),
+      ('03', 'Universidad', ['WordPress', 'Figma', 'Chía', 'Storyboard']),
+      ('04', 'Branding y copy', ['Vora', 'Café del Sur', 'Nidoo', "Alfredo's Pasta"])]
+tiles = ''.join('<div class="tile"><b class="tn">%s</b><p class="tc">%s</p><ul>%s</ul></div>' % (n, c, ''.join('<li>/ %s</li>' % x for x in xs)) for n, c, xs in IX)
 page('<div class="ix">%s</div><p class="sig">Paula Urbano<b>Portfolio</b></p>' % tiles, 'index', '#221616', '#FAF6F0')
 
 exec(open('uni_projects.py').read())
