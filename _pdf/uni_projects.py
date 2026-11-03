@@ -136,7 +136,7 @@ full('mock/rata-two.png', 'Cada plano lleva encuadre, cámara y acción.', *B)
 # ---------------- BRANDING ----------------
 B = '#F1E6D6', '#3A1D12'
 proj('Vora', 'Branding / Naming', 'Beach club en El Saler. «Vora» es orilla en valenciano.',
-     [('Técnicas', 'Illustrator · Photoshop')], '../img/logos/vora.svg', *B, tbg='#AB4729')
+     [('Técnicas', 'Illustrator · Photoshop')], '../img/logos/vora.svg', '#AB4729', '#F6E9D7', None, True, '#AB4729')
 full('uni/hi/vora-21-0.jpg', 'Señalética de la entrada.', *B)
 imgs([('uni/hi/vora-22-0.jpg', 'Interior.'), ('uni/hi/vora-26-0.jpg', 'La carta.')], *B)
 imgs([('uni/hi/vora-23-0.jpg', 'Mesa.'), ('uni/hi/vora-24-1.jpg', 'Mantel.'), ('uni/hi/vora-28-0.jpg', 'Merch.')], *B)
