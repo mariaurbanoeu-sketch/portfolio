@@ -1,0 +1,59 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1300px;background:transparent}
+.sc{position:relative;width:1300px;display:flex;align-items:flex-end;justify-content:center;padding:40px 0 60px}
+/* portátil */
+.lap{position:relative;width:1040px;filter:drop-shadow(0 40px 40px rgba(0,0,0,.22)) drop-shadow(0 10px 12px rgba(0,0,0,.18))}
+.lid{position:relative;margin:0 auto;width:930px;padding:14px 14px 20px;border-radius:26px 26px 6px 6px;background:#0b0b0d;box-shadow:inset 0 0 0 2px #2a2a2e,inset 0 0 0 3px #111}
+.lid::before{content:"";position:absolute;left:50%;top:0;width:120px;height:13px;transform:translateX(-50%);background:#0b0b0d;border-radius:0 0 8px 8px;z-index:2}
+.lid::after{content:"";position:absolute;left:50%;top:4px;width:5px;height:5px;transform:translateX(-50%);background:#1d2533;border-radius:50%;z-index:3}
+.scr{position:relative;aspect-ratio:16/10;overflow:hidden;border-radius:6px;background:#000}
+.scr img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.base{position:relative;height:20px;margin-top:-2px;border-radius:2px 2px 14px 14px;background:linear-gradient(#e8e9eb,#c9cbcf 45%,#9ea1a6);box-shadow:inset 0 1px 0 #fff}
+.base::before{content:"";position:absolute;left:50%;top:0;width:150px;height:8px;transform:translateX(-50%);background:linear-gradient(#b9bcc1,#d7d9dc);border-radius:0 0 10px 10px}
+/* celular */
+.ph{position:relative;width:250px;aspect-ratio:390/844;padding:10px;border-radius:46px;background:linear-gradient(135deg,#55575c,#1c1d20 30%,#3b3d41 60%,#151618);filter:drop-shadow(0 30px 30px rgba(0,0,0,.25)) drop-shadow(0 8px 10px rgba(0,0,0,.2))}
+.ph::before{content:"";position:absolute;inset:3px;border-radius:43px;background:#050505}
+.ph .s{position:relative;width:100%;height:100%;border-radius:37px;overflow:hidden;background:#fff}
+.ph .s img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.ph .di{position:absolute;left:50%;top:21px;width:74px;height:21px;transform:translateX(-50%);background:#000;border-radius:12px;z-index:3}
+.ph i{position:absolute;right:-3px;width:4px;border-radius:0 3px 3px 0;background:#2a2b2e}
+.ph i.a{top:22%;height:13%}.ph i.b{left:-3px;right:auto;border-radius:3px 0 0 3px;top:18%;height:6%}.ph i.c{left:-3px;right:auto;border-radius:3px 0 0 3px;top:27%;height:9%}
+/* composiciones */
+.duo .lap{margin-right:110px}
+.duo .ph{position:absolute;right:70px;bottom:55px;width:230px}
+.row{gap:44px;align-items:center;padding:50px 0 70px}
+.row .ph{width:300px}
+.row5{gap:22px;padding:40px 0 60px}.row5 .ph{width:236px;padding:9px;border-radius:40px}.row5 .ph::before{border-radius:37px}.row5 .ph .s{border-radius:32px}.row5 .ph .di{width:64px;height:18px;top:19px}
+
+/* tablet */
+.tab{position:relative;width:400px;aspect-ratio:820/1180;padding:16px;border-radius:34px;background:linear-gradient(135deg,#5a5c61,#1c1d20 30%,#3b3d41 60%,#151618);filter:drop-shadow(0 34px 34px rgba(0,0,0,.24)) drop-shadow(0 8px 10px rgba(0,0,0,.18))}
+.tab::before{content:"";position:absolute;inset:3px;border-radius:31px;background:#050505}
+.tab .s{position:relative;width:100%;height:100%;border-radius:18px;overflow:hidden;background:#fff}
+.tab .s img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.tab .cam{position:absolute;left:50%;top:7px;width:6px;height:6px;transform:translateX(-50%);border-radius:50%;background:#1d2533;z-index:3}
+/* trío: portátil al centro, tablet detrás a la izquierda y celular delante a la derecha */
+.trio{height:760px;padding:0}
+.trio .lap{position:absolute;left:190px;bottom:70px;width:960px}
+.trio .tab{position:absolute;left:40px;bottom:46px;width:330px;z-index:2}
+.trio .ph{position:absolute;right:60px;bottom:46px;width:200px;z-index:3}
+/* pantallas flotando en perspectiva */
+.float{height:760px;padding:0;perspective:2600px;overflow:hidden}
+.float .iso{position:absolute;left:50%;top:50%;width:1000px;height:620px;transform:translate(-50%,-50%) rotateX(50deg) rotateZ(-32deg);transform-style:preserve-3d}
+.float .card{position:absolute;width:600px;aspect-ratio:16/10;border-radius:12px;overflow:hidden;background:#000;box-shadow:0 0 0 1px rgba(255,255,255,.06),-30px 50px 60px rgba(0,0,0,.35)}
+.float .card img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.float .c1{left:0;top:0;transform:translateZ(0)}
+.float .c2{left:220px;top:180px;transform:translateZ(70px)}
+.float .c3{left:440px;top:360px;transform:translateZ(140px)}
+/* tablet + celulares */
+.tabrow{gap:50px;align-items:flex-end;padding:40px 0 60px}
+.tabrow .tab{width:420px}.tabrow .ph{width:240px}
+
+/* Android: bordes finos, esquinas menos redondas y cámara perforada */
+.and{position:relative;width:250px;aspect-ratio:412/917;padding:8px;border-radius:34px;background:linear-gradient(135deg,#3a3c40,#16171a 40%,#2c2e32);filter:drop-shadow(0 30px 30px rgba(0,0,0,.25)) drop-shadow(0 8px 10px rgba(0,0,0,.2))}
+.and .s{position:relative;width:100%;height:100%;border-radius:27px;overflow:hidden;background:#fff}
+.and .s img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.and .cam{position:absolute;left:50%;top:15px;width:11px;height:11px;transform:translateX(-50%);border-radius:50%;background:#050505;box-shadow:0 0 0 2px #1a1a1a;z-index:3}
+.and i{position:absolute;right:-3px;top:20%;width:3px;height:9%;border-radius:0 2px 2px 0;background:#2a2b2e}
+.row .and{width:300px}
+</style></head><body><div class="sc one" id="n-nacar-nov"><div class="lap"><div class="lid"><div class="scr"><img src="../shots/nacar-nov.png"></div></div><div class="base"></div></div></div><div class="sc duo" id="n-nacar-prod"><div class="lap"><div class="lid"><div class="scr"><img src="../shots/nacar-prod.png"></div></div><div class="base"></div></div><div class="ph"><i class="a"></i><i class="b"></i><i class="c"></i><div class="s"><img src="../shots/nacar-m-prod.png"></div><div class="di"></div></div></div><div class="sc duo" id="n-nacar-cart"><div class="lap"><div class="lid"><div class="scr"><img src="../shots/nacar-cart.png"></div></div><div class="base"></div></div><div class="ph"><i class="a"></i><i class="b"></i><i class="c"></i><div class="s"><img src="../shots/nacar-m-cart.png"></div><div class="di"></div></div></div><div class="sc one" id="n-nacar-lang"><div class="lap"><div class="lid"><div class="scr"><img src="../shots/nacar-lang.png"></div></div><div class="base"></div></div></div><div class="sc row" id="n-ea-12"><div class="ph"><i class="a"></i><i class="b"></i><i class="c"></i><div class="s"><img src="../../img/ea/s1.webp"></div><div class="di"></div></div><div class="ph"><i class="a"></i><i class="b"></i><i class="c"></i><div class="s"><img src="../../img/ea/s2.webp"></div><div class="di"></div></div></div><div class="sc row" id="n-ea-34"><div class="ph"><i class="a"></i><i class="b"></i><i class="c"></i><div class="s"><img src="../../img/ea/s3.webp"></div><div class="di"></div></div><div class="ph"><i class="a"></i><i class="b"></i><i class="c"></i><div class="s"><img src="../../img/ea/s4.webp"></div><div class="di"></div></div></div><div class="sc row" id="n-ea-5"><div class="ph"><i class="a"></i><i class="b"></i><i class="c"></i><div class="s"><img src="../../img/ea/s5.webp"></div><div class="di"></div></div></div><div class="sc one" id="n-jairo"><div class="lap"><div class="lid"><div class="scr"><img src="../shots/jairo-live.webp"></div></div><div class="base"></div></div></div><div class="sc one" id="n-cata"><div class="lap"><div class="lid"><div class="scr"><img src="../shots/catalina-live.webp"></div></div><div class="base"></div></div></div><div class="sc one" id="n-zk"><div class="lap"><div class="lid"><div class="scr"><img src="../shots/zoguekidd-live.webp"></div></div><div class="base"></div></div></div></body></html>

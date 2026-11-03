@@ -1,0 +1,4 @@
+const {chromium}=require(process.env.PW);(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1300,height:900},deviceScaleFactor:2});
+await p.goto('http://localhost:8794/_pdf/mock/scenes.html',{waitUntil:'networkidle'});await p.waitForTimeout(500);
+for(const id of await p.evaluate(()=>[...document.querySelectorAll('.sc')].map(e=>e.id))){const missing=await p.evaluate(i=>[...document.querySelectorAll('#'+i+' img')].filter(m=>!m.naturalWidth).map(m=>m.getAttribute('src')),id);if(missing.length)console.log('FALTA',id,missing);
+await (await p.$('#'+id)).screenshot({path:'mock/'+id+'.png',omitBackground:true});}await b.close()})();
