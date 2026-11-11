@@ -439,6 +439,7 @@ body[data-bg="milk"] .btn,body[data-bg="nails"] .btn,body[data-bg="nacar"] .btn{
 .js .polaroid[data-reveal]{transform:translateY(28px) rotate(-8deg)}
 .js .polaroid[data-reveal].in{transform:rotate(-3deg)}
 .polaroid canvas{width:100%;height:auto;aspect-ratio:1;image-rendering:pixelated;background:#d9c8b6}
+.polaroid img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;background:#d9c8b6}
 .polaroid figcaption{padding:.9rem 0 1.1rem;text-align:center;font:400 1.7rem/1 var(--script);color:#2A1714}
 .about-txt{margin-top:1.4rem;font-size:clamp(1.05rem,1.6vw,1.25rem);max-width:52ch}
 .about-txt p+p{margin-top:1rem}
